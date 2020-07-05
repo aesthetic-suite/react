@@ -1,0 +1,39 @@
+# Logs
+logs/
+*.log
+
+# Cache
+.eslintcache
+.idea
+.npm
+.vscode
+.yarn
+.yarnclean
+
+# Directories
+_book/
+coverage/
+build/
+dist/
+esm/
+lib/
+tmp/
+node_modules/
+
+# Custom
+*.min.js
+*.map
+
+# Configs
+.babelrc
+.eslintignore
+.eslintrc.js
+.flowconfig
+.prettierignore
+babel.config.js
+jest.config.js
+prettier.config.js
+tsconfig.json
+tsconfig.options.json
+webpack.config.js
+*.tsbuildinfo
