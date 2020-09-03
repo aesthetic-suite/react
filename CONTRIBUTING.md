@@ -44,7 +44,7 @@ pull request titles must match the conventional commits preset specification.
 ### Reporting a bug
 
 Please report bugs using the
-[official issue template](https://github.com/aesthetic-suite/framework/issues/new?assignees=&labels=bug&template=bug_report.md&title=),
+[official issue template](https://github.com/aesthetic-suite/react/issues/new?assignees=&labels=bug&template=bug_report.md&title=),
 only after you have previously searched for the issue and found no results. Be sure to be as
 descriptive as possible and to include all applicable labels.
 
@@ -54,9 +54,9 @@ repository with a runnable example, or a usable code snippet.
 ### Requesting new functionality
 
 Before requesting new functionality, view the
-[roadmap and backlog](https://github.com/aesthetic-suite/framework/blob/master/ROADMAP.md) as your
+[roadmap and backlog](https://github.com/aesthetic-suite/react/blob/master/ROADMAP.md) as your
 request may already exist. If it does not exist, submit an
-[issue using the official template](https://github.com/aesthetic-suite/framework/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=).
+[issue using the official template](https://github.com/aesthetic-suite/react/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=).
 Be sure to be as descriptive as possible and to include all applicable labels.
 
 ### Submitting a pull request
