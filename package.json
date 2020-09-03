@@ -24,7 +24,7 @@
     "@milesj/build-tools": "^2.11.0",
     "@rollup/plugin-babel": "^5.2.0",
     "@rollup/plugin-node-resolve": "^9.0.0",
-    "@types/prop-types": "^15.7.3",
+    "@types/hoist-non-react-statics": "^3.3.1",
     "@types/react": "^16.9.49",
     "@types/react-dom": "^16.9.8",
     "builtin-modules": "^3.1.0",
