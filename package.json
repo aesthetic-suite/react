@@ -1,59 +1,41 @@
 {
-  "name": "@aesthetic/react-ui",
+  "name": "aesthetic-react",
+  "private": true,
   "version": "0.0.0",
-  "description": "Primitive React UI components built on Aesthetic.",
-  "keywords": [
-    "aesthetic",
-    "react",
-    "ui",
-    "components",
-    "primitives"
-  ],
   "scripts": {
     "prepare": "beemo create-config --silent",
-    "build": "beemo run-script build",
+    "build": "beemo create-config babel --esm --silent && rollup --config && yarn run type",
+    "clean": "rm -rf ./packages/*/{lib,esm,*.tsbuildinfo}",
     "coverage": "yarn run jest --coverage",
+    "format": "beemo prettier",
     "lint": "beemo eslint",
     "jest": "beemo jest",
-    "prettier": "beemo prettier",
-    "release": "npx np --yolo --no-yarn",
-    "type": "beemo typescript --noEmit",
-    "prerelease": "yarn test && yarn run build",
+    "release": "lerna publish",
+    "type": "beemo typescript --build --reference-workspaces",
+    "prerelease": "yarn run clean && yarn run build && yarn test",
     "pretest": "yarn run type",
-    "test": "yarn run jest",
-    "posttest": "yarn run eslint"
-  },
-  "repository": "https://github.com/aesthetic-suite/react-ui",
-  "license": "MIT",
-  "main": "./lib/index.js",
-  "module": "./esm/index.js",
-  "types": "./lib/index.d.ts",
-  "sideEffects": false,
-  "publishConfig": {
-    "access": "public"
-  },
-  "funding": {
-    "type": "ko-fi",
-    "url": "https://ko-fi.com/milesjohnson"
+    "test": "yarn run coverage",
+    "posttest": "yarn run lint"
   },
   "engines": {
     "node": ">=10.10.0"
   },
-  "browserslist": [
-    "ie 11"
-  ],
-  "peerDependencies": {
-    "@aesthetic/react": "*",
-    "react": "^16.13.0",
-    "react-dom": "^16.13.0"
-  },
   "devDependencies": {
-    "@aesthetic/react": "^0.2.0",
-    "@milesj/build-tools": "^2.9.0",
-    "@types/react": "^16.9.41",
+    "@milesj/build-tools": "^2.11.0",
+    "@types/prop-types": "^15.7.3",
+    "@types/react": "^16.9.49",
     "@types/react-dom": "^16.9.8",
+    "conventional-changelog-beemo": "^2.0.0",
+    "eslint-plugin-rut": "^1.1.0",
+    "jest-rut": "^1.0.2",
+    "lerna": "^3.22.1",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "rollup": "^2.26.9",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-node-externals": "^2.2.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rut-dom": "^1.0.2"
   },
   "beemo": {
     "module": "@milesj/build-tools",
@@ -62,10 +44,31 @@
       "eslint",
       "jest",
       "prettier",
-      "typescript"
+      {
+        "driver": "typescript",
+        "declarationOnly": true
+      }
     ],
     "settings": {
+      "decorators": true,
       "react": true
+    },
+    "eslint": {
+      "extends": [
+        "plugin:rut/recommended"
+      ]
+    },
+    "jest": {
+      "setupFilesAfterEnv": [
+        "jest-rut"
+      ],
+      "testEnvironment": "jsdom"
     }
-  }
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "browserslist": [
+    "ie 11"
+  ]
 }
