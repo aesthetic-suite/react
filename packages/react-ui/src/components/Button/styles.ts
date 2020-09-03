@@ -1,14 +1,9 @@
 import { createComponentStyles } from '@aesthetic/react';
 
 export default createComponentStyles((css) => ({
-  button: css.mixin('text-df', {
+  button: css.mixin('pattern-reset-button', {
     display: 'inline-flex',
     textAlign: 'center',
-    minWidth: css.unit(8),
-    padding: {
-      leftRight: css.var('spacing-md'),
-      topBottom: css.var('spacing-df'),
-    },
 
     '@selectors': {
       // Removes weird bonus padding from button in Firefox
@@ -18,6 +13,30 @@ export default createComponentStyles((css) => ({
         margin: 0,
       },
     },
+
+    '@variants': {
+      size_sm: css.mixin('text-sm', {
+        minWidth: css.unit(6),
+        padding: {
+          leftRight: css.var('spacing-df'),
+          topBottom: css.var('spacing-sm'),
+        },
+      }),
+      size_df: css.mixin('text-df', {
+        minWidth: css.unit(8),
+        padding: {
+          leftRight: css.var('spacing-md'),
+          topBottom: css.var('spacing-df'),
+        },
+      }),
+      size_lg: css.mixin('text-lg', {
+        minWidth: css.unit(10),
+        padding: {
+          leftRight: css.var('spacing-xl'),
+          topBottom: css.var('spacing-lg'),
+        },
+      }),
+    },
   }),
 
   button_block: {
@@ -26,24 +45,4 @@ export default createComponentStyles((css) => ({
     whiteSpace: 'normal',
     overflow: 'hidden',
   },
-
-  // SIZES
-
-  button_small: css.mixin('text-sm', {
-    minWidth: css.unit(6),
-    padding: {
-      leftRight: css.var('spacing-df'),
-      topBottom: css.var('spacing-sm'),
-    },
-  }),
-
-  button_large: css.mixin('text-lg', {
-    minWidth: css.unit(10),
-    padding: {
-      leftRight: css.var('spacing-xl'),
-      topBottom: css.var('spacing-lg'),
-    },
-  }),
-
-  // PALETTES
 }));

@@ -1,6 +1,6 @@
 <!--
 Before making a PR, please read our contributing guidelines
-https://github.com/aesthetic-react/framework/blob/main/CONTRIBUTING.md
+https://github.com/aesthetic-suite/react/blob/main/CONTRIBUTING.md
 -->
 
 <!-- If fixing an issue, uncomment the following and include a link/issue number. -->
