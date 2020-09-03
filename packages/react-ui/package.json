@@ -27,5 +27,8 @@
     "@aesthetic/react": "*",
     "react": "^16.13.0",
     "react-dom": "^16.13.0"
+  },
+  "devDependencies": {
+    "prop-types": "^15.7.2"
   }
 }

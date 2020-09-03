@@ -11,7 +11,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   size?: TextSize;
 }
 
-export default function Button({
+export function Button({
   block = false,
   children,
   palette = 'primary',
@@ -21,16 +21,7 @@ export default function Button({
   const cx = useStyles(styleSheet);
 
   return (
-    <button
-      type="button"
-      className={cx(
-        'button',
-        block && 'button_block',
-        size === 'sm' && 'button_small',
-        size === 'lg' && 'button_large',
-      )}
-      {...props}
-    >
+    <button type="button" className={cx('button', block && 'button_block', { size })} {...props}>
       {children}
     </button>
   );
