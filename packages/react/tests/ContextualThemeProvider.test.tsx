@@ -3,7 +3,7 @@
 import React from 'react';
 import { render } from 'rut-dom';
 import { getTheme, renderThemeStyles } from '@aesthetic/core';
-import { lightTheme, darkTheme } from '@aesthetic/core/src/testing';
+import { lightTheme, darkTheme } from '@aesthetic/core/lib/testing';
 import ContextualThemeProvider from '../src/ContextualThemeProvider';
 import { ThemeProviderProps, DirectionProviderProps } from '../src/types';
 import useTheme from '../src/useTheme';

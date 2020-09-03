@@ -12,7 +12,7 @@ import {
   unsubscribe,
   OnChangeTheme,
 } from '@aesthetic/core';
-import { lightTheme, darkTheme } from '@aesthetic/core/src/testing';
+import { lightTheme, darkTheme } from '@aesthetic/core/lib/testing';
 import ThemeProvider from '../src/ThemeProvider';
 import { ThemeProviderProps } from '../src/types';
 import useTheme from '../src/useTheme';

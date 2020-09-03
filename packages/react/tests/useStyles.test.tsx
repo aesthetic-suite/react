@@ -9,7 +9,7 @@ import {
   getRenderedStyles,
   darkTheme,
   lightTheme,
-} from '@aesthetic/core/src/testing';
+} from '@aesthetic/core/lib/testing';
 import { useStyles } from '../src';
 import { createStyleSheet, ButtonProps, Wrapper } from './__mocks__/Button';
 
