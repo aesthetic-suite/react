@@ -56,4 +56,4 @@ yarn add @aesthetic/react react react-dom
 
 ## Documentation
 
-[https://milesj.gitbook.io/aesthetic/packages/react](https://milesj.gitbook.io/aesthetic/packages/react)
+[https://aestheticsuite.dev/docs/integrations/react](https://aestheticsuite.dev/docs/integrations/react)
