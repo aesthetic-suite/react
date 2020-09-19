@@ -1,17 +1,17 @@
 import React from 'react';
 import { render } from 'rut-dom';
-import { setupAesthetic, teardownAesthetic } from '@aesthetic/core/lib/testing';
 import withDirection from '../src/withDirection';
 import DirectionProvider from '../src/DirectionProvider';
 import { DirectionProviderProps, WithDirectionWrappedProps } from '../src/types';
+import { setupAestheticReact, teardownAestheticReact } from './helpers';
 
 describe('withDirection()', () => {
   beforeEach(() => {
-    setupAesthetic();
+    setupAestheticReact();
   });
 
   afterEach(() => {
-    teardownAesthetic();
+    teardownAestheticReact();
   });
 
   function BaseComponent(props: WithDirectionWrappedProps) {

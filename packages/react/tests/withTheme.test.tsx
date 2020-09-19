@@ -1,22 +1,17 @@
 import React from 'react';
 import { render } from 'rut-dom';
-import {
-  setupAesthetic,
-  teardownAesthetic,
-  lightTheme,
-  darkTheme,
-} from '@aesthetic/core/lib/testing';
 import withTheme from '../src/withTheme';
 import ThemeProvider from '../src/ThemeProvider';
 import { ThemeProviderProps, WithThemeWrappedProps } from '../src/types';
+import { dawnTheme, setupAestheticReact, teardownAestheticReact, twilightTheme } from './helpers';
 
 describe('withTheme()', () => {
   beforeEach(() => {
-    setupAesthetic();
+    setupAestheticReact();
   });
 
   afterEach(() => {
-    teardownAesthetic();
+    teardownAestheticReact();
   });
 
   function BaseComponent(props: WithThemeWrappedProps) {
@@ -24,7 +19,7 @@ describe('withTheme()', () => {
   }
 
   function WrappingComponent({ children }: { children?: React.ReactNode }) {
-    return <ThemeProvider name="day">{children || <div />}</ThemeProvider>;
+    return <ThemeProvider name="dawn">{children || <div />}</ThemeProvider>;
   }
 
   it('inherits name from component `constructor.name`', () => {
@@ -59,7 +54,7 @@ describe('withTheme()', () => {
     const Wrapped = withTheme()(ThemeComponent);
     const { root } = render<{}>(<Wrapped />, { wrapper: <WrappingComponent /> });
 
-    expect(root.findOne(ThemeComponent)).toHaveProp('theme', lightTheme);
+    expect(root.findOne(ThemeComponent)).toHaveProp('theme', dawnTheme);
   });
 
   it('can bubble up the ref with `wrappedRef`', () => {
@@ -96,15 +91,15 @@ describe('withTheme()', () => {
 
     const Wrapped = withTheme()(BaseComponent);
     const { root, update } = render<ThemeProviderProps>(
-      <ThemeProvider>
+      <ThemeProvider name="dawn">
         <Wrapped />
       </ThemeProvider>,
     );
 
-    expect(root.findOne(BaseComponent)).toHaveProp('theme', lightTheme);
+    expect(root.findOne(BaseComponent)).toHaveProp('theme', dawnTheme);
 
-    update({ name: 'night' });
+    update({ name: 'twilight' });
 
-    expect(root.findOne(BaseComponent)).toHaveProp('theme', darkTheme);
+    expect(root.findOne(BaseComponent)).toHaveProp('theme', twilightTheme);
   });
 });
