@@ -17,6 +17,7 @@ export default createComponentStyles((css) => ({
     '@variants': {
       size_sm: css.mixin('text-sm', {
         minWidth: css.unit(6),
+        // @ts-expect-error
         padding: {
           leftRight: css.var('spacing-df'),
           topBottom: css.var('spacing-sm'),
@@ -24,6 +25,7 @@ export default createComponentStyles((css) => ({
       }),
       size_df: css.mixin('text-df', {
         minWidth: css.unit(8),
+        // @ts-expect-error
         padding: {
           leftRight: css.var('spacing-md'),
           topBottom: css.var('spacing-df'),
@@ -31,6 +33,7 @@ export default createComponentStyles((css) => ({
       }),
       size_lg: css.mixin('text-lg', {
         minWidth: css.unit(10),
+        // @ts-expect-error
         padding: {
           leftRight: css.var('spacing-xl'),
           topBottom: css.var('spacing-lg'),

@@ -7,7 +7,6 @@ import { createComponentStyles, DirectionProvider, ThemeProvider } from '../../s
 export function createStyleSheet() {
   return createComponentStyles((css) => ({
     button: css.mixin.resetButton(
-      {},
       css.mixin.border(
         { size: 'df' },
         {
@@ -62,15 +61,12 @@ export function createStyleSheet() {
       ),
     ),
 
-    button_block: css.mixin.textWrap(
-      {},
-      {
-        display: 'block',
-        width: '100%',
-        whiteSpace: 'normal',
-        overflow: 'hidden',
-      },
-    ),
+    button_block: css.mixin.textWrap({
+      display: 'block',
+      width: '100%',
+      whiteSpace: 'normal',
+      overflow: 'hidden',
+    }),
 
     button_disabled: {
       '@variants': {
@@ -108,7 +104,7 @@ export interface WrapperProps {
 
 export function Wrapper({ children, direction = 'ltr', theme = 'twilight' }: WrapperProps) {
   return (
-    <DirectionProvider direction={direction}>
+    <DirectionProvider direction={direction} wrapper={<div />}>
       <ThemeProvider name={theme}>{children || <div />}</ThemeProvider>
     </DirectionProvider>
   );

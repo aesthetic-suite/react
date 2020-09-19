@@ -27,7 +27,7 @@ describe('ContextualThemeProvider', () => {
 
   it('renders children', () => {
     const { root } = render<ThemeProviderProps>(
-      <ContextualThemeProvider name="night">
+      <ContextualThemeProvider name="night" wrapper={<div />}>
         <div>1</div>
         <div>2</div>
         <div>3</div>
@@ -47,7 +47,7 @@ describe('ContextualThemeProvider', () => {
     }
 
     const { update } = render<ThemeProviderProps>(
-      <ContextualThemeProvider name="day">
+      <ContextualThemeProvider name="day" wrapper={<div />}>
         <Child />
       </ContextualThemeProvider>,
     );
@@ -71,7 +71,7 @@ describe('ContextualThemeProvider', () => {
     }
 
     render<ThemeProviderProps>(
-      <ContextualThemeProvider name="night">
+      <ContextualThemeProvider name="night" wrapper={<div />}>
         <Test />
       </ContextualThemeProvider>,
     );
@@ -79,7 +79,7 @@ describe('ContextualThemeProvider', () => {
 
   it('wraps in a div with a class name and data attribute', () => {
     const { root } = render<ThemeProviderProps>(
-      <ContextualThemeProvider name="night">
+      <ContextualThemeProvider name="night" wrapper={<div />}>
         <span />
       </ContextualThemeProvider>,
     );
@@ -92,13 +92,13 @@ describe('ContextualThemeProvider', () => {
 
   it('re-renders theme styles if `name` changes', () => {
     const { rerender } = render<ThemeProviderProps>(
-      <ContextualThemeProvider name="night">
+      <ContextualThemeProvider name="night" wrapper={<div />}>
         <div />
       </ContextualThemeProvider>,
     );
 
     rerender(
-      <ContextualThemeProvider name="day">
+      <ContextualThemeProvider name="day" wrapper={<div />}>
         <div />
       </ContextualThemeProvider>,
     );
@@ -109,16 +109,16 @@ describe('ContextualThemeProvider', () => {
 
   it('re-renders theme styles if direction changes', () => {
     const { rerender } = render<DirectionProviderProps>(
-      <DirectionProvider direction="ltr">
-        <ContextualThemeProvider name="night">
+      <DirectionProvider direction="ltr" wrapper={<div />}>
+        <ContextualThemeProvider name="night" wrapper={<div />}>
           <div />
         </ContextualThemeProvider>
       </DirectionProvider>,
     );
 
     rerender(
-      <DirectionProvider direction="rtl">
-        <ContextualThemeProvider name="night">
+      <DirectionProvider direction="rtl" wrapper={<div />}>
+        <ContextualThemeProvider name="night" wrapper={<div />}>
           <div />
         </ContextualThemeProvider>
       </DirectionProvider>,

@@ -2,12 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { getTheme, renderThemeStyles } from '@aesthetic/core';
 import ThemeContext from './ThemeContext';
 import useDirection from './useDirection';
-import { ThemeProviderProps } from './types';
+import { ContextualThemeProviderProps } from './types';
 
 /**
- * Rendered nested within the page to provide a contextual theme.
+ * Provides a theme for a distinct portion of the React tree.
  */
-export default function ContextualThemeProvider({ children, name }: Required<ThemeProviderProps>) {
+export default function ContextualThemeProvider({
+  children,
+  name,
+  wrapper,
+}: ContextualThemeProviderProps) {
   const [className, setClassName] = useState('');
   const direction = useDirection();
   const theme = getTheme(name);
@@ -19,9 +23,7 @@ export default function ContextualThemeProvider({ children, name }: Required<The
 
   return (
     <ThemeContext.Provider value={theme}>
-      <div className={className} data-theme={name}>
-        {children}
-      </div>
+      {React.cloneElement(wrapper, { className, 'data-theme': name }, children)}
     </ThemeContext.Provider>
   );
 }

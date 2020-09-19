@@ -144,8 +144,7 @@ describe('ThemeProvider', () => {
         </ThemeProvider>,
       );
 
-      expect(subscribe).toHaveBeenCalledTimes(2);
-      expect(subscribe).toHaveBeenCalledWith('change:direction', expect.any(Function));
+      expect(subscribe).toHaveBeenCalledTimes(1);
       expect(subscribe).toHaveBeenCalledWith('change:theme', expect.any(Function));
     });
 
@@ -160,7 +159,7 @@ describe('ThemeProvider', () => {
       update();
       update();
 
-      expect(subscribe).toHaveBeenCalledTimes(2); // theme, dir
+      expect(subscribe).toHaveBeenCalledTimes(1);
     });
 
     it('unsubscribes on unmount', () => {
@@ -172,8 +171,7 @@ describe('ThemeProvider', () => {
 
       unmount();
 
-      expect(unsubscribe).toHaveBeenCalledTimes(2);
-      expect(unsubscribe).toHaveBeenCalledWith('change:direction', expect.any(Function));
+      expect(unsubscribe).toHaveBeenCalledTimes(1);
       expect(unsubscribe).toHaveBeenCalledWith('change:theme', expect.any(Function));
     });
 

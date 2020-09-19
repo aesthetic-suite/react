@@ -2,19 +2,22 @@
 # yarn lockfile v1
 
 
-"@aesthetic/addon-mixins@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@aesthetic/addon-mixins/-/addon-mixins-0.1.0.tgz#0d76e9efaa2352ef2f536f2001a0f2dc5b3aee4a"
-  integrity sha512-UEZOPwzPYBOvC9JmuXLCuq5IkEMbgbQkKzC7rnAoJ4zIbMGdK+FzAY9dvqgpWdJVCrOeyXT7PlFoPQyNxjW2sA==
+"@aesthetic/addon-mixins@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@aesthetic/addon-mixins/-/addon-mixins-0.1.1.tgz#7e9ed64456231fe4668dada3301d346a66bee4c9"
+  integrity sha512-yg/dNnPaHvygcfSlAgMGintyD4iIxSGPMcP/xfTg9N20B1iD8hP9KWhXGjmpcxH+m17+ZHG96qdxsAM/SPhAzw==
+  dependencies:
+    "@aesthetic/types" "^0.2.0"
+    "@aesthetic/utils" "^0.4.0"
 
-"@aesthetic/core@^0.4.0":
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/@aesthetic/core/-/core-0.4.0.tgz#aa524b5cedb756e8dbccebe68b7e7cef46a79adf"
-  integrity sha512-20pnvRLmIZ7BhfzhuvunoatIMI1BQfbGZ0dxfviXNV5rRz73mARG7VMiBZDn4vLpfYpIlyyopRSJRA83ekHu4Q==
+"@aesthetic/core@^0.4.1":
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/@aesthetic/core/-/core-0.4.1.tgz#09beaa33aae6f9a35bf965e339a48542f9d2ecbf"
+  integrity sha512-n2vKXpcY4umZgMR8ZRjHUeu0nZu02QYXOtBw9GVqr9f8H58/n3OdBK0uH72v4jrTXnCrXXFzD063DAJv6TExQg==
   dependencies:
     "@aesthetic/sss" "^0.4.0"
     "@aesthetic/style" "^0.4.0"
-    "@aesthetic/system" "^0.4.0"
+    "@aesthetic/system" "^0.4.1"
     "@aesthetic/types" "^0.2.0"
     "@aesthetic/utils" "^0.4.0"
 
@@ -35,10 +38,10 @@
     "@aesthetic/utils" "^0.4.0"
     sort-css-media-queries "^1.5.0"
 
-"@aesthetic/system@^0.4.0":
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/@aesthetic/system/-/system-0.4.0.tgz#c4a8cf1a3144c730ec2f80ad9051991f7abeaef9"
-  integrity sha512-BAIQlGALC4qI1H4feVPO8pgrcxLODzUtY81OaRswTXJa3xMEu2TB/VCZTON1BfdI1kq6OieunLispUrArxSe4Q==
+"@aesthetic/system@^0.4.1":
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/@aesthetic/system/-/system-0.4.1.tgz#ead0bc09dac780cb05786be8fb60238904dd27b3"
+  integrity sha512-0F9CW3dxYdOxm1tgAPuRc521nDHrQ4uOCl7RHRM4fXFgKRLQKoCXHyvfxKuQfnlYFz5S3pF2FNtuJO5To01VpQ==
   dependencies:
     "@aesthetic/types" "^0.2.0"
     "@aesthetic/utils" "^0.4.0"
