@@ -21,7 +21,7 @@ export function Button({
   const cx = useStyles(styleSheet);
 
   return (
-    <button type="button" className={cx('button', block && 'button_block', { size })} {...props}>
+    <button type="button" className={cx({ size }, 'button', block && 'button_block')} {...props}>
       {children}
     </button>
   );

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { renderToString, renderToStaticMarkup } from 'react-dom/server';
-import { aesthetic, LocalSheet, SheetStructure } from '@aesthetic/core';
+import { LocalSheet, SheetStructure } from '@aesthetic/core';
 import { ServerRenderer } from '@aesthetic/style/lib/server';
 import { setupAesthetic, teardownAesthetic, purgeStyles } from '@aesthetic/core/lib/testing';
 import { useStyles, ThemeProvider } from '../src';
@@ -20,10 +20,15 @@ describe('SSR', () => {
     return (
       <button
         type="button"
-        className={cx('button', block && 'button_block', disabled && 'button_disabled', {
-          // eslint-disable-next-line no-nested-ternary
-          size: large ? 'lg' : small ? 'sm' : 'df',
-        })}
+        className={cx(
+          {
+            // eslint-disable-next-line no-nested-ternary
+            size: large ? 'lg' : small ? 'sm' : 'df',
+          },
+          'button',
+          block && 'button_block',
+          disabled && 'button_disabled',
+        )}
       >
         {children}
       </button>
@@ -46,11 +51,11 @@ describe('SSR', () => {
     renderer = new ServerRenderer();
     sheet = createStyleSheet();
 
-    setupAesthetic(aesthetic);
+    setupAesthetic();
   });
 
   afterEach(() => {
-    teardownAesthetic(aesthetic);
+    teardownAesthetic();
     purgeStyles();
 
     // @ts-expect-error

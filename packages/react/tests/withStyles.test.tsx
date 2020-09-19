@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { render } from 'rut-dom';
-import { aesthetic } from '@aesthetic/core';
 import {
   setupAesthetic,
   teardownAesthetic,
@@ -17,11 +16,11 @@ import { createStyleSheet, ButtonProps, Wrapper } from './__mocks__/Button';
 
 describe('withStyles()', () => {
   beforeEach(() => {
-    setupAesthetic(aesthetic);
+    setupAesthetic();
   });
 
   afterEach(() => {
-    teardownAesthetic(aesthetic);
+    teardownAesthetic();
   });
 
   function BaseButton({
@@ -38,10 +37,15 @@ describe('withStyles()', () => {
     return (
       <button
         type="button"
-        className={cx('button', block && 'button_block', disabled && 'button_disabled', {
-          // eslint-disable-next-line no-nested-ternary
-          size: large ? 'lg' : small ? 'sm' : 'df',
-        })}
+        className={cx(
+          {
+            // eslint-disable-next-line no-nested-ternary
+            size: large ? 'lg' : small ? 'sm' : 'df',
+          },
+          'button',
+          block && 'button_block',
+          disabled && 'button_disabled',
+        )}
       >
         {children}
       </button>

@@ -1,4 +1,4 @@
-import { useCallback, useState, useEffect } from 'react';
+import { useCallback, useState, useEffect, useLayoutEffect } from 'react';
 import { ClassNameSheet, LocalSheet, renderComponentStyles } from '@aesthetic/core';
 import { ClassNameGenerator } from './types';
 import useDirection from './useDirection';
@@ -28,8 +28,10 @@ export default function useStyles<T = unknown>(sheet: LocalSheet<T>): ClassNameG
         theme: theme.name,
       }),
     );
-  }, [direction, theme, sheet]);
+    // It wants to include `sheet` but that triggers an infinite render loop
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [direction, theme]);
 
   // Return function to generate dynamic class names
-  return useCallback((...keys) => cxHandler(keys, classNames), [classNames]);
+  return useCallback((...keys: unknown[]) => cxHandler(keys, classNames), [classNames]);
 }
