@@ -1,14 +1,9 @@
-import { useCallback, useState, useEffect, useLayoutEffect } from 'react';
-import {
-  ClassNameSheet,
-  generateClassName,
-  LocalSheet,
-  renderComponentStyles,
-} from '@aesthetic/core';
-import { isSSR } from '@aesthetic/utils';
+import { useCallback, useState, useEffect } from 'react';
+import { ClassNameSheet, LocalSheet, renderComponentStyles } from '@aesthetic/core';
 import { ClassNameGenerator } from './types';
 import useDirection from './useDirection';
 import useTheme from './useTheme';
+import cxHandler from './cxHandler';
 
 /**
  * Hook within a component to provide a style sheet.
@@ -16,35 +11,25 @@ import useTheme from './useTheme';
 export default function useStyles<T = unknown>(sheet: LocalSheet<T>): ClassNameGenerator<keyof T> {
   const direction = useDirection();
   const theme = useTheme();
-  const ssr = isSSR() || global.AESTHETIC_CUSTOM_RENDERER;
 
-  // Render the styles immediately for SSR and tests
-  const [classNames, setClassNames] = useState<ClassNameSheet<string>>(() => {
-    if (ssr || process.env.NODE_ENV === 'test') {
-      return renderComponentStyles(sheet, {
-        direction,
-        theme: theme.name,
-      });
-    }
-
-    // istanbul ignore next
-    return {};
-  });
+  // Render the styles immediately
+  const [classNames, setClassNames] = useState<ClassNameSheet<string>>(() =>
+    renderComponentStyles(sheet, {
+      direction,
+      theme: theme.name,
+    }),
+  );
 
   // Re-render styles when the theme or direction change
-  const useSideEffect = ssr ? useEffect : useLayoutEffect;
-
-  useSideEffect(() => {
+  useEffect(() => {
     setClassNames(
       renderComponentStyles(sheet, {
         direction,
         theme: theme.name,
       }),
     );
-  }, [direction, theme]);
+  }, [direction, theme, sheet]);
 
-  // Generate dynamic class names
-  const cx = useCallback((...keys) => generateClassName(keys, classNames), [classNames]);
-
-  return cx;
+  // Return function to generate dynamic class names
+  return useCallback((...keys) => cxHandler(keys, classNames), [classNames]);
 }
