@@ -1,4 +1,4 @@
-import { useCallback, useState, useEffect, useLayoutEffect } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import { ClassNameSheet, LocalSheet, renderComponentStyles } from '@aesthetic/core';
 import { ClassNameGenerator } from './types';
 import useDirection from './useDirection';
