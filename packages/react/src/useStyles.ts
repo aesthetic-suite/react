@@ -3,7 +3,7 @@ import { ClassNameSheet, LocalSheet, renderComponentStyles } from '@aesthetic/co
 import { ClassNameGenerator } from './types';
 import useDirection from './useDirection';
 import useTheme from './useTheme';
-import cxHandler from './cxHandler';
+import generateCX from './generateCX';
 
 /**
  * Hook within a component to provide a style sheet.
@@ -33,5 +33,5 @@ export default function useStyles<T = unknown>(sheet: LocalSheet<T>): ClassNameG
   }, [direction, theme]);
 
   // Return function to generate dynamic class names
-  return useCallback((...keys: unknown[]) => cxHandler(keys, classNames), [classNames]);
+  return useCallback((...keys: unknown[]) => generateCX(keys, classNames), [classNames]);
 }
