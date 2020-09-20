@@ -139,7 +139,7 @@ describe('withStyles()', () => {
     update();
     update();
 
-    expect(spy).toHaveBeenCalledTimes(2);
+    expect(spy).toHaveBeenCalledTimes(1);
   });
 
   it('re-renders if direction changes', () => {
@@ -153,7 +153,7 @@ describe('withStyles()', () => {
       </Wrapper>,
     );
 
-    expect(spy).toHaveBeenCalledTimes(2);
+    expect(spy).toHaveBeenCalledTimes(1);
     expect(spy).toHaveBeenCalledWith(
       expect.anything(),
       twilightTheme,
@@ -169,7 +169,7 @@ describe('withStyles()', () => {
       </Wrapper>,
     );
 
-    expect(spy).toHaveBeenCalledTimes(3);
+    expect(spy).toHaveBeenCalledTimes(2);
     expect(spy).toHaveBeenCalledWith(
       expect.anything(),
       twilightTheme,
@@ -191,7 +191,7 @@ describe('withStyles()', () => {
       </Wrapper>,
     );
 
-    expect(spy).toHaveBeenCalledTimes(2);
+    expect(spy).toHaveBeenCalledTimes(1);
     expect(spy).toHaveBeenCalledWith(
       expect.anything(),
       twilightTheme,
@@ -207,7 +207,7 @@ describe('withStyles()', () => {
       </Wrapper>,
     );
 
-    expect(spy).toHaveBeenCalledTimes(3);
+    expect(spy).toHaveBeenCalledTimes(2);
     expect(spy).toHaveBeenCalledWith(
       expect.anything(),
       dawnTheme,

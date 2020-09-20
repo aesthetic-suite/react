@@ -118,7 +118,7 @@ describe('useStyles()', () => {
     update();
     update();
 
-    expect(spy).toHaveBeenCalledTimes(2);
+    expect(spy).toHaveBeenCalledTimes(1);
   });
 
   it('re-renders if direction changes', () => {
@@ -131,7 +131,7 @@ describe('useStyles()', () => {
       </Wrapper>,
     );
 
-    expect(spy).toHaveBeenCalledTimes(2);
+    expect(spy).toHaveBeenCalledTimes(1);
     expect(spy).toHaveBeenCalledWith(
       expect.anything(),
       twilightTheme,
@@ -147,7 +147,7 @@ describe('useStyles()', () => {
       </Wrapper>,
     );
 
-    expect(spy).toHaveBeenCalledTimes(3);
+    expect(spy).toHaveBeenCalledTimes(2);
     expect(spy).toHaveBeenCalledWith(
       expect.anything(),
       twilightTheme,
@@ -168,7 +168,7 @@ describe('useStyles()', () => {
       </Wrapper>,
     );
 
-    expect(spy).toHaveBeenCalledTimes(2);
+    expect(spy).toHaveBeenCalledTimes(1);
     expect(spy).toHaveBeenCalledWith(
       expect.anything(),
       twilightTheme,
@@ -184,7 +184,7 @@ describe('useStyles()', () => {
       </Wrapper>,
     );
 
-    expect(spy).toHaveBeenCalledTimes(3);
+    expect(spy).toHaveBeenCalledTimes(2);
     expect(spy).toHaveBeenCalledWith(
       expect.anything(),
       dawnTheme,
@@ -205,7 +205,7 @@ describe('useStyles()', () => {
       </Wrapper>,
     );
 
-    expect(spy).toHaveBeenCalledTimes(2);
+    expect(spy).toHaveBeenCalledTimes(1);
     expect(spy).toHaveBeenCalledWith(
       expect.anything(),
       twilightTheme,
@@ -222,7 +222,7 @@ describe('useStyles()', () => {
     );
 
     // Annoying that this fires multiple times, possible to batch?
-    expect(spy).toHaveBeenCalledTimes(4);
+    expect(spy).toHaveBeenCalledTimes(3);
 
     expect(spy).toHaveBeenCalledWith(
       expect.anything(),

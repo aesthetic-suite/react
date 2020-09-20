@@ -1,5 +1,6 @@
 import { useCallback, useState, useEffect } from 'react';
 import { ClassNameSheet, LocalSheet, renderComponentStyles } from '@aesthetic/core';
+import { isSSR } from '@aesthetic/utils';
 import { ClassNameGenerator } from './types';
 import useDirection from './useDirection';
 import useTheme from './useTheme';
@@ -12,13 +13,17 @@ export default function useStyles<T = unknown>(sheet: LocalSheet<T>): ClassNameG
   const direction = useDirection();
   const theme = useTheme();
 
-  // Render the styles immediately
-  const [classNames, setClassNames] = useState<ClassNameSheet<string>>(() =>
-    renderComponentStyles(sheet, {
-      direction,
-      theme: theme.name,
-    }),
-  );
+  // Render the styles immediately for SSR since effects do not run
+  const [classNames, setClassNames] = useState<ClassNameSheet<string>>(() => {
+    if (isSSR() || global.AESTHETIC_CUSTOM_RENDERER) {
+      return renderComponentStyles(sheet, {
+        direction,
+        theme: theme.name,
+      });
+    }
+
+    return {};
+  });
 
   // Re-render styles when the theme or direction change
   useEffect(() => {
