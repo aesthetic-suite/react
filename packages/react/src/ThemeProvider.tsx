@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { changeTheme, getActiveTheme, getTheme, subscribe, unsubscribe } from '@aesthetic/core';
 import ThemeContext from './ThemeContext';
 import { ThemeProviderProps } from './types';
@@ -11,24 +11,13 @@ export default function ThemeProvider({ children, name = '' }: ThemeProviderProp
   const theme = themeName ? getTheme(themeName) : getActiveTheme();
 
   // Listen to theme changes that occur outside of the provider
-  const handleChangeTheme = useCallback(
-    (nextTheme) => {
-      if (nextTheme !== themeName) {
-        setThemeName(nextTheme);
-      }
-    },
-    [themeName],
-  );
-
   useEffect(() => {
-    subscribe('change:direction', handleChangeTheme);
-    subscribe('change:theme', handleChangeTheme);
+    subscribe('change:theme', setThemeName);
 
     return () => {
-      unsubscribe('change:direction', handleChangeTheme);
-      unsubscribe('change:theme', handleChangeTheme);
+      unsubscribe('change:theme', setThemeName);
     };
-  }, [handleChangeTheme]);
+  }, []);
 
   // Update state when the `name` prop changes
   useEffect(() => {

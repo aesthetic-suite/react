@@ -5,9 +5,12 @@ import React from 'react';
 import { Theme, ClassNameSheetVariants } from '@aesthetic/core';
 import { ClassName, Direction, ThemeName } from '@aesthetic/types';
 
-export type ClassNameGenerator<T> = (
-  ...keys: (undefined | null | false | T | ClassNameSheetVariants)[]
-) => ClassName;
+export type ClassNameTypes<T> = (undefined | null | false | T)[];
+
+export interface ClassNameGenerator<T> {
+  (variants: ClassNameSheetVariants, ...keys: ClassNameTypes<T>): ClassName;
+  (...keys: ClassNameTypes<T>): ClassName;
+}
 
 // CONTEXT
 
@@ -17,10 +20,10 @@ export interface DirectionProviderProps {
   children: NonNullable<React.ReactNode>;
   /** Explicit direction to use. */
   direction?: Exclude<Direction, 'neutral'>;
-  /** Render an inline element instead of block. */
-  inline?: boolean;
   /** Locale aware string to deduce the direction from. */
   value?: string;
+  /** Element to wrap the children with. */
+  wrapper: React.ReactElement;
 }
 
 export type ThemeContextType = Theme;
@@ -29,6 +32,11 @@ export interface ThemeProviderProps {
   children: NonNullable<React.ReactNode>;
   /** Theme to activate. */
   name?: ThemeName;
+}
+
+export interface ContextualThemeProviderProps extends Required<ThemeProviderProps> {
+  /** Element to wrap the children with. */
+  wrapper: React.ReactElement;
 }
 
 // HOCs

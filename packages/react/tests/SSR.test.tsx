@@ -2,11 +2,12 @@
 
 import React from 'react';
 import { renderToString, renderToStaticMarkup } from 'react-dom/server';
-import { aesthetic, LocalSheet, SheetStructure } from '@aesthetic/core';
+import { LocalSheet, SheetStructure } from '@aesthetic/core';
 import { ServerRenderer } from '@aesthetic/style/lib/server';
-import { setupAesthetic, teardownAesthetic, purgeStyles } from '@aesthetic/core/lib/testing';
+import { purgeStyles } from '@aesthetic/core/lib/testing';
 import { useStyles, ThemeProvider } from '../src';
 import { createStyleSheet, ButtonProps } from './__mocks__/Button';
+import { setupAestheticReact, teardownAestheticReact } from './helpers';
 
 describe('SSR', () => {
   let renderer: ServerRenderer;
@@ -20,10 +21,15 @@ describe('SSR', () => {
     return (
       <button
         type="button"
-        className={cx('button', block && 'button_block', disabled && 'button_disabled', {
-          // eslint-disable-next-line no-nested-ternary
-          size: large ? 'lg' : small ? 'sm' : 'df',
-        })}
+        className={cx(
+          {
+            // eslint-disable-next-line no-nested-ternary
+            size: large ? 'lg' : small ? 'sm' : 'df',
+          },
+          'button',
+          block && 'button_block',
+          disabled && 'button_disabled',
+        )}
       >
         {children}
       </button>
@@ -32,7 +38,7 @@ describe('SSR', () => {
 
   function App() {
     return (
-      <ThemeProvider name="night">
+      <ThemeProvider name="twilight">
         <main>
           <div>You are not logged in!</div>
           <Button href="/login">Login</Button>
@@ -46,11 +52,11 @@ describe('SSR', () => {
     renderer = new ServerRenderer();
     sheet = createStyleSheet();
 
-    setupAesthetic(aesthetic);
+    setupAestheticReact();
   });
 
   afterEach(() => {
-    teardownAesthetic(aesthetic);
+    teardownAestheticReact();
     purgeStyles();
 
     // @ts-expect-error

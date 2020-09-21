@@ -2,26 +2,20 @@
 
 import React from 'react';
 import { render } from 'rut-dom';
-import { aesthetic } from '@aesthetic/core';
-import {
-  setupAesthetic,
-  teardownAesthetic,
-  getRenderedStyles,
-  darkTheme,
-  lightTheme,
-} from '@aesthetic/core/lib/testing';
+import { getRenderedStyles } from '@aesthetic/core/lib/testing';
 import withStyles from '../src/withStyles';
 import ThemeProvider from '../src/ThemeProvider';
 import { WithStylesWrappedProps } from '../src/types';
 import { createStyleSheet, ButtonProps, Wrapper } from './__mocks__/Button';
+import { dawnTheme, setupAestheticReact, teardownAestheticReact, twilightTheme } from './helpers';
 
 describe('withStyles()', () => {
   beforeEach(() => {
-    setupAesthetic(aesthetic);
+    setupAestheticReact();
   });
 
   afterEach(() => {
-    teardownAesthetic(aesthetic);
+    teardownAestheticReact();
   });
 
   function BaseButton({
@@ -38,10 +32,15 @@ describe('withStyles()', () => {
     return (
       <button
         type="button"
-        className={cx('button', block && 'button_block', disabled && 'button_disabled', {
-          // eslint-disable-next-line no-nested-ternary
-          size: large ? 'lg' : small ? 'sm' : 'df',
-        })}
+        className={cx(
+          {
+            // eslint-disable-next-line no-nested-ternary
+            size: large ? 'lg' : small ? 'sm' : 'df',
+          },
+          'button',
+          block && 'button_block',
+          disabled && 'button_disabled',
+        )}
       >
         {children}
       </button>
@@ -58,7 +57,7 @@ describe('withStyles()', () => {
   }
 
   function WrappingComponent({ children }: { children?: React.ReactNode }) {
-    return <ThemeProvider name="day">{children || <div />}</ThemeProvider>;
+    return <ThemeProvider name="dawn">{children || <div />}</ThemeProvider>;
   }
 
   it('inherits name from component `constructor.name`', () => {
@@ -121,7 +120,7 @@ describe('withStyles()', () => {
 
     expect(root.findOne('button')).toHaveProp(
       'className',
-      'p q r s t u v w x y z a1 b1 c1 d1 e1 f1 g1 h1 i1 j1 k1 l1 m1 n1 o1 p1 f g h i j',
+      'a b c d e f g h i j k l m n o p q r s t u v w c1 d1 e1 f1 g1',
     );
 
     expect(getRenderedStyles('standard')).toMatchSnapshot();
@@ -140,7 +139,7 @@ describe('withStyles()', () => {
     update();
     update();
 
-    expect(spy).toHaveBeenCalledTimes(2);
+    expect(spy).toHaveBeenCalledTimes(1);
   });
 
   it('re-renders if direction changes', () => {
@@ -154,13 +153,13 @@ describe('withStyles()', () => {
       </Wrapper>,
     );
 
-    expect(spy).toHaveBeenCalledTimes(2);
+    expect(spy).toHaveBeenCalledTimes(1);
     expect(spy).toHaveBeenCalledWith(
       expect.anything(),
-      darkTheme,
+      twilightTheme,
       expect.objectContaining({
         direction: 'ltr',
-        theme: 'night',
+        theme: 'twilight',
       }),
     );
 
@@ -170,13 +169,13 @@ describe('withStyles()', () => {
       </Wrapper>,
     );
 
-    expect(spy).toHaveBeenCalledTimes(3);
+    expect(spy).toHaveBeenCalledTimes(2);
     expect(spy).toHaveBeenCalledWith(
       expect.anything(),
-      darkTheme,
+      twilightTheme,
       expect.objectContaining({
         direction: 'rtl',
-        theme: 'night',
+        theme: 'twilight',
       }),
     );
   });
@@ -192,29 +191,29 @@ describe('withStyles()', () => {
       </Wrapper>,
     );
 
-    expect(spy).toHaveBeenCalledTimes(2);
+    expect(spy).toHaveBeenCalledTimes(1);
     expect(spy).toHaveBeenCalledWith(
       expect.anything(),
-      darkTheme,
+      twilightTheme,
       expect.objectContaining({
         direction: 'ltr',
-        theme: 'night',
+        theme: 'twilight',
       }),
     );
 
     rerender(
-      <Wrapper theme="day">
+      <Wrapper theme="dawn">
         <Button sheet={sheet}>Child</Button>
       </Wrapper>,
     );
 
-    expect(spy).toHaveBeenCalledTimes(3);
+    expect(spy).toHaveBeenCalledTimes(2);
     expect(spy).toHaveBeenCalledWith(
       expect.anything(),
-      lightTheme,
+      dawnTheme,
       expect.objectContaining({
         direction: 'ltr',
-        theme: 'day',
+        theme: 'dawn',
       }),
     );
   });

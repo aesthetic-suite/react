@@ -1,18 +1,17 @@
 import React from 'react';
 import { render } from 'rut-dom';
-import { aesthetic } from '@aesthetic/core';
-import { setupAesthetic, teardownAesthetic } from '@aesthetic/core/lib/testing';
 import withDirection from '../src/withDirection';
 import DirectionProvider from '../src/DirectionProvider';
 import { DirectionProviderProps, WithDirectionWrappedProps } from '../src/types';
+import { setupAestheticReact, teardownAestheticReact } from './helpers';
 
 describe('withDirection()', () => {
   beforeEach(() => {
-    setupAesthetic(aesthetic);
+    setupAestheticReact();
   });
 
   afterEach(() => {
-    teardownAesthetic(aesthetic);
+    teardownAestheticReact();
   });
 
   function BaseComponent(props: WithDirectionWrappedProps) {
@@ -20,7 +19,11 @@ describe('withDirection()', () => {
   }
 
   function WrappingComponent({ children }: { children?: React.ReactNode }) {
-    return <DirectionProvider direction="ltr">{children || <div />}</DirectionProvider>;
+    return (
+      <DirectionProvider direction="ltr" wrapper={<div />}>
+        {children || <div />}
+      </DirectionProvider>
+    );
   }
 
   it('inherits name from component `constructor.name`', () => {
@@ -89,7 +92,7 @@ describe('withDirection()', () => {
   it('returns new direction if direction context changes', () => {
     const Wrapped = withDirection()(BaseComponent);
     const { root, update } = render<DirectionProviderProps>(
-      <DirectionProvider direction="rtl">
+      <DirectionProvider direction="rtl" wrapper={<div />}>
         <Wrapped />
       </DirectionProvider>,
     );

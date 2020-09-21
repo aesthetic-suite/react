@@ -11,16 +11,15 @@ import { DirectionProviderProps } from './types';
 export default function DirectionProvider({
   children,
   direction,
-  inline,
   value,
+  wrapper,
 }: DirectionProviderProps) {
-  const Tag = inline ? 'span' : 'div';
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const dir: Direction = direction || getDirection(value) || 'ltr';
 
   return (
     <DirectionContext.Provider value={dir}>
-      <Tag dir={dir}>{children}</Tag>
+      {React.cloneElement(wrapper, { dir }, children)}
     </DirectionContext.Provider>
   );
 }

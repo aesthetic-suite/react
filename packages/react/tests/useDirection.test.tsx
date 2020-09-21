@@ -28,7 +28,7 @@ describe('useDirection()', () => {
     }
 
     render<{}>(
-      <DirectionProvider direction="rtl">
+      <DirectionProvider direction="rtl" wrapper={<div />}>
         <Component />
       </DirectionProvider>,
     );
