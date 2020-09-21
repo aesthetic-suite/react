@@ -9,6 +9,7 @@ import {
 } from '@aesthetic/core/lib/testing';
 import { registerTheme } from '../lib';
 
+// @ts-expect-error
 export const designWithMixins = design.extend('react', {}, mixins);
 
 export const dawnTheme = designWithMixins.createTheme(
