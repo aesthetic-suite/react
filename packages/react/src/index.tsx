@@ -8,6 +8,7 @@ import DirectionProvider from './DirectionProvider';
 import ThemeContext from './ThemeContext';
 import ThemeProvider from './ThemeProvider';
 import ContextualThemeProvider from './ContextualThemeProvider';
+import createStyled from './createStyled';
 import useDirection from './useDirection';
 import useStyles from './useStyles';
 import useTheme from './useTheme';
@@ -24,6 +25,7 @@ export {
   ThemeContext,
   ThemeProvider,
   ContextualThemeProvider,
+  createStyled,
   useDirection,
   useStyles,
   useTheme,

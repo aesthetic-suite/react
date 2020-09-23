@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createStyled() creates and renders a button with defined styles 1`] = `
+"<Wrapper>
+  <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>
+    <div dir=\\"ltr\\">
+      <ThemeProvider name=\\"twilight\\">
+        <ForwardRef>
+          <button className=\\"a b c\\">
+            Test
+          </button>
+        </ForwardRef>
+      </ThemeProvider>
+    </div>
+  </DirectionProvider>
+</Wrapper>"
+`;
+
+exports[`createStyled() creates and renders a button with defined styles 2`] = `".a {display: inline-flex;}.b {text-align: center;}.c {padding: 1rem;}"`;
