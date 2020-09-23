@@ -32,7 +32,7 @@ export default function createStyled<
     const typeOfType = typeof type;
     const typeOfFactory = typeof factory;
 
-    if (typeOfType !== 'string') {
+    if (typeOfType !== 'string' && typeOfType !== 'object') {
       throw new TypeError(
         `Styled components must extend an HTML element or React component, found ${typeOfType}.`,
       );

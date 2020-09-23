@@ -134,16 +134,47 @@ describe('createStyled()', () => {
     expect(debug({ log: false })).toMatchSnapshot();
   });
 
-  it('can access the ref', () => {
-    const Icon = createStyled('svg', {
-      display: 'inline-block',
-      verticalAlign: 'bottom',
-      width: '16px',
+  it('supports styled component composition', () => {
+    const Button = createStyled('button', () => ({
+      display: 'inline-flex',
+      textAlign: 'center',
+      padding: '1rem',
+    }));
+
+    const BlockButton = createStyled(Button, {
+      display: 'flex',
+      width: '100%',
     });
 
-    const svg = document.createElement('svg');
+    const LargeBlockButton = createStyled(BlockButton, {
+      padding: '2rem',
+      fontSize: 18,
+    });
+
+    const { debug } = render<{}>(
+      <>
+        <Button type="button">Normal</Button>
+        <BlockButton type="submit">Block</BlockButton>
+        <LargeBlockButton disabled>Large</LargeBlockButton>
+      </>,
+      {
+        wrapper: <Wrapper />,
+      },
+    );
+
+    expect(debug({ log: false })).toMatchSnapshot();
+    expect(getRenderedStyles('standard')).toMatchSnapshot();
+  });
+
+  it('can access the ref from multiple layers of composition', () => {
+    const Leaf = createStyled('main', {});
+    const Branch = createStyled(Leaf, {});
+    const Trunk = createStyled(Branch, {});
+    const Root = createStyled(Trunk, {});
+
+    const svg = document.createElement('main');
     const spy = jest.fn();
-    const { debug } = render<{}>(<Icon ref={spy} />, {
+    const { debug } = render<{}>(<Root ref={spy} />, {
       mockRef: () => svg,
       wrapper: <Wrapper />,
     });
