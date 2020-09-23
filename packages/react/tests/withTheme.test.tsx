@@ -86,9 +86,6 @@ describe('withTheme()', () => {
   });
 
   it('returns new theme if theme context changes', () => {
-    // @ts-expect-error Only need to mock matches
-    window.matchMedia = () => ({ matches: false });
-
     const Wrapped = withTheme()(BaseComponent);
     const { root, update } = render<ThemeProviderProps>(
       <ThemeProvider name="dawn">
