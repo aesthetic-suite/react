@@ -9,14 +9,14 @@
   dependencies:
     "@aesthetic/utils" "^0.4.2"
 
-"@aesthetic/core@^0.4.4":
-  version "0.4.4"
-  resolved "https://registry.yarnpkg.com/@aesthetic/core/-/core-0.4.4.tgz#3cc76f7880900aa4348e86085b70cc9d1ea0226f"
-  integrity sha512-leT60BlH+F3eRw81ozYlgs8NZo+YM/geRodsdkaJJdtIgyxNG8ERQQZ0y3s1NOdCOGntfCc3mI5hdRYljfFoTA==
+"@aesthetic/core@^0.4.5":
+  version "0.4.5"
+  resolved "https://registry.yarnpkg.com/@aesthetic/core/-/core-0.4.5.tgz#2ece4ef07649ff078cf6566ea2584fe00ece144c"
+  integrity sha512-VYf4kOk8Fy6U/vYZTIaEISdnYmpQvu3URTsyVnsO692JQYsPBSY7hBQ5bzKkY902QF0GD5SpxXq5rItPKECJgw==
   dependencies:
     "@aesthetic/sss" "^0.4.3"
     "@aesthetic/style" "^0.4.2"
-    "@aesthetic/system" "^0.4.3"
+    "@aesthetic/system" "^0.4.4"
     "@aesthetic/types" "^0.2.1"
     "@aesthetic/utils" "^0.4.2"
 
@@ -37,10 +37,10 @@
     "@aesthetic/utils" "^0.4.2"
     sort-css-media-queries "^1.5.0"
 
-"@aesthetic/system@^0.4.3":
-  version "0.4.3"
-  resolved "https://registry.yarnpkg.com/@aesthetic/system/-/system-0.4.3.tgz#ce5890f16583272acfa18626c7569989c6179bd1"
-  integrity sha512-awtBrwmHa5beXavNENaE6OqQV0sm1a+zetzMX9V6JMIThZqwcOkTGN8XQ6oa3JuXpJt6d05JZTXqdV0sxH2EcQ==
+"@aesthetic/system@^0.4.4":
+  version "0.4.4"
+  resolved "https://registry.yarnpkg.com/@aesthetic/system/-/system-0.4.4.tgz#7b3905c20e2a6a0372347c4033af5cd726b236e6"
+  integrity sha512-7i8hZmzHc+CcL9xLW9zTeDh96Lg9Fl9KewWmOwrUvcLuMxj6jcbZI1y6JdFymgcopJXjvdMaM5jkIGE8sgkCgg==
   dependencies:
     "@aesthetic/types" "^0.2.1"
     "@aesthetic/utils" "^0.4.2"

@@ -75,3 +75,62 @@ exports[`createStyled() only renders styles once, even when component rerenders 
 `;
 
 exports[`createStyled() only renders styles once, even when component rerenders 2`] = `".a {text-decoration: none;}"`;
+
+exports[`createStyled() supports variants 1`] = `
+"<Wrapper>
+  <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>
+    <div dir=\\"ltr\\">
+      <ThemeProvider name=\\"twilight\\">
+        <ForwardRef palette=\\"success\\">
+          <div className=\\"a b\\" palette=\\"success\\">
+            <div>
+              <h1>Title</h1>
+              And other content!
+            </div>
+          </div>
+        </ForwardRef>
+      </ThemeProvider>
+    </div>
+  </DirectionProvider>
+</Wrapper>"
+`;
+
+exports[`createStyled() supports variants 2`] = `".a {background: var(--palette-neutral-bg-base);}.b {background: var(--palette-success-bg-base);}.c {background: var(--palette-failure-bg-base);}.d {background: var(--palette-warning-bg-base);}"`;
+
+exports[`createStyled() supports variants 3`] = `
+"<Wrapper>
+  <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>
+    <div dir=\\"ltr\\">
+      <ThemeProvider name=\\"twilight\\">
+        <ForwardRef palette=\\"failure\\">
+          <div className=\\"a c\\" palette=\\"failure\\">
+            <div>
+              <h1>Title</h1>
+              And other content!
+            </div>
+          </div>
+        </ForwardRef>
+      </ThemeProvider>
+    </div>
+  </DirectionProvider>
+</Wrapper>"
+`;
+
+exports[`createStyled() supports variants 4`] = `
+"<Wrapper>
+  <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>
+    <div dir=\\"ltr\\">
+      <ThemeProvider name=\\"twilight\\">
+        <ForwardRef>
+          <div className=\\"a\\">
+            <div>
+              <h1>Title</h1>
+              And other content!
+            </div>
+          </div>
+        </ForwardRef>
+      </ThemeProvider>
+    </div>
+  </DirectionProvider>
+</Wrapper>"
+`;

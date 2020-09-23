@@ -1,11 +1,24 @@
-import React, { useMemo } from 'react';
-import { createComponentStyles, LocalBlock, Utilities } from '@aesthetic/core';
+import React from 'react';
+import { createComponentStyles, LocalBlock, Utilities, LocalSheet } from '@aesthetic/core';
 import useStyles from './useStyles';
+import { ElementType } from './types';
 
-export default function createStyled<T extends keyof JSX.IntrinsicElements>(
+function getVariantsFromProps<V extends object>(styleSheet: LocalSheet<{}>, props: object): V {
+  const variants: Record<string, unknown> = {};
+
+  styleSheet.metadata.element?.variantTypes.forEach((name) => {
+    if (name in props) {
+      variants[name] = (props as Record<string, unknown>)[name];
+    }
+  });
+
+  return variants as V;
+}
+
+export default function createStyled<T extends ElementType, V extends object = {}>(
   type: T,
   factory: (utilities: Utilities<LocalBlock>) => LocalBlock,
-) /* infer */ {
+): React.ForwardRefExoticComponent<JSX.IntrinsicElements[T] & V> {
   if (__DEV__) {
     if (typeof factory !== 'function') {
       throw new TypeError(
@@ -18,9 +31,9 @@ export default function createStyled<T extends keyof JSX.IntrinsicElements>(
     element: factory(utils),
   }));
 
-  const Component = React.forwardRef<unknown, JSX.IntrinsicElements[T]>((props, ref) => {
+  const Component = React.forwardRef<unknown, JSX.IntrinsicElements[T] & V>((props, ref) => {
     const cx = useStyles(styleSheet);
-    let className = useMemo(() => cx('element'), [cx]);
+    let className = cx(getVariantsFromProps(styleSheet, props), 'element');
 
     if (props.className) {
       className += ` ${props.className}`;
@@ -35,5 +48,6 @@ export default function createStyled<T extends keyof JSX.IntrinsicElements>(
 
   Component.displayName = `styled(${type})`;
 
-  return Component;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return Component as any;
 }

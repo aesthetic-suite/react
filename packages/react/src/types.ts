@@ -12,6 +12,8 @@ export interface ClassNameGenerator<T> {
   (...keys: ClassNameTypes<T>): ClassName;
 }
 
+export type ElementType = keyof JSX.IntrinsicElements;
+
 // CONTEXT
 
 export type DirectionContextType = Direction;

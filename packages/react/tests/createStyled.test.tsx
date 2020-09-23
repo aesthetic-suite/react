@@ -88,4 +88,55 @@ describe('createStyled()', () => {
     expect(debug({ log: false })).toMatchSnapshot();
     expect(getRenderedStyles('standard')).toMatchSnapshot();
   });
+
+  it('supports variants', () => {
+    interface AlertProps {
+      palette?: 'success' | 'failure' | 'warning';
+    }
+
+    const Alert = createStyled<'div', AlertProps>('div', (css) => ({
+      background: css.var('palette-neutral-bg-base'),
+      '@variants': {
+        palette: {
+          success: {
+            background: css.var('palette-success-bg-base'),
+          },
+          failure: {
+            background: css.var('palette-failure-bg-base'),
+          },
+          warning: {
+            background: css.var('palette-warning-bg-base'),
+          },
+        },
+      },
+    }));
+
+    const { debug, update } = render<AlertProps>(
+      <Alert palette="success">
+        <div>
+          <h1>Title</h1>And other content!
+        </div>
+      </Alert>,
+      {
+        wrapper: <Wrapper />,
+      },
+    );
+
+    expect(debug({ log: false })).toMatchSnapshot();
+    expect(getRenderedStyles('standard')).toMatchSnapshot();
+
+    update({ palette: 'failure' });
+
+    expect(debug({ log: false })).toMatchSnapshot();
+
+    update({ palette: undefined });
+
+    expect(debug({ log: false })).toMatchSnapshot();
+  });
+
+  // const Icon = createStyled('svg', {
+  //   display: 'inline-block',
+  //   verticalAlign: 'bottom',
+  //   width: '16px',
+  // });
 });
