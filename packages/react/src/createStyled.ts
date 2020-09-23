@@ -1,5 +1,11 @@
 import React from 'react';
-import { createComponentStyles, LocalBlock, Utilities, LocalSheet } from '@aesthetic/core';
+import {
+  createComponentStyles,
+  renderComponentStyles,
+  LocalBlock,
+  Utilities,
+  LocalSheet,
+} from '@aesthetic/core';
 import useStyles from './useStyles';
 import { ElementType } from './types';
 
@@ -20,7 +26,14 @@ export default function createStyled<T extends ElementType, V extends object = {
   factory: LocalBlock | ((utilities: Utilities<LocalBlock>) => LocalBlock),
 ): React.ForwardRefExoticComponent<JSX.IntrinsicElements[T] & V> {
   if (__DEV__) {
+    const typeOfType = typeof type;
     const typeOfFactory = typeof factory;
+
+    if (typeOfType !== 'string') {
+      throw new TypeError(
+        `Styled components must extend an HTML element or React component, found ${typeOfType}.`,
+      );
+    }
 
     if (typeOfFactory !== 'function' && typeOfFactory !== 'object') {
       throw new TypeError(
@@ -33,7 +46,11 @@ export default function createStyled<T extends ElementType, V extends object = {
     element: typeof factory === 'function' ? factory(utils) : factory,
   }));
 
-  const Component = React.forwardRef<unknown, JSX.IntrinsicElements[T] & V>((props, ref) => {
+  // Attempt to render styles immediately so that they're available on mount
+  renderComponentStyles(styleSheet);
+
+  // Use `forwardRef` so that consumer can access the underlying element
+  const Component = React.forwardRef<unknown, { className?: string }>((props, ref) => {
     const cx = useStyles(styleSheet);
     let className = cx(getVariantsFromProps(styleSheet, props), 'element');
 
@@ -50,6 +67,7 @@ export default function createStyled<T extends ElementType, V extends object = {
 
   Component.displayName = `styled(${type})`;
 
+  // Use the return type of `createStyled` instead of `forwardRef`
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return Component as any;
 }

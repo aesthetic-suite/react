@@ -40,7 +40,7 @@ describe('createStyled()', () => {
     const Link = createStyled('a', spy);
 
     const { debug, update } = render<{}>(<Link href="/foo/bar">Test</Link>, {
-      wrapper: <Wrapper />,
+      wrapper: <Wrapper theme="day" />,
     });
 
     update();
