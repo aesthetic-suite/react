@@ -1,5 +1,45 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`createStyled() can pass custom props/attributes 1`] = `
+"<Wrapper>
+  <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>
+    <div dir=\\"ltr\\">
+      <ThemeProvider name=\\"twilight\\">
+        <ForwardRef
+          className=\\"will-be-appended\\"
+          placeholder=\\"Search...\\"
+          type=\\"text\\"
+        >
+          <input
+            className=\\"a b c will-be-appended\\"
+            placeholder=\\"Search...\\"
+            type=\\"text\\"
+          />
+        </ForwardRef>
+      </ThemeProvider>
+    </div>
+  </DirectionProvider>
+</Wrapper>"
+`;
+
+exports[`createStyled() can pass custom props/attributes 2`] = `".a {border: 1px solid black;}.b {padding: 1rem;}.c:focus {outline: none;}"`;
+
+exports[`createStyled() can use and define CSS variables 1`] = `
+"<Wrapper>
+  <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>
+    <div dir=\\"ltr\\">
+      <ThemeProvider name=\\"twilight\\">
+        <ForwardRef>
+          <code className=\\"a b\\" />
+        </ForwardRef>
+      </ThemeProvider>
+    </div>
+  </DirectionProvider>
+</Wrapper>"
+`;
+
+exports[`createStyled() can use and define CSS variables 2`] = `".a {font-size: var(--text-sm-size);}.b {line-height: 1.25;}"`;
+
 exports[`createStyled() creates and renders a button with defined styles 1`] = `
 "<Wrapper>
   <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>

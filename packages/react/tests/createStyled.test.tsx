@@ -51,4 +51,41 @@ describe('createStyled()', () => {
     expect(debug({ log: false })).toMatchSnapshot();
     expect(getRenderedStyles('standard')).toMatchSnapshot();
   });
+
+  it('can pass custom props/attributes', () => {
+    const Input = createStyled('input', () => ({
+      border: '1px solid black',
+      padding: '1rem',
+      ':focus': {
+        outline: 'none',
+      },
+    }));
+
+    const { debug } = render<{}>(
+      <Input disabled={false} type="text" placeholder="Search..." className="will-be-appended" />,
+      {
+        wrapper: <Wrapper />,
+      },
+    );
+
+    expect(debug({ log: false })).toMatchSnapshot();
+    expect(getRenderedStyles('standard')).toMatchSnapshot();
+  });
+
+  it('can use and define CSS variables', () => {
+    const Code = createStyled('code', (css) => ({
+      fontSize: css.var('text-sm-size'),
+      lineHeight: css.token('text-sm-line-height') as number,
+      '@variables': {
+        elementLevelVar: 'nice',
+      },
+    }));
+
+    const { debug } = render<{}>(<Code />, {
+      wrapper: <Wrapper />,
+    });
+
+    expect(debug({ log: false })).toMatchSnapshot();
+    expect(getRenderedStyles('standard')).toMatchSnapshot();
+  });
 });
