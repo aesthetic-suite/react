@@ -1,5 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`createStyled() can access the ref 1`] = `
+"<Wrapper>
+  <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>
+    <div dir=\\"ltr\\">
+      <ThemeProvider name=\\"twilight\\">
+        <ForwardRef>
+          <svg ref={mockConstructor()} className=\\"a b c\\" />
+        </ForwardRef>
+      </ThemeProvider>
+    </div>
+  </DirectionProvider>
+</Wrapper>"
+`;
+
 exports[`createStyled() can pass custom props/attributes 1`] = `
 "<Wrapper>
   <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>

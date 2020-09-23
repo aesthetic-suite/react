@@ -134,9 +134,21 @@ describe('createStyled()', () => {
     expect(debug({ log: false })).toMatchSnapshot();
   });
 
-  // const Icon = createStyled('svg', {
-  //   display: 'inline-block',
-  //   verticalAlign: 'bottom',
-  //   width: '16px',
-  // });
+  it('can access the ref', () => {
+    const Icon = createStyled('svg', () => ({
+      display: 'inline-block',
+      verticalAlign: 'bottom',
+      width: '16px',
+    }));
+
+    const svg = document.createElement('svg');
+    const spy = jest.fn();
+    const { debug } = render<{}>(<Icon ref={spy} />, {
+      mockRef: () => svg,
+      wrapper: <Wrapper />,
+    });
+
+    expect(spy).toHaveBeenCalledWith(svg);
+    expect(debug({ log: false })).toMatchSnapshot();
+  });
 });
