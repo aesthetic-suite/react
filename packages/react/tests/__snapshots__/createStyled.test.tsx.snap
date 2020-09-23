@@ -17,3 +17,21 @@ exports[`createStyled() creates and renders a button with defined styles 1`] = `
 `;
 
 exports[`createStyled() creates and renders a button with defined styles 2`] = `".a {display: inline-flex;}.b {text-align: center;}.c {padding: 1rem;}"`;
+
+exports[`createStyled() only renders styles once, even when component rerenders 1`] = `
+"<Wrapper>
+  <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>
+    <div dir=\\"ltr\\">
+      <ThemeProvider name=\\"twilight\\">
+        <ForwardRef href=\\"/foo/bar\\">
+          <a className=\\"a\\" href=\\"/foo/bar\\">
+            Test
+          </a>
+        </ForwardRef>
+      </ThemeProvider>
+    </div>
+  </DirectionProvider>
+</Wrapper>"
+`;
+
+exports[`createStyled() only renders styles once, even when component rerenders 2`] = `".a {text-decoration: none;}"`;

@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { createComponentStyles, LocalBlock, Utilities } from '@aesthetic/core';
 import useStyles from './useStyles';
 
 export default function createStyled<T extends keyof JSX.IntrinsicElements>(
   type: T,
   factory: (utilities: Utilities<LocalBlock>) => LocalBlock,
-): React.ForwardRefExoticComponent<JSX.IntrinsicElements[T]> {
+) /* infer */ {
   if (__DEV__) {
     if (typeof factory !== 'function') {
       throw new TypeError(
@@ -20,7 +20,7 @@ export default function createStyled<T extends keyof JSX.IntrinsicElements>(
 
   const Component = React.forwardRef<unknown, JSX.IntrinsicElements[T]>((props, ref) => {
     const cx = useStyles(styleSheet);
-    let className = cx('element');
+    let className = useMemo(() => cx('element'), [cx]);
 
     if (props.className) {
       className += ` ${props.className}`;

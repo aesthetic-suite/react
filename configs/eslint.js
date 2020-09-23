@@ -13,6 +13,7 @@ module.exports = {
   rules: {
     'react/forbid-prop-types': 'off',
     'react/no-unused-prop-types': 'off',
+    'react/prop-types': 'off',
     'react/require-default-props': 'off',
 
     // Broken
