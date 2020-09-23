@@ -17,18 +17,20 @@ function getVariantsFromProps<V extends object>(styleSheet: LocalSheet<{}>, prop
 
 export default function createStyled<T extends ElementType, V extends object = {}>(
   type: T,
-  factory: (utilities: Utilities<LocalBlock>) => LocalBlock,
+  factory: LocalBlock | ((utilities: Utilities<LocalBlock>) => LocalBlock),
 ): React.ForwardRefExoticComponent<JSX.IntrinsicElements[T] & V> {
   if (__DEV__) {
-    if (typeof factory !== 'function') {
+    const typeOfFactory = typeof factory;
+
+    if (typeOfFactory !== 'function' && typeOfFactory !== 'object') {
       throw new TypeError(
-        `Styled components require a style sheet factory function, found ${typeof factory}.`,
+        `Styled components require a style sheet factory function, found ${typeOfFactory}.`,
       );
     }
   }
 
   const styleSheet = createComponentStyles((utils) => ({
-    element: factory(utils),
+    element: typeof factory === 'function' ? factory(utils) : factory,
   }));
 
   const Component = React.forwardRef<unknown, JSX.IntrinsicElements[T] & V>((props, ref) => {

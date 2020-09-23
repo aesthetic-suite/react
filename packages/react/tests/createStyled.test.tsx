@@ -53,13 +53,13 @@ describe('createStyled()', () => {
   });
 
   it('can pass custom props/attributes', () => {
-    const Input = createStyled('input', () => ({
+    const Input = createStyled('input', {
       border: '1px solid black',
       padding: '1rem',
       ':focus': {
         outline: 'none',
       },
-    }));
+    });
 
     const { debug } = render<{}>(
       <Input disabled={false} type="text" placeholder="Search..." className="will-be-appended" />,
@@ -135,11 +135,11 @@ describe('createStyled()', () => {
   });
 
   it('can access the ref', () => {
-    const Icon = createStyled('svg', () => ({
+    const Icon = createStyled('svg', {
       display: 'inline-block',
       verticalAlign: 'bottom',
       width: '16px',
-    }));
+    });
 
     const svg = document.createElement('svg');
     const spy = jest.fn();
