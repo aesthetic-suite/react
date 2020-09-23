@@ -14,6 +14,16 @@ export interface ClassNameGenerator<T> {
 
 export type ElementType = keyof JSX.IntrinsicElements;
 
+export interface StyledInheritedProps {
+  className?: string;
+}
+
+export type InferProps<T extends ElementType | React.ComponentType> = T extends ElementType
+  ? JSX.IntrinsicElements[T]
+  : T extends React.ComponentType<infer P>
+  ? P
+  : never;
+
 // CONTEXT
 
 export type DirectionContextType = Direction;

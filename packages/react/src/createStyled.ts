@@ -7,7 +7,7 @@ import {
   LocalSheet,
 } from '@aesthetic/core';
 import useStyles from './useStyles';
-import { ElementType } from './types';
+import { ElementType, InferProps, StyledInheritedProps } from './types';
 
 function getVariantsFromProps<V extends object>(styleSheet: LocalSheet<{}>, props: object): V {
   const variants: Record<string, unknown> = {};
@@ -21,10 +21,13 @@ function getVariantsFromProps<V extends object>(styleSheet: LocalSheet<{}>, prop
   return variants as V;
 }
 
-export default function createStyled<T extends ElementType, V extends object = {}>(
+export default function createStyled<
+  T extends ElementType | React.ComponentType,
+  V extends object = {}
+>(
   type: T,
   factory: LocalBlock | ((utilities: Utilities<LocalBlock>) => LocalBlock),
-): React.ForwardRefExoticComponent<JSX.IntrinsicElements[T] & V> {
+): React.ForwardRefExoticComponent<InferProps<T> & StyledInheritedProps & V> {
   if (__DEV__) {
     const typeOfType = typeof type;
     const typeOfFactory = typeof factory;
@@ -60,12 +63,19 @@ export default function createStyled<T extends ElementType, V extends object = {
 
     return React.createElement(type, {
       ...props,
+      // These dont type correctly because all of our inference
+      // @ts-expect-error
       className,
       ref,
     });
   });
 
-  Component.displayName = `styled(${type})`;
+  const displayName =
+    typeof type === 'string'
+      ? String(type)
+      : String((type as React.ComponentType).displayName || (type as Function).name);
+
+  Component.displayName = `styled(${displayName})`;
 
   // Use the return type of `createStyled` instead of `forwardRef`
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
