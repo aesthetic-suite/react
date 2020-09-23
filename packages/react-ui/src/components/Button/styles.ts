@@ -15,30 +15,29 @@ export default createComponentStyles((css) => ({
     },
 
     '@variants': {
-      size_sm: css.mixin('text-sm', {
-        minWidth: css.unit(6),
-        // @ts-expect-error
-        padding: {
-          leftRight: css.var('spacing-df'),
-          topBottom: css.var('spacing-sm'),
-        },
-      }),
-      size_df: css.mixin('text-df', {
-        minWidth: css.unit(8),
-        // @ts-expect-error
-        padding: {
-          leftRight: css.var('spacing-md'),
-          topBottom: css.var('spacing-df'),
-        },
-      }),
-      size_lg: css.mixin('text-lg', {
-        minWidth: css.unit(10),
-        // @ts-expect-error
-        padding: {
-          leftRight: css.var('spacing-xl'),
-          topBottom: css.var('spacing-lg'),
-        },
-      }),
+      size: {
+        sm: css.mixin('text-sm', {
+          minWidth: css.unit(6),
+          padding: {
+            leftRight: css.var('spacing-df'),
+            topBottom: css.var('spacing-sm'),
+          },
+        }),
+        df: css.mixin('text-df', {
+          minWidth: css.unit(8),
+          padding: {
+            leftRight: css.var('spacing-md'),
+            topBottom: css.var('spacing-df'),
+          },
+        }),
+        lg: css.mixin('text-lg', {
+          minWidth: css.unit(10),
+          padding: {
+            leftRight: css.var('spacing-xl'),
+            topBottom: css.var('spacing-lg'),
+          },
+        }),
+      },
     },
   }),
 
