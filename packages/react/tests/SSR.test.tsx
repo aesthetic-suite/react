@@ -59,7 +59,6 @@ describe('SSR', () => {
     teardownAestheticReact();
     purgeStyles();
 
-    // @ts-expect-error
     delete global.AESTHETIC_CUSTOM_RENDERER;
   });
 

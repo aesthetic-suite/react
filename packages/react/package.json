@@ -20,9 +20,9 @@
     "access": "public"
   },
   "dependencies": {
-    "@aesthetic/core": "^0.4.6",
+    "@aesthetic/core": "^0.4.7",
     "@aesthetic/types": "^0.2.1",
-    "@aesthetic/utils": "^0.4.3",
+    "@aesthetic/utils": "^0.4.4",
     "direction": "^1.0.4",
     "hoist-non-react-statics": "^3.3.2"
   },
@@ -30,7 +30,7 @@
     "react": "^16.6.0"
   },
   "devDependencies": {
-    "@aesthetic/addon-mixins": "^0.1.4",
+    "@aesthetic/addon-mixins": "^0.1.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
