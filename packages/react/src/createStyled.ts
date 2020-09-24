@@ -7,7 +7,7 @@ import {
   LocalSheet,
 } from '@aesthetic/core';
 import useStyles from './useStyles';
-import { ElementType, InferProps, StyledInheritedProps } from './types';
+import { ElementType, InferProps, StyledComponent } from './types';
 
 function getVariantsFromProps<V extends object>(styleSheet: LocalSheet<{}>, props: object): V {
   const variants: Record<string, unknown> = {};
@@ -21,21 +21,24 @@ function getVariantsFromProps<V extends object>(styleSheet: LocalSheet<{}>, prop
   return variants as V;
 }
 
+// eslint-disable-next-line complexity
 export default function createStyled<
   T extends ElementType | React.ComponentType,
   V extends object = {}
 >(
   type: T,
   factory: LocalBlock | ((utilities: Utilities<LocalBlock>) => LocalBlock),
-): React.ForwardRefExoticComponent<InferProps<T> & StyledInheritedProps & V> {
+): StyledComponent<InferProps<T> & V> {
   if (__DEV__) {
     const typeOfType = typeof type;
     const typeOfFactory = typeof factory;
 
-    if (typeOfType !== 'string' && typeOfType !== 'object') {
+    if (typeOfType !== 'string' && typeOfType !== 'function' && typeOfType !== 'object') {
       throw new TypeError(
         `Styled components must extend an HTML element or React component, found ${typeOfType}.`,
       );
+    } else if ((typeOfType === 'function' || typeOfType === 'object') && !('styleSheet' in type)) {
+      throw new TypeError(`Styled components may only extend other styled components.`);
     }
 
     if (typeOfFactory !== 'function' && typeOfFactory !== 'object') {
@@ -63,7 +66,7 @@ export default function createStyled<
 
     return React.createElement(type, {
       ...props,
-      // These dont type correctly because all of our inference
+      // These dont type correctly because of our inference
       // @ts-expect-error
       className,
       ref,
@@ -76,6 +79,8 @@ export default function createStyled<
       : String((type as React.ComponentType).displayName || (type as Function).name);
 
   Component.displayName = `styled(${displayName})`;
+
+  (Component as StyledComponent).styleSheet = styleSheet;
 
   // Use the return type of `createStyled` instead of `forwardRef`
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

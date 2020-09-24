@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import React from 'react';
-import { Theme, ClassNameSheetVariants } from '@aesthetic/core';
+import { Theme, ClassNameSheetVariants, LocalSheet } from '@aesthetic/core';
 import { ClassName, Direction, ThemeName } from '@aesthetic/types';
 
 export type ClassNameTypes<T> = (undefined | null | false | T)[];
@@ -13,6 +13,11 @@ export interface ClassNameGenerator<T> {
 }
 
 export type ElementType = keyof JSX.IntrinsicElements;
+
+export interface StyledComponent<P extends object = {}>
+  extends React.ForwardRefExoticComponent<P & StyledInheritedProps> {
+  styleSheet: LocalSheet;
+}
 
 export interface StyledInheritedProps {
   className?: string;

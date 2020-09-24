@@ -1,13 +1,6 @@
 import React from 'react';
-import { getActiveTheme, Theme } from '@aesthetic/core';
+import { getActiveTheme } from '@aesthetic/core';
+import { attempt } from '@aesthetic/utils';
 import { ThemeContextType } from './types';
 
-let theme: Theme | null = null;
-
-try {
-  theme = getActiveTheme();
-} catch {
-  // Ignore
-}
-
-export default React.createContext<ThemeContextType | null>(theme);
+export default React.createContext<ThemeContextType | null>(attempt(() => getActiveTheme()));

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { render } from 'rut-dom';
+import { StyleSheet } from '@aesthetic/core';
 import { getRenderedStyles, purgeStyles } from '@aesthetic/core/lib/testing';
 import { createStyled } from '../src';
 import { Wrapper } from './__mocks__/Button';
@@ -15,6 +16,48 @@ describe('createStyled()', () => {
   afterEach(() => {
     purgeStyles();
     teardownAestheticReact();
+  });
+
+  it('errors for a non-react element type', () => {
+    expect(() =>
+      createStyled(
+        // @ts-expect-error
+        123,
+        {},
+      ),
+    ).toThrow('Styled components must extend an HTML element or React component, found number.');
+  });
+
+  it('errors for invalid style sheet factory', () => {
+    expect(() =>
+      createStyled(
+        'div',
+        // @ts-expect-error
+        true,
+      ),
+    ).toThrow('Styled components require a style sheet factory function, found boolean.');
+  });
+
+  it('errors when a non-styled react component is passed', () => {
+    function Foo() {
+      return <div />;
+    }
+
+    expect(() => createStyled(Foo, {})).toThrow(
+      'Styled components may only extend other styled components.',
+    );
+  });
+
+  it('sets static properties on component', () => {
+    const Button = createStyled('button', {});
+
+    expect(Button.displayName).toBe('styled(button)');
+    expect(Button.styleSheet).toBeInstanceOf(StyleSheet);
+
+    const ComposedButton = createStyled(Button, {});
+
+    expect(ComposedButton.displayName).toBe('styled(styled(button))');
+    expect(ComposedButton.styleSheet).toBeInstanceOf(StyleSheet);
   });
 
   it('creates and renders a button with defined styles', () => {
