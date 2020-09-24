@@ -50,7 +50,7 @@ exports[`createStyled() can use and define CSS variables 1`] = `
     <div dir=\\"ltr\\">
       <ThemeProvider name=\\"twilight\\">
         <ForwardRef>
-          <code className=\\"a b\\" />
+          <code className=\\"a b c\\" />
         </ForwardRef>
       </ThemeProvider>
     </div>
@@ -58,7 +58,7 @@ exports[`createStyled() can use and define CSS variables 1`] = `
 </Wrapper>"
 `;
 
-exports[`createStyled() can use and define CSS variables 2`] = `".a {font-size: var(--text-sm-size);}.b {line-height: 1.25;}"`;
+exports[`createStyled() can use and define CSS variables 2`] = `".a {font-size: var(--text-sm-size);}.b {line-height: 1.25;}.c {--element-level-var: nice;}"`;
 
 exports[`createStyled() creates and renders a button with defined styles 1`] = `
 "<Wrapper>

@@ -12,7 +12,7 @@ import { ElementType, InferProps, StyledInheritedProps } from './types';
 function getVariantsFromProps<V extends object>(styleSheet: LocalSheet<{}>, props: object): V {
   const variants: Record<string, unknown> = {};
 
-  styleSheet.metadata.element?.variantTypes.forEach((name) => {
+  styleSheet.metadata.element?.variantTypes?.forEach((name) => {
     if (name in props) {
       variants[name] = (props as Record<string, unknown>)[name];
     }

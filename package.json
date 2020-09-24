@@ -35,7 +35,7 @@
     "lerna": "^3.22.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "rollup": "^2.28.1",
+    "rollup": "^2.28.2",
     "rollup-plugin-node-externals": "^2.2.0",
     "rut-dom": "^1.0.2"
   },
