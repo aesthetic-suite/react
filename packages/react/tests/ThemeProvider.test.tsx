@@ -21,9 +21,6 @@ jest.mock('@aesthetic/core');
 
 describe('ThemeProvider', () => {
   beforeEach(() => {
-    // @ts-expect-error Only need to mock matches
-    window.matchMedia = () => ({ matches: false });
-
     lightTheme.name = 'day';
     darkTheme.name = 'night';
 
