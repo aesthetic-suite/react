@@ -15,7 +15,7 @@ export interface ClassNameGenerator<T> {
 export type ElementType = keyof JSX.IntrinsicElements;
 
 export interface StyledComponent<P extends object = {}>
-  extends React.ForwardRefExoticComponent<P & StyledInheritedProps> {
+  extends React.MemoExoticComponent<React.ForwardRefExoticComponent<P & StyledInheritedProps>> {
   styleSheet: LocalSheet;
 }
 

@@ -65,24 +65,25 @@ export default function createStyled<
     element: typeof factory === 'function' ? factory(utils) : factory,
   }));
 
-  // Use `forwardRef` so that consumer can access the underlying element
-  const Component = React.forwardRef((baseProps, ref) => {
-    const cx = useStyles(styleSheet);
-    const { props, variants } = getVariantsFromProps(styleSheet, baseProps);
-    let className = cx(variants, 'element');
+  const Component = React.memo(
+    React.forwardRef((baseProps, ref) => {
+      const cx = useStyles(styleSheet);
+      const { props, variants } = getVariantsFromProps(styleSheet, baseProps);
+      let className = cx(variants, 'element');
 
-    if (props.className) {
-      className += ` ${props.className}`;
-    }
+      if (props.className) {
+        className += ` ${props.className}`;
+      }
 
-    return React.createElement(type, {
-      ...props,
-      // These dont type correctly because of our inference
-      // @ts-expect-error
-      className,
-      ref,
-    });
-  });
+      return React.createElement(type, {
+        ...props,
+        // These dont type correctly because of our inference
+        // @ts-expect-error
+        className,
+        ref,
+      });
+    }),
+  );
 
   const displayName =
     typeof type === 'string'
