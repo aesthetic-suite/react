@@ -1,7 +1,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import mixins from '@aesthetic/addon-mixins';
 import {
-  setupAesthetic,
   lightTheme,
   darkTheme,
   design,

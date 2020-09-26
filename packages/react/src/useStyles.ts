@@ -1,4 +1,4 @@
-import { useCallback, useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { ClassNameSheet, LocalSheet, renderComponentStyles } from '@aesthetic/core';
 import { isSSR } from '@aesthetic/utils';
 import { ClassNameGenerator } from './types';
@@ -12,6 +12,7 @@ import generateCX from './generateCX';
 export default function useStyles<T = unknown>(sheet: LocalSheet<T>): ClassNameGenerator<keyof T> {
   const direction = useDirection();
   const theme = useTheme();
+  const cache = useRef<Record<string, string>>({});
 
   // Render the styles immediately for SSR since effects do not run
   const [classNames, setClassNames] = useState<ClassNameSheet<string>>(() => {
@@ -27,6 +28,8 @@ export default function useStyles<T = unknown>(sheet: LocalSheet<T>): ClassNameG
 
   // Re-render styles when the theme or direction change
   useEffect(() => {
+    cache.current = {};
+
     setClassNames(
       renderComponentStyles(sheet, {
         direction,
@@ -38,5 +41,5 @@ export default function useStyles<T = unknown>(sheet: LocalSheet<T>): ClassNameG
   }, [direction, theme]);
 
   // Return function to generate dynamic class names
-  return useCallback((...keys: unknown[]) => generateCX(keys, classNames), [classNames]);
+  return (...keys: unknown[]) => generateCX(keys, classNames, cache.current);
 }
