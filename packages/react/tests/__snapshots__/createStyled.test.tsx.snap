@@ -1,25 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`createStyled() can access the ref from multiple layers of composition 1`] = `
-"<Wrapper>
-  <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>
-    <div dir=\\"ltr\\">
-      <ThemeProvider name=\\"twilight\\">
-        <ForwardRef>
-          <ForwardRef className=\\"\\">
-            <ForwardRef className=\\"\\">
-              <ForwardRef className=\\"\\">
-                <main ref={mockConstructor()} className=\\"\\" />
-              </ForwardRef>
-            </ForwardRef>
-          </ForwardRef>
-        </ForwardRef>
-      </ThemeProvider>
-    </div>
-  </DirectionProvider>
-</Wrapper>"
-`;
-
 exports[`createStyled() can pass custom props/attributes 1`] = `
 "<Wrapper>
   <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>
@@ -60,6 +40,60 @@ exports[`createStyled() can use and define CSS variables 1`] = `
 
 exports[`createStyled() can use and define CSS variables 2`] = `".a {font-size: var(--text-sm-size);}.b {line-height: 1.25;}.c {--element-level-var: nice;}"`;
 
+exports[`createStyled() composition can access the ref from multiple layers of composition 1`] = `
+"<Wrapper>
+  <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>
+    <div dir=\\"ltr\\">
+      <ThemeProvider name=\\"twilight\\">
+        <ForwardRef>
+          <ForwardRef className=\\"\\">
+            <ForwardRef className=\\"\\">
+              <ForwardRef className=\\"\\">
+                <main ref={mockConstructor()} className=\\"\\" />
+              </ForwardRef>
+            </ForwardRef>
+          </ForwardRef>
+        </ForwardRef>
+      </ThemeProvider>
+    </div>
+  </DirectionProvider>
+</Wrapper>"
+`;
+
+exports[`createStyled() composition supports extending othet styled components 1`] = `
+"<Wrapper>
+  <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>
+    <div dir=\\"ltr\\">
+      <ThemeProvider name=\\"twilight\\">
+        <ForwardRef type=\\"button\\">
+          <button className=\\"a b c\\" type=\\"button\\">
+            Normal
+          </button>
+        </ForwardRef>
+        <ForwardRef type=\\"submit\\">
+          <ForwardRef className=\\"d e\\" type=\\"submit\\">
+            <button className=\\"a b c d e\\" type=\\"submit\\">
+              Block
+            </button>
+          </ForwardRef>
+        </ForwardRef>
+        <ForwardRef disabled>
+          <ForwardRef disabled className=\\"f g\\">
+            <ForwardRef disabled className=\\"d e f g\\">
+              <button disabled className=\\"a b c d e f g\\">
+                Large
+              </button>
+            </ForwardRef>
+          </ForwardRef>
+        </ForwardRef>
+      </ThemeProvider>
+    </div>
+  </DirectionProvider>
+</Wrapper>"
+`;
+
+exports[`createStyled() composition supports extending othet styled components 2`] = `".a {display: inline-flex;}.b {text-align: center;}.c {padding: 1rem;}.d {display: flex;}.e {width: 100%;}.f {padding: 2rem;}.g {font-size: 18px;}"`;
+
 exports[`createStyled() creates and renders a button with defined styles 1`] = `
 "<Wrapper>
   <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>
@@ -96,47 +130,27 @@ exports[`createStyled() only renders styles once, even when component rerenders 
 
 exports[`createStyled() only renders styles once, even when component rerenders 2`] = `".a {text-decoration: none;}"`;
 
-exports[`createStyled() supports styled component composition 1`] = `
-"<Wrapper>
-  <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>
-    <div dir=\\"ltr\\">
-      <ThemeProvider name=\\"twilight\\">
-        <ForwardRef type=\\"button\\">
-          <button className=\\"a b c\\" type=\\"button\\">
-            Normal
-          </button>
-        </ForwardRef>
-        <ForwardRef type=\\"submit\\">
-          <ForwardRef className=\\"d e\\" type=\\"submit\\">
-            <button className=\\"a b c d e\\" type=\\"submit\\">
-              Block
-            </button>
-          </ForwardRef>
-        </ForwardRef>
-        <ForwardRef disabled>
-          <ForwardRef disabled className=\\"f g\\">
-            <ForwardRef disabled className=\\"d e f g\\">
-              <button disabled className=\\"a b c d e f g\\">
-                Large
-              </button>
-            </ForwardRef>
-          </ForwardRef>
-        </ForwardRef>
-      </ThemeProvider>
-    </div>
-  </DirectionProvider>
-</Wrapper>"
-`;
-
-exports[`createStyled() supports styled component composition 2`] = `".a {display: inline-flex;}.b {text-align: center;}.c {padding: 1rem;}.d {display: flex;}.e {width: 100%;}.f {padding: 2rem;}.g {font-size: 18px;}"`;
-
-exports[`createStyled() supports variants 1`] = `
+exports[`createStyled() variants doesnt pass the variant prop to the HTML element 1`] = `
 "<Wrapper>
   <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>
     <div dir=\\"ltr\\">
       <ThemeProvider name=\\"twilight\\">
         <ForwardRef palette=\\"success\\">
-          <div className=\\"a b\\" palette=\\"success\\">
+          <div className=\\"a b\\" />
+        </ForwardRef>
+      </ThemeProvider>
+    </div>
+  </DirectionProvider>
+</Wrapper>"
+`;
+
+exports[`createStyled() variants supports variants 1`] = `
+"<Wrapper>
+  <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>
+    <div dir=\\"ltr\\">
+      <ThemeProvider name=\\"twilight\\">
+        <ForwardRef palette=\\"success\\">
+          <div className=\\"a b\\">
             <div>
               <h1>Title</h1>
               And other content!
@@ -149,15 +163,15 @@ exports[`createStyled() supports variants 1`] = `
 </Wrapper>"
 `;
 
-exports[`createStyled() supports variants 2`] = `".a {background: var(--palette-neutral-bg-base);}.b {background: var(--palette-success-bg-base);}.c {background: var(--palette-failure-bg-base);}.d {background: var(--palette-warning-bg-base);}"`;
+exports[`createStyled() variants supports variants 2`] = `".a {background: var(--palette-neutral-bg-base);}.b {background: var(--palette-success-bg-base);}.c {background: var(--palette-failure-bg-base);}.d {background: var(--palette-warning-bg-base);}"`;
 
-exports[`createStyled() supports variants 3`] = `
+exports[`createStyled() variants supports variants 3`] = `
 "<Wrapper>
   <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>
     <div dir=\\"ltr\\">
       <ThemeProvider name=\\"twilight\\">
         <ForwardRef palette=\\"failure\\">
-          <div className=\\"a c\\" palette=\\"failure\\">
+          <div className=\\"a c\\">
             <div>
               <h1>Title</h1>
               And other content!
@@ -170,7 +184,7 @@ exports[`createStyled() supports variants 3`] = `
 </Wrapper>"
 `;
 
-exports[`createStyled() supports variants 4`] = `
+exports[`createStyled() variants supports variants 4`] = `
 "<Wrapper>
   <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>
     <div dir=\\"ltr\\">

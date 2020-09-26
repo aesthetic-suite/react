@@ -131,97 +131,115 @@ describe('createStyled()', () => {
     expect(getRenderedStyles('standard')).toMatchSnapshot();
   });
 
-  it('supports variants', () => {
+  describe('variants', () => {
     interface AlertProps {
       palette?: 'success' | 'failure' | 'warning';
     }
 
-    const Alert = createStyled<'div', AlertProps>('div', (css) => ({
-      background: css.var('palette-neutral-bg-base'),
-      '@variants': {
-        palette: {
-          success: {
-            background: css.var('palette-success-bg-base'),
-          },
-          failure: {
-            background: css.var('palette-failure-bg-base'),
-          },
-          warning: {
-            background: css.var('palette-warning-bg-base'),
+    function createAlert() {
+      return createStyled<'div', AlertProps>('div', (css) => ({
+        background: css.var('palette-neutral-bg-base'),
+        '@variants': {
+          palette: {
+            success: {
+              background: css.var('palette-success-bg-base'),
+            },
+            failure: {
+              background: css.var('palette-failure-bg-base'),
+            },
+            warning: {
+              background: css.var('palette-warning-bg-base'),
+            },
           },
         },
-      },
-    }));
+      }));
+    }
 
-    const { debug, update } = render<AlertProps>(
-      <Alert palette="success">
-        <div>
-          <h1>Title</h1>And other content!
-        </div>
-      </Alert>,
-      {
+    it('supports variants', () => {
+      const Alert = createAlert();
+
+      const { debug, update } = render<AlertProps>(
+        <Alert palette="success">
+          <div>
+            <h1>Title</h1>And other content!
+          </div>
+        </Alert>,
+        {
+          wrapper: <Wrapper />,
+        },
+      );
+
+      expect(debug({ log: false })).toMatchSnapshot();
+      expect(getRenderedStyles('standard')).toMatchSnapshot();
+
+      update({ palette: 'failure' });
+
+      expect(debug({ log: false })).toMatchSnapshot();
+
+      update({ palette: undefined });
+
+      expect(debug({ log: false })).toMatchSnapshot();
+    });
+
+    it('doesnt pass the variant prop to the HTML element', () => {
+      const Alert = createAlert();
+
+      const { debug } = render<AlertProps>(<Alert palette="success" />, {
         wrapper: <Wrapper />,
-      },
-    );
+      });
 
-    expect(debug({ log: false })).toMatchSnapshot();
-    expect(getRenderedStyles('standard')).toMatchSnapshot();
-
-    update({ palette: 'failure' });
-
-    expect(debug({ log: false })).toMatchSnapshot();
-
-    update({ palette: undefined });
-
-    expect(debug({ log: false })).toMatchSnapshot();
+      expect(debug({ log: false })).toMatchSnapshot();
+    });
   });
 
-  it('supports styled component composition', () => {
-    const Button = createStyled('button', () => ({
-      display: 'inline-flex',
-      textAlign: 'center',
-      padding: '1rem',
-    }));
+  describe('composition', () => {
+    it('supports extending othet styled components', () => {
+      const Button = createStyled('button', () => ({
+        display: 'inline-flex',
+        textAlign: 'center',
+        padding: '1rem',
+      }));
 
-    const BlockButton = createStyled(Button, {
-      display: 'flex',
-      width: '100%',
+      const BlockButton = createStyled(Button, {
+        display: 'flex',
+        width: '100%',
+      });
+
+      const LargeBlockButton = createStyled(BlockButton, {
+        padding: '2rem',
+        fontSize: 18,
+      });
+
+      const { debug } = render<{}>(
+        <>
+          <Button type="button">Normal</Button>
+          <BlockButton type="submit">Block</BlockButton>
+          <LargeBlockButton disabled>Large</LargeBlockButton>
+        </>,
+        {
+          wrapper: <Wrapper />,
+        },
+      );
+
+      expect(debug({ log: false })).toMatchSnapshot();
+      expect(getRenderedStyles('standard')).toMatchSnapshot();
     });
 
-    const LargeBlockButton = createStyled(BlockButton, {
-      padding: '2rem',
-      fontSize: 18,
-    });
+    it('can access the ref from multiple layers of composition', () => {
+      const Leaf = createStyled('main', {});
+      const Branch = createStyled(Leaf, {});
+      const Trunk = createStyled(Branch, {});
+      const Root = createStyled(Trunk, {});
 
-    const { debug } = render<{}>(
-      <>
-        <Button type="button">Normal</Button>
-        <BlockButton type="submit">Block</BlockButton>
-        <LargeBlockButton disabled>Large</LargeBlockButton>
-      </>,
-      {
+      const svg = document.createElement('main');
+      const spy = jest.fn();
+      const { debug } = render<{}>(<Root ref={spy} />, {
+        mockRef: () => svg,
         wrapper: <Wrapper />,
-      },
-    );
+      });
 
-    expect(debug({ log: false })).toMatchSnapshot();
-    expect(getRenderedStyles('standard')).toMatchSnapshot();
-  });
-
-  it('can access the ref from multiple layers of composition', () => {
-    const Leaf = createStyled('main', {});
-    const Branch = createStyled(Leaf, {});
-    const Trunk = createStyled(Branch, {});
-    const Root = createStyled(Trunk, {});
-
-    const svg = document.createElement('main');
-    const spy = jest.fn();
-    const { debug } = render<{}>(<Root ref={spy} />, {
-      mockRef: () => svg,
-      wrapper: <Wrapper />,
+      expect(spy).toHaveBeenCalledWith(svg);
+      expect(debug({ log: false })).toMatchSnapshot();
     });
-
-    expect(spy).toHaveBeenCalledWith(svg);
-    expect(debug({ log: false })).toMatchSnapshot();
   });
 });
