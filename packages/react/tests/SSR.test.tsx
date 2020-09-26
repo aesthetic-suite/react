@@ -2,21 +2,16 @@
 
 import React from 'react';
 import { renderToString, renderToStaticMarkup } from 'react-dom/server';
-import { LocalSheet, SheetStructure } from '@aesthetic/core';
 import { ServerRenderer } from '@aesthetic/style/lib/server';
-import { purgeStyles } from '@aesthetic/core/lib/testing';
 import { useStyles, ThemeProvider } from '../src';
 import { createStyleSheet, ButtonProps } from './__mocks__/Button';
 import { setupAestheticReact, teardownAestheticReact } from './helpers';
 
 describe('SSR', () => {
   let renderer: ServerRenderer;
-  let sheet: LocalSheet<SheetStructure<
-    'button' | 'button_block' | 'button_disabled' | 'button_large' | 'button_small'
-  >>;
 
   function Button({ children, block, disabled, large, small }: ButtonProps) {
-    const cx = useStyles(sheet);
+    const cx = useStyles(createStyleSheet());
 
     return (
       <button
@@ -49,15 +44,13 @@ describe('SSR', () => {
   }
 
   beforeEach(() => {
-    renderer = new ServerRenderer();
-    sheet = createStyleSheet();
-
     setupAestheticReact();
+
+    renderer = new ServerRenderer();
   });
 
   afterEach(() => {
     teardownAestheticReact();
-    purgeStyles();
 
     delete global.AESTHETIC_CUSTOM_RENDERER;
   });

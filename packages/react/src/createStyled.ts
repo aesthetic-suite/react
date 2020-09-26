@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  createComponentStyles,
-  renderComponentStyles,
-  LocalBlock,
-  Utilities,
-  LocalSheet,
-} from '@aesthetic/core';
+import { createComponentStyles, LocalBlock, Utilities, LocalSheet } from '@aesthetic/core';
 import useStyles from './useStyles';
 import { ElementType, InferProps, StyledComponent } from './types';
 
@@ -51,9 +45,6 @@ export default function createStyled<
   const styleSheet = createComponentStyles((utils) => ({
     element: typeof factory === 'function' ? factory(utils) : factory,
   }));
-
-  // Attempt to render styles immediately so that they're available on mount
-  renderComponentStyles(styleSheet);
 
   // Use `forwardRef` so that consumer can access the underlying element
   const Component = React.forwardRef<unknown, { className?: string }>((props, ref) => {

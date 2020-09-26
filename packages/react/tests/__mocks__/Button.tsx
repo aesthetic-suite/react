@@ -36,24 +36,15 @@ export function createStyleSheet() {
             size: {
               sm: {
                 minWidth: css.unit(6),
-                padding: {
-                  topBottom: css.var('spacing-sm'),
-                  leftRight: css.var('spacing-df'),
-                },
+                padding: `${css.var('spacing-sm')} ${css.var('spacing-df')}`,
               },
               df: {
                 minWidth: css.unit(8),
-                padding: {
-                  topBottom: css.var('spacing-df'),
-                  leftRight: css.var('spacing-md'),
-                },
+                padding: `${css.var('spacing-df')} ${css.var('spacing-md')}`,
               },
               lg: {
                 minWidth: css.unit(10),
-                padding: {
-                  topBottom: css.var('spacing-md'),
-                  leftRight: css.var('spacing-lg'),
-                },
+                padding: `${css.var('spacing-md')} ${css.var('spacing-lg')}`,
               },
             },
           },

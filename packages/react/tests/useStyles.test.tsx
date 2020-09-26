@@ -62,12 +62,12 @@ describe('useStyles()', () => {
       wrapper: <Wrapper />,
     });
 
+    expect(getRenderedStyles('standard')).toMatchSnapshot();
+
     expect(root.findOne('button')).toHaveProp(
       'className',
-      'a b c d e f g h i j k l m n o p q r s t u v w c1 d1 e1 f1 g1',
+      'a b c d e f g h i j k l m n o p q r s t u v w z a1',
     );
-
-    expect(getRenderedStyles('standard')).toMatchSnapshot();
   });
 
   it('changes class name based on props enabled', () => {
@@ -77,21 +77,21 @@ describe('useStyles()', () => {
 
     expect(root.findOne('button')).toHaveProp(
       'className',
-      'a b c d e f g h i j k l m n o p q r s t u v w c1 d1 e1 f1 g1',
+      'a b c d e f g h i j k l m n o p q r s t u v w z a1',
     );
 
     update({ disabled: true });
 
     expect(root.findOne('button')).toHaveProp(
       'className',
-      'a b c d e f g h i j k l m n o p q r s t u v w c1 d1 e1 f1 g1 u1',
+      'a b c d e f g h i j k l m n o p q r s t u v w z a1 l1',
     );
 
     update({ block: true, large: true });
 
     expect(root.findOne('button')).toHaveProp(
       'className',
-      'a b c d e f g h i j k l m n o p q r s t u v w h1 i1 j1 k1 l1 m1 n1 o1 p1 q1 r1 s1 v1',
+      'a b c d e f g h i j k l m n o p q r s t u v w b1 c1 d1 e1 f1 g1 h1 i1 j1 m1',
     );
   });
 

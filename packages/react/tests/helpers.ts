@@ -6,8 +6,9 @@ import {
   darkTheme,
   design,
   teardownAesthetic,
+  purgeStyles,
 } from '@aesthetic/core/lib/testing';
-import { registerTheme } from '../lib';
+import { registerTheme } from '../src';
 
 export const designWithMixins = design.extend('react', {}, mixins);
 
@@ -22,7 +23,6 @@ export const twilightTheme = designWithMixins.createTheme(
 );
 
 export function setupAestheticReact() {
-  setupAesthetic();
   registerTheme('dawn', dawnTheme);
   registerTheme('twilight', twilightTheme);
 }
@@ -31,4 +31,5 @@ export function teardownAestheticReact() {
   dawnTheme.name = '';
   twilightTheme.name = '';
   teardownAesthetic();
+  purgeStyles();
 }

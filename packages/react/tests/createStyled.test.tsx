@@ -3,7 +3,7 @@
 import React from 'react';
 import { render } from 'rut-dom';
 import { StyleSheet } from '@aesthetic/core';
-import { getRenderedStyles, purgeStyles } from '@aesthetic/core/lib/testing';
+import { getRenderedStyles } from '@aesthetic/core/lib/testing';
 import { createStyled } from '../src';
 import { Wrapper } from './__mocks__/Button';
 import { setupAestheticReact, teardownAestheticReact } from './helpers';
@@ -14,7 +14,6 @@ describe('createStyled()', () => {
   });
 
   afterEach(() => {
-    purgeStyles();
     teardownAestheticReact();
   });
 
@@ -83,7 +82,7 @@ describe('createStyled()', () => {
     const Link = createStyled('a', spy);
 
     const { debug, update } = render<{}>(<Link href="/foo/bar">Test</Link>, {
-      wrapper: <Wrapper theme="day" />,
+      wrapper: <Wrapper theme="dawn" />,
     });
 
     update();
@@ -118,7 +117,7 @@ describe('createStyled()', () => {
   it('can use and define CSS variables', () => {
     const Code = createStyled('code', (css) => ({
       fontSize: css.var('text-sm-size'),
-      lineHeight: css.token('text-sm-line-height') as number,
+      lineHeight: css.tokens.text.sm.lineHeight,
       '@variables': {
         elementLevelVar: 'nice',
       },

@@ -2,48 +2,48 @@
 # yarn lockfile v1
 
 
-"@aesthetic/addon-mixins@^0.1.5":
-  version "0.1.5"
-  resolved "https://registry.yarnpkg.com/@aesthetic/addon-mixins/-/addon-mixins-0.1.5.tgz#317edc6346426e2707d4a9053accca4ac3c711b7"
-  integrity sha512-EVaGMSZqxcZm2YCP8dyue9eZZPNStqpnTICRzehlKoZ39UbJBbKthi/byzVjgRvB1ea7RLsUh+NxGp4A4/bojA==
+"@aesthetic/addon-mixins@^0.1.6":
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/@aesthetic/addon-mixins/-/addon-mixins-0.1.6.tgz#fa3b836c5678537adcd3880eaae3c2fee9b84a5c"
+  integrity sha512-oiJVUasqsgPwxu6iQcTHPhu8HLbxXKa2IIlRwVmVJKll9l7D0NjR4tfSav4qSD6ugRyEDoS34QBgpqWTSFceag==
   dependencies:
-    "@aesthetic/utils" "^0.4.4"
+    "@aesthetic/utils" "^0.4.5"
 
-"@aesthetic/core@^0.4.7":
-  version "0.4.7"
-  resolved "https://registry.yarnpkg.com/@aesthetic/core/-/core-0.4.7.tgz#cbfabd7baaf772199beb18b7c125a51ab765c986"
-  integrity sha512-kp7d7sdWeqOEjGGhmEgK2a9fNbUfiE33oCOWGXvGVX82oem1BxeqrRy6E0dXq88Y+BVz/n+qCDz3UhdR1wk6Dw==
+"@aesthetic/core@^0.4.8":
+  version "0.4.8"
+  resolved "https://registry.yarnpkg.com/@aesthetic/core/-/core-0.4.8.tgz#928cb283b288e4916609af0e3865a84bdfdfc15f"
+  integrity sha512-WNTzYRSCXf2nRwp8BFvOxBGTfgFdYPhIbnmQepat9s5lQUNVFq652V+JylXBYPWIRVM+eORvRTNQ00P4gAnH+g==
   dependencies:
-    "@aesthetic/sss" "^0.4.5"
-    "@aesthetic/style" "^0.4.4"
-    "@aesthetic/system" "^0.4.6"
+    "@aesthetic/sss" "^0.4.6"
+    "@aesthetic/style" "^0.4.5"
+    "@aesthetic/system" "^0.4.7"
     "@aesthetic/types" "^0.2.1"
-    "@aesthetic/utils" "^0.4.4"
+    "@aesthetic/utils" "^0.4.5"
 
-"@aesthetic/sss@^0.4.5":
+"@aesthetic/sss@^0.4.6":
+  version "0.4.6"
+  resolved "https://registry.yarnpkg.com/@aesthetic/sss/-/sss-0.4.6.tgz#8af82ba448bdda1dd775c9006cbcdf7aceeeeece"
+  integrity sha512-Mvn6vXl9PMgjK5osxlYmNmgwMtmmJ37Pon6zTz9ABiFQOZCD4GEwHcfundICQXwHi7qUkZeUh73KiXPDOO1mvQ==
+  dependencies:
+    "@aesthetic/types" "^0.2.1"
+    "@aesthetic/utils" "^0.4.5"
+
+"@aesthetic/style@^0.4.5":
   version "0.4.5"
-  resolved "https://registry.yarnpkg.com/@aesthetic/sss/-/sss-0.4.5.tgz#1cbd45d73eb1a723b7803b3844fd514c14826bc8"
-  integrity sha512-UmFnta8baM40sszqHb2kkHE7bhXFr2mFhX/sHLd7m++AdySFZUkqHFiXhAEwFHcH76uGV+Yy7gijWRcDE3UIKg==
+  resolved "https://registry.yarnpkg.com/@aesthetic/style/-/style-0.4.5.tgz#506bb988c83e310f56f2cb77efd601aea31219e9"
+  integrity sha512-s7gCkIHs7bp7Qr4VAw5JL3uAaS+Nm/ZhFqPs4ZWDP4ZBo9HmplNWJumvlkNqplXljxKrj0GbioLkHIEZQmiU9w==
   dependencies:
     "@aesthetic/types" "^0.2.1"
-    "@aesthetic/utils" "^0.4.4"
-
-"@aesthetic/style@^0.4.4":
-  version "0.4.4"
-  resolved "https://registry.yarnpkg.com/@aesthetic/style/-/style-0.4.4.tgz#b714cabc6422fe1ce25f7bcc0ccd64b68188501c"
-  integrity sha512-ZkwDBngf0o/YEq9rOhrw0u2ZL/vEb/VxC0t8jwv77jCdRMd4pipv2fOIMN5OuIk5CGL3ZuvqTbzHzopP2mVjLQ==
-  dependencies:
-    "@aesthetic/types" "^0.2.1"
-    "@aesthetic/utils" "^0.4.4"
+    "@aesthetic/utils" "^0.4.5"
     sort-css-media-queries "^1.5.0"
 
-"@aesthetic/system@^0.4.6":
-  version "0.4.6"
-  resolved "https://registry.yarnpkg.com/@aesthetic/system/-/system-0.4.6.tgz#a7defde07a392ac42fbd538f92b1769fda79e3a9"
-  integrity sha512-2H7RA+Vx8tXeT/07zMWPexkayex6kig+Cl5tgGwLQopZnk6s3JsnZsw2RC+vX6a19Xxw0o2ThlXdENiRfgMwLQ==
+"@aesthetic/system@^0.4.7":
+  version "0.4.7"
+  resolved "https://registry.yarnpkg.com/@aesthetic/system/-/system-0.4.7.tgz#3d85d7f4b53a934e1d58437ca2f1180c1e6780af"
+  integrity sha512-Hk7TPOHyKaMDXhkP9K07c35kE45blNhzudooClPcz2D8/6MDi7+hUwe5ZvqHzYPe2lfu+Mff9V6jRobCCwLINw==
   dependencies:
     "@aesthetic/types" "^0.2.1"
-    "@aesthetic/utils" "^0.4.4"
+    "@aesthetic/utils" "^0.4.5"
 
 "@aesthetic/types@^0.2.1":
   version "0.2.1"
@@ -52,10 +52,10 @@
   dependencies:
     csstype "^3.0.3"
 
-"@aesthetic/utils@^0.4.4":
-  version "0.4.4"
-  resolved "https://registry.yarnpkg.com/@aesthetic/utils/-/utils-0.4.4.tgz#7c447f4614745ef24e2ad0cdb33564a5dadfacfc"
-  integrity sha512-bRtr1Aq6Oa4F3EOq6fOxnPB40W5X3j4UnSxKH5DvSU2aJwdQPV545FzcstqHEH5xkOcDXUnqF3YRk0nHo+aOww==
+"@aesthetic/utils@^0.4.5":
+  version "0.4.5"
+  resolved "https://registry.yarnpkg.com/@aesthetic/utils/-/utils-0.4.5.tgz#994fe439532af48043209d9e56fcb3959ed026c3"
+  integrity sha512-M0EAOEKLJzifdbvO6ANa78WR6MXwv5Lk+OMWRrcuhu8nL0ZC2l3aauD59Iee+C7jdphN9hBRTa8SrYG0h2PEow==
   dependencies:
     string-hash "^1.1.3"
 

@@ -18,24 +18,15 @@ export default createComponentStyles((css) => ({
       size: {
         sm: css.mixin('text-sm', {
           minWidth: css.unit(6),
-          padding: {
-            leftRight: css.var('spacing-df'),
-            topBottom: css.var('spacing-sm'),
-          },
+          padding: `${css.var('spacing-sm')} ${css.var('spacing-df')}`,
         }),
         df: css.mixin('text-df', {
           minWidth: css.unit(8),
-          padding: {
-            leftRight: css.var('spacing-md'),
-            topBottom: css.var('spacing-df'),
-          },
+          padding: `${css.var('spacing-df')} ${css.var('spacing-md')}`,
         }),
         lg: css.mixin('text-lg', {
           minWidth: css.unit(10),
-          padding: {
-            leftRight: css.var('spacing-xl'),
-            topBottom: css.var('spacing-lg'),
-          },
+          padding: `${css.var('spacing-md')} ${css.var('spacing-lg')}`,
         }),
       },
     },
