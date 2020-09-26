@@ -144,6 +144,22 @@ exports[`createStyled() variants doesnt pass the variant prop to the HTML elemen
 </Wrapper>"
 `;
 
+exports[`createStyled() variants inherits and merges variant props and types when composing 1`] = `
+"<Wrapper>
+  <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>
+    <div dir=\\"ltr\\">
+      <ThemeProvider name=\\"twilight\\">
+        <ForwardRef palette=\\"success\\" size=\\"lg\\">
+          <ForwardRef className=\\"f\\" palette=\\"success\\">
+            <div className=\\"a b f\\" />
+          </ForwardRef>
+        </ForwardRef>
+      </ThemeProvider>
+    </div>
+  </DirectionProvider>
+</Wrapper>"
+`;
+
 exports[`createStyled() variants supports variants 1`] = `
 "<Wrapper>
   <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>

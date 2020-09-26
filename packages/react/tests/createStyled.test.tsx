@@ -190,6 +190,25 @@ describe('createStyled()', () => {
 
       expect(debug({ log: false })).toMatchSnapshot();
     });
+
+    it('inherits and merges variant props and types when composing', () => {
+      const Alert = createAlert();
+
+      const SubAlert = createStyled<typeof Alert, { size?: 'sm' | 'lg' }>(Alert, {
+        '@variants': {
+          size: {
+            sm: { padding: 1 },
+            lg: { padding: 2 },
+          },
+        },
+      });
+
+      const { debug } = render<AlertProps>(<SubAlert palette="success" size="lg" />, {
+        wrapper: <Wrapper />,
+      });
+
+      expect(debug({ log: false })).toMatchSnapshot();
+    });
   });
 
   describe('composition', () => {
