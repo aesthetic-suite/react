@@ -2,13 +2,18 @@
 
 import React from 'react';
 import { renderToString, renderToStaticMarkup } from 'react-dom/server';
-import { ServerRenderer } from '@aesthetic/style/lib/server';
+import { StyleEngine } from '@aesthetic/style';
+import {
+  createServerEngine,
+  extractStyles,
+  renderToStyleMarkup,
+} from '@aesthetic/style/lib/server';
 import { useStyles, ThemeProvider } from '../src';
 import { createStyleSheet, ButtonProps } from './__mocks__/Button';
 import { setupAestheticReact, teardownAestheticReact } from './helpers';
 
 describe('SSR', () => {
-  let renderer: ServerRenderer;
+  let engine: StyleEngine;
 
   function Button({ children, block, disabled, large, small }: ButtonProps) {
     const cx = useStyles(createStyleSheet());
@@ -46,26 +51,27 @@ describe('SSR', () => {
   beforeEach(() => {
     setupAestheticReact();
 
-    renderer = new ServerRenderer();
+    engine = createServerEngine();
   });
 
   afterEach(() => {
     teardownAestheticReact();
 
-    delete global.AESTHETIC_CUSTOM_RENDERER;
+    // @ts-expect-error
+    delete global.AESTHETIC_CUSTOM_ENGINE;
   });
 
   describe('renderToString()', () => {
     it('renders markup', () => {
-      expect(renderToString(renderer.extractStyles(<App />))).toMatchSnapshot();
-      expect(renderer.renderToStyleMarkup()).toMatchSnapshot();
+      expect(renderToString(extractStyles(<App />, engine))).toMatchSnapshot();
+      expect(renderToStyleMarkup(engine)).toMatchSnapshot();
     });
   });
 
   describe('renderToStaticMarkup()', () => {
     it('renders markup', () => {
-      expect(renderToStaticMarkup(renderer.extractStyles(<App />))).toMatchSnapshot();
-      expect(renderer.renderToStyleMarkup()).toMatchSnapshot();
+      expect(renderToStaticMarkup(extractStyles(<App />, engine))).toMatchSnapshot();
+      expect(renderToStyleMarkup(engine)).toMatchSnapshot();
     });
   });
 });

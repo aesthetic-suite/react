@@ -5,9 +5,10 @@ import {
   darkTheme,
   design,
   teardownAesthetic,
-  purgeStyles,
-} from '@aesthetic/core/lib/testing';
-import { registerTheme } from '../src';
+  setupAesthetic,
+} from '@aesthetic/core/lib/test';
+import { createTestStyleEngine, purgeStyles } from '@aesthetic/style/lib/test';
+import aesthetic from '../src/aesthetic';
 
 export const designWithMixins = design.extend('react', {}, mixins);
 
@@ -22,13 +23,17 @@ export const twilightTheme = designWithMixins.createTheme(
 );
 
 export function setupAestheticReact() {
-  registerTheme('dawn', dawnTheme);
-  registerTheme('twilight', twilightTheme);
+  // Order is important here!
+  aesthetic.registerTheme('twilight', twilightTheme);
+  aesthetic.registerTheme('dawn', dawnTheme);
+  aesthetic.configureEngine(createTestStyleEngine());
+  setupAesthetic(aesthetic);
 }
 
 export function teardownAestheticReact() {
+  // Order is important here!
+  purgeStyles();
+  teardownAesthetic(aesthetic);
   dawnTheme.name = '';
   twilightTheme.name = '';
-  teardownAesthetic();
-  purgeStyles();
 }

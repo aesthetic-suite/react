@@ -2,27 +2,24 @@
 
 import React from 'react';
 import { render } from 'rut-dom';
-import { getTheme, renderThemeStyles } from '@aesthetic/core';
-import { lightTheme, darkTheme } from '@aesthetic/core/lib/testing';
-import ContextualThemeProvider from '../src/ContextualThemeProvider';
-import { ThemeProviderProps, DirectionProviderProps } from '../src/types';
-import useTheme from '../src/useTheme';
-import DirectionProvider from '../src/DirectionProvider';
-
-jest.mock('@aesthetic/core');
+import { lightTheme, darkTheme } from '@aesthetic/core/lib/test';
+import {
+  ContextualThemeProvider,
+  ThemeProviderProps,
+  DirectionProviderProps,
+  useTheme,
+  DirectionProvider,
+} from '../src';
+import aesthetic from '../src/aesthetic';
+import { setupAestheticReact, teardownAestheticReact } from './helpers';
 
 describe('ContextualThemeProvider', () => {
   beforeEach(() => {
-    lightTheme.name = 'day';
-    darkTheme.name = 'night';
-
-    (getTheme as jest.Mock).mockImplementation((name) => (name === 'day' ? lightTheme : darkTheme));
-    (renderThemeStyles as jest.Mock).mockImplementation((theme) => `theme-${theme.name}`);
+    setupAestheticReact();
   });
 
   afterEach(() => {
-    lightTheme.name = '';
-    darkTheme.name = '';
+    teardownAestheticReact();
   });
 
   it('renders children', () => {
@@ -78,6 +75,8 @@ describe('ContextualThemeProvider', () => {
   });
 
   it('wraps in a div with a class name and data attribute', () => {
+    const spy = jest.spyOn(aesthetic, 'renderThemeStyles').mockImplementation(() => 'theme-night');
+
     const { root } = render<ThemeProviderProps>(
       <ContextualThemeProvider name="night" wrapper={<div />}>
         <span />
@@ -88,9 +87,13 @@ describe('ContextualThemeProvider', () => {
     expect(wrapper).toHaveProp('className', 'theme-night');
     // @ts-expect-error Data props not typed
     expect(wrapper).toHaveProp('data-theme', 'night');
+
+    spy.mockRestore();
   });
 
   it('re-renders theme styles if `name` changes', () => {
+    const spy = jest.spyOn(aesthetic, 'renderThemeStyles');
+
     const { rerender } = render<ThemeProviderProps>(
       <ContextualThemeProvider name="night" wrapper={<div />}>
         <div />
@@ -103,11 +106,15 @@ describe('ContextualThemeProvider', () => {
       </ContextualThemeProvider>,
     );
 
-    expect(renderThemeStyles).toHaveBeenCalledWith(darkTheme, { direction: 'ltr' }); // Initial
-    expect(renderThemeStyles).toHaveBeenCalledWith(lightTheme, { direction: 'ltr' }); // Rerender
+    expect(spy).toHaveBeenCalledWith(darkTheme, { direction: 'ltr' }); // Initial
+    expect(spy).toHaveBeenCalledWith(lightTheme, { direction: 'ltr' }); // Rerender
+
+    spy.mockRestore();
   });
 
   it('re-renders theme styles if direction changes', () => {
+    const spy = jest.spyOn(aesthetic, 'renderThemeStyles');
+
     const { rerender } = render<DirectionProviderProps>(
       <DirectionProvider direction="ltr" wrapper={<div />}>
         <ContextualThemeProvider name="night" wrapper={<div />}>
@@ -124,7 +131,9 @@ describe('ContextualThemeProvider', () => {
       </DirectionProvider>,
     );
 
-    expect(renderThemeStyles).toHaveBeenCalledWith(darkTheme, { direction: 'ltr' }); // Initial
-    expect(renderThemeStyles).toHaveBeenCalledWith(darkTheme, { direction: 'rtl' }); // Rerender
+    expect(spy).toHaveBeenCalledWith(darkTheme, { direction: 'ltr' }); // Initial
+    expect(spy).toHaveBeenCalledWith(darkTheme, { direction: 'rtl' }); // Rerender
+
+    spy.mockRestore();
   });
 });

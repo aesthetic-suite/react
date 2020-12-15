@@ -3,6 +3,7 @@
  * @license     https://opensource.org/licenses/MIT
  */
 
+import aesthetic from './aesthetic';
 import DirectionContext from './DirectionContext';
 import DirectionProvider from './DirectionProvider';
 import ThemeContext from './ThemeContext';
@@ -33,3 +34,25 @@ export {
   withStyles,
   withTheme,
 };
+
+export const {
+  changeDirection,
+  changeTheme,
+  configure,
+  createComponentStyles,
+  createThemeStyles,
+  generateClassName,
+  getActiveDirection,
+  getActiveTheme,
+  getEngine,
+  getTheme,
+  registerDefaultTheme,
+  registerTheme,
+  renderComponentStyles,
+  renderFontFace,
+  renderImport,
+  renderKeyframes,
+  renderThemeStyles,
+  subscribe,
+  unsubscribe,
+} = aesthetic;

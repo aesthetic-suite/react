@@ -2,10 +2,7 @@
 
 import React from 'react';
 import { render } from 'rut-dom';
-import { getRenderedStyles } from '@aesthetic/core/lib/testing';
-import withStyles from '../src/withStyles';
-import ThemeProvider from '../src/ThemeProvider';
-import { WithStylesWrappedProps } from '../src/types';
+import { withStyles, ThemeProvider, WithStylesWrappedProps } from '../src';
 import { createStyleSheet, ButtonProps, Wrapper } from './__mocks__/Button';
 import { dawnTheme, setupAestheticReact, teardownAestheticReact, twilightTheme } from './helpers';
 
@@ -122,8 +119,6 @@ describe('withStyles()', () => {
       'className',
       'a b c d e f g h i j k l m n o p q r s t u v w z a1',
     );
-
-    expect(getRenderedStyles('standard')).toMatchSnapshot();
   });
 
   it('only renders once unless theme or direction change', () => {

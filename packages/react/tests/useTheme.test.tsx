@@ -1,21 +1,16 @@
 import React from 'react';
 import { render } from 'rut-dom';
-import {
-  setupAesthetic,
-  teardownAesthetic,
-  darkTheme,
-  lightTheme,
-} from '@aesthetic/core/lib/testing';
-import useTheme from '../src/useTheme';
-import ThemeProvider from '../src/ThemeProvider';
+import { darkTheme } from '@aesthetic/core/lib/test';
+import { useTheme, ThemeProvider } from '../src';
+import { setupAestheticReact, teardownAestheticReact, twilightTheme } from './helpers';
 
 describe('useTheme()', () => {
   beforeEach(() => {
-    setupAesthetic();
+    setupAestheticReact();
   });
 
   afterEach(() => {
-    teardownAesthetic();
+    teardownAestheticReact();
   });
 
   it('errors if no context provided', () => {
@@ -45,7 +40,7 @@ describe('useTheme()', () => {
       </ThemeProvider>,
     );
 
-    expect(theme).toEqual(lightTheme);
+    expect(theme).toEqual(twilightTheme);
   });
 
   it('returns the theme defined by the provider', () => {

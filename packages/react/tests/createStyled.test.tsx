@@ -3,7 +3,7 @@
 import React from 'react';
 import { render } from 'rut-dom';
 import { StyleSheet } from '@aesthetic/core';
-import { getRenderedStyles } from '@aesthetic/core/lib/testing';
+import { getRenderedStyles } from '@aesthetic/style/lib/test';
 import { createStyled } from '../src';
 import { Wrapper } from './__mocks__/Button';
 import { setupAestheticReact, teardownAestheticReact } from './helpers';
@@ -74,7 +74,7 @@ describe('createStyled()', () => {
     expect(getRenderedStyles('standard')).toMatchSnapshot();
   });
 
-  it('only renders styles once, even when component rerenders', () => {
+  it('only renders styles twice (create and mount), even when component rerenders', () => {
     const spy = jest.fn(() => ({
       textDecoration: 'none',
     }));
@@ -89,7 +89,7 @@ describe('createStyled()', () => {
     update();
     update();
 
-    expect(spy).toHaveBeenCalledTimes(1);
+    expect(spy).toHaveBeenCalledTimes(2);
     expect(debug({ log: false })).toMatchSnapshot();
     expect(getRenderedStyles('standard')).toMatchSnapshot();
   });

@@ -2,17 +2,16 @@
 
 import React from 'react';
 import { render } from 'rut-dom';
-import { setupAesthetic, teardownAesthetic } from '@aesthetic/core/lib/testing';
-import DirectionProvider from '../src/DirectionProvider';
-import { DirectionProviderProps } from '../src/types';
+import { DirectionProvider, DirectionProviderProps } from '../src';
+import { setupAestheticReact, teardownAestheticReact } from './helpers';
 
 describe('DirectionProvider', () => {
   beforeEach(() => {
-    setupAesthetic();
+    setupAestheticReact();
   });
 
   afterEach(() => {
-    teardownAesthetic();
+    teardownAestheticReact();
   });
 
   it('renders and wraps with the chosen element', () => {
