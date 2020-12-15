@@ -1,5 +1,5 @@
 import React from 'react';
-import { getActiveDirection } from '@aesthetic/core';
+import aesthetic from './aesthetic';
 import { DirectionContextType } from './types';
 
-export default React.createContext<DirectionContextType>(getActiveDirection() || 'ltr');
+export default React.createContext<DirectionContextType>(aesthetic.getActiveDirection() || 'ltr');

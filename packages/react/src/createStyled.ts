@@ -1,12 +1,7 @@
 import React from 'react';
-import {
-  createComponentStyles,
-  LocalBlock,
-  Utilities,
-  LocalSheet,
-  ClassNameSheetVariants,
-} from '@aesthetic/core';
+import { LocalBlock, Utilities, LocalSheet, ClassNameSheetVariants } from '@aesthetic/core';
 import { objectLoop } from '@aesthetic/utils';
+import aesthetic from './aesthetic';
 import useStyles from './useStyles';
 import { ElementType, InferProps, StyledComponent } from './types';
 
@@ -61,7 +56,7 @@ export default function createStyled<
     }
   }
 
-  const styleSheet = createComponentStyles((utils) => ({
+  const styleSheet = aesthetic.createComponentStyles((utils) => ({
     element: typeof factory === 'function' ? factory(utils) : factory,
   }));
 

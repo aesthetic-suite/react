@@ -1,5 +1,6 @@
-import { ClassNameSheet, ClassNameSheetVariants, generateClassName } from '@aesthetic/core';
+import { ClassNameSheet, ClassNameSheetVariants } from '@aesthetic/core';
 import { isObject, objectLoop } from '@aesthetic/utils';
+import aesthetic from './aesthetic';
 
 export default function generateCX(
   keys: unknown[],
@@ -23,7 +24,7 @@ export default function generateCX(
 
   if (!cache[cacheKey]) {
     // eslint-disable-next-line no-param-reassign
-    cache[cacheKey] = generateClassName(keys as string[], variants, classNames);
+    cache[cacheKey] = aesthetic.generateClassName(keys as string[], variants, classNames);
   }
 
   return cache[cacheKey];

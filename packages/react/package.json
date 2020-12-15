@@ -20,20 +20,20 @@
     "access": "public"
   },
   "dependencies": {
-    "@aesthetic/core": "^0.5.1",
-    "@aesthetic/style": "^0.5.1",
-    "@aesthetic/types": "^0.3.0",
-    "@aesthetic/utils": "^0.5.0",
+    "@aesthetic/core": "^0.6.0",
+    "@aesthetic/style": "^0.5.2",
+    "@aesthetic/types": "^0.3.1",
+    "@aesthetic/utils": "^0.5.1",
     "direction": "^1.0.4",
     "hoist-non-react-statics": "^3.3.2"
   },
   "peerDependencies": {
-    "react": "^16.6.0"
+    "react": "^16.6.0 || ^17.0.0"
   },
   "devDependencies": {
-    "@aesthetic/addon-mixins": "^0.2.0",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "@aesthetic/addon-mixins": "^0.2.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
   },
   "funding": {
     "type": "ko-fi",

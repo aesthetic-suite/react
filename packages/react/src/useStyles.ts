@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
-import { ClassNameSheet, LocalSheet, renderComponentStyles } from '@aesthetic/core';
+import { ClassNameSheet, LocalSheet } from '@aesthetic/core';
 import { isSSR } from '@aesthetic/utils';
+import aesthetic from './aesthetic';
 import { ClassNameGenerator } from './types';
 import useDirection from './useDirection';
 import useTheme from './useTheme';
@@ -17,7 +18,7 @@ export default function useStyles<T = unknown>(sheet: LocalSheet<T>): ClassNameG
   // Render the styles immediately for SSR since effects do not run
   const [classNames, setClassNames] = useState<ClassNameSheet<string>>(() => {
     if (isSSR() || global.AESTHETIC_CUSTOM_ENGINE) {
-      return renderComponentStyles(sheet, {
+      return aesthetic.renderComponentStyles(sheet, {
         direction,
         theme: theme.name,
       });
@@ -31,7 +32,7 @@ export default function useStyles<T = unknown>(sheet: LocalSheet<T>): ClassNameG
     cache.current = {};
 
     setClassNames(
-      renderComponentStyles(sheet, {
+      aesthetic.renderComponentStyles(sheet, {
         direction,
         theme: theme.name,
       }),

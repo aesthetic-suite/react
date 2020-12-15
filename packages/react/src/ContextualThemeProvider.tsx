@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getTheme, renderThemeStyles } from '@aesthetic/core';
+import aesthetic from './aesthetic';
 import ThemeContext from './ThemeContext';
 import useDirection from './useDirection';
 import { ContextualThemeProviderProps } from './types';
@@ -14,11 +14,11 @@ export default function ContextualThemeProvider({
 }: ContextualThemeProviderProps) {
   const [className, setClassName] = useState('');
   const direction = useDirection();
-  const theme = getTheme(name);
+  const theme = aesthetic.getTheme(name);
 
   // Render styles when theme/direction change
   useEffect(() => {
-    setClassName(renderThemeStyles(theme, { direction }));
+    setClassName(aesthetic.renderThemeStyles(theme, { direction }));
   }, [theme, direction]);
 
   return (
