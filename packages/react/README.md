@@ -46,7 +46,7 @@ export default function Button({ children, block = false }: ButtonProps) {
 
 ## Requirements
 
-- React 16.6+
+- React 16.6+ / 17+
 
 ## Installation
 
