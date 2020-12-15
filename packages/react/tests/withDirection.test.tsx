@@ -1,8 +1,11 @@
 import React from 'react';
 import { render } from 'rut-dom';
-import withDirection from '../src/withDirection';
-import DirectionProvider from '../src/DirectionProvider';
-import { DirectionProviderProps, WithDirectionWrappedProps } from '../src/types';
+import {
+  withDirection,
+  DirectionProvider,
+  DirectionProviderProps,
+  WithDirectionWrappedProps,
+} from '../src';
 import { setupAestheticReact, teardownAestheticReact } from './helpers';
 
 describe('withDirection()', () => {

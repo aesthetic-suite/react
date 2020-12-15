@@ -2,10 +2,8 @@
 
 import React from 'react';
 import { render } from 'rut-dom';
-import { getRenderedStyles } from '@aesthetic/core/lib/testing';
-import withStyles from '../src/withStyles';
-import ThemeProvider from '../src/ThemeProvider';
-import { WithStylesWrappedProps } from '../src/types';
+import { getRenderedStyles } from '@aesthetic/style/lib/test';
+import { withStyles, ThemeProvider, WithStylesWrappedProps } from '../src';
 import { createStyleSheet, ButtonProps, Wrapper } from './__mocks__/Button';
 import { dawnTheme, setupAestheticReact, teardownAestheticReact, twilightTheme } from './helpers';
 

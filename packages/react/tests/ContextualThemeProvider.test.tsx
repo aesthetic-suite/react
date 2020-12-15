@@ -3,11 +3,14 @@
 import React from 'react';
 import { render } from 'rut-dom';
 import { getTheme, renderThemeStyles } from '@aesthetic/core';
-import { lightTheme, darkTheme } from '@aesthetic/core/lib/testing';
-import ContextualThemeProvider from '../src/ContextualThemeProvider';
-import { ThemeProviderProps, DirectionProviderProps } from '../src/types';
-import useTheme from '../src/useTheme';
-import DirectionProvider from '../src/DirectionProvider';
+import { lightTheme, darkTheme } from '@aesthetic/core/lib/test';
+import {
+  ContextualThemeProvider,
+  ThemeProviderProps,
+  DirectionProviderProps,
+  useTheme,
+  DirectionProvider,
+} from '../src';
 
 jest.mock('@aesthetic/core');
 

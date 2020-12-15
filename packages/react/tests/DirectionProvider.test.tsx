@@ -2,9 +2,8 @@
 
 import React from 'react';
 import { render } from 'rut-dom';
-import { setupAesthetic, teardownAesthetic } from '@aesthetic/core/lib/testing';
-import DirectionProvider from '../src/DirectionProvider';
-import { DirectionProviderProps } from '../src/types';
+import { setupAesthetic, teardownAesthetic } from '@aesthetic/core/lib/test';
+import { DirectionProvider, DirectionProviderProps } from '../src';
 
 describe('DirectionProvider', () => {
   beforeEach(() => {

@@ -12,10 +12,8 @@ import {
   unsubscribe,
   OnChangeTheme,
 } from '@aesthetic/core';
-import { lightTheme, darkTheme } from '@aesthetic/core/lib/testing';
-import ThemeProvider from '../src/ThemeProvider';
-import { ThemeProviderProps } from '../src/types';
-import useTheme from '../src/useTheme';
+import { lightTheme, darkTheme } from '@aesthetic/core/lib/test';
+import { ThemeProvider, ThemeProviderProps, useTheme } from '../src';
 
 jest.mock('@aesthetic/core');
 

@@ -29,7 +29,7 @@
     "react-dom": "^16.13.0"
   },
   "devDependencies": {
-    "@aesthetic/addon-mixins": "^0.1.6",
+    "@aesthetic/addon-mixins": "^0.2.0",
     "prop-types": "^15.7.2"
   }
 }

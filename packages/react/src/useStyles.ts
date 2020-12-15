@@ -16,7 +16,7 @@ export default function useStyles<T = unknown>(sheet: LocalSheet<T>): ClassNameG
 
   // Render the styles immediately for SSR since effects do not run
   const [classNames, setClassNames] = useState<ClassNameSheet<string>>(() => {
-    if (isSSR() || global.AESTHETIC_CUSTOM_RENDERER) {
+    if (isSSR() || global.AESTHETIC_CUSTOM_ENGINE) {
       return renderComponentStyles(sheet, {
         direction,
         theme: theme.name,

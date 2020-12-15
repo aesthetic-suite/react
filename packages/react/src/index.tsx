@@ -3,6 +3,7 @@
  * @license     https://opensource.org/licenses/MIT
  */
 
+import './setup';
 import DirectionContext from './DirectionContext';
 import DirectionProvider from './DirectionProvider';
 import ThemeContext from './ThemeContext';

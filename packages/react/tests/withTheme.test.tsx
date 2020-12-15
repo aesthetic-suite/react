@@ -1,8 +1,6 @@
 import React from 'react';
 import { render } from 'rut-dom';
-import withTheme from '../src/withTheme';
-import ThemeProvider from '../src/ThemeProvider';
-import { ThemeProviderProps, WithThemeWrappedProps } from '../src/types';
+import { withTheme, ThemeProvider, ThemeProviderProps, WithThemeWrappedProps } from '../src';
 import { dawnTheme, setupAestheticReact, teardownAestheticReact, twilightTheme } from './helpers';
 
 describe('withTheme()', () => {

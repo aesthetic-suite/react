@@ -1,12 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import mixins from '@aesthetic/addon-mixins';
-import {
-  lightTheme,
-  darkTheme,
-  design,
-  teardownAesthetic,
-  purgeStyles,
-} from '@aesthetic/core/lib/testing';
+import { lightTheme, darkTheme, design, teardownAesthetic } from '@aesthetic/core/lib/test';
+import { purgeStyles } from '@aesthetic/style/lib/test';
 import { registerTheme } from '../src';
 
 export const designWithMixins = design.extend('react', {}, mixins);
