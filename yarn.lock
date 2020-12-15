@@ -9,10 +9,10 @@
   dependencies:
     "@aesthetic/utils" "^0.5.1"
 
-"@aesthetic/core@^0.6.0":
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/@aesthetic/core/-/core-0.6.0.tgz#e71b83d5d48ac1dca0d792f11b6b6396f56ed337"
-  integrity sha512-E6FB38kqS50UOGmbCuY/XhqzaKiEdResqijF01LAJrdqlvTpERNGVzxWnSH7LGg5Veiiz8gBpywy0DP702FFkw==
+"@aesthetic/core@^0.6.1":
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/@aesthetic/core/-/core-0.6.1.tgz#3101f9f29dd290ad037c61a89393fba64d9f86b1"
+  integrity sha512-RkF7+fXIoCy78RzYHKoiwV5X51Y8rjmZQeJXCMBi1G56GP9JfiGrj2ZJtvtwftTT7wJYoQa/LBMHqr0YrJ4xaA==
   dependencies:
     "@aesthetic/sss" "^0.5.1"
     "@aesthetic/system" "^0.5.2"

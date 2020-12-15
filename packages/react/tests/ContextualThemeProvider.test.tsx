@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { render } from 'rut-dom';
-import { lightTheme, darkTheme, setupAesthetic, teardownAesthetic } from '@aesthetic/core/lib/test';
+import { lightTheme, darkTheme } from '@aesthetic/core/lib/test';
 import {
   ContextualThemeProvider,
   ThemeProviderProps,
@@ -11,14 +11,15 @@ import {
   DirectionProvider,
 } from '../src';
 import aesthetic from '../src/aesthetic';
+import { setupAestheticReact, teardownAestheticReact } from './helpers';
 
 describe('ContextualThemeProvider', () => {
   beforeEach(() => {
-    setupAesthetic(aesthetic);
+    setupAestheticReact();
   });
 
   afterEach(() => {
-    teardownAesthetic(aesthetic);
+    teardownAestheticReact();
   });
 
   it('renders children', () => {

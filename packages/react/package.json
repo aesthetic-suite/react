@@ -20,7 +20,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@aesthetic/core": "^0.6.0",
+    "@aesthetic/core": "^0.6.1",
     "@aesthetic/style": "^0.5.2",
     "@aesthetic/types": "^0.3.1",
     "@aesthetic/utils": "^0.5.1",

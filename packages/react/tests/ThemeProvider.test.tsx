@@ -3,36 +3,18 @@
 import React from 'react';
 import { render } from 'rut-dom';
 import { act } from 'react-test-renderer';
-import {
-  changeTheme,
-  getActiveTheme,
-  getTheme,
-  renderThemeStyles,
-  subscribe,
-  unsubscribe,
-  OnChangeTheme,
-} from '@aesthetic/core';
-import { lightTheme, darkTheme } from '@aesthetic/core/lib/test';
+import { OnChangeTheme } from '@aesthetic/core';
 import { ThemeProvider, ThemeProviderProps, useTheme } from '../src';
-
-jest.mock('@aesthetic/core');
+import aesthetic from '../src/aesthetic';
+import { setupAestheticReact, teardownAestheticReact, twilightTheme, dawnTheme } from './helpers';
 
 describe('ThemeProvider', () => {
   beforeEach(() => {
-    lightTheme.name = 'day';
-    darkTheme.name = 'night';
-
-    (getTheme as jest.Mock).mockImplementation((name) => (name === 'day' ? lightTheme : darkTheme));
-    (getActiveTheme as jest.Mock).mockImplementation(() => lightTheme);
-    (renderThemeStyles as jest.Mock).mockImplementation((theme) => `theme-${theme.name}`);
-    (changeTheme as jest.Mock).mockReset();
-    (subscribe as jest.Mock).mockReset();
-    (unsubscribe as jest.Mock).mockReset();
+    setupAestheticReact();
   });
 
   afterEach(() => {
-    lightTheme.name = '';
-    darkTheme.name = '';
+    teardownAestheticReact();
   });
 
   it('renders children', () => {
@@ -85,7 +67,7 @@ describe('ThemeProvider', () => {
     function Test() {
       const theme = useTheme();
 
-      expect(theme).toBe(lightTheme);
+      expect(theme).toBe(twilightTheme);
 
       return null;
     }
@@ -103,19 +85,21 @@ describe('ThemeProvider', () => {
     function Test() {
       const theme = useTheme();
 
-      expect(theme).toBe(darkTheme);
+      expect(theme).toBe(dawnTheme);
 
       return null;
     }
 
     render<ThemeProviderProps>(
-      <ThemeProvider name="night">
+      <ThemeProvider name="dawn">
         <Test />
       </ThemeProvider>,
     );
   });
 
   it('calls `changeTheme` when `name` changes', () => {
+    const spy = jest.spyOn(aesthetic, 'changeTheme');
+
     const { update } = render<ThemeProviderProps>(
       <ThemeProvider>
         <div>1</div>
@@ -128,10 +112,25 @@ describe('ThemeProvider', () => {
       name: 'night',
     });
 
-    expect(changeTheme).toHaveBeenCalledWith('night', false);
+    expect(spy).toHaveBeenCalledWith('night', false);
+
+    spy.mockRestore();
   });
 
   describe('subscriptions', () => {
+    let subSpy: jest.SpyInstance;
+    let unsubSpy: jest.SpyInstance;
+
+    beforeEach(() => {
+      subSpy = jest.spyOn(aesthetic, 'subscribe');
+      unsubSpy = jest.spyOn(aesthetic, 'unsubscribe');
+    });
+
+    afterEach(() => {
+      subSpy.mockRestore();
+      unsubSpy.mockRestore();
+    });
+
     it('subscribes on mount', () => {
       render<ThemeProviderProps>(
         <ThemeProvider>
@@ -139,8 +138,8 @@ describe('ThemeProvider', () => {
         </ThemeProvider>,
       );
 
-      expect(subscribe).toHaveBeenCalledTimes(1);
-      expect(subscribe).toHaveBeenCalledWith('change:theme', expect.any(Function));
+      expect(subSpy).toHaveBeenCalledTimes(1);
+      expect(subSpy).toHaveBeenCalledWith('change:theme', expect.any(Function));
     });
 
     it('only subscribes once', () => {
@@ -154,7 +153,7 @@ describe('ThemeProvider', () => {
       update();
       update();
 
-      expect(subscribe).toHaveBeenCalledTimes(1);
+      expect(subSpy).toHaveBeenCalledTimes(1);
     });
 
     it('unsubscribes on unmount', () => {
@@ -166,8 +165,8 @@ describe('ThemeProvider', () => {
 
       unmount();
 
-      expect(unsubscribe).toHaveBeenCalledTimes(1);
-      expect(unsubscribe).toHaveBeenCalledWith('change:theme', expect.any(Function));
+      expect(unsubSpy).toHaveBeenCalledTimes(1);
+      expect(unsubSpy).toHaveBeenCalledWith('change:theme', expect.any(Function));
     });
 
     it('changes theme if outside `changeTheme` is called', () => {
@@ -175,7 +174,7 @@ describe('ThemeProvider', () => {
       let doChangeTheme: OnChangeTheme = () => {};
 
       // Janky, but since we mocked the module, we need to extract this
-      (subscribe as jest.Mock).mockImplementation((name, cb) => {
+      subSpy.mockImplementation((name, cb) => {
         doChangeTheme = cb as OnChangeTheme;
       });
 
@@ -186,18 +185,18 @@ describe('ThemeProvider', () => {
       }
 
       render<ThemeProviderProps>(
-        <ThemeProvider name="day">
+        <ThemeProvider name="twilight">
           <Comp />
         </ThemeProvider>,
       );
 
       // eslint-disable-next-line rut/no-act
       act(() => {
-        doChangeTheme('night');
+        doChangeTheme('dawn');
       });
 
-      expect(themeSpy).toHaveBeenCalledWith(lightTheme);
-      expect(themeSpy).toHaveBeenCalledWith(darkTheme);
+      expect(themeSpy).toHaveBeenCalledWith(twilightTheme);
+      expect(themeSpy).toHaveBeenCalledWith(dawnTheme);
     });
   });
 });
