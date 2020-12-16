@@ -1,8 +1,12 @@
 import React from 'react';
 import { LocalSheet } from '@aesthetic/core';
-import createHOC from './createHOC';
+import {
+  WithStylesWrappedProps,
+  WrapperProps,
+  WrapperComponent,
+  createHOC,
+} from '@aesthetic/core-react';
 import useStyles from './useStyles';
-import { WithStylesWrappedProps, WrapperProps, WrapperComponent } from './types';
 
 /**
  * Wrap a React component with an HOC that injects the style to class name transfer function.

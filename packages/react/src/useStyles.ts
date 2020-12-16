@@ -3,8 +3,8 @@ import { ClassNameSheet, LocalSheet } from '@aesthetic/core';
 import { isSSR } from '@aesthetic/utils';
 import aesthetic from './aesthetic';
 import { ClassNameGenerator } from './types';
-import useDirection from './useDirection';
-import useTheme from './useTheme';
+import { useDirection } from './direction';
+import { useTheme } from './theme';
 import generateCX from './generateCX';
 
 /**

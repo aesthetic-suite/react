@@ -4,29 +4,16 @@
  */
 
 import aesthetic from './aesthetic';
-import ThemeContext from './ThemeContext';
-import ThemeProvider from './ThemeProvider';
-import ContextualThemeProvider from './ContextualThemeProvider';
 import createStyled from './createStyled';
 import useStyles from './useStyles';
-import useTheme from './useTheme';
 import withStyles from './withStyles';
-import withTheme from './withTheme';
 
 export * from '@aesthetic/core';
 export * from './direction';
+export * from './theme';
 export * from './types';
 
-export {
-  ThemeContext,
-  ThemeProvider,
-  ContextualThemeProvider,
-  createStyled,
-  useStyles,
-  useTheme,
-  withStyles,
-  withTheme,
-};
+export { createStyled, useStyles, withStyles };
 
 export const {
   changeDirection,

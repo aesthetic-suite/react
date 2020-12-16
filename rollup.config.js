@@ -6,7 +6,7 @@ import babel from '@rollup/plugin-babel';
 const babelConfig = require('./babel.config');
 
 // Order is imporant!
-const packages = ['react', 'react-ui'];
+const packages = ['core-react', 'react', 'react-ui'];
 const targets = [];
 
 const extensions = ['.ts', '.tsx', '.js', '.jsx'];

@@ -1,17 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { createThemeHelpers, ContextualThemeProviderProps } from '@aesthetic/core-react';
 import aesthetic from './aesthetic';
-import ThemeContext from './ThemeContext';
-import useDirection from './useDirection';
-import { ContextualThemeProviderProps } from './types';
+import { useDirection } from './direction';
+
+export const { ThemeContext, ThemeProvider, useTheme, withTheme } = createThemeHelpers(aesthetic);
 
 /**
  * Provides a theme for a distinct portion of the React tree.
  */
-export default function ContextualThemeProvider({
-  children,
-  name,
-  wrapper,
-}: ContextualThemeProviderProps) {
+export function ContextualThemeProvider({ children, name, wrapper }: ContextualThemeProviderProps) {
   const [className, setClassName] = useState('');
   const direction = useDirection();
   const theme = aesthetic.getTheme(name);
