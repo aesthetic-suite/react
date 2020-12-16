@@ -1,12 +1,16 @@
 import { ClassNameSheet, ClassNameSheetVariants } from '@aesthetic/core';
+import { createStyleHelpers } from '@aesthetic/core-react';
+import { ClassName } from '@aesthetic/types';
 import { isObject, objectLoop } from '@aesthetic/utils';
 import aesthetic from './aesthetic';
+import { useDirection } from './direction';
+import { useTheme } from './theme';
 
-export default function generateCX(
+function generate(
   keys: unknown[],
   classNames: ClassNameSheet<string>,
   cache: Record<string, string>,
-) {
+): ClassName {
   const variants: string[] = [];
   let cacheKey = '';
 
@@ -29,3 +33,9 @@ export default function generateCX(
 
   return cache[cacheKey];
 }
+
+export const { useStyles, withStyles } = createStyleHelpers<ClassName>(aesthetic, {
+  generate,
+  useDirection,
+  useTheme,
+});

@@ -4,7 +4,10 @@
  */
 
 import createDirectionHelpers from './createDirectionHelpers';
+import createStyleHelpers from './createStyleHelpers';
 import createThemeHelpers from './createThemeHelpers';
 import createHOC from './createHOC';
 
-export { createDirectionHelpers, createThemeHelpers, createHOC };
+export { createDirectionHelpers, createStyleHelpers, createThemeHelpers, createHOC };
+
+export * from './types';

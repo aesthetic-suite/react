@@ -3,7 +3,7 @@
 
 import React from 'react';
 import { Theme } from '@aesthetic/core';
-import { Direction, ThemeName } from '@aesthetic/types';
+import { ClassName, Direction, ThemeName } from '@aesthetic/types';
 
 // HOCs
 
@@ -62,7 +62,14 @@ export interface WithThemeWrappedProps extends WrappedProps {
 
 // STYLES
 
-export interface WithStylesWrappedProps<T = string> extends WrappedProps {
-  /** Function to generate CSS class names from a style sheet. Provided by `withStyles`. */
-  // cx: ClassNameGenerator<T>;
+export type StyleResultTypes<T> = (undefined | null | false | T)[];
+
+export interface StyleResultGenerator<T, R = ClassName> {
+  (variants: Record<string, string>, ...keys: StyleResultTypes<T>): R;
+  (...keys: StyleResultTypes<T>): R;
+}
+
+export interface WithStylesWrappedProps<T = string, R = ClassName> extends WrappedProps {
+  /** Function to generate styles from a sheet. Provided by `withStyles`. */
+  cx: StyleResultGenerator<T, R>;
 }

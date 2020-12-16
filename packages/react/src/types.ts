@@ -1,13 +1,5 @@
 import React from 'react';
-import { ClassNameSheetVariants, LocalSheet } from '@aesthetic/core';
-import { ClassName } from '@aesthetic/types';
-
-export type ClassNameTypes<T> = (undefined | null | false | T)[];
-
-export interface ClassNameGenerator<T> {
-  (variants: ClassNameSheetVariants, ...keys: ClassNameTypes<T>): ClassName;
-  (...keys: ClassNameTypes<T>): ClassName;
-}
+import { LocalSheet } from '@aesthetic/core';
 
 export type ElementType = keyof JSX.IntrinsicElements;
 

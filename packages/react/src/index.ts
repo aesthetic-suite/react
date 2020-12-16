@@ -5,15 +5,15 @@
 
 import aesthetic from './aesthetic';
 import createStyled from './createStyled';
-import useStyles from './useStyles';
-import withStyles from './withStyles';
 
 export * from '@aesthetic/core';
+export * from '@aesthetic/core-react';
 export * from './direction';
+export * from './styles';
 export * from './theme';
 export * from './types';
 
-export { createStyled, useStyles, withStyles };
+export { createStyled };
 
 export const {
   changeDirection,

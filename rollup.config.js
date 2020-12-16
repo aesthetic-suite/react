@@ -22,7 +22,7 @@ const webPlugins = [
 
 packages.forEach((pkg) => {
   targets.push({
-    input: `packages/${pkg}/src/index.tsx`,
+    input: `packages/${pkg}/src/index.ts`,
     output: [
       {
         file: `packages/${pkg}/lib/index.js`,
