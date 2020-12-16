@@ -1,0 +1,35 @@
+{
+  "private": true,
+  "name": "@aesthetic/core-react",
+  "version": "0.0.0",
+  "description": "Primitive React UI components built on Aesthetic.",
+  "keywords": [
+    "aesthetic",
+    "react",
+    "core",
+    "api",
+    "factories"
+  ],
+  "repository": "https://github.com/aesthetic-suite/core-react",
+  "license": "MIT",
+  "main": "./lib/index.js",
+  "module": "./esm/index.js",
+  "types": "./lib/index.d.ts",
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "funding": {
+    "type": "ko-fi",
+    "url": "https://ko-fi.com/milesjohnson"
+  },
+  "peerDependencies": {
+    "@aesthetic/core": "*",
+    "react": "^16.13.0 || ^17.0.0"
+  },
+  "dependencies": {
+    "@aesthetic/types": "^0.3.1",
+    "direction": "^1.0.4",
+    "hoist-non-react-statics": "^3.3.2"
+  }
+}
