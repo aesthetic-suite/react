@@ -1,6 +1,12 @@
 import React from 'react';
 import { render } from 'rut-dom';
-import { withTheme, ThemeProvider, ThemeProviderProps, WithThemeWrappedProps } from '../src';
+import {
+  withTheme,
+  ThemeProvider,
+  ThemeProviderProps,
+  WithThemeWrappedProps,
+  LocalBlock,
+} from '../src';
 import { dawnTheme, setupAestheticReact, teardownAestheticReact, twilightTheme } from './helpers';
 
 describe('withTheme()', () => {
@@ -12,7 +18,7 @@ describe('withTheme()', () => {
     teardownAestheticReact();
   });
 
-  function BaseComponent(props: WithThemeWrappedProps) {
+  function BaseComponent(props: WithThemeWrappedProps<LocalBlock>) {
     return null;
   }
 
@@ -61,7 +67,7 @@ describe('withTheme()', () => {
     }
 
     // eslint-disable-next-line react/prefer-stateless-function
-    class RefComponent extends React.Component<RefProps & WithThemeWrappedProps> {
+    class RefComponent extends React.Component<RefProps & WithThemeWrappedProps<LocalBlock>> {
       render() {
         return <div />;
       }
