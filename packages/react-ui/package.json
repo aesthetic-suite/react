@@ -35,5 +35,8 @@
   "devDependencies": {
     "@aesthetic/addon-mixins": "^0.2.3",
     "prop-types": "^15.7.2"
+  },
+  "packemon": {
+    "platform": "browser"
   }
 }

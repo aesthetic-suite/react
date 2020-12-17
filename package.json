@@ -4,15 +4,16 @@
   "version": "0.0.0",
   "scripts": {
     "prepare": "beemo create-config --silent",
-    "build": "beemo create-config babel --esm --silent && rollup --config",
-    "clean": "rm -rf ./packages/*/{lib,esm,*.tsbuildinfo}",
+    "build": "packemon build --addEngines",
+    "pack": "NODE_ENV=production packemon pack --addEngines --generateDeclaration=standard",
+    "clean": "packemon clean",
     "coverage": "yarn run jest --coverage",
     "format": "beemo prettier",
     "lint": "beemo eslint",
     "jest": "beemo jest",
     "release": "lerna publish",
     "type": "beemo typescript --build --reference-workspaces",
-    "prerelease": "yarn run clean && yarn run build && yarn test",
+    "prerelease": "yarn run pack && yarn test",
     "pretest": "yarn run type",
     "test": "yarn run coverage",
     "posttest": "yarn run lint"
@@ -22,8 +23,6 @@
   },
   "devDependencies": {
     "@milesj/build-tools": "^2.14.1",
-    "@rollup/plugin-babel": "^5.2.2",
-    "@rollup/plugin-node-resolve": "^11.0.1",
     "@types/hoist-non-react-statics": "^3.3.1",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
@@ -35,19 +34,21 @@
     "lerna": "^3.22.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "rollup": "^2.35.1",
-    "rollup-plugin-node-externals": "^2.2.0",
     "rut-dom": "^2.0.0"
   },
   "beemo": {
     "module": "@milesj/build-tools",
     "drivers": [
-      "babel",
+      {
+        "driver": "babel",
+        "strategy": "none"
+      },
       "eslint",
       "jest",
       "prettier",
       {
         "driver": "typescript",
+        "buildFolder": "dts",
         "declarationOnly": true
       }
     ],
@@ -69,8 +70,5 @@
   },
   "workspaces": [
     "packages/*"
-  ],
-  "browserslist": [
-    "ie 11"
   ]
 }

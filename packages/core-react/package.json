@@ -36,5 +36,8 @@
     "@aesthetic/utils": "^0.5.2",
     "direction": "^1.0.4",
     "hoist-non-react-statics": "^3.3.2"
+  },
+  "packemon": {
+    "platform": "browser"
   }
 }
