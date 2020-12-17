@@ -1,11 +1,12 @@
 import React from 'react';
-import { LocalSheet } from '@aesthetic/core';
+import { LocalBlock, LocalSheet } from '@aesthetic/core';
+import { ClassName } from '@aesthetic/types';
 
 export type ElementType = keyof JSX.IntrinsicElements;
 
 export interface StyledComponent<P extends object = {}>
   extends React.MemoExoticComponent<React.ForwardRefExoticComponent<P & StyledInheritedProps>> {
-  styleSheet: LocalSheet;
+  styleSheet: LocalSheet<unknown, LocalBlock, ClassName>;
 }
 
 export interface StyledInheritedProps {
