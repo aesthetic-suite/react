@@ -10,8 +10,10 @@ import {
   WrapperProps,
 } from './types';
 
-export default function createThemeHelpers(aesthetic: Aesthetic) /* infer */ {
-  const ThemeContext = React.createContext<ThemeContextType | null>(
+export default function createThemeHelpers<Result, Block extends object>(
+  aesthetic: Aesthetic<Result, Block>,
+) /* infer */ {
+  const ThemeContext = React.createContext<ThemeContextType<Block> | null>(
     attempt(() => aesthetic.getActiveTheme()),
   );
 
@@ -45,7 +47,7 @@ export default function createThemeHelpers(aesthetic: Aesthetic) /* infer */ {
   /**
    * Hook within a component to provide the current theme object.
    */
-  function useTheme(): Theme {
+  function useTheme(): Theme<Block> {
     const theme = useContext(ThemeContext);
 
     if (__DEV__) {
@@ -62,8 +64,8 @@ export default function createThemeHelpers(aesthetic: Aesthetic) /* infer */ {
    */
   function withTheme() /* infer */ {
     return function withThemeComposer<Props extends object = {}>(
-      WrappedComponent: React.ComponentType<Props & WithThemeWrappedProps>,
-    ): React.FunctionComponent<Omit<Props, keyof WithThemeWrappedProps> & WrapperProps> &
+      WrappedComponent: React.ComponentType<Props & WithThemeWrappedProps<Block>>,
+    ): React.FunctionComponent<Omit<Props, keyof WithThemeWrappedProps<Block>> & WrapperProps> &
       WrapperComponent {
       return createHOC('withTheme', WrappedComponent, function WithTheme({ wrappedRef, ...props }) {
         const theme = useTheme();

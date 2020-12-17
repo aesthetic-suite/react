@@ -3,7 +3,7 @@
 
 import React from 'react';
 import { Theme } from '@aesthetic/core';
-import { ClassName, Direction, ThemeName } from '@aesthetic/types';
+import { Direction, ThemeName } from '@aesthetic/types';
 
 // HOCs
 
@@ -42,7 +42,7 @@ export interface WithDirectionWrappedProps extends WrappedProps {
 
 // THEME
 
-export type ThemeContextType = Theme;
+export type ThemeContextType<T extends object> = Theme<T>;
 
 export interface ThemeProviderProps {
   children: NonNullable<React.ReactNode>;
@@ -55,21 +55,21 @@ export interface ContextualThemeProviderProps extends Required<ThemeProviderProp
   wrapper: React.ReactElement;
 }
 
-export interface WithThemeWrappedProps extends WrappedProps {
+export interface WithThemeWrappedProps<T extends object> extends WrappedProps {
   /** The theme object. Provided by `withTheme`. */
-  theme: Theme;
+  theme: Theme<T>;
 }
 
 // STYLES
 
 export type StyleResultTypes<T> = (undefined | null | false | T)[];
 
-export interface StyleResultGenerator<T, R = ClassName> {
+export interface StyleResultGenerator<T, R> {
   (variants: Record<string, string>, ...keys: StyleResultTypes<T>): R;
   (...keys: StyleResultTypes<T>): R;
 }
 
-export interface WithStylesWrappedProps<T = string, R = ClassName> extends WrappedProps {
+export interface WithStylesWrappedProps<T, R> extends WrappedProps {
   /** Function to generate styles from a sheet. Provided by `withStyles`. */
   cx: StyleResultGenerator<T, R>;
 }

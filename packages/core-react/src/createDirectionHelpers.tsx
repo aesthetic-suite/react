@@ -11,7 +11,9 @@ import {
   WrapperProps,
 } from './types';
 
-export default function createDirectionHelpers(aesthetic: Aesthetic) /* infer */ {
+export default function createDirectionHelpers<Result, Block extends object>(
+  aesthetic: Aesthetic<Result, Block>,
+) /* infer */ {
   const DirectionContext = React.createContext<DirectionContextType>(
     aesthetic.getActiveDirection() || 'ltr',
   );
