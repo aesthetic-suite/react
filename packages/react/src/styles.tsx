@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { LocalBlock, Utilities, LocalSheet } from '@aesthetic/core';
 import { createStyleHelpers } from '@aesthetic/core-react';
 import { objectLoop } from '@aesthetic/utils';
-import { ClassName } from '@aesthetic/types';
+import { ClassName, RenderOptions, Rule } from '@aesthetic/types';
 import aesthetic from './aesthetic';
 import { useDirection } from './direction';
 import { useTheme } from './theme';
@@ -13,6 +13,13 @@ export const { useStyles, withStyles } = createStyleHelpers(aesthetic, {
   useDirection,
   useTheme,
 });
+
+export function useCss(
+  rule: Rule,
+  options?: Omit<RenderOptions, 'className' | 'rankings' | 'type'>,
+): ClassName {
+  return useMemo(() => aesthetic.getEngine().renderRule(rule, options), [rule, options]);
+}
 
 function getVariantsFromProps(
   styleSheet: LocalSheet<unknown, LocalBlock, ClassName>,
