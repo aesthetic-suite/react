@@ -14,7 +14,10 @@ export const { useStyles, withStyles } = createStyleHelpers(aesthetic, {
   useTheme,
 });
 
-export function useCss(rule: Rule, options?: RenderOptions): ClassName {
+export function useCss(
+  rule: Rule,
+  options?: Omit<RenderOptions, 'className' | 'rankings' | 'type'>,
+): ClassName {
   return useMemo(() => aesthetic.getEngine().renderRule(rule, options), [rule, options]);
 }
 
