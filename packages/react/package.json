@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@aesthetic/core": "^0.6.3",
-    "@aesthetic/core-react": "*",
+    "@aesthetic/core-react": "^0.0.0",
     "@aesthetic/style": "^0.5.3",
     "@aesthetic/types": "^0.3.2",
     "@aesthetic/utils": "^0.5.2"

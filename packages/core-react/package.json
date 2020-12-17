@@ -2,7 +2,7 @@
   "private": true,
   "name": "@aesthetic/core-react",
   "version": "0.0.0",
-  "description": "Primitive React UI components built on Aesthetic.",
+  "description": "Core React APIs.",
   "keywords": [
     "aesthetic",
     "react",
