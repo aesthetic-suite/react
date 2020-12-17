@@ -10,7 +10,11 @@
     "components",
     "primitives"
   ],
-  "repository": "https://github.com/aesthetic-suite/react-ui",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:aesthetic-suite/react.git",
+    "directory": "packages/react"
+  },
   "license": "MIT",
   "main": "./lib/index.js",
   "module": "./esm/index.js",

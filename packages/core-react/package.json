@@ -10,7 +10,11 @@
     "api",
     "factories"
   ],
-  "repository": "https://github.com/aesthetic-suite/core-react",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:aesthetic-suite/react.git",
+    "directory": "packages/core-react"
+  },
   "license": "MIT",
   "main": "./lib/index.js",
   "module": "./esm/index.js",
