@@ -24,7 +24,8 @@ describe('withStyles()', () => {
     small,
   }: ButtonProps &
     WithStylesWrappedProps<
-      'button' | 'button_block' | 'button_disabled' | 'button_large' | 'button_small'
+      'button' | 'button_block' | 'button_disabled' | 'button_large' | 'button_small',
+      string
     >) {
     return (
       <button
@@ -49,7 +50,7 @@ describe('withStyles()', () => {
     unknown?: unknown;
   }
 
-  function BaseComponent(props: BaseComponentProps & WithStylesWrappedProps<string>) {
+  function BaseComponent(props: BaseComponentProps & WithStylesWrappedProps<string, string>) {
     return null;
   }
 
@@ -87,7 +88,7 @@ describe('withStyles()', () => {
     }
 
     // eslint-disable-next-line react/prefer-stateless-function
-    class RefComponent extends React.Component<RefProps & WithStylesWrappedProps<string>> {
+    class RefComponent extends React.Component<RefProps & WithStylesWrappedProps<string, string>> {
       render() {
         return <div />;
       }

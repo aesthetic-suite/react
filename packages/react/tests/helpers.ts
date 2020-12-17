@@ -6,8 +6,8 @@ import {
   design,
   teardownAesthetic,
   setupAesthetic,
-} from '@aesthetic/core/lib/test';
-import { createTestStyleEngine, purgeStyles } from '@aesthetic/style/lib/test';
+} from '@aesthetic/core/test';
+import { createTestStyleEngine, purgeStyles } from '@aesthetic/style/test';
 import aesthetic from '../src/aesthetic';
 
 export const designWithMixins = design.extend('react', {}, mixins);

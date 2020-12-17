@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { render } from 'rut-dom';
-import { lightTheme, darkTheme } from '@aesthetic/core/lib/test';
+import { lightTheme, darkTheme } from '@aesthetic/core/test';
 import {
   ContextualThemeProvider,
   ThemeProviderProps,

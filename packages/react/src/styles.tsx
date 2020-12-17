@@ -1,21 +1,30 @@
 import React from 'react';
-import { LocalBlock, Utilities, LocalSheet, ClassNameSheetVariants } from '@aesthetic/core';
+import { LocalBlock, Utilities, LocalSheet } from '@aesthetic/core';
+import { createStyleHelpers } from '@aesthetic/core-react';
 import { objectLoop } from '@aesthetic/utils';
+import { ClassName } from '@aesthetic/types';
 import aesthetic from './aesthetic';
-import useStyles from './useStyles';
+import { useDirection } from './direction';
+import { useTheme } from './theme';
 import { ElementType, InferProps, StyledComponent } from './types';
 
+export const { useStyles, withStyles } = createStyleHelpers(aesthetic, {
+  generate: aesthetic.generateClassName,
+  useDirection,
+  useTheme,
+});
+
 function getVariantsFromProps(
-  styleSheet: LocalSheet<{}>,
+  styleSheet: LocalSheet<unknown, LocalBlock, ClassName>,
   baseProps: object,
-): { props: { className?: string }; variants: ClassNameSheetVariants } {
+): { props: { className?: string }; variants: Record<string, string> } {
   const types = styleSheet.metadata.element?.variantTypes;
 
   if (!types) {
     return { props: baseProps, variants: {} };
   }
 
-  const variants: ClassNameSheetVariants = {};
+  const variants: Record<string, string> = {};
   const props: Record<string, unknown> = {};
 
   objectLoop(baseProps, (value, key) => {
@@ -30,10 +39,7 @@ function getVariantsFromProps(
 }
 
 // eslint-disable-next-line complexity
-export default function createStyled<
-  T extends ElementType | React.ComponentType,
-  V extends object = {}
->(
+export function createStyled<T extends ElementType | React.ComponentType, V extends object = {}>(
   type: T,
   factory: LocalBlock | ((utilities: Utilities<LocalBlock>) => LocalBlock),
 ): StyledComponent<InferProps<T> & V> {
@@ -90,6 +96,5 @@ export default function createStyled<
   (Component as StyledComponent).styleSheet = styleSheet;
 
   // Use the return type of `createStyled` instead of `forwardRef`
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return Component as any;
 }

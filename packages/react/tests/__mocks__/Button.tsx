@@ -1,7 +1,8 @@
 /* eslint-disable no-magic-numbers, sort-keys */
 
 import React from 'react';
-import { LocalSheet } from '@aesthetic/core';
+import { LocalBlock, LocalSheet } from '@aesthetic/core';
+import { ClassName } from '@aesthetic/types';
 import { DirectionProvider, ThemeProvider } from '../../src';
 import aesthetic from '../../src/aesthetic';
 
@@ -89,7 +90,7 @@ export interface ButtonProps {
   href?: string;
   large?: boolean;
   small?: boolean;
-  sheet?: LocalSheet;
+  sheet?: LocalSheet<unknown, LocalBlock, ClassName>;
 }
 
 export interface WrapperProps {

@@ -1,19 +1,19 @@
 {
   "private": true,
-  "name": "@aesthetic/react-ui",
-  "version": "0.0.4",
-  "description": "Primitive React UI components built on Aesthetic.",
+  "name": "@aesthetic/core-react",
+  "version": "0.0.0",
+  "description": "Core React APIs.",
   "keywords": [
     "aesthetic",
     "react",
-    "ui",
-    "components",
-    "primitives"
+    "core",
+    "api",
+    "factories"
   ],
   "repository": {
     "type": "git",
     "url": "git@github.com:aesthetic-suite/react.git",
-    "directory": "packages/react"
+    "directory": "packages/core-react"
   },
   "license": "MIT",
   "main": "./lib/index.js",
@@ -28,12 +28,13 @@
     "url": "https://ko-fi.com/milesjohnson"
   },
   "peerDependencies": {
-    "@aesthetic/react": "*",
-    "react": "^16.13.0 || ^17.0.0",
-    "react-dom": "^16.13.0 || ^17.0.0"
+    "@aesthetic/core": "*",
+    "react": "^16.13.0 || ^17.0.0"
   },
-  "devDependencies": {
-    "@aesthetic/addon-mixins": "^0.2.3",
-    "prop-types": "^15.7.2"
+  "dependencies": {
+    "@aesthetic/types": "^0.3.2",
+    "@aesthetic/utils": "^0.5.2",
+    "direction": "^1.0.4",
+    "hoist-non-react-statics": "^3.3.2"
   }
 }

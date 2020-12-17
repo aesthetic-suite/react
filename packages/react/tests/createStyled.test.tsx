@@ -3,7 +3,7 @@
 import React from 'react';
 import { render } from 'rut-dom';
 import { StyleSheet } from '@aesthetic/core';
-import { getRenderedStyles } from '@aesthetic/style/lib/test';
+import { getRenderedStyles } from '@aesthetic/style/test';
 import { createStyled } from '../src';
 import { Wrapper } from './__mocks__/Button';
 import { setupAestheticReact, teardownAestheticReact } from './helpers';
