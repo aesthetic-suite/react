@@ -1,8 +1,14 @@
 import React, { useMemo } from 'react';
-import { LocalBlock, Utilities, LocalSheet } from '@aesthetic/core';
+import {
+  ClassName,
+  ElementStyles,
+  LocalSheet,
+  RenderOptions,
+  Rule,
+  Utilities,
+} from '@aesthetic/core';
 import { createStyleHelpers } from '@aesthetic/core-react';
 import { objectLoop } from '@aesthetic/utils';
-import { ClassName, RenderOptions, Rule } from '@aesthetic/types';
 import aesthetic from './aesthetic';
 import { useDirection } from './direction';
 import { useTheme } from './theme';
@@ -22,7 +28,7 @@ export function useCss(
 }
 
 function getVariantsFromProps(
-  styleSheet: LocalSheet<unknown, LocalBlock, ClassName>,
+  styleSheet: LocalSheet<unknown, ElementStyles, ClassName>,
   baseProps: object,
 ): { props: { className?: string }; variants: Record<string, string> } {
   const types = styleSheet.metadata.element?.variantTypes;
@@ -48,7 +54,7 @@ function getVariantsFromProps(
 // eslint-disable-next-line complexity
 export function createStyled<T extends ElementType | React.ComponentType, V extends object = {}>(
   type: T,
-  factory: LocalBlock | ((utilities: Utilities<LocalBlock>) => LocalBlock),
+  factory: ElementStyles | ((utilities: Utilities<ElementStyles>) => ElementStyles),
 ): StyledComponent<InferProps<T> & V> {
   if (__DEV__) {
     const typeOfType = typeof type;

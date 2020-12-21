@@ -32,13 +32,12 @@
     "react": "^16.13.0 || ^17.0.0"
   },
   "dependencies": {
-    "@aesthetic/types": "^0.3.2",
-    "@aesthetic/utils": "^0.5.2",
+    "@aesthetic/utils": "^0.6.0",
     "direction": "^1.0.4",
     "hoist-non-react-statics": "^3.3.2"
   },
   "devDependencies": {
-    "@aesthetic/core": "^0.6.3",
+    "@aesthetic/core": "^0.7.0",
     "react": "^17.0.1"
   },
   "packemon": {

@@ -1,8 +1,7 @@
-import { Aesthetic, LocalBlock } from '@aesthetic/core';
+import { Aesthetic, ClassName, ElementStyles } from '@aesthetic/core';
 import { createClientEngine } from '@aesthetic/style';
-import { ClassName } from '@aesthetic/types';
 
-const aesthetic = new Aesthetic<ClassName, LocalBlock>();
+const aesthetic = new Aesthetic<ClassName, ElementStyles>();
 
 aesthetic.configureEngine(createClientEngine());
 

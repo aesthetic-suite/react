@@ -2,8 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import React from 'react';
-import { Theme } from '@aesthetic/core';
-import { Direction, ThemeName } from '@aesthetic/types';
+import { Direction, Theme, ThemeName } from '@aesthetic/core';
 
 // HOCs
 
