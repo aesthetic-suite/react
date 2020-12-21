@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@aesthetic/react-ui",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Primitive React UI components built on Aesthetic.",
   "keywords": [
     "aesthetic",
@@ -35,7 +35,7 @@
   },
   "devDependencies": {
     "@aesthetic/addon-mixins": "^0.2.4",
-    "@aesthetic/react": "^0.6.1",
+    "@aesthetic/react": "^0.6.2",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
