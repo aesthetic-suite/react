@@ -31,7 +31,7 @@ describe('useCss()', () => {
     const options = useMemo(
       () => ({
         deterministic: true,
-        conditions: ['@supports (display: inline-flex)'],
+        supports: '(display: inline-flex)',
       }),
       [],
     );
@@ -65,7 +65,7 @@ describe('useCss()', () => {
 
     expect(getRenderedStyles('conditions')).toMatchSnapshot();
 
-    expect(root.findOne('button')).toHaveProp('className', 'c7a2jwm cz4mqki c9n9uql ch6ahvm');
+    expect(root.findOne('button')).toHaveProp('className', 'cmo4l16 cm8buhq c15zuv5t c1tlzqim');
   });
 
   it('only renders styles once', () => {

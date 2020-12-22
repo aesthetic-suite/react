@@ -25,16 +25,16 @@
     "access": "public"
   },
   "dependencies": {
-    "@aesthetic/core": "^0.7.0",
+    "@aesthetic/core": "^0.7.1",
     "@aesthetic/core-react": "^0.1.2",
-    "@aesthetic/style": "^0.6.0",
-    "@aesthetic/utils": "^0.6.0"
+    "@aesthetic/style": "^0.6.1",
+    "@aesthetic/utils": "^0.6.1"
   },
   "peerDependencies": {
     "react": "^16.6.0 || ^17.0.0"
   },
   "devDependencies": {
-    "@aesthetic/addon-mixins": "^0.2.4",
+    "@aesthetic/addon-mixins": "^0.2.5",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
   },

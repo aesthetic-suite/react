@@ -27,7 +27,7 @@
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "benchmark": "^2.1.4",
-    "builtin-modules": "^3.1.0",
+    "builtin-modules": "^3.2.0",
     "conventional-changelog-beemo": "^2.0.0",
     "eslint-plugin-rut": "^2.0.0",
     "jest-rut": "^2.0.0",
