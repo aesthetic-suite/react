@@ -52,7 +52,10 @@ function getVariantsFromProps(
 }
 
 // eslint-disable-next-line complexity
-export function createStyled<T extends ElementType | React.ComponentType, V extends object = {}>(
+export function createStyled<
+  T extends ElementType | React.ComponentType<any>,
+  V extends object = {}
+>(
   type: T,
   factory: ElementStyles | ((utilities: Utilities<ElementStyles>) => ElementStyles),
 ): StyledComponent<InferProps<T> & V> {
@@ -91,8 +94,6 @@ export function createStyled<T extends ElementType | React.ComponentType, V exte
 
       return React.createElement(type, {
         ...props,
-        // These dont type correctly because of our inference
-        // @ts-expect-error
         className,
         ref,
       });
