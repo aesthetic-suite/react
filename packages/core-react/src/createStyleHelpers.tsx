@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { Aesthetic, Theme, LocalSheet, RenderResultSheet, Direction } from '@aesthetic/core';
-import { isDOM, isObject, objectLoop } from '@aesthetic/utils';
+import { isObject, objectLoop } from '@aesthetic/utils';
 import createHOC from './createHOC';
 import {
   StyleResultGenerator,
@@ -59,37 +59,43 @@ export default function createStyleHelpers<Result, Block extends object>(
   function useStyles<T = unknown>(
     sheet: LocalSheet<T, Block, Result>,
   ): StyleResultGenerator<keyof T, Result> {
-    const direction = useDirection();
     const theme = useTheme();
-    const cache = useRef<Record<string, Result>>({});
+    const direction = useDirection();
+    const classCache = useRef<Record<string, Result>>({});
+    const initialMount = useRef(true);
+    const [result, setResult] = useState<Record<string, any>>(() =>
+      aesthetic.renderComponentStyles(sheet, {
+        direction,
+        theme: theme.name,
+      }),
+    );
 
-    // Render the styles immediately for SSR since effects do not run
-    const [result, setResult] = useState<Record<string, any>>(() => {
-      if (!isDOM() || process.env.AESTHETIC_SSR) {
-        return aesthetic.renderComponentStyles(sheet, {
-          direction,
-          theme: theme.name,
-        });
+    useEffect(() => {
+      // Avoid double rendering on first mount
+      if (initialMount.current) {
+        initialMount.current = false;
+
+        return;
       }
 
-      return {};
-    });
+      // Reset cache since styles are changing
+      classCache.current = {};
 
-    // Re-render styles when the theme or direction change
-    useEffect(() => {
-      cache.current = {};
-
+      // Re-render styles when the theme or direction change
       setResult(
         aesthetic.renderComponentStyles(sheet, {
           direction,
           theme: theme.name,
         }),
       );
+
       // It wants to include `sheet` but that triggers an infinite render loop
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [direction, theme.name]);
 
-    return useCallback((...keys: unknown[]) => cxWithCache(keys, result, cache.current), [result]);
+    return useCallback((...keys: unknown[]) => cxWithCache(keys, result, classCache.current), [
+      result,
+    ]);
   }
 
   /**
