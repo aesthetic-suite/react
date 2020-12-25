@@ -76,7 +76,29 @@ exports[`createStyled() composition can access the ref from multiple layers of c
 </Wrapper>"
 `;
 
-exports[`createStyled() composition supports extending othet styled components 1`] = `
+exports[`createStyled() composition supports extending non-styled components 1`] = `
+"<Wrapper>
+  <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>
+    <div dir=\\"ltr\\">
+      <ThemeProvider name=\\"twilight\\">
+        <Memo(ForwardRef) className=\\"test\\">
+          <ForwardRef className=\\"test\\">
+            <Base className=\\"a b c test\\">
+              <button className=\\"a b c test\\" type=\\"button\\">
+                Normal
+              </button>
+            </Base>
+          </ForwardRef>
+        </Memo(ForwardRef)>
+      </ThemeProvider>
+    </div>
+  </DirectionProvider>
+</Wrapper>"
+`;
+
+exports[`createStyled() composition supports extending non-styled components 2`] = `".a {display: inline-flex;}.b {text-align: center;}.c {padding: 1rem;}"`;
+
+exports[`createStyled() composition supports extending other styled components 1`] = `
 "<Wrapper>
   <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>
     <div dir=\\"ltr\\">
@@ -120,7 +142,7 @@ exports[`createStyled() composition supports extending othet styled components 1
 </Wrapper>"
 `;
 
-exports[`createStyled() composition supports extending othet styled components 2`] = `".a {display: inline-flex;}.b {text-align: center;}.c {padding: 1rem;}.d {display: flex;}.e {width: 100%;}.f {padding: 2rem;}.g {font-size: 18px;}"`;
+exports[`createStyled() composition supports extending other styled components 2`] = `".a {display: inline-flex;}.b {text-align: center;}.c {padding: 1rem;}.d {display: flex;}.e {width: 100%;}.f {padding: 2rem;}.g {font-size: 18px;}"`;
 
 exports[`createStyled() creates and renders a button with defined styles 1`] = `
 "<Wrapper>

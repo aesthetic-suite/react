@@ -37,16 +37,6 @@ describe('createStyled()', () => {
     ).toThrow('Styled components require a style sheet factory function, found boolean.');
   });
 
-  it('errors when a non-styled react component is passed', () => {
-    function Foo() {
-      return <div />;
-    }
-
-    expect(() => createStyled(Foo, {})).toThrow(
-      'Styled components may only extend other styled components.',
-    );
-  });
-
   it('sets static properties on component', () => {
     const Button = createStyled('button', {});
 
@@ -212,7 +202,30 @@ describe('createStyled()', () => {
   });
 
   describe('composition', () => {
-    it('supports extending othet styled components', () => {
+    it('supports extending non-styled components', () => {
+      function Base({ children, className }: { children: React.ReactNode; className?: string }) {
+        return (
+          <button type="button" className={className}>
+            {children}
+          </button>
+        );
+      }
+
+      const Button = createStyled(Base, () => ({
+        display: 'inline-flex',
+        textAlign: 'center',
+        padding: '1rem',
+      }));
+
+      const { debug } = render<{}>(<Button className="test">Normal</Button>, {
+        wrapper: <Wrapper />,
+      });
+
+      expect(debug({ log: false })).toMatchSnapshot();
+      expect(getRenderedStyles('standard')).toMatchSnapshot();
+    });
+
+    it('supports extending other styled components', () => {
       const Button = createStyled('button', () => ({
         display: 'inline-flex',
         textAlign: 'center',

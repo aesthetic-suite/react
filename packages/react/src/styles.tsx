@@ -51,7 +51,6 @@ function getVariantsFromProps(
   return { props, variants };
 }
 
-// eslint-disable-next-line complexity
 export function createStyled<
   T extends ElementType | React.ComponentType<any>,
   V extends object = {}
@@ -67,8 +66,6 @@ export function createStyled<
       throw new TypeError(
         `Styled components must extend an HTML element or React component, found ${typeOfType}.`,
       );
-    } else if ((typeOfType === 'function' || typeOfType === 'object') && !('styleSheet' in type)) {
-      throw new TypeError(`Styled components may only extend other styled components.`);
     }
 
     if (typeOfFactory !== 'function' && typeOfFactory !== 'object') {
