@@ -75,7 +75,9 @@ describe('ContextualThemeProvider', () => {
   });
 
   it('wraps in a div with a class name and data attribute', () => {
-    const spy = jest.spyOn(aesthetic, 'renderThemeStyles').mockImplementation(() => 'theme-night');
+    const spy = jest
+      .spyOn(aesthetic, 'renderThemeStyles')
+      .mockImplementation(() => ['theme-night']);
 
     const { root } = render<ThemeProviderProps>(
       <ContextualThemeProvider name="night" wrapper={<div />}>

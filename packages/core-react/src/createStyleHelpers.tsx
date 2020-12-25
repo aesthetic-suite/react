@@ -65,7 +65,7 @@ export default function createStyleHelpers<Result, Block extends object>(
 
     // Render the styles immediately for SSR since effects do not run
     const [result, setResult] = useState<Record<string, any>>(() => {
-      if (!isDOM() || global.AESTHETIC_CUSTOM_ENGINE) {
+      if (!isDOM() || process.env.AESTHETIC_SSR) {
         return aesthetic.renderComponentStyles(sheet, {
           direction,
           theme: theme.name,
@@ -87,7 +87,7 @@ export default function createStyleHelpers<Result, Block extends object>(
       );
       // It wants to include `sheet` but that triggers an infinite render loop
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [direction, theme]);
+    }, [direction, theme.name]);
 
     return useCallback((...keys: unknown[]) => cxWithCache(keys, result, cache.current), [result]);
   }
