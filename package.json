@@ -26,6 +26,7 @@
     "@types/hoist-non-react-statics": "^3.3.1",
     "@types/react": "^17.0.4",
     "@types/react-dom": "^17.0.3",
+    "@types/react-native": "^0.63.42",
     "benchmark": "^2.1.4",
     "builtin-modules": "^3.2.0",
     "conventional-changelog-beemo": "^2.1.0",

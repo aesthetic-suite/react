@@ -1,0 +1,286 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createStyled() can pass custom props/attributes 1`] = `
+"<Wrapper>
+  <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>
+    <div dir=\\"ltr\\">
+      <ThemeProvider name=\\"twilight\\">
+        <Memo(ForwardRef)
+          className=\\"will-be-appended\\"
+          placeholder=\\"Search...\\"
+          type=\\"text\\"
+        >
+          <ForwardRef
+            className=\\"will-be-appended\\"
+            placeholder=\\"Search...\\"
+            type=\\"text\\"
+          >
+            <input
+              className=\\"a b c will-be-appended\\"
+              placeholder=\\"Search...\\"
+              type=\\"text\\"
+            />
+          </ForwardRef>
+        </Memo(ForwardRef)>
+      </ThemeProvider>
+    </div>
+  </DirectionProvider>
+</Wrapper>"
+`;
+
+exports[`createStyled() can pass custom props/attributes 2`] = `".a {border: 1px solid black;}.b {padding: 1rem;}.c:focus {outline: none;}"`;
+
+exports[`createStyled() can use and define CSS variables 1`] = `
+"<Wrapper>
+  <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>
+    <div dir=\\"ltr\\">
+      <ThemeProvider name=\\"twilight\\">
+        <Memo(ForwardRef)>
+          <ForwardRef>
+            <code className=\\"a b c\\" />
+          </ForwardRef>
+        </Memo(ForwardRef)>
+      </ThemeProvider>
+    </div>
+  </DirectionProvider>
+</Wrapper>"
+`;
+
+exports[`createStyled() can use and define CSS variables 2`] = `".a {font-size: var(--text-sm-size);}.b {line-height: 1.25;}.c {--element-level-var: nice;}"`;
+
+exports[`createStyled() composition can access the ref from multiple layers of composition 1`] = `
+"<Wrapper>
+  <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>
+    <div dir=\\"ltr\\">
+      <ThemeProvider name=\\"twilight\\">
+        <Memo(ForwardRef)>
+          <ForwardRef>
+            <Memo(ForwardRef) className=\\"\\">
+              <ForwardRef className=\\"\\">
+                <Memo(ForwardRef) className=\\"\\">
+                  <ForwardRef className=\\"\\">
+                    <Memo(ForwardRef) className=\\"\\">
+                      <ForwardRef className=\\"\\">
+                        <main ref={mockConstructor()} className=\\"\\" />
+                      </ForwardRef>
+                    </Memo(ForwardRef)>
+                  </ForwardRef>
+                </Memo(ForwardRef)>
+              </ForwardRef>
+            </Memo(ForwardRef)>
+          </ForwardRef>
+        </Memo(ForwardRef)>
+      </ThemeProvider>
+    </div>
+  </DirectionProvider>
+</Wrapper>"
+`;
+
+exports[`createStyled() composition supports extending non-styled components 1`] = `
+"<Wrapper>
+  <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>
+    <div dir=\\"ltr\\">
+      <ThemeProvider name=\\"twilight\\">
+        <Memo(ForwardRef) className=\\"test\\">
+          <ForwardRef className=\\"test\\">
+            <Base className=\\"a b c test\\">
+              <button className=\\"a b c test\\" type=\\"button\\">
+                Normal
+              </button>
+            </Base>
+          </ForwardRef>
+        </Memo(ForwardRef)>
+      </ThemeProvider>
+    </div>
+  </DirectionProvider>
+</Wrapper>"
+`;
+
+exports[`createStyled() composition supports extending non-styled components 2`] = `".a {display: inline-flex;}.b {text-align: center;}.c {padding: 1rem;}"`;
+
+exports[`createStyled() composition supports extending other styled components 1`] = `
+"<Wrapper>
+  <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>
+    <div dir=\\"ltr\\">
+      <ThemeProvider name=\\"twilight\\">
+        <Memo(ForwardRef) type=\\"button\\">
+          <ForwardRef type=\\"button\\">
+            <button className=\\"a b c\\" type=\\"button\\">
+              Normal
+            </button>
+          </ForwardRef>
+        </Memo(ForwardRef)>
+        <Memo(ForwardRef) type=\\"submit\\">
+          <ForwardRef type=\\"submit\\">
+            <Memo(ForwardRef) className=\\"d e\\" type=\\"submit\\">
+              <ForwardRef className=\\"d e\\" type=\\"submit\\">
+                <button className=\\"a b c d e\\" type=\\"submit\\">
+                  Block
+                </button>
+              </ForwardRef>
+            </Memo(ForwardRef)>
+          </ForwardRef>
+        </Memo(ForwardRef)>
+        <Memo(ForwardRef) disabled>
+          <ForwardRef disabled>
+            <Memo(ForwardRef) disabled className=\\"f g\\">
+              <ForwardRef disabled className=\\"f g\\">
+                <Memo(ForwardRef) disabled className=\\"d e f g\\">
+                  <ForwardRef disabled className=\\"d e f g\\">
+                    <button disabled className=\\"a b c d e f g\\">
+                      Large
+                    </button>
+                  </ForwardRef>
+                </Memo(ForwardRef)>
+              </ForwardRef>
+            </Memo(ForwardRef)>
+          </ForwardRef>
+        </Memo(ForwardRef)>
+      </ThemeProvider>
+    </div>
+  </DirectionProvider>
+</Wrapper>"
+`;
+
+exports[`createStyled() composition supports extending other styled components 2`] = `".a {display: inline-flex;}.b {text-align: center;}.c {padding: 1rem;}.d {display: flex;}.e {width: 100%;}.f {padding: 2rem;}.g {font-size: 18px;}"`;
+
+exports[`createStyled() creates and renders a button with defined styles 1`] = `
+"<Wrapper>
+  <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>
+    <div dir=\\"ltr\\">
+      <ThemeProvider name=\\"twilight\\">
+        <Memo(ForwardRef)>
+          <ForwardRef>
+            <button className=\\"a b c\\">
+              Test
+            </button>
+          </ForwardRef>
+        </Memo(ForwardRef)>
+      </ThemeProvider>
+    </div>
+  </DirectionProvider>
+</Wrapper>"
+`;
+
+exports[`createStyled() creates and renders a button with defined styles 2`] = `".a {display: inline-flex;}.b {text-align: center;}.c {padding: 1rem;}"`;
+
+exports[`createStyled() only renders styles twice (create and mount), even when component rerenders 1`] = `
+"<Wrapper theme=\\"dawn\\">
+  <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>
+    <div dir=\\"ltr\\">
+      <ThemeProvider name=\\"dawn\\">
+        <Memo(ForwardRef) href=\\"/foo/bar\\">
+          <ForwardRef href=\\"/foo/bar\\">
+            <a className=\\"a\\" href=\\"/foo/bar\\">
+              Test
+            </a>
+          </ForwardRef>
+        </Memo(ForwardRef)>
+      </ThemeProvider>
+    </div>
+  </DirectionProvider>
+</Wrapper>"
+`;
+
+exports[`createStyled() only renders styles twice (create and mount), even when component rerenders 2`] = `".a {text-decoration: none;}"`;
+
+exports[`createStyled() variants doesnt pass the variant prop to the HTML element 1`] = `
+"<Wrapper>
+  <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>
+    <div dir=\\"ltr\\">
+      <ThemeProvider name=\\"twilight\\">
+        <Memo(ForwardRef) palette=\\"success\\">
+          <ForwardRef palette=\\"success\\">
+            <div className=\\"a b\\" />
+          </ForwardRef>
+        </Memo(ForwardRef)>
+      </ThemeProvider>
+    </div>
+  </DirectionProvider>
+</Wrapper>"
+`;
+
+exports[`createStyled() variants inherits and merges variant props and types when composing 1`] = `
+"<Wrapper>
+  <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>
+    <div dir=\\"ltr\\">
+      <ThemeProvider name=\\"twilight\\">
+        <Memo(ForwardRef) palette=\\"success\\" size=\\"lg\\">
+          <ForwardRef palette=\\"success\\" size=\\"lg\\">
+            <Memo(ForwardRef) className=\\"f\\" palette=\\"success\\">
+              <ForwardRef className=\\"f\\" palette=\\"success\\">
+                <div className=\\"a b f\\" />
+              </ForwardRef>
+            </Memo(ForwardRef)>
+          </ForwardRef>
+        </Memo(ForwardRef)>
+      </ThemeProvider>
+    </div>
+  </DirectionProvider>
+</Wrapper>"
+`;
+
+exports[`createStyled() variants supports variants 1`] = `
+"<Wrapper>
+  <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>
+    <div dir=\\"ltr\\">
+      <ThemeProvider name=\\"twilight\\">
+        <Memo(ForwardRef) palette=\\"success\\">
+          <ForwardRef palette=\\"success\\">
+            <div className=\\"a b\\">
+              <div>
+                <h1>Title</h1>
+                And other content!
+              </div>
+            </div>
+          </ForwardRef>
+        </Memo(ForwardRef)>
+      </ThemeProvider>
+    </div>
+  </DirectionProvider>
+</Wrapper>"
+`;
+
+exports[`createStyled() variants supports variants 2`] = `".a {background: var(--palette-neutral-bg-base);}.b {background: var(--palette-success-bg-base);}.c {background: var(--palette-failure-bg-base);}.d {background: var(--palette-warning-bg-base);}"`;
+
+exports[`createStyled() variants supports variants 3`] = `
+"<Wrapper>
+  <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>
+    <div dir=\\"ltr\\">
+      <ThemeProvider name=\\"twilight\\">
+        <Memo(ForwardRef) palette=\\"failure\\">
+          <ForwardRef palette=\\"failure\\">
+            <div className=\\"a c\\">
+              <div>
+                <h1>Title</h1>
+                And other content!
+              </div>
+            </div>
+          </ForwardRef>
+        </Memo(ForwardRef)>
+      </ThemeProvider>
+    </div>
+  </DirectionProvider>
+</Wrapper>"
+`;
+
+exports[`createStyled() variants supports variants 4`] = `
+"<Wrapper>
+  <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>
+    <div dir=\\"ltr\\">
+      <ThemeProvider name=\\"twilight\\">
+        <Memo(ForwardRef)>
+          <ForwardRef>
+            <div className=\\"a\\">
+              <div>
+                <h1>Title</h1>
+                And other content!
+              </div>
+            </div>
+          </ForwardRef>
+        </Memo(ForwardRef)>
+      </ThemeProvider>
+    </div>
+  </DirectionProvider>
+</Wrapper>"
+`;
