@@ -1,5 +1,12 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Aesthetic, Direction, LocalSheet, RenderResultSheet, Theme } from '@aesthetic/core';
+import {
+  Aesthetic,
+  Direction,
+  LocalSheet,
+  RenderResult,
+  RenderResultSheet,
+  Theme,
+} from '@aesthetic/core';
 import { isObject, objectLoop } from '@aesthetic/utils';
 import createHOC from './createHOC';
 import {
@@ -127,7 +134,32 @@ export default function createStyleHelpers<Result, Block extends object>(
     };
   }
 
+  function getVariantsFromProps(
+    renderResult: RenderResult<unknown> | undefined,
+    baseProps: object,
+  ): { props: { className?: string }; variants?: Record<string, string> } {
+    const types = renderResult?.variantTypes;
+
+    if (!types) {
+      return { props: baseProps };
+    }
+
+    const variants: Record<string, string> = {};
+    const props: Record<string, unknown> = {};
+
+    objectLoop(baseProps, (value, key) => {
+      if (types.has(key)) {
+        variants[key] = value;
+      } else {
+        props[key] = value;
+      }
+    });
+
+    return { props, variants };
+  }
+
   return {
+    getVariantsFromProps,
     useStyles,
     withStyles,
   };

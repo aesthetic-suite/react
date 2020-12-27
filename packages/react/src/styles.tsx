@@ -1,20 +1,12 @@
 import { createElement, forwardRef, memo, useMemo } from 'react';
-import {
-  ClassName,
-  ElementStyles,
-  RenderOptions,
-  RenderResult,
-  Rule,
-  Utilities,
-} from '@aesthetic/core';
+import { ClassName, ElementStyles, RenderOptions, Rule, Utilities } from '@aesthetic/core';
 import { createStyleHelpers } from '@aesthetic/core-react';
-import { objectLoop } from '@aesthetic/utils';
 import aesthetic from './aesthetic';
 import { useDirection } from './direction';
 import { useTheme } from './theme';
 import { ElementType, InferProps, StyledComponent } from './types';
 
-export const { useStyles, withStyles } = createStyleHelpers(aesthetic, {
+export const { getVariantsFromProps, useStyles, withStyles } = createStyleHelpers(aesthetic, {
   generate: aesthetic.generateClassName,
   useDirection,
   useTheme,
@@ -25,30 +17,6 @@ export function useCss(
   options?: Pick<RenderOptions, 'media' | 'selector' | 'supports'>,
 ): ClassName {
   return useMemo(() => aesthetic.getEngine().renderRule(rule, options), [rule, options]);
-}
-
-function getVariantsFromProps(
-  renderResult: RenderResult<unknown> | undefined,
-  baseProps: object,
-): { props: { className?: string }; variants?: Record<string, string> } {
-  const types = renderResult?.variantTypes;
-
-  if (!types) {
-    return { props: baseProps };
-  }
-
-  const variants: Record<string, string> = {};
-  const props: Record<string, unknown> = {};
-
-  objectLoop(baseProps, (value, key) => {
-    if (types.has(key)) {
-      variants[key] = value;
-    } else {
-      props[key] = value;
-    }
-  });
-
-  return { props, variants };
 }
 
 export function createStyled<

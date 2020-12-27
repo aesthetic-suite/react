@@ -1,6 +1,6 @@
 import { I18nManager } from 'react-native';
-import { Aesthetic, Engine } from '@aesthetic/core';
-import { NativeStyles } from './types';
+import { Aesthetic } from '@aesthetic/core';
+import { NativeEngine, NativeBlock, NativeStyles } from './types';
 
 function unsupported(method: string) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -10,8 +10,7 @@ function unsupported(method: string) {
   };
 }
 
-const engine: Engine<NativeStyles> = {
-  cacheManager: {},
+const engine: NativeEngine = {
   direction: I18nManager.isRTL ? 'rtl' : 'ltr',
   renderDeclaration: unsupported('renderDeclaration()'),
   renderFontFace: unsupported('renderFontFace()'),
@@ -27,7 +26,7 @@ const engine: Engine<NativeStyles> = {
   setRootVariables: unsupported('setRootVariables()'),
 };
 
-const aesthetic = new Aesthetic<NativeStyles, NativeStyles>();
+const aesthetic = new Aesthetic<NativeStyles, NativeBlock>();
 
 aesthetic.configureEngine(engine);
 

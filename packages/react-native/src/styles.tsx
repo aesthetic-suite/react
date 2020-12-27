@@ -1,57 +1,52 @@
 import React from 'react';
-import { ClassName, ElementStyles, LocalSheet, Utilities } from '@aesthetic/core';
+import { Utilities } from '@aesthetic/core';
 import { createStyleHelpers } from '@aesthetic/core-react';
-import { objectLoop } from '@aesthetic/utils';
+import { arrayLoop } from '@aesthetic/utils';
 import aesthetic from './aesthetic';
 import { useDirection } from './direction';
 import { useTheme } from './theme';
-import { ElementType, InferProps, StyledComponent } from './types';
+import { InferProps, StyledComponent, NativeBlock, NativeStyles } from './types';
 
-export const { useStyles, withStyles } = createStyleHelpers(aesthetic, {
-  generate: aesthetic.generateClassName,
+export const { getVariantsFromProps, useStyles, withStyles } = createStyleHelpers(aesthetic, {
+  generate(keys, variants, results) {
+    let style: NativeStyles = {};
+
+    arrayLoop(keys, (key) => {
+      const hash = results[key];
+
+      if (!hash) {
+        return;
+      }
+
+      if (hash.result) {
+        style = hash.result;
+      }
+
+      if (hash.variants) {
+        arrayLoop(variants, (variant) => {
+          if (hash.variants?.[variant]) {
+            Object.assign(style, hash.variants[variant]);
+          }
+        });
+      }
+    });
+
+    return style;
+  },
   useDirection,
   useTheme,
 });
 
-function getVariantsFromProps(
-  styleSheet: LocalSheet<unknown, ElementStyles, ClassName>,
-  baseProps: object,
-): { props: { className?: string }; variants: Record<string, string> } {
-  const types = styleSheet.metadata.element?.variantTypes;
-
-  if (!types) {
-    return { props: baseProps, variants: {} };
-  }
-
-  const variants: Record<string, string> = {};
-  const props: Record<string, unknown> = {};
-
-  objectLoop(baseProps, (value, key) => {
-    if (types.has(key)) {
-      variants[key] = value;
-    } else {
-      props[key] = value;
-    }
-  });
-
-  return { props, variants };
-}
-
-export function createStyled<
-  T extends ElementType | React.ComponentType<any>,
-  V extends object = {}
->(
+export function createStyled<T extends React.ComponentType<any>, V extends object = {}>(
   type: T,
-  factory: ElementStyles | ((utilities: Utilities<ElementStyles>) => ElementStyles),
+  factory: NativeBlock | ((utilities: Utilities<NativeBlock>) => NativeBlock),
 ): StyledComponent<InferProps<T> & V> {
   if (__DEV__) {
     const typeOfType = typeof type;
     const typeOfFactory = typeof factory;
 
     if (typeOfType !== 'string' && typeOfType !== 'function' && typeOfType !== 'object') {
-      throw new TypeError(
-        `Styled components must extend an HTML element or React component, found ${typeOfType}.`,
-      );
+      throw new TypeError(`Styled components must extend a View component, found ${typeOfType}.`);
     }
 
     if (typeOfFactory !== 'function' && typeOfFactory !== 'object') {
@@ -68,17 +63,17 @@ export function createStyled<
   const Component = React.memo(
     React.forwardRef((baseProps, ref) => {
       const cx = useStyles(styleSheet);
-      const { props, variants } = getVariantsFromProps(styleSheet, baseProps);
-      let className = cx(variants, 'element');
+      const { props, variants } = getVariantsFromProps<'style'>(styleSheet, baseProps);
+      let style: NativeStyles | NativeStyles[] = cx(variants, 'element');
 
-      if (props.className) {
-        className += ` ${props.className}`;
+      if (props.style) {
+        style = [style, props.style];
       }
 
       return React.createElement(type, {
         ...props,
-        className,
         ref,
+        style,
       });
     }),
   );
