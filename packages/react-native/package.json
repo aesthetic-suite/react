@@ -28,7 +28,6 @@
   "dependencies": {
     "@aesthetic/core": "^0.7.2",
     "@aesthetic/core-react": "^0.1.5",
-    "@aesthetic/style": "^0.6.2",
     "@aesthetic/utils": "^0.6.1"
   },
   "peerDependencies": {
