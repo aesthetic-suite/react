@@ -41,13 +41,11 @@ export default function createThemeHelpers<Result, Block extends object>(
   function useTheme(): Theme<Block> {
     const theme = useContext(ThemeContext);
 
-    if (__DEV__) {
-      if (!theme) {
-        throw new Error('Theme has not been provided.');
-      }
+    if (!theme) {
+      throw new Error('Theme has not been provided.');
     }
 
-    return theme!;
+    return theme;
   }
 
   /**

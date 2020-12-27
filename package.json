@@ -53,11 +53,7 @@
         "buildFolder": "dts",
         "declarationOnly": true
       }
-    ],
-    "settings": {
-      "decorators": true,
-      "react": true
-    }
+    ]
   },
   "workspaces": [
     "packages/*"

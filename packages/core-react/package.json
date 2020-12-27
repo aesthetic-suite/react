@@ -48,5 +48,11 @@
   },
   "packemon": {
     "platform": "browser"
+  },
+  "tsconfig": {
+    "compilerOptions": {
+      "jsx": "react",
+      "types": ["react"]
+    }
   }
 }

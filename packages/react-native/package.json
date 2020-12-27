@@ -50,7 +50,8 @@
   },
   "tsconfig": {
     "compilerOptions": {
-      "lib": ["esnext"]
+      "lib": ["esnext"],
+      "types": ["react", "react-native"]
     }
   }
 }
