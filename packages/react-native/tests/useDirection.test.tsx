@@ -1,5 +1,6 @@
 import React from 'react';
-import { render } from 'rut-dom';
+import { View } from 'react-native';
+import { render } from '@testing-library/react-native';
 import { useDirection, DirectionProvider } from '../src';
 
 describe('useDirection()', () => {
@@ -12,7 +13,7 @@ describe('useDirection()', () => {
       return null;
     }
 
-    render<{}>(<Component />);
+    render(<Component />);
 
     expect(dir).toBe('ltr');
   });
@@ -26,8 +27,8 @@ describe('useDirection()', () => {
       return null;
     }
 
-    render<{}>(
-      <DirectionProvider direction="rtl" wrapper={<div />}>
+    render(
+      <DirectionProvider direction="rtl" wrapper={<View />}>
         <Component />
       </DirectionProvider>,
     );

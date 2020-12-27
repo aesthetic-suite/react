@@ -36,6 +36,7 @@
   },
   "devDependencies": {
     "@aesthetic/addon-mixins": "^0.2.7",
+    "@testing-library/react-native": "^7.0.2",
     "@types/react-native": "^0.63.42",
     "react": "^17.0.1",
     "react-native": "^0.64.0-rc.2"

@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from 'rut-dom';
+import { render } from '@testing-library/react-native';
 import { darkTheme } from '@aesthetic/core/test';
 import { useTheme, ThemeProvider } from '../src';
 import { setupAestheticReact, teardownAestheticReact, twilightTheme } from './helpers';
@@ -21,7 +21,7 @@ describe('useTheme()', () => {
     }
 
     expect(() => {
-      render<{}>(<Component />);
+      render(<Component />);
     }).toThrow('Theme has not been provided.');
   });
 
@@ -34,7 +34,7 @@ describe('useTheme()', () => {
       return null;
     }
 
-    render<{}>(
+    render(
       <ThemeProvider>
         <Component />
       </ThemeProvider>,
@@ -52,7 +52,7 @@ describe('useTheme()', () => {
       return null;
     }
 
-    render<{}>(
+    render(
       <ThemeProvider name="night">
         <Component />
       </ThemeProvider>,

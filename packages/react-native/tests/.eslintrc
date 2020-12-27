@@ -1,0 +1,6 @@
+{
+  "rules": {
+    "babel/new-cap": "off",
+    "rut/require-render-generics": "off"
+  }
+}

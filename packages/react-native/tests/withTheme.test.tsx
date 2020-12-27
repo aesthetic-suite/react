@@ -1,12 +1,7 @@
 import React from 'react';
-import { render } from 'rut-dom';
-import {
-  withTheme,
-  ThemeProvider,
-  ThemeProviderProps,
-  WithThemeWrappedProps,
-  LocalBlock,
-} from '../src';
+import { View } from 'react-native';
+import { render } from '@testing-library/react-native';
+import { withTheme, ThemeProvider, WithThemeWrappedProps, NativeBlock } from '../src';
 import { dawnTheme, setupAestheticReact, teardownAestheticReact, twilightTheme } from './helpers';
 
 describe('withTheme()', () => {
@@ -18,12 +13,12 @@ describe('withTheme()', () => {
     teardownAestheticReact();
   });
 
-  function BaseComponent(props: WithThemeWrappedProps<LocalBlock>) {
+  function BaseComponent(props: WithThemeWrappedProps<NativeBlock>) {
     return null;
   }
 
   function WrappingComponent({ children }: { children?: React.ReactNode }) {
-    return <ThemeProvider name="dawn">{children || <div />}</ThemeProvider>;
+    return <ThemeProvider name="dawn">{children || <View />}</ThemeProvider>;
   }
 
   it('inherits name from component `constructor.name`', () => {
@@ -52,13 +47,13 @@ describe('withTheme()', () => {
 
   it('receives theme from provider', () => {
     function ThemeComponent(props: { theme?: {} }) {
-      return <div />;
+      return <View />;
     }
 
     const Wrapped = withTheme()(ThemeComponent);
-    const { root } = render<{}>(<Wrapped />, { wrapper: <WrappingComponent /> });
+    const result = render(<Wrapped />, { wrapper: WrappingComponent });
 
-    expect(root.findOne(ThemeComponent)).toHaveProp('theme', dawnTheme);
+    expect(result.UNSAFE_getByType(ThemeComponent).props.theme).toEqual(dawnTheme);
   });
 
   it('can bubble up the ref with `wrappedRef`', () => {
@@ -67,22 +62,22 @@ describe('withTheme()', () => {
     }
 
     // eslint-disable-next-line react/prefer-stateless-function
-    class RefComponent extends React.Component<RefProps & WithThemeWrappedProps<LocalBlock>> {
+    class RefComponent extends React.Component<RefProps & WithThemeWrappedProps<NativeBlock>> {
       render() {
-        return <div />;
+        return <View />;
       }
     }
 
     let foundRef: Function | null = null;
     const Wrapped = withTheme()(RefComponent);
 
-    render<{}>(
+    render(
       <Wrapped
         wrappedRef={(ref: Function | null) => {
           foundRef = ref;
         }}
       />,
-      { wrapper: <WrappingComponent /> },
+      { wrapper: WrappingComponent },
     );
 
     expect(foundRef).not.toBeNull();
@@ -91,16 +86,20 @@ describe('withTheme()', () => {
 
   it('returns new theme if theme context changes', () => {
     const Wrapped = withTheme()(BaseComponent);
-    const { root, update } = render<ThemeProviderProps>(
+    const result = render(
       <ThemeProvider name="dawn">
         <Wrapped />
       </ThemeProvider>,
     );
 
-    expect(root.findOne(BaseComponent)).toHaveProp('theme', dawnTheme);
+    expect(result.UNSAFE_getByType(BaseComponent).props.theme).toEqual(dawnTheme);
 
-    update({ name: 'twilight' });
+    result.update(
+      <ThemeProvider name="twilight">
+        <Wrapped />
+      </ThemeProvider>,
+    );
 
-    expect(root.findOne(BaseComponent)).toHaveProp('theme', twilightTheme);
+    expect(result.UNSAFE_getByType(BaseComponent).props.theme).toEqual(twilightTheme);
   });
 });

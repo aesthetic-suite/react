@@ -35,7 +35,8 @@
     "jest-rut": "^2.0.0",
     "lerna": "^4.0.0",
     "packemon": "^0.15.1",
-    "react": "^17.0.2"
+    "react": "^17.0.2",
+    "react-test-renderer": "^17.0.1"
   },
   "beemo": {
     "module": "@milesj/build-tools",

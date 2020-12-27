@@ -1,10 +1,10 @@
 /* eslint-disable react/jsx-no-literals */
 
 import React from 'react';
-import { render } from 'rut-dom';
-import { act } from 'react-test-renderer';
+import { View } from 'react-native';
+import { render, act } from '@testing-library/react-native';
 import { OnChangeTheme } from '@aesthetic/core';
-import { ThemeProvider, ThemeProviderProps, useTheme } from '../src';
+import { ThemeProvider, useTheme } from '../src';
 import aesthetic from '../src/aesthetic';
 import { setupAestheticReact, teardownAestheticReact, twilightTheme, dawnTheme } from './helpers';
 
@@ -18,25 +18,15 @@ describe('ThemeProvider', () => {
   });
 
   it('renders children', () => {
-    const { root } = render<ThemeProviderProps>(
+    const result = render(
       <ThemeProvider>
-        <div>1</div>
-        <div>2</div>
-        <div>3</div>
+        <View>1</View>
+        <View>2</View>
+        <View>3</View>
       </ThemeProvider>,
     );
 
-    expect(root.find('div')).toHaveLength(3);
-  });
-
-  it('doesnt wrap with a div when the root provider', () => {
-    const { root } = render<ThemeProviderProps>(
-      <ThemeProvider>
-        <span>Child</span>
-      </ThemeProvider>,
-    );
-
-    expect(root.find('div')).toHaveLength(0);
+    expect(result.UNSAFE_getAllByType(View).length).toHaveLength(3);
   });
 
   it('doesnt re-render children if props never change', () => {
@@ -48,15 +38,27 @@ describe('ThemeProvider', () => {
       return null;
     }
 
-    const { update } = render<ThemeProviderProps>(
+    const { update } = render(
       <ThemeProvider>
         <Child />
       </ThemeProvider>,
     );
 
-    update();
-    update();
-    update();
+    update(
+      <ThemeProvider>
+        <Child />
+      </ThemeProvider>,
+    );
+    update(
+      <ThemeProvider>
+        <Child />
+      </ThemeProvider>,
+    );
+    update(
+      <ThemeProvider>
+        <Child />
+      </ThemeProvider>,
+    );
 
     expect(count).toBe(1);
   });
@@ -72,7 +74,7 @@ describe('ThemeProvider', () => {
       return null;
     }
 
-    render<ThemeProviderProps>(
+    render(
       <ThemeProvider>
         <Test />
       </ThemeProvider>,
@@ -90,7 +92,7 @@ describe('ThemeProvider', () => {
       return null;
     }
 
-    render<ThemeProviderProps>(
+    render(
       <ThemeProvider name="dawn">
         <Test />
       </ThemeProvider>,
@@ -100,17 +102,16 @@ describe('ThemeProvider', () => {
   it('calls `changeTheme` when `name` changes', () => {
     const spy = jest.spyOn(aesthetic, 'changeTheme');
 
-    const { update } = render<ThemeProviderProps>(
-      <ThemeProvider>
-        <div>1</div>
-        <div>2</div>
-        <div>3</div>
-      </ThemeProvider>,
+    const children = (
+      <>
+        <View>1</View>
+        <View>2</View>
+        <View>3</View>
+      </>
     );
+    const { update } = render(<ThemeProvider>{children}</ThemeProvider>);
 
-    update({
-      name: 'night',
-    });
+    update(<ThemeProvider name="night">{children}</ThemeProvider>);
 
     expect(spy).toHaveBeenCalledWith('night', false);
 
@@ -132,9 +133,9 @@ describe('ThemeProvider', () => {
     });
 
     it('subscribes on mount', () => {
-      render<ThemeProviderProps>(
+      render(
         <ThemeProvider>
-          <div />
+          <View />
         </ThemeProvider>,
       );
 
@@ -143,23 +144,35 @@ describe('ThemeProvider', () => {
     });
 
     it('only subscribes once', () => {
-      const { update } = render<ThemeProviderProps>(
+      const { update } = render(
         <ThemeProvider>
-          <div />
+          <View />
         </ThemeProvider>,
       );
 
-      update();
-      update();
-      update();
+      update(
+        <ThemeProvider>
+          <View />
+        </ThemeProvider>,
+      );
+      update(
+        <ThemeProvider>
+          <View />
+        </ThemeProvider>,
+      );
+      update(
+        <ThemeProvider>
+          <View />
+        </ThemeProvider>,
+      );
 
       expect(subSpy).toHaveBeenCalledTimes(1);
     });
 
     it('unsubscribes on unmount', () => {
-      const { unmount } = render<ThemeProviderProps>(
+      const { unmount } = render(
         <ThemeProvider>
-          <div />
+          <View />
         </ThemeProvider>,
       );
 
@@ -184,7 +197,7 @@ describe('ThemeProvider', () => {
         return null;
       }
 
-      render<ThemeProviderProps>(
+      render(
         <ThemeProvider name="twilight">
           <Comp />
         </ThemeProvider>,

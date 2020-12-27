@@ -1,16 +1,10 @@
 /* eslint-disable react/jsx-no-literals */
 
 import React from 'react';
-import { render } from 'rut-dom';
-import { lightTheme, darkTheme } from '@aesthetic/core/test';
-import {
-  ContextualThemeProvider,
-  ThemeProviderProps,
-  DirectionProviderProps,
-  useTheme,
-  DirectionProvider,
-} from '../src';
-import aesthetic from '../src/aesthetic';
+import { View } from 'react-native';
+import { render } from '@testing-library/react-native';
+import { darkTheme } from '@aesthetic/core/test';
+import { ContextualThemeProvider, useTheme } from '../src';
 import { setupAestheticReact, teardownAestheticReact } from './helpers';
 
 describe('ContextualThemeProvider', () => {
@@ -23,15 +17,15 @@ describe('ContextualThemeProvider', () => {
   });
 
   it('renders children', () => {
-    const { root } = render<ThemeProviderProps>(
-      <ContextualThemeProvider name="night" wrapper={<div />}>
-        <div>1</div>
-        <div>2</div>
-        <div>3</div>
+    const result = render(
+      <ContextualThemeProvider name="night" wrapper={<View />}>
+        <View>1</View>
+        <View>2</View>
+        <View>3</View>
       </ContextualThemeProvider>,
     );
 
-    expect(root.find('div')).toHaveLength(4);
+    expect(result.UNSAFE_getAllByType(View).length).toHaveLength(4);
   });
 
   it('doesnt re-render children if props never change', () => {
@@ -43,15 +37,28 @@ describe('ContextualThemeProvider', () => {
       return null;
     }
 
-    const { update } = render<ThemeProviderProps>(
-      <ContextualThemeProvider name="day" wrapper={<div />}>
+    const wrapper = <View />;
+    const { update } = render(
+      <ContextualThemeProvider name="day" wrapper={wrapper}>
         <Child />
       </ContextualThemeProvider>,
     );
 
-    update();
-    update();
-    update();
+    update(
+      <ContextualThemeProvider name="day" wrapper={wrapper}>
+        <Child />
+      </ContextualThemeProvider>,
+    );
+    update(
+      <ContextualThemeProvider name="day" wrapper={wrapper}>
+        <Child />
+      </ContextualThemeProvider>,
+    );
+    update(
+      <ContextualThemeProvider name="day" wrapper={wrapper}>
+        <Child />
+      </ContextualThemeProvider>,
+    );
 
     expect(count).toBe(1);
   });
@@ -67,75 +74,10 @@ describe('ContextualThemeProvider', () => {
       return null;
     }
 
-    render<ThemeProviderProps>(
-      <ContextualThemeProvider name="night" wrapper={<div />}>
+    render(
+      <ContextualThemeProvider name="night" wrapper={<View />}>
         <Test />
       </ContextualThemeProvider>,
     );
-  });
-
-  it('wraps in a div with a class name and data attribute', () => {
-    const spy = jest
-      .spyOn(aesthetic, 'renderThemeStyles')
-      .mockImplementation(() => ['theme-night']);
-
-    const { root } = render<ThemeProviderProps>(
-      <ContextualThemeProvider name="night" wrapper={<div />}>
-        <span />
-      </ContextualThemeProvider>,
-    );
-    const wrapper = root.findOne('div');
-
-    expect(wrapper).toHaveProp('className', 'theme-night');
-    // @ts-expect-error Data props not typed
-    expect(wrapper).toHaveProp('data-theme', 'night');
-
-    spy.mockRestore();
-  });
-
-  it('re-renders theme styles if `name` changes', () => {
-    const spy = jest.spyOn(aesthetic, 'renderThemeStyles');
-
-    const { rerender } = render<ThemeProviderProps>(
-      <ContextualThemeProvider name="night" wrapper={<div />}>
-        <div />
-      </ContextualThemeProvider>,
-    );
-
-    rerender(
-      <ContextualThemeProvider name="day" wrapper={<div />}>
-        <div />
-      </ContextualThemeProvider>,
-    );
-
-    expect(spy).toHaveBeenCalledWith(darkTheme, { direction: 'ltr' }); // Initial
-    expect(spy).toHaveBeenCalledWith(lightTheme, { direction: 'ltr' }); // Rerender
-
-    spy.mockRestore();
-  });
-
-  it('re-renders theme styles if direction changes', () => {
-    const spy = jest.spyOn(aesthetic, 'renderThemeStyles');
-
-    const { rerender } = render<DirectionProviderProps>(
-      <DirectionProvider direction="ltr" wrapper={<div />}>
-        <ContextualThemeProvider name="night" wrapper={<div />}>
-          <div />
-        </ContextualThemeProvider>
-      </DirectionProvider>,
-    );
-
-    rerender(
-      <DirectionProvider direction="rtl" wrapper={<div />}>
-        <ContextualThemeProvider name="night" wrapper={<div />}>
-          <div />
-        </ContextualThemeProvider>
-      </DirectionProvider>,
-    );
-
-    expect(spy).toHaveBeenCalledWith(darkTheme, { direction: 'ltr' }); // Initial
-    expect(spy).toHaveBeenCalledWith(darkTheme, { direction: 'rtl' }); // Rerender
-
-    spy.mockRestore();
   });
 });

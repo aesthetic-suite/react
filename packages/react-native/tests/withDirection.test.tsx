@@ -1,11 +1,7 @@
 import React from 'react';
-import { render } from 'rut-dom';
-import {
-  withDirection,
-  DirectionProvider,
-  DirectionProviderProps,
-  WithDirectionWrappedProps,
-} from '../src';
+import { View } from 'react-native';
+import { render } from '@testing-library/react-native';
+import { withDirection, DirectionProvider, WithDirectionWrappedProps } from '../src';
 import { setupAestheticReact, teardownAestheticReact } from './helpers';
 
 describe('withDirection()', () => {
@@ -23,8 +19,8 @@ describe('withDirection()', () => {
 
   function WrappingComponent({ children }: { children?: React.ReactNode }) {
     return (
-      <DirectionProvider direction="ltr" wrapper={<div />}>
-        {children || <div />}
+      <DirectionProvider direction="ltr" wrapper={<View testID="wrapper" />}>
+        {children || <View />}
       </DirectionProvider>
     );
   }
@@ -55,13 +51,13 @@ describe('withDirection()', () => {
 
   it('receives direction from provider', () => {
     function DirComponent(props: { direction?: {} }) {
-      return <div />;
+      return <View />;
     }
 
     const Wrapped = withDirection()(DirComponent);
-    const { root } = render<{}>(<Wrapped />, { wrapper: <WrappingComponent /> });
+    const result = render(<Wrapped />, { wrapper: WrappingComponent });
 
-    expect(root.findOne(DirComponent)).toHaveProp('direction', 'ltr');
+    expect(result.UNSAFE_getByType(DirComponent).props.direction).toBe('ltr');
   });
 
   it('can bubble up the ref with `wrappedRef`', () => {
@@ -72,20 +68,20 @@ describe('withDirection()', () => {
     // eslint-disable-next-line react/prefer-stateless-function
     class RefComponent extends React.Component<RefProps & WithDirectionWrappedProps> {
       render() {
-        return <div />;
+        return <View />;
       }
     }
 
     let foundRef: Function | null = null;
     const Wrapped = withDirection()(RefComponent);
 
-    render<{}>(
+    render(
       <Wrapped
         wrappedRef={(ref: Function | null) => {
           foundRef = ref;
         }}
       />,
-      { wrapper: <WrappingComponent /> },
+      { wrapper: WrappingComponent },
     );
 
     expect(foundRef).not.toBeNull();
@@ -94,16 +90,20 @@ describe('withDirection()', () => {
 
   it('returns new direction if direction context changes', () => {
     const Wrapped = withDirection()(BaseComponent);
-    const { root, update } = render<DirectionProviderProps>(
-      <DirectionProvider direction="rtl" wrapper={<div />}>
+    const result = render(
+      <DirectionProvider direction="rtl" wrapper={<View />}>
         <Wrapped />
       </DirectionProvider>,
     );
 
-    expect(root.findOne(BaseComponent)).toHaveProp('direction', 'rtl');
+    expect(result.UNSAFE_getByType(BaseComponent).props.direction).toBe('rtl');
 
-    update({ direction: 'ltr' });
+    result.update(
+      <DirectionProvider direction="ltr" wrapper={<View />}>
+        <Wrapped />
+      </DirectionProvider>,
+    );
 
-    expect(root.findOne(BaseComponent)).toHaveProp('direction', 'ltr');
+    expect(result.UNSAFE_getByType(BaseComponent).props.direction).toBe('ltr');
   });
 });
