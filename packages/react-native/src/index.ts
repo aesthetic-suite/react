@@ -17,7 +17,6 @@ export const {
   changeTheme,
   configure,
   createComponentStyles,
-  createThemeStyles,
   getActiveDirection,
   getActiveTheme,
   getEngine,
@@ -25,7 +24,6 @@ export const {
   registerDefaultTheme,
   registerTheme,
   renderComponentStyles,
-  renderThemeStyles,
   subscribe,
   unsubscribe,
 } = aesthetic;

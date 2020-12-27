@@ -28,6 +28,7 @@ const engine: NativeEngine = {
 
 const aesthetic = new Aesthetic<NativeStyles, NativeBlock>();
 
+aesthetic.atomic = false;
 aesthetic.configureEngine(engine);
 
 export default aesthetic;

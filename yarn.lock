@@ -2,14 +2,14 @@
 # yarn lockfile v1
 
 
-"@aesthetic/addon-mixins@^0.2.6":
+"@aesthetic/addon-mixins@^0.2.7":
   version "0.2.11"
   resolved "https://registry.yarnpkg.com/@aesthetic/addon-mixins/-/addon-mixins-0.2.11.tgz#f27df54d091ee8c750858b5dffa623a33d9571b3"
   integrity sha512-CPEx+uiqT5com6iYHqCZ/LMNcTIPdZCPJFvww4chtv+cm1hi3RYdTC0Nh5t8zBsSAkNlj4BW0yYKkWDXR9I6iA==
   dependencies:
     "@aesthetic/utils" "^0.7.0"
 
-"@aesthetic/core@^0.7.2":
+"@aesthetic/core@^0.7.3":
   version "0.7.8"
   resolved "https://registry.yarnpkg.com/@aesthetic/core/-/core-0.7.8.tgz#fcae86ff20037209777fdb04e3d286ed367c7060"
   integrity sha512-DQI4Q6NlCdweB7rkRJP82II8xlO+adajJuJnkxpaYI8k2mqIsNojyTr6Rnv57vptVnZk368LL2Z5mk6AoQQoPw==
@@ -46,15 +46,6 @@
     "@aesthetic/types" "^0.5.0"
     "@aesthetic/utils" "^0.7.0"
     csstype "^3.0.8"
-
-"@aesthetic/style@^0.6.2":
-  version "0.6.7"
-  resolved "https://registry.yarnpkg.com/@aesthetic/style/-/style-0.6.7.tgz#7be2d47d3186bd2d0a2bb6caf90a5fe64ef08191"
-  integrity sha512-QPTjJeYXG6yO1vpQftqlpG0hkt5igAl7OHBBfg9njo+Q+02VskWqNSgIqHzsgBB6MX7GtGP22b7M+qKJzvPsrg==
-  dependencies:
-    "@aesthetic/types" "^0.4.6"
-    "@aesthetic/utils" "^0.6.3"
-    sort-css-media-queries "^1.5.4"
 
 "@aesthetic/style@^0.8.0":
   version "0.8.0"
@@ -3199,7 +3190,7 @@
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.3.tgz#2ab0d5da2e5815f94b0b9d4b95d1e5f243ab2ca7"
   integrity sha512-KfRL3PuHmqQLOG+2tGpRO26Ctg+Cq1E01D2DMriKEATHgWLfeNDmq9e29Q9WIky0dQ3NPkd1mzYH8Lm936Z9qw==
 
-"@types/react-dom@*", "@types/react-dom@^17.0.3":
+"@types/react-dom@*", "@types/react-dom@^17.0.0":
   version "17.0.3"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-17.0.3.tgz#7fdf37b8af9d6d40127137865bb3fff8871d7ee1"
   integrity sha512-4NnJbCeWE+8YBzupn/YrJxZ8VnjcJq5iR1laqQ1vkpQgBiA7bwk0Rp24fxsdNinzJY2U+HHS4dJJDPdoMjdJ7w==
@@ -11449,15 +11440,10 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typescript@^4.1.3:
+typescript@^4.1.3, typescript@~4.1.3:
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.2.3.tgz#39062d8019912d43726298f09493d598048c1ce3"
   integrity sha512-qOcYwxaByStAWrBf4x0fibwZvMRG+r4cQoTjbPtUlrWjBHbmCAww1i448U0GJ+3cNNEtebDteo/cHOR3xJ4wEw==
-
-typescript@~4.1.3:
-  version "4.1.3"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.1.3.tgz#519d582bd94cba0cf8934c7d8e8467e473f53bb7"
-  integrity sha512-B3ZIOf1IKeH2ixgHhj6la6xdwR9QrLC5d1VKeCSY4tvkqhF2eqd9O7txNlS0PO3GrBAFIdr3L1ndNwteUbZLYg==
 
 uglify-es@^3.1.9:
   version "3.3.9"
