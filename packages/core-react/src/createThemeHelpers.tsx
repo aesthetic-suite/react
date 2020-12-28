@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Aesthetic, Theme } from '@aesthetic/core';
+import { Aesthetic, OnChangeTheme, Theme } from '@aesthetic/core';
 import createHOC from './createHOC';
 import {
   ThemeContextType,
@@ -9,9 +9,18 @@ import {
   WrapperProps,
 } from './types';
 
+interface ThemeHelperOptions {
+  onChange?: OnChangeTheme;
+}
+
 export default function createThemeHelpers<Result, Block extends object>(
   aesthetic: Aesthetic<Result, Block>,
+  { onChange }: ThemeHelperOptions = {},
 ) /* infer */ {
+  if (onChange) {
+    aesthetic.subscribe('change:theme', onChange);
+  }
+
   const ThemeContext = React.createContext<ThemeContextType<Block> | null>(null);
 
   /**
@@ -23,11 +32,7 @@ export default function createThemeHelpers<Result, Block extends object>(
 
     // Listen to theme changes that occur outside of the provider
     useEffect(() => {
-      aesthetic.subscribe('change:theme', setThemeName);
-
-      return () => {
-        aesthetic.unsubscribe('change:theme', setThemeName);
-      };
+      return aesthetic.subscribe('change:theme', setThemeName);
     }, []);
 
     // Update state when the `name` prop changes

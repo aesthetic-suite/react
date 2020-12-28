@@ -9,21 +9,19 @@ import {
   WrapperProps,
 } from './types';
 
+interface StyleHelperOptions<Result, Block extends object> {
+  generate: <T extends string>(
+    keys: T[],
+    variants: string[],
+    results: RenderResultSheet<Result>,
+  ) => Result;
+  useDirection: () => Direction;
+  useTheme: () => Theme<Block>;
+}
+
 export default function createStyleHelpers<Result, Block extends object>(
   aesthetic: Aesthetic<Result, Block>,
-  {
-    generate,
-    useDirection,
-    useTheme,
-  }: {
-    generate: <T extends string>(
-      keys: T[],
-      variants: string[],
-      results: RenderResultSheet<Result>,
-    ) => Result;
-    useDirection: () => Direction;
-    useTheme: () => Theme<Block>;
-  },
+  { generate, useDirection, useTheme }: StyleHelperOptions<Result, Block>,
 ) /* infer */ {
   function cxWithCache(
     keys: unknown[],
