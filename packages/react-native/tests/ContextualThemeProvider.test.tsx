@@ -38,25 +38,26 @@ describe('ContextualThemeProvider', () => {
     }
 
     const wrapper = <View />;
-    const { update } = render(
+    const child = <Child />;
+    const result = render(
       <ContextualThemeProvider name="day" wrapper={wrapper}>
-        <Child />
+        {child}
       </ContextualThemeProvider>,
     );
 
-    update(
+    result.update(
       <ContextualThemeProvider name="day" wrapper={wrapper}>
-        <Child />
+        {child}
       </ContextualThemeProvider>,
     );
-    update(
+    result.update(
       <ContextualThemeProvider name="day" wrapper={wrapper}>
-        <Child />
+        {child}
       </ContextualThemeProvider>,
     );
-    update(
+    result.update(
       <ContextualThemeProvider name="day" wrapper={wrapper}>
-        <Child />
+        {child}
       </ContextualThemeProvider>,
     );
 

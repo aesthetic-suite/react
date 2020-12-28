@@ -117,7 +117,32 @@ describe('withStyles()', () => {
       wrapper: Wrapper,
     });
 
-    expect(result.getByTestId('button').props.style).toEqual({});
+    expect(result.getByTestId('button').props.style).toEqual({
+      '::-moz-focus-inner': {
+        border: 0,
+        margin: 0,
+        padding: 0,
+      },
+      ':active': {
+        backgroundColor: '#000',
+      },
+      ':hover': {
+        backgroundColor: '#000',
+      },
+      appearance: 'none',
+      backgroundColor: '#000',
+      border: 0,
+      color: '#000',
+      cursor: 'pointer',
+      display: 'flex',
+      margin: 0,
+      padding: 0,
+      position: 'relative',
+      textAlign: 'center',
+      textDecoration: 'none',
+      userSelect: 'auto',
+      verticalAlign: 'middle',
+    });
   });
 
   it('only renders once unless theme or direction change', () => {

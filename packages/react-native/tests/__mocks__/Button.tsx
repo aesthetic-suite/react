@@ -20,6 +20,7 @@ export function createStyleSheet() {
       position: 'relative',
       display: 'flex',
       textAlign: 'center',
+      width: 'auto',
       backgroundColor: css.tokens.palette.brand.color['40'],
       color: css.tokens.palette.neutral.color['00'],
 

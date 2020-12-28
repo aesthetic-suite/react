@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react-native';
 import { darkTheme } from '@aesthetic/core/test';
 import { useTheme, ThemeProvider } from '../src';
-import { setupAestheticReact, teardownAestheticReact, twilightTheme } from './helpers';
+import { dawnTheme, setupAestheticReact, teardownAestheticReact } from './helpers';
 
 describe('useTheme()', () => {
   beforeEach(() => {
@@ -40,7 +40,7 @@ describe('useTheme()', () => {
       </ThemeProvider>,
     );
 
-    expect(theme).toEqual(twilightTheme);
+    expect(theme).toEqual(dawnTheme);
   });
 
   it('returns the theme defined by the provider', () => {
