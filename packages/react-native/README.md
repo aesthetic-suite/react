@@ -17,7 +17,7 @@ export const styleSheet = createComponentStyles((css) => ({
     display: 'flex',
     textAlign: 'center',
     width: 'auto',
-    padding: css.var('spacing-df'),
+    padding: css.tokens.spacing.df,
   },
 
   button_block: {
@@ -31,9 +31,9 @@ export interface ButtonProps {
 }
 
 export default function Button({ children, block = false }: ButtonProps) {
-  const cx = useStyles(styleSheet);
+  const sx = useStyles(styleSheet);
 
-  return <View style={cx('button', block && 'button_block')}>{children}</View>;
+  return <View style={sx('button', block && 'button_block')}>{children}</View>;
 }
 ```
 

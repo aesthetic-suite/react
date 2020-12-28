@@ -26,7 +26,7 @@ describe('ThemeProvider', () => {
       </ThemeProvider>,
     );
 
-    expect(result.UNSAFE_getAllByType(View).length).toHaveLength(3);
+    expect(result.UNSAFE_getAllByType(View)).toHaveLength(3);
   });
 
   it('doesnt re-render children if props never change', () => {
@@ -38,27 +38,12 @@ describe('ThemeProvider', () => {
       return null;
     }
 
-    const { update } = render(
-      <ThemeProvider>
-        <Child />
-      </ThemeProvider>,
-    );
+    const child = <Child />;
+    const result = render(<ThemeProvider>{child}</ThemeProvider>);
 
-    update(
-      <ThemeProvider>
-        <Child />
-      </ThemeProvider>,
-    );
-    update(
-      <ThemeProvider>
-        <Child />
-      </ThemeProvider>,
-    );
-    update(
-      <ThemeProvider>
-        <Child />
-      </ThemeProvider>,
-    );
+    result.update(<ThemeProvider>{child}</ThemeProvider>);
+    result.update(<ThemeProvider>{child}</ThemeProvider>);
+    result.update(<ThemeProvider>{child}</ThemeProvider>);
 
     expect(count).toBe(1);
   });
@@ -69,7 +54,7 @@ describe('ThemeProvider', () => {
     function Test() {
       const theme = useTheme();
 
-      expect(theme).toBe(twilightTheme);
+      expect(theme).toBe(dawnTheme);
 
       return null;
     }

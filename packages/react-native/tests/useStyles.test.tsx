@@ -86,6 +86,7 @@ describe('useStyles()', () => {
       textAlign: 'center',
       textDecoration: 'none',
       userSelect: 'auto',
+      width: 'auto',
       verticalAlign: 'middle',
     });
   });

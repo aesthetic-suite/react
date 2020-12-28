@@ -141,6 +141,7 @@ describe('withStyles()', () => {
       textAlign: 'center',
       textDecoration: 'none',
       userSelect: 'auto',
+      width: 'auto',
       verticalAlign: 'middle',
     });
   });

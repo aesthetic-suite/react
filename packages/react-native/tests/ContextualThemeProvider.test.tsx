@@ -25,7 +25,7 @@ describe('ContextualThemeProvider', () => {
       </ContextualThemeProvider>,
     );
 
-    expect(result.UNSAFE_getAllByType(View).length).toHaveLength(4);
+    expect(result.UNSAFE_getAllByType(View)).toHaveLength(4);
   });
 
   it('doesnt re-render children if props never change', () => {

@@ -13,18 +13,6 @@ describe('useTheme()', () => {
     teardownAestheticReact();
   });
 
-  it('errors if no context provided', () => {
-    function Component() {
-      useTheme();
-
-      return null;
-    }
-
-    expect(() => {
-      render(<Component />);
-    }).toThrow('Theme has not been provided.');
-  });
-
   it('returns a preferred theme if no name provided', () => {
     let theme;
 

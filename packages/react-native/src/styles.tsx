@@ -1,4 +1,5 @@
 import React from 'react';
+import { StyleSheet, StyleProp } from 'react-native';
 import { Utilities } from '@aesthetic/core';
 import { createStyleHelpers } from '@aesthetic/core-react';
 import { arrayLoop } from '@aesthetic/utils';
@@ -9,7 +10,7 @@ import { InferProps, StyledComponent, NativeBlock, NativeStyles } from './types'
 
 export const { getVariantsFromProps, useStyles, withStyles } = createStyleHelpers(aesthetic, {
   generate(keys, variants, results) {
-    let style: NativeStyles = {};
+    let style: StyleProp<NativeStyles> = {};
 
     arrayLoop(keys, (key) => {
       const hash = results[key];
@@ -25,7 +26,7 @@ export const { getVariantsFromProps, useStyles, withStyles } = createStyleHelper
       if (hash.variants) {
         arrayLoop(variants, (variant) => {
           if (hash.variants?.[variant]) {
-            Object.assign(style, hash.variants[variant]);
+            style = StyleSheet.compose(style, hash.variants[variant]);
           }
         });
       }
@@ -62,9 +63,9 @@ export function createStyled<T extends React.ComponentType<any>, V extends objec
 
   const Component = React.memo(
     React.forwardRef((baseProps, ref) => {
-      const cx = useStyles(styleSheet);
+      const sx = useStyles(styleSheet);
       const { props, variants } = getVariantsFromProps<'style'>(styleSheet, baseProps);
-      let style: NativeStyles | NativeStyles[] = cx(variants, 'element');
+      let style: StyleProp<NativeStyles> = sx(variants, 'element');
 
       if (props.style) {
         style = [style, props.style];
