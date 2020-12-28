@@ -16,11 +16,11 @@ const engine: NativeEngine = {
   renderFontFace: unsupported('renderFontFace()'),
   renderImport: unsupported('renderImport()'),
   renderKeyframes: unsupported('renderKeyframes()'),
-  renderRule: unsupported('renderRule()'),
+  renderRule: (rule) => rule as NativeStyles,
   renderRuleGrouped: unsupported('renderRuleGrouped()'),
   renderVariable: unsupported('renderVariable()'),
   ruleIndex: 0,
-  setDirection: (direction) => {
+  setDirection(direction) {
     engine.direction = direction;
   },
   setRootVariables: unsupported('setRootVariables()'),

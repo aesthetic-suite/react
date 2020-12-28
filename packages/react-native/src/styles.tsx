@@ -41,7 +41,7 @@ export function createStyled<T extends React.ComponentType<any>, V extends objec
   type: T,
   factory: NativeBlock | ((utilities: Utilities<NativeBlock>) => NativeBlock),
 ): StyledComponent<InferProps<T> & V> {
-  if (__DEV__) {
+  if (process.env.NODE_ENV !== 'production') {
     const typeOfType = typeof type;
     const typeOfFactory = typeof factory;
 

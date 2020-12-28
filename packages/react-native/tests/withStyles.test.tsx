@@ -1,8 +1,9 @@
 /* eslint-disable react/jsx-no-literals */
 
 import React from 'react';
-import { render } from 'rut-dom';
-import { withStyles, ThemeProvider, WithStylesWrappedProps } from '../src';
+import { View } from 'react-native';
+import { render } from '@testing-library/react-native';
+import { withStyles, ThemeProvider, WithStylesWrappedProps, NativeStyles } from '../src';
 import { createStyleSheet, ButtonProps, Wrapper } from './__mocks__/Button';
 import { dawnTheme, setupAestheticReact, teardownAestheticReact, twilightTheme } from './helpers';
 
@@ -25,12 +26,12 @@ describe('withStyles()', () => {
   }: ButtonProps &
     WithStylesWrappedProps<
       'button' | 'button_block' | 'button_disabled' | 'button_large' | 'button_small',
-      string
+      NativeStyles
     >) {
     return (
-      <button
-        type="button"
-        className={cx(
+      <View
+        testID="button"
+        style={cx(
           {
             // eslint-disable-next-line no-nested-ternary
             size: large ? 'lg' : small ? 'sm' : 'df',
@@ -41,7 +42,7 @@ describe('withStyles()', () => {
         )}
       >
         {children}
-      </button>
+      </View>
     );
   }
 
@@ -50,12 +51,12 @@ describe('withStyles()', () => {
     unknown?: unknown;
   }
 
-  function BaseComponent(props: BaseComponentProps & WithStylesWrappedProps<string, string>) {
+  function BaseComponent(props: BaseComponentProps & WithStylesWrappedProps<string, NativeStyles>) {
     return null;
   }
 
   function WrappingComponent({ children }: { children?: React.ReactNode }) {
-    return <ThemeProvider name="dawn">{children || <div />}</ThemeProvider>;
+    return <ThemeProvider name="dawn">{children || <View />}</ThemeProvider>;
   }
 
   it('inherits name from component `constructor.name`', () => {
@@ -90,20 +91,20 @@ describe('withStyles()', () => {
     // eslint-disable-next-line react/prefer-stateless-function
     class RefComponent extends React.Component<RefProps & WithStylesWrappedProps<string, string>> {
       render() {
-        return <div />;
+        return <View />;
       }
     }
 
     let foundRef: Function | null = null;
     const Wrapped = withStyles(createStyleSheet())(RefComponent);
 
-    render<{}>(
+    render(
       <Wrapped
         wrappedRef={(ref: Function | null) => {
           foundRef = ref;
         }}
       />,
-      { wrapper: <WrappingComponent /> },
+      { wrapper: WrappingComponent },
     );
 
     expect(foundRef).not.toBeNull();
@@ -112,14 +113,11 @@ describe('withStyles()', () => {
 
   it('renders a button and its base styles', () => {
     const Button = withStyles(createStyleSheet())(BaseButton);
-    const { root } = render<ButtonProps>(<Button>Child</Button>, {
-      wrapper: <Wrapper />,
+    const result = render(<Button>Child</Button>, {
+      wrapper: Wrapper,
     });
 
-    expect(root.findOne('button')).toHaveProp(
-      'className',
-      'a b c d e f g h i j k l m n o p q r s t u v w z a1',
-    );
+    expect(result.getByTestId('button').props.style).toEqual({});
   });
 
   it('only renders once unless theme or direction change', () => {
@@ -127,13 +125,13 @@ describe('withStyles()', () => {
     const Button = withStyles(sheet)(BaseButton);
     const spy = jest.spyOn(sheet, 'render');
 
-    const { update } = render<ButtonProps>(<Button sheet={sheet}>Child</Button>, {
-      wrapper: <Wrapper />,
+    const { update } = render(<Button sheet={sheet}>Child</Button>, {
+      wrapper: Wrapper,
     });
 
-    update();
-    update();
-    update();
+    update(<Button sheet={sheet}>Child</Button>);
+    update(<Button sheet={sheet}>Child</Button>);
+    update(<Button sheet={sheet}>Child</Button>);
 
     expect(spy).toHaveBeenCalledTimes(1);
   });
@@ -143,7 +141,7 @@ describe('withStyles()', () => {
     const Button = withStyles(sheet)(BaseButton);
     const spy = jest.spyOn(sheet, 'render');
 
-    const { rerender } = render<ButtonProps>(
+    const { rerender } = render(
       <Wrapper>
         <Button sheet={sheet}>Child</Button>
       </Wrapper>,
@@ -181,7 +179,7 @@ describe('withStyles()', () => {
     const Button = withStyles(sheet)(BaseButton);
     const spy = jest.spyOn(sheet, 'render');
 
-    const { rerender } = render<ButtonProps>(
+    const { rerender } = render(
       <Wrapper>
         <Button sheet={sheet}>Child</Button>
       </Wrapper>,

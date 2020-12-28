@@ -45,7 +45,7 @@ export default function createThemeHelpers<Result, Block extends object>(
       throw new Error('Theme has not been provided.');
     }
 
-    return theme;
+    return theme!;
   }
 
   /**

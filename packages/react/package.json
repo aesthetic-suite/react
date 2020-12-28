@@ -61,7 +61,7 @@
   "tsconfig": {
     "compilerOptions": {
       "lib": ["dom", "esnext"],
-      "types": ["react"]
+      "types": ["node", "react", "../../node_modules/typescript/lib/lib.dom"]
     }
   }
 }

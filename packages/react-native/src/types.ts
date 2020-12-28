@@ -16,6 +16,7 @@ export interface StyledComponent<P extends object = {}>
 }
 
 export interface StyledInheritedProps {
+  children?: React.ReactNode;
   style?: NativeStyles;
 }
 

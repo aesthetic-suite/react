@@ -1,5 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`useCss() renders a button and its base styles 1`] = `".a {position: relative;}.b {display: inline-flex;}.c {text-align: center;}.d {padding: 8px;}"`;
-
-exports[`useCss() renders with custom options 1`] = `"@supports (display: inline-flex) {.cmo4l16 {position: relative;}}@supports (display: inline-flex) {.cm8buhq {display: inline-flex;}}@supports (display: inline-flex) {.c15zuv5t {text-align: center;}}@supports (display: inline-flex) {.c1tlzqim {padding: 8px;}}"`;

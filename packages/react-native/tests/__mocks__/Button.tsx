@@ -1,64 +1,70 @@
 /* eslint-disable no-magic-numbers, sort-keys */
 
 import React from 'react';
-import { ElementStyles, LocalSheet, ClassName } from '@aesthetic/core';
-import { DirectionProvider, ThemeProvider } from '../../src';
+import { View } from 'react-native';
+import { LocalSheet } from '@aesthetic/core';
+import { DirectionProvider, NativeBlock, NativeStyles, ThemeProvider } from '../../src';
 import aesthetic from '../../src/aesthetic';
 
 export function createStyleSheet() {
   return aesthetic.createComponentStyles((css) => ({
-    button: css.mixin.resetButton(
-      css.mixin.border(
-        { size: 'df' },
-        {
-          position: 'relative',
-          display: 'flex',
-          textAlign: 'center',
-          backgroundColor: css.var('palette-brand-color-40'),
-          color: css.var('palette-neutral-color-00'),
+    button: {
+      appearance: 'none',
+      border: 0,
+      cursor: 'pointer',
+      margin: 0,
+      padding: 0,
+      textDecoration: 'none',
+      userSelect: 'auto',
+      verticalAlign: 'middle',
+      position: 'relative',
+      display: 'flex',
+      textAlign: 'center',
+      backgroundColor: css.tokens.palette.brand.color['40'],
+      color: css.tokens.palette.neutral.color['00'],
 
-          ':hover': {
-            backgroundColor: css.var('palette-brand-color-50'),
+      ':hover': {
+        backgroundColor: css.tokens.palette.brand.color['50'],
+      },
+
+      ':active': {
+        backgroundColor: css.tokens.palette.brand.color['60'],
+      },
+
+      '@selectors': {
+        '::-moz-focus-inner': {
+          border: 0,
+          padding: 0,
+          margin: 0,
+        },
+      },
+
+      '@variants': {
+        size: {
+          sm: {
+            minWidth: css.unit(6),
+            padding: `${css.tokens.spacing.md} ${css.tokens.spacing.df}`,
           },
-
-          ':active': {
-            backgroundColor: css.var('palette-brand-color-60'),
+          df: {
+            minWidth: css.unit(8),
+            padding: `${css.tokens.spacing.df} ${css.tokens.spacing.md}`,
           },
-
-          '@selectors': {
-            '::-moz-focus-inner': {
-              border: 0,
-              padding: 0,
-              margin: 0,
-            },
-          },
-
-          '@variants': {
-            size: {
-              sm: {
-                minWidth: css.unit(6),
-                padding: `${css.var('spacing-sm')} ${css.var('spacing-df')}`,
-              },
-              df: {
-                minWidth: css.unit(8),
-                padding: `${css.var('spacing-df')} ${css.var('spacing-md')}`,
-              },
-              lg: {
-                minWidth: css.unit(10),
-                padding: `${css.var('spacing-md')} ${css.var('spacing-lg')}`,
-              },
-            },
+          lg: {
+            minWidth: css.unit(10),
+            padding: `${css.tokens.spacing.md} ${css.tokens.spacing.lg}`,
           },
         },
-      ),
-    ),
+      },
+    },
 
-    button_block: css.mixin.textWrap({
-      display: 'block',
+    button_block: {
+      overflowWrap: 'normal',
+      wordWrap: 'normal',
+      wordBreak: 'normal',
       width: '100%',
       whiteSpace: 'normal',
       overflow: 'hidden',
-    }),
+    },
 
     button_disabled: {
       '@variants': {
@@ -85,7 +91,7 @@ export interface ButtonProps {
   href?: string;
   large?: boolean;
   small?: boolean;
-  sheet?: LocalSheet<unknown, ElementStyles, ClassName>;
+  sheet?: LocalSheet<unknown, NativeBlock, NativeStyles>;
 }
 
 export interface WrapperProps {
@@ -96,8 +102,8 @@ export interface WrapperProps {
 
 export function Wrapper({ children, direction = 'ltr', theme = 'twilight' }: WrapperProps) {
   return (
-    <DirectionProvider direction={direction} wrapper={<div />}>
-      <ThemeProvider name={theme}>{children || <div />}</ThemeProvider>
+    <DirectionProvider direction={direction} wrapper={<View />}>
+      <ThemeProvider name={theme}>{children || <View />}</ThemeProvider>
     </DirectionProvider>
   );
 }

@@ -9,7 +9,7 @@ powerful [Aesthetic](https://github.com/aesthetic-suite/framework) core library.
 
 ```tsx
 import React from 'react';
-import { Button as BaseButton } from 'react-native';
+import { View } from 'react-native';
 import { createComponentStyles, useStyles } from '@aesthetic/react-native';
 
 export const styleSheet = createComponentStyles((css) => ({
@@ -33,7 +33,7 @@ export interface ButtonProps {
 export default function Button({ children, block = false }: ButtonProps) {
   const cx = useStyles(styleSheet);
 
-  return <BaseButton styles={cx('button', block && 'button_block')}>{children}</BaseButton>;
+  return <View style={cx('button', block && 'button_block')}>{children}</View>;
 }
 ```
 

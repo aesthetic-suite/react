@@ -1,8 +1,8 @@
 /* eslint-disable react/jsx-no-literals */
 
 import React from 'react';
-import { render } from 'rut-dom';
-import { getRenderedStyles } from '@aesthetic/style/test';
+import { View } from 'react-native';
+import { render } from '@testing-library/react-native';
 import { useStyles } from '../src';
 import { createStyleSheet, ButtonProps, Wrapper } from './__mocks__/Button';
 import { dawnTheme, setupAestheticReact, teardownAestheticReact, twilightTheme } from './helpers';
@@ -12,9 +12,9 @@ describe('useStyles()', () => {
     const cx = useStyles(createStyleSheet());
 
     return (
-      <button
-        type="button"
-        className={cx(
+      <View
+        testID="button"
+        style={cx(
           {
             // eslint-disable-next-line no-nested-ternary
             size: large ? 'lg' : small ? 'sm' : 'df',
@@ -25,7 +25,7 @@ describe('useStyles()', () => {
         )}
       >
         {children}
-      </button>
+      </View>
     );
   }
 
@@ -33,9 +33,9 @@ describe('useStyles()', () => {
     const cx = useStyles(sheet!);
 
     return (
-      <button type="button" className={cx()}>
+      <View testID="button" style={cx()}>
         {children}
-      </button>
+      </View>
     );
   }
 
@@ -43,9 +43,9 @@ describe('useStyles()', () => {
     const cx = useStyles(createStyleSheet());
 
     return (
-      <button type="button" className={cx(disabled && 'button_disabled')}>
+      <View testID="button" style={cx(disabled && 'button_disabled')}>
         {children}
-      </button>
+      </View>
     );
   }
 
@@ -58,65 +58,52 @@ describe('useStyles()', () => {
   });
 
   it('renders a button and its base styles', () => {
-    const { root } = render<ButtonProps>(<Button>Child</Button>, {
-      wrapper: <Wrapper />,
+    const result = render(<Button>Child</Button>, {
+      wrapper: Wrapper,
     });
 
-    expect(getRenderedStyles('standard')).toMatchSnapshot();
-
-    expect(root.findOne('button')).toHaveProp(
-      'className',
-      'a b c d e f g h i j k l m n o p q r s t u v w z a1',
-    );
+    expect(result.getByTestId('button').props.style).toEqual({});
   });
 
-  it('changes class name based on props enabled', () => {
-    const { root, update } = render<ButtonProps>(<Button>Child</Button>, {
-      wrapper: <Wrapper />,
+  it('changes styles based on props enabled', () => {
+    const result = render(<Button>Child</Button>, {
+      wrapper: Wrapper,
     });
 
-    expect(root.findOne('button')).toHaveProp(
-      'className',
-      'a b c d e f g h i j k l m n o p q r s t u v w z a1',
+    expect(result.getByTestId('button').props.style).toEqual({});
+
+    result.update(<Button disabled>Child</Button>);
+
+    expect(result.getByTestId('button').props.style).toEqual({});
+
+    result.update(
+      <Button block large>
+        Child
+      </Button>,
     );
 
-    update({ disabled: true });
-
-    expect(root.findOne('button')).toHaveProp(
-      'className',
-      'a b c d e f g h i j k l m n o p q r s t u v w z a1 l1',
-    );
-
-    update({ block: true, large: true });
-
-    expect(root.findOne('button')).toHaveProp(
-      'className',
-      'a b c d e f g h i j k l m n o p q r s t u v w b1 c1 d1 e1 f1 g1 h1 i1 j1 m1',
-    );
+    expect(result.getByTestId('button').props.style).toEqual({});
   });
 
-  it('returns an empty string if no selectors enabled', () => {
-    const { root } = render<ButtonProps>(<StylelessButton>Child</StylelessButton>, {
-      wrapper: <Wrapper />,
+  it('returns an empty object if no selectors enabled', () => {
+    const result = render(<StylelessButton>Child</StylelessButton>, {
+      wrapper: Wrapper,
     });
 
-    expect(root.findOne('button')).toHaveProp('className', '');
+    expect(result.getByTestId('button').props.style).toEqual({});
   });
 
   it('only renders once unless theme or direction change', () => {
     const sheet = createStyleSheet();
     const spy = jest.spyOn(sheet, 'render');
 
-    const { update } = render<ButtonProps>(
-      <CustomSheetButton sheet={sheet}>Child</CustomSheetButton>,
-      {
-        wrapper: <Wrapper />,
-      },
-    );
+    const { update } = render(<CustomSheetButton sheet={sheet}>Child</CustomSheetButton>, {
+      wrapper: Wrapper,
+    });
 
-    update();
-    update();
-    update();
+    update(<CustomSheetButton sheet={sheet}>Child</CustomSheetButton>);
+    update(<CustomSheetButton sheet={sheet}>Child</CustomSheetButton>);
+    update(<CustomSheetButton sheet={sheet}>Child</CustomSheetButton>);
 
     expect(spy).toHaveBeenCalledTimes(1);
   });
@@ -125,7 +112,7 @@ describe('useStyles()', () => {
     const sheet = createStyleSheet();
     const spy = jest.spyOn(sheet, 'render');
 
-    const { rerender } = render<ButtonProps>(
+    const { rerender } = render(
       <Wrapper>
         <CustomSheetButton sheet={sheet}>Child</CustomSheetButton>
       </Wrapper>,
@@ -162,7 +149,7 @@ describe('useStyles()', () => {
     const sheet = createStyleSheet();
     const spy = jest.spyOn(sheet, 'render');
 
-    const { rerender } = render<ButtonProps>(
+    const { rerender } = render(
       <Wrapper>
         <CustomSheetButton sheet={sheet}>Child</CustomSheetButton>
       </Wrapper>,
@@ -199,7 +186,7 @@ describe('useStyles()', () => {
     const sheet = createStyleSheet();
     const spy = jest.spyOn(sheet, 'render');
 
-    const { rerender } = render<ButtonProps>(
+    const { rerender } = render(
       <Wrapper>
         <CustomSheetButton sheet={sheet}>Child</CustomSheetButton>
       </Wrapper>,

@@ -1,12 +1,24 @@
-/* eslint-disable react/jsx-no-literals */
+/* eslint-disable jsx-a11y/anchor-is-valid, react/jsx-no-literals */
 
 import React from 'react';
-import { render } from 'rut-dom';
+import { Text, View, ViewStyle, TextInput } from 'react-native';
+import { render } from '@testing-library/react-native';
 import { StyleSheet } from '@aesthetic/core';
-import { getRenderedStyles } from '@aesthetic/style/test';
 import { createStyled } from '../src';
 import { Wrapper } from './__mocks__/Button';
 import { setupAestheticReact, teardownAestheticReact } from './helpers';
+
+function extractDebug(debug: () => void): string {
+  const spy = jest.spyOn(console, 'log').mockImplementationOnce(() => {});
+
+  debug();
+
+  const output = spy.mock.results[0].value;
+
+  spy.mockRestore();
+
+  return output;
+}
 
 describe('createStyled()', () => {
   beforeEach(() => {
@@ -30,7 +42,7 @@ describe('createStyled()', () => {
   it('errors for invalid style sheet factory', () => {
     expect(() =>
       createStyled(
-        'div',
+        View,
         // @ts-expect-error
         true,
       ),
@@ -38,87 +50,74 @@ describe('createStyled()', () => {
   });
 
   it('sets static properties on component', () => {
-    const Button = createStyled('button', {});
+    const Button = createStyled(View, {});
 
-    expect(Button.displayName).toBe('styled(button)');
+    expect(Button.displayName).toBe('styled(View)');
     expect(Button.styleSheet).toBeInstanceOf(StyleSheet);
 
     const ComposedButton = createStyled(Button, {});
 
-    expect(ComposedButton.displayName).toBe('styled(styled(button))');
+    expect(ComposedButton.displayName).toBe('styled(styled(View))');
     expect(ComposedButton.styleSheet).toBeInstanceOf(StyleSheet);
   });
 
   it('creates and renders a button with defined styles', () => {
-    const Button = createStyled('button', () => ({
-      display: 'inline-flex',
+    const Button = createStyled(View, () => ({
+      display: 'flex',
       textAlign: 'center',
       padding: '1rem',
     }));
 
-    const { debug } = render<{}>(<Button>Test</Button>, {
-      wrapper: <Wrapper />,
-    });
-
-    expect(debug({ log: false })).toMatchSnapshot();
-    expect(getRenderedStyles('standard')).toMatchSnapshot();
-  });
-
-  it('only renders styles twice (create and mount), even when component rerenders', () => {
-    const spy = jest.fn(() => ({
-      textDecoration: 'none',
-    }));
-
-    const Link = createStyled('a', spy);
-
-    const { debug, update } = render<{}>(<Link href="/foo/bar">Test</Link>, {
-      wrapper: <Wrapper theme="dawn" />,
-    });
-
-    update();
-    update();
-    update();
-
-    expect(spy).toHaveBeenCalledTimes(2);
-    expect(debug({ log: false })).toMatchSnapshot();
-    expect(getRenderedStyles('standard')).toMatchSnapshot();
-  });
-
-  it('can pass custom props/attributes', () => {
-    const Input = createStyled('input', {
-      border: '1px solid black',
-      padding: '1rem',
-      ':focus': {
-        outline: 'none',
-      },
-    });
-
-    const { debug } = render<{}>(
-      <Input disabled={false} type="text" placeholder="Search..." className="will-be-appended" />,
+    const { debug } = render(
+      <Button>
+        <Text>Test</Text>
+      </Button>,
       {
-        wrapper: <Wrapper />,
+        wrapper: Wrapper,
       },
     );
 
-    expect(debug({ log: false })).toMatchSnapshot();
-    expect(getRenderedStyles('standard')).toMatchSnapshot();
+    expect(extractDebug(debug)).toMatchSnapshot();
   });
 
-  it('can use and define CSS variables', () => {
-    const Code = createStyled('code', (css) => ({
-      fontSize: css.var('text-sm-size'),
-      lineHeight: css.tokens.text.sm.lineHeight,
-      '@variables': {
-        elementLevelVar: 'nice',
-      },
-    }));
+  it('only renders styles twice (create and mount), even when component rerenders', () => {
+    const spy = jest.fn(
+      () =>
+        ({
+          fontWeight: 'bold',
+        } as const),
+    );
 
-    const { debug } = render<{}>(<Code />, {
-      wrapper: <Wrapper />,
+    const Link = createStyled(Text, spy);
+    const cb = () => {};
+
+    const { debug, update } = render(<Link onPress={cb}>Test</Link>, {
+      wrapper: Wrapper,
     });
 
-    expect(debug({ log: false })).toMatchSnapshot();
-    expect(getRenderedStyles('standard')).toMatchSnapshot();
+    update(<Link onPress={cb}>Test</Link>);
+    update(<Link onPress={cb}>Test</Link>);
+    update(<Link onPress={cb}>Test</Link>);
+
+    expect(spy).toHaveBeenCalledTimes(2);
+    expect(extractDebug(debug)).toMatchSnapshot();
+  });
+
+  it('can pass custom props/attributes', () => {
+    const Input = createStyled(TextInput, {
+      borderWidth: 1,
+      borderColor: 'black',
+      padding: '1rem',
+    });
+
+    const { debug } = render(
+      <Input editable={false} placeholder="Search..." style={{ borderStyle: 'solid' }} />,
+      {
+        wrapper: Wrapper,
+      },
+    );
+
+    expect(extractDebug(debug)).toMatchSnapshot();
   });
 
   describe('variants', () => {
@@ -127,18 +126,18 @@ describe('createStyled()', () => {
     }
 
     function createAlert() {
-      return createStyled<'div', AlertProps>('div', (css) => ({
-        background: css.var('palette-neutral-bg-base'),
+      return createStyled<typeof View, AlertProps>(View, (css) => ({
+        backgroundColor: css.tokens.palette.neutral.bg.base,
         '@variants': {
           palette: {
             success: {
-              background: css.var('palette-success-bg-base'),
+              backgroundColor: css.tokens.palette.success.bg.base,
             },
             failure: {
-              background: css.var('palette-failure-bg-base'),
+              backgroundColor: css.tokens.palette.failure.bg.base,
             },
             warning: {
-              background: css.var('palette-warning-bg-base'),
+              backgroundColor: css.tokens.palette.warning.bg.base,
             },
           },
         },
@@ -147,38 +146,31 @@ describe('createStyled()', () => {
 
     it('supports variants', () => {
       const Alert = createAlert();
+      const children = <Text>Title and other content!</Text>;
 
-      const { debug, update } = render<AlertProps>(
-        <Alert palette="success">
-          <div>
-            <h1>Title</h1>And other content!
-          </div>
-        </Alert>,
-        {
-          wrapper: <Wrapper />,
-        },
-      );
+      const { debug, update } = render(<Alert palette="success">{children}</Alert>, {
+        wrapper: Wrapper,
+      });
 
-      expect(debug({ log: false })).toMatchSnapshot();
-      expect(getRenderedStyles('standard')).toMatchSnapshot();
+      expect(extractDebug(debug)).toMatchSnapshot();
 
-      update({ palette: 'failure' });
+      update(<Alert palette="failure">{children}</Alert>);
 
-      expect(debug({ log: false })).toMatchSnapshot();
+      expect(extractDebug(debug)).toMatchSnapshot();
 
-      update({ palette: undefined });
+      update(<Alert>{children}</Alert>);
 
-      expect(debug({ log: false })).toMatchSnapshot();
+      expect(extractDebug(debug)).toMatchSnapshot();
     });
 
     it('doesnt pass the variant prop to the HTML element', () => {
       const Alert = createAlert();
 
-      const { debug } = render<AlertProps>(<Alert palette="success" />, {
-        wrapper: <Wrapper />,
+      const { debug } = render(<Alert palette="success" />, {
+        wrapper: Wrapper,
       });
 
-      expect(debug({ log: false })).toMatchSnapshot();
+      expect(extractDebug(debug)).toMatchSnapshot();
     });
 
     it('inherits and merges variant props and types when composing', () => {
@@ -193,41 +185,36 @@ describe('createStyled()', () => {
         },
       });
 
-      const { debug } = render<AlertProps>(<SubAlert palette="success" size="lg" />, {
-        wrapper: <Wrapper />,
+      const { debug } = render(<SubAlert palette="success" size="lg" />, {
+        wrapper: Wrapper,
       });
 
-      expect(debug({ log: false })).toMatchSnapshot();
+      expect(extractDebug(debug)).toMatchSnapshot();
     });
   });
 
   describe('composition', () => {
     it('supports extending non-styled components', () => {
-      function Base({ children, className }: { children: React.ReactNode; className?: string }) {
-        return (
-          <button type="button" className={className}>
-            {children}
-          </button>
-        );
+      function Base({ children, style }: { children: React.ReactNode; style?: ViewStyle }) {
+        return <View style={style}>{children}</View>;
       }
 
       const Button = createStyled(Base, () => ({
-        display: 'inline-flex',
+        display: 'flex',
         textAlign: 'center',
         padding: '1rem',
       }));
 
-      const { debug } = render<{}>(<Button className="test">Normal</Button>, {
-        wrapper: <Wrapper />,
+      const { debug } = render(<Button style={{ color: 'red' }}>Normal</Button>, {
+        wrapper: Wrapper,
       });
 
-      expect(debug({ log: false })).toMatchSnapshot();
-      expect(getRenderedStyles('standard')).toMatchSnapshot();
+      expect(extractDebug(debug)).toMatchSnapshot();
     });
 
     it('supports extending other styled components', () => {
-      const Button = createStyled('button', () => ({
-        display: 'inline-flex',
+      const Button = createStyled(View, () => ({
+        display: 'flex',
         textAlign: 'center',
         padding: '1rem',
       }));
@@ -242,36 +229,36 @@ describe('createStyled()', () => {
         fontSize: 18,
       });
 
-      const { debug } = render<{}>(
+      const { debug } = render(
         <>
-          <Button type="button">Normal</Button>
-          <BlockButton type="submit">Block</BlockButton>
-          <LargeBlockButton disabled>Large</LargeBlockButton>
+          <Button>Normal</Button>
+          <BlockButton>Block</BlockButton>
+          <LargeBlockButton>Large</LargeBlockButton>
         </>,
         {
-          wrapper: <Wrapper />,
+          wrapper: Wrapper,
         },
       );
 
-      expect(debug({ log: false })).toMatchSnapshot();
-      expect(getRenderedStyles('standard')).toMatchSnapshot();
+      expect(extractDebug(debug)).toMatchSnapshot();
     });
 
     it('can access the ref from multiple layers of composition', () => {
-      const Leaf = createStyled('main', {});
+      const Leaf = createStyled(View, {});
       const Branch = createStyled(Leaf, {});
       const Trunk = createStyled(Branch, {});
       const Root = createStyled(Trunk, {});
 
-      const svg = document.createElement('main');
+      const ref = { ref: true };
       const spy = jest.fn();
-      const { debug } = render<{}>(<Root ref={spy} />, {
-        mockRef: () => svg,
-        wrapper: <Wrapper />,
+      // @ts-expect-error
+      const { debug } = render(<Root ref={spy} />, {
+        createNodeMock: () => ref,
+        wrapper: Wrapper,
       });
 
-      expect(spy).toHaveBeenCalledWith(svg);
-      expect(debug({ log: false })).toMatchSnapshot();
+      expect(spy).toHaveBeenCalledWith(ref);
+      expect(extractDebug(debug)).toMatchSnapshot();
     });
   });
 });
