@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Aesthetic, Direction, OnChangeDirection } from '@aesthetic/core';
+import { Aesthetic, Direction } from '@aesthetic/core';
 import getDirection from 'direction';
 import createHOC from './createHOC';
 import {
@@ -10,18 +10,9 @@ import {
   WrapperProps,
 } from './types';
 
-interface DirectionHelperOptions {
-  onChange?: OnChangeDirection;
-}
-
 export default function createDirectionHelpers<Result, Block extends object>(
   aesthetic: Aesthetic<Result, Block>,
-  { onChange }: DirectionHelperOptions = {},
 ) /* infer */ {
-  if (onChange) {
-    aesthetic.subscribe('change:direction', onChange);
-  }
-
   const DirectionContext = React.createContext<DirectionContextType>(
     aesthetic.getActiveDirection() || 'ltr',
   );
@@ -59,6 +50,7 @@ export default function createDirectionHelpers<Result, Block extends object>(
       return createHOC(
         'withDirection',
         WrappedComponent,
+        // eslint-disable-next-line prefer-arrow-callback
         function WithDirection({ wrappedRef, ...props }) {
           const direction = useDirection();
 

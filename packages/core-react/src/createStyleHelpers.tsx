@@ -109,6 +109,7 @@ export default function createStyleHelpers<Result, Block extends object>(
       return createHOC(
         'withStyles',
         WrappedComponent,
+        // eslint-disable-next-line prefer-arrow-callback
         function WithStyles({ wrappedRef, ...props }) {
           const cx = useStyles(sheet);
 

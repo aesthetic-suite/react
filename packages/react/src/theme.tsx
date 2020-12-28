@@ -3,12 +3,7 @@ import { createThemeHelpers, ContextualThemeProviderProps } from '@aesthetic/cor
 import aesthetic from './aesthetic';
 import { useDirection } from './direction';
 
-export const { ThemeContext, ThemeProvider, useTheme, withTheme } = createThemeHelpers(aesthetic, {
-  // Set theme class names on body
-  onChange(nextTheme, classNames) {
-    document.body.className = classNames.join(' ');
-  },
-});
+export const { ThemeContext, ThemeProvider, useTheme, withTheme } = createThemeHelpers(aesthetic);
 
 /**
  * Provides a theme for a distinct portion of the React tree.

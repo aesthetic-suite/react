@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Aesthetic, OnChangeTheme, Theme } from '@aesthetic/core';
+import { Aesthetic, Theme } from '@aesthetic/core';
 import createHOC from './createHOC';
 import {
   ThemeContextType,
@@ -9,18 +9,9 @@ import {
   WrapperProps,
 } from './types';
 
-interface ThemeHelperOptions {
-  onChange?: OnChangeTheme;
-}
-
 export default function createThemeHelpers<Result, Block extends object>(
   aesthetic: Aesthetic<Result, Block>,
-  { onChange }: ThemeHelperOptions = {},
 ) /* infer */ {
-  if (onChange) {
-    aesthetic.subscribe('change:theme', onChange);
-  }
-
   const ThemeContext = React.createContext<ThemeContextType<Block> | null>(null);
 
   /**
@@ -31,9 +22,7 @@ export default function createThemeHelpers<Result, Block extends object>(
     const theme = themeName ? aesthetic.getTheme(themeName) : aesthetic.getActiveTheme();
 
     // Listen to theme changes that occur outside of the provider
-    useEffect(() => {
-      return aesthetic.subscribe('change:theme', setThemeName);
-    }, []);
+    useEffect(() => aesthetic.subscribe('change:theme', setThemeName), []);
 
     // Update state when the `name` prop changes
     useEffect(() => {
@@ -69,6 +58,7 @@ export default function createThemeHelpers<Result, Block extends object>(
       WrappedComponent: React.ComponentType<Props & WithThemeWrappedProps<Block>>,
     ): React.FunctionComponent<Omit<Props, keyof WithThemeWrappedProps<Block>> & WrapperProps> &
       WrapperComponent {
+      // eslint-disable-next-line prefer-arrow-callback
       return createHOC('withTheme', WrappedComponent, function WithTheme({ wrappedRef, ...props }) {
         const theme = useTheme();
 
