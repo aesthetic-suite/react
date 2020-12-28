@@ -52,7 +52,9 @@
   "tsconfig": {
     "compilerOptions": {
       "jsx": "react",
-      "types": ["react"]
+      "types": [
+        "react"
+      ]
     }
   }
 }

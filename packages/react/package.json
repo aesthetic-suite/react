@@ -60,8 +60,15 @@
   },
   "tsconfig": {
     "compilerOptions": {
-      "lib": ["dom", "esnext"],
-      "types": ["node", "react", "../../node_modules/typescript/lib/lib.dom"]
+      "lib": [
+        "dom",
+        "esnext"
+      ],
+      "types": [
+        "node",
+        "react",
+        "../../node_modules/typescript/lib/lib.dom"
+      ]
     }
   }
 }

@@ -1,6 +1,8 @@
-import { I18nManager } from 'react-native';
+import { Appearance, I18nManager } from 'react-native';
 import { Aesthetic } from '@aesthetic/core';
 import { NativeEngine, NativeBlock, NativeStyles } from './types';
+
+const noop = () => {};
 
 function unsupported(method: string) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -11,7 +13,10 @@ function unsupported(method: string) {
 }
 
 const engine: NativeEngine = {
+  atomic: false,
   direction: I18nManager.isRTL ? 'rtl' : 'ltr',
+  prefersColorScheme: (scheme) => scheme === Appearance.getColorScheme(),
+  prefersContrastLevel: () => false,
   renderDeclaration: unsupported('renderDeclaration()'),
   renderFontFace: unsupported('renderFontFace()'),
   renderImport: unsupported('renderImport()'),
@@ -20,15 +25,13 @@ const engine: NativeEngine = {
   renderRuleGrouped: unsupported('renderRuleGrouped()'),
   renderVariable: unsupported('renderVariable()'),
   ruleIndex: 0,
-  setDirection(direction) {
-    engine.direction = direction;
-  },
-  setRootVariables: unsupported('setRootVariables()'),
+  setDirection: noop,
+  setRootVariables: noop,
+  setTheme: noop,
 };
 
 const aesthetic = new Aesthetic<NativeStyles, NativeBlock>();
 
-aesthetic.atomic = false;
 aesthetic.configureEngine(engine);
 
 export default aesthetic;

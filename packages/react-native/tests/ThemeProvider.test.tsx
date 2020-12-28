@@ -205,7 +205,7 @@ describe('ThemeProvider', () => {
 
       // eslint-disable-next-line rut/no-act
       act(() => {
-        doChangeTheme('dawn');
+        doChangeTheme('dawn', []);
       });
 
       expect(themeSpy).toHaveBeenCalledWith(twilightTheme);
