@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, StyleProp } from 'react-native';
+import { StyleProp, StyleSheet } from 'react-native';
 import { Utilities } from '@aesthetic/core';
 import { createStyleHelpers } from '@aesthetic/core-react';
 import { arrayLoop } from '@aesthetic/utils';
@@ -8,9 +8,13 @@ import { useDirection } from './direction';
 import { useTheme } from './theme';
 import { InferProps, StyledComponent, NativeBlock, NativeStyles } from './types';
 
-export const { getVariantsFromProps, useStyles, withStyles } = createStyleHelpers(aesthetic, {
+export const { getVariantsFromProps, useStyles, withStyles } = createStyleHelpers<
+  NativeStyles,
+  NativeBlock,
+  StyleProp<NativeStyles>
+>(aesthetic, {
   generate(keys, variants, results) {
-    let style: StyleProp<NativeStyles> = {};
+    const style: StyleProp<NativeStyles> = [];
 
     arrayLoop(keys, (key) => {
       const hash = results[key];
@@ -20,19 +24,19 @@ export const { getVariantsFromProps, useStyles, withStyles } = createStyleHelper
       }
 
       if (hash.result) {
-        style = hash.result;
+        style.push(hash.result);
       }
 
       if (hash.variants) {
         arrayLoop(variants, (variant) => {
           if (hash.variants?.[variant]) {
-            style = StyleSheet.compose(style, hash.variants[variant]);
+            style.push(hash.variants[variant]);
           }
         });
       }
     });
 
-    return style;
+    return (style.length === 1 ? style[0] : style) as StyleProp<NativeStyles>;
   },
   useDirection,
   useTheme,
@@ -65,10 +69,14 @@ export function createStyled<T extends React.ComponentType<any>, V extends objec
     React.forwardRef((baseProps, ref) => {
       const sx = useStyles(styleSheet);
       const { props, variants } = getVariantsFromProps<'style'>(styleSheet, baseProps);
-      let style: StyleProp<NativeStyles> = sx(variants, 'element');
+      let style = sx(variants, 'element');
 
       if (props.style) {
-        style = [style, props.style];
+        if (Array.isArray(style)) {
+          style.push(props.style);
+        } else {
+          style = StyleSheet.compose(style, props.style);
+        }
       }
 
       return React.createElement(type, {

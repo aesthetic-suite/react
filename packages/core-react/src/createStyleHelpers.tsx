@@ -17,25 +17,25 @@ import {
   WrapperProps,
 } from './types';
 
-interface StyleHelperOptions<Result, Block extends object> {
+interface StyleHelperOptions<Result, Block extends object, GeneratedResult> {
   generate: <T extends string>(
     keys: T[],
     variants: Set<string>,
     results: RenderResultSheet<Result>,
-  ) => Result;
+  ) => GeneratedResult;
   useDirection: () => Direction;
   useTheme: () => Theme<Block>;
 }
 
-export default function createStyleHelpers<Result, Block extends object>(
+export default function createStyleHelpers<Result, Block extends object, GeneratedResult = Result>(
   aesthetic: Aesthetic<Result, Block>,
-  { generate, useDirection, useTheme }: StyleHelperOptions<Result, Block>,
+  { generate, useDirection, useTheme }: StyleHelperOptions<Result, Block, GeneratedResult>,
 ) /* infer */ {
   function cxWithCache(
     keys: unknown[],
     results: RenderResultSheet<Result>,
-    cache: Record<string, Result>,
-  ): Result {
+    cache: Record<string, GeneratedResult>,
+  ): GeneratedResult {
     const variants = new Set<string>();
     let cacheKey = '';
 
@@ -66,10 +66,10 @@ export default function createStyleHelpers<Result, Block extends object>(
    */
   function useStyles<T = unknown>(
     sheet: LocalSheet<T, Block, Result>,
-  ): StyleResultGenerator<keyof T, Result> {
+  ): StyleResultGenerator<keyof T, GeneratedResult> {
     const theme = useTheme();
     const direction = useDirection();
-    const classCache = useRef<Record<string, Result>>({});
+    const classCache = useRef<Record<string, GeneratedResult>>({});
     const initialMount = useRef(true);
     const [result, setResult] = useState<RenderResultSheet<Result>>(() =>
       aesthetic.renderComponentStyles(sheet, {

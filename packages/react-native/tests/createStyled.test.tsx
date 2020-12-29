@@ -20,7 +20,7 @@ function extractDebug(debug: () => void): string {
   return output;
 }
 
-describe('createStyled()', () => {
+describe.skip('createStyled()', () => {
   beforeEach(() => {
     setupAestheticReact();
   });
