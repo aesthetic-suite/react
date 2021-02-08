@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'rut-dom';
 import { darkTheme } from '@aesthetic/core/test';
-import { useTheme, ThemeProvider } from '../src';
+import { ThemeProvider, useTheme } from '../src';
 import { setupAestheticReact, teardownAestheticReact, twilightTheme } from './helpers';
 
 describe('useTheme()', () => {

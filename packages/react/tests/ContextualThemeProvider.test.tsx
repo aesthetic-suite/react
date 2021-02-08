@@ -2,13 +2,13 @@
 
 import React from 'react';
 import { render } from 'rut-dom';
-import { lightTheme, darkTheme } from '@aesthetic/core/test';
+import { darkTheme, lightTheme } from '@aesthetic/core/test';
 import {
   ContextualThemeProvider,
-  ThemeProviderProps,
-  DirectionProviderProps,
-  useTheme,
   DirectionProvider,
+  DirectionProviderProps,
+  ThemeProviderProps,
+  useTheme,
 } from '../src';
 import aesthetic from '../src/aesthetic';
 import { setupAestheticReact, teardownAestheticReact } from './helpers';

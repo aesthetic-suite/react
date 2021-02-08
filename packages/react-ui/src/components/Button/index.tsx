@@ -1,5 +1,5 @@
 import React from 'react';
-import { useStyles, PaletteType, TextSize } from '@aesthetic/react';
+import { PaletteType, TextSize, useStyles } from '@aesthetic/react';
 import styleSheet from './styles';
 
 export { styleSheet };

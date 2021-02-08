@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { render } from 'rut-dom';
-import { withStyles, ThemeProvider, WithStylesWrappedProps } from '../src';
-import { createStyleSheet, ButtonProps, Wrapper } from './__mocks__/Button';
+import { ThemeProvider, withStyles, WithStylesWrappedProps } from '../src';
+import { ButtonProps, createStyleSheet, Wrapper } from './__mocks__/Button';
 import { dawnTheme, setupAestheticReact, teardownAestheticReact, twilightTheme } from './helpers';
 
 describe('withStyles()', () => {
@@ -24,7 +24,7 @@ describe('withStyles()', () => {
     small,
   }: ButtonProps &
     WithStylesWrappedProps<
-      'button' | 'button_block' | 'button_disabled' | 'button_large' | 'button_small',
+      'button_block' | 'button_disabled' | 'button_large' | 'button_small' | 'button',
       string
     >) {
     return (

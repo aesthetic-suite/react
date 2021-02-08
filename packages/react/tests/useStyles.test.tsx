@@ -4,7 +4,7 @@ import React from 'react';
 import { render } from 'rut-dom';
 import { getRenderedStyles } from '@aesthetic/style/test';
 import { useStyles } from '../src';
-import { createStyleSheet, ButtonProps, Wrapper } from './__mocks__/Button';
+import { ButtonProps, createStyleSheet, Wrapper } from './__mocks__/Button';
 import { dawnTheme, setupAestheticReact, teardownAestheticReact, twilightTheme } from './helpers';
 
 describe('useStyles()', () => {

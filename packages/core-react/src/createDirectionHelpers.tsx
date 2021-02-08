@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import { Aesthetic, Direction } from '@aesthetic/core';
 import getDirection from 'direction';
+import { Aesthetic, Direction } from '@aesthetic/core';
 import createHOC from './createHOC';
 import {
   DirectionContextType,

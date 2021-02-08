@@ -1,12 +1,12 @@
 /* eslint-disable react/jsx-no-literals */
 
 import React from 'react';
-import { render } from 'rut-dom';
 import { act } from 'react-test-renderer';
+import { render } from 'rut-dom';
 import { OnChangeTheme } from '@aesthetic/core';
 import { ThemeProvider, ThemeProviderProps, useTheme } from '../src';
 import aesthetic from '../src/aesthetic';
-import { setupAestheticReact, teardownAestheticReact, twilightTheme, dawnTheme } from './helpers';
+import { dawnTheme, setupAestheticReact, teardownAestheticReact, twilightTheme } from './helpers';
 
 describe('ThemeProvider', () => {
   beforeEach(() => {

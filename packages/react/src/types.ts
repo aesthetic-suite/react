@@ -1,5 +1,5 @@
 import React from 'react';
-import { ClassName, LocalSheet, ElementStyles } from '@aesthetic/core';
+import { ClassName, ElementStyles, LocalSheet } from '@aesthetic/core';
 
 export type ElementType = keyof JSX.IntrinsicElements;
 

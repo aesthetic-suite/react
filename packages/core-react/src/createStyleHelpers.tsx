@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useRef, useCallback } from 'react';
-import { Aesthetic, Theme, LocalSheet, RenderResultSheet, Direction } from '@aesthetic/core';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { Aesthetic, Direction, LocalSheet, RenderResultSheet, Theme } from '@aesthetic/core';
 import { isObject, objectLoop } from '@aesthetic/utils';
 import createHOC from './createHOC';
 import {

@@ -1,11 +1,11 @@
 import React from 'react';
 import { render } from 'rut-dom';
 import {
-  withTheme,
+  LocalBlock,
   ThemeProvider,
   ThemeProviderProps,
+  withTheme,
   WithThemeWrappedProps,
-  LocalBlock,
 } from '../src';
 import { dawnTheme, setupAestheticReact, teardownAestheticReact, twilightTheme } from './helpers';
 

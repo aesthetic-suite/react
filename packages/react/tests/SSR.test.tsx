@@ -1,11 +1,11 @@
 /* eslint-disable react/jsx-no-literals */
 
 import React from 'react';
-import { renderToString, renderToStaticMarkup } from 'react-dom/server';
+import { renderToStaticMarkup, renderToString } from 'react-dom/server';
 import { StyleEngine } from '@aesthetic/style';
 import { createServerEngine, extractStyles, renderToStyleMarkup } from '@aesthetic/style/server';
-import { useStyles, ThemeProvider } from '../src';
-import { createStyleSheet, ButtonProps } from './__mocks__/Button';
+import { ThemeProvider, useStyles } from '../src';
+import { ButtonProps, createStyleSheet } from './__mocks__/Button';
 import { setupAestheticReact, teardownAestheticReact } from './helpers';
 
 describe('SSR', () => {

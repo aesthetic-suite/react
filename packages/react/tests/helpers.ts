@@ -1,11 +1,11 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import mixins from '@aesthetic/addon-mixins';
 import {
-  lightTheme,
   darkTheme,
   design,
-  teardownAesthetic,
+  lightTheme,
   setupAesthetic,
+  teardownAesthetic,
 } from '@aesthetic/core/test';
 import { createTestStyleEngine, purgeStyles } from '@aesthetic/style/test';
 import aesthetic from '../src/aesthetic';

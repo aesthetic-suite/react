@@ -123,7 +123,7 @@ describe('createStyled()', () => {
 
   describe('variants', () => {
     interface AlertProps {
-      palette?: 'success' | 'failure' | 'warning';
+      palette?: 'failure' | 'success' | 'warning';
     }
 
     function createAlert() {
@@ -184,7 +184,7 @@ describe('createStyled()', () => {
     it('inherits and merges variant props and types when composing', () => {
       const Alert = createAlert();
 
-      const SubAlert = createStyled<typeof Alert, { size?: 'sm' | 'lg' }>(Alert, {
+      const SubAlert = createStyled<typeof Alert, { size?: 'lg' | 'sm' }>(Alert, {
         '@variants': {
           size: {
             sm: { padding: 1 },

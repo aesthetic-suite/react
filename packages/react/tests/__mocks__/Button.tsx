@@ -1,7 +1,7 @@
 /* eslint-disable no-magic-numbers, sort-keys */
 
 import React from 'react';
-import { ElementStyles, LocalSheet, ClassName } from '@aesthetic/core';
+import { ClassName, ElementStyles, LocalSheet } from '@aesthetic/core';
 import { DirectionProvider, ThemeProvider } from '../../src';
 import aesthetic from '../../src/aesthetic';
 

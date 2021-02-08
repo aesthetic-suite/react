@@ -1,9 +1,9 @@
 import React from 'react';
 import { render } from 'rut-dom';
 import {
-  withDirection,
   DirectionProvider,
   DirectionProviderProps,
+  withDirection,
   WithDirectionWrappedProps,
 } from '../src';
 import { setupAestheticReact, teardownAestheticReact } from './helpers';

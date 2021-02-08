@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { createThemeHelpers, ContextualThemeProviderProps } from '@aesthetic/core-react';
+import { ContextualThemeProviderProps, createThemeHelpers } from '@aesthetic/core-react';
 import aesthetic from './aesthetic';
 import { useDirection } from './direction';
 

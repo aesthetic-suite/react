@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'rut-dom';
-import { useDirection, DirectionProvider } from '../src';
+import { DirectionProvider, useDirection } from '../src';
 
 describe('useDirection()', () => {
   it('returns "ltr" if no context provided', () => {

@@ -5,12 +5,12 @@
 
 import aesthetic from './aesthetic';
 
-export * from '@aesthetic/core';
-export * from '@aesthetic/core-react';
 export * from './direction';
 export * from './styles';
 export * from './theme';
 export * from './types';
+export * from '@aesthetic/core';
+export * from '@aesthetic/core-react';
 
 export const {
   changeDirection,

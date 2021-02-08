@@ -61,7 +61,7 @@ export interface WithThemeWrappedProps<T extends object> extends WrappedProps {
 
 // STYLES
 
-export type StyleResultTypes<T> = (undefined | null | false | T)[];
+export type StyleResultTypes<T> = (T | false | null | undefined)[];
 
 export interface StyleResultGenerator<T, R> {
   (variants: Record<string, string>, ...keys: StyleResultTypes<T>): R;
