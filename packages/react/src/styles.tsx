@@ -2,8 +2,8 @@ import { createElement, forwardRef, memo, useMemo } from 'react';
 import {
   ClassName,
   ElementStyles,
-  LocalSheet,
   RenderOptions,
+  RenderResult,
   Rule,
   Utilities,
 } from '@aesthetic/core';
@@ -28,10 +28,10 @@ export function useCss(
 }
 
 function getVariantsFromProps(
-  styleSheet: LocalSheet<unknown, ElementStyles, ClassName>,
+  renderResult: RenderResult<unknown> | undefined,
   baseProps: object,
 ): { props: { className?: string }; variants: Record<string, string> } {
-  const types = styleSheet.metadata.element?.variantTypes;
+  const types = renderResult?.variantTypes;
 
   if (!types) {
     return { props: baseProps, variants: {} };
@@ -82,7 +82,7 @@ export function createStyled<
   const Component = memo(
     forwardRef((baseProps, ref) => {
       const cx = useStyles(styleSheet);
-      const { props, variants } = getVariantsFromProps(styleSheet, baseProps);
+      const { props, variants } = getVariantsFromProps(cx.result.element, baseProps);
       let className = cx(variants, 'element');
 
       if (props.className) {

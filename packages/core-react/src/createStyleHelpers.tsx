@@ -61,7 +61,7 @@ export default function createStyleHelpers<Result, Block extends object>(
     const direction = useDirection();
     const classCache = useRef<Record<string, Result>>({});
     const initialMount = useRef(true);
-    const [result, setResult] = useState<Record<string, any>>(() =>
+    const [result, setResult] = useState<RenderResultSheet<Result>>(() =>
       aesthetic.renderComponentStyles(sheet, {
         direction,
         theme: theme.name,
@@ -91,9 +91,14 @@ export default function createStyleHelpers<Result, Block extends object>(
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [direction, theme.name]);
 
-    return useCallback((...keys: unknown[]) => cxWithCache(keys, result, classCache.current), [
+    const cx = useCallback((...keys: unknown[]) => cxWithCache(keys, result, classCache.current), [
       result,
-    ]);
+    ]) as StyleResultGenerator<keyof T, Result>;
+
+    // Make the result available if need be, but behind a hidden API
+    cx.result = result;
+
+    return cx;
   }
 
   /**
