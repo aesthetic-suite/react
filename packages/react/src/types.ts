@@ -1,4 +1,3 @@
-import React from 'react';
 import { ClassName, ElementStyles, LocalSheet } from '@aesthetic/core';
 
 export type ElementType = keyof JSX.IntrinsicElements;

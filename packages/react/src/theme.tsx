@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { cloneElement, useEffect, useState } from 'react';
 import { ContextualThemeProviderProps, createThemeHelpers } from '@aesthetic/core-react';
 import aesthetic from './aesthetic';
 import { useDirection } from './direction';
@@ -20,7 +20,7 @@ export function ContextualThemeProvider({ children, name, wrapper }: ContextualT
 
   return (
     <ThemeContext.Provider value={theme}>
-      {React.cloneElement(wrapper, { className, 'data-theme': name }, children)}
+      {cloneElement(wrapper, { className, 'data-theme': name }, children)}
     </ThemeContext.Provider>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { cloneElement, createContext, useContext } from 'react';
 import getDirection from 'direction';
 import { Aesthetic, Direction } from '@aesthetic/core';
 import createHOC from './createHOC';
@@ -13,7 +13,7 @@ import {
 export default function createDirectionHelpers<Result, Block extends object>(
   aesthetic: Aesthetic<Result, Block>,
 ) /* infer */ {
-  const DirectionContext = React.createContext<DirectionContextType>(
+  const DirectionContext = createContext<DirectionContextType>(
     aesthetic.getActiveDirection() || 'ltr',
   );
 
@@ -27,7 +27,7 @@ export default function createDirectionHelpers<Result, Block extends object>(
 
     return (
       <DirectionContext.Provider value={dir}>
-        {React.cloneElement(wrapper, { dir }, children)}
+        {cloneElement(wrapper, { dir }, children)}
       </DirectionContext.Provider>
     );
   }

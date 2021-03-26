@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { createElement, forwardRef, memo, useMemo } from 'react';
 import {
   ClassName,
   ElementStyles,
@@ -79,8 +79,8 @@ export function createStyled<
     element: typeof factory === 'function' ? factory(utils) : factory,
   }));
 
-  const Component = React.memo(
-    React.forwardRef((baseProps, ref) => {
+  const Component = memo(
+    forwardRef((baseProps, ref) => {
       const cx = useStyles(styleSheet);
       const { props, variants } = getVariantsFromProps(styleSheet, baseProps);
       let className = cx(variants, 'element');
@@ -89,7 +89,7 @@ export function createStyled<
         className += ` ${props.className}`;
       }
 
-      return React.createElement(type, {
+      return createElement(type, {
         ...props,
         className,
         ref,

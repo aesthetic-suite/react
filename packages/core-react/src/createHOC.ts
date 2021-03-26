@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import React from 'react';
 import hoistNonReactStatics from 'hoist-non-react-statics';
 import { WrapperComponent } from './types';
 

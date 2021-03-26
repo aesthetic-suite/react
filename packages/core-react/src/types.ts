@@ -1,7 +1,6 @@
 // Any must be used here for consumers to be typed correctly.
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import React from 'react';
 import { Direction, Theme, ThemeName } from '@aesthetic/core';
 
 // HOCs

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { Aesthetic, Theme } from '@aesthetic/core';
 import createHOC from './createHOC';
 import {
@@ -12,7 +12,7 @@ import {
 export default function createThemeHelpers<Result, Block extends object>(
   aesthetic: Aesthetic<Result, Block>,
 ) /* infer */ {
-  const ThemeContext = React.createContext<ThemeContextType<Block> | null>(null);
+  const ThemeContext = createContext<ThemeContextType<Block> | null>(null);
 
   /**
    * Rendered at the root to provide the theme to the entire application.
