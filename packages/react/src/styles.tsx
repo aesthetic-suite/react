@@ -30,11 +30,11 @@ export function useCss(
 function getVariantsFromProps(
   renderResult: RenderResult<unknown> | undefined,
   baseProps: object,
-): { props: { className?: string }; variants: Record<string, string> } {
+): { props: { className?: string }; variants?: Record<string, string> } {
   const types = renderResult?.variantTypes;
 
   if (!types) {
-    return { props: baseProps, variants: {} };
+    return { props: baseProps };
   }
 
   const variants: Record<string, string> = {};
@@ -83,7 +83,7 @@ export function createStyled<
     forwardRef((baseProps, ref) => {
       const cx = useStyles(styleSheet);
       const { props, variants } = getVariantsFromProps(cx.result.element, baseProps);
-      let className = cx(variants, 'element');
+      let className = variants ? cx(variants, 'element') : cx('element');
 
       if (props.className) {
         className += ` ${props.className}`;
