@@ -24,6 +24,8 @@
     "dts/**/*.d.ts",
     "esm/**/*.{js,map}",
     "lib/**/*.{js,map}",
+    "server.d.ts",
+    "server.js",
     "src/**/*.{ts,tsx,json}"
   ],
   "sideEffects": false,
@@ -49,6 +51,10 @@
     "url": "https://ko-fi.com/milesjohnson"
   },
   "packemon": {
+    "inputs": {
+      "index": "src/index.ts",
+      "server": "src/server.tsx"
+    },
     "platform": "browser"
   }
 }
