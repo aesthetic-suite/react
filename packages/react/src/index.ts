@@ -33,3 +33,7 @@ export const {
   subscribe,
   unsubscribe,
 } = aesthetic;
+
+// Do not use! This is for bundler pre-compilation usage!
+// @private
+export const internalAestheticRuntime = aesthetic;
