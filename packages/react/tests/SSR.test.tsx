@@ -59,14 +59,14 @@ describe('SSR', () => {
 
   describe('renderToString()', () => {
     it('renders markup', () => {
-      expect(renderToString(extractStyles(<App />, engine))).toMatchSnapshot();
+      expect(renderToString(extractStyles(engine, <App />))).toMatchSnapshot();
       expect(renderToStyleMarkup(engine)).toMatchSnapshot();
     });
   });
 
   describe('renderToStaticMarkup()', () => {
     it('renders markup', () => {
-      expect(renderToStaticMarkup(extractStyles(<App />, engine))).toMatchSnapshot();
+      expect(renderToStaticMarkup(extractStyles(engine, <App />))).toMatchSnapshot();
       expect(renderToStyleMarkup(engine)).toMatchSnapshot();
     });
   });
