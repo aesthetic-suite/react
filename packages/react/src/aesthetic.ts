@@ -1,8 +1,12 @@
 import { Aesthetic, ClassName, ElementStyles } from '@aesthetic/core';
 import { createClientEngine } from '@aesthetic/style';
+import { isDOM } from '@aesthetic/utils';
 
 const aesthetic = new Aesthetic<ClassName, ElementStyles>();
 
-aesthetic.configureEngine(createClientEngine());
+// Avoid creating the client on the server
+if (isDOM()) {
+  aesthetic.configureEngine(createClientEngine());
+}
 
 export default aesthetic;

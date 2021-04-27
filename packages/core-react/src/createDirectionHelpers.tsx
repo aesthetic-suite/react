@@ -13,17 +13,17 @@ import {
 export default function createDirectionHelpers<Result, Block extends object>(
   aesthetic: Aesthetic<Result, Block>,
 ) /* infer */ {
-  const DirectionContext = createContext<DirectionContextType>(
-    aesthetic.getActiveDirection() || 'ltr',
-  );
+  const DirectionContext = createContext<DirectionContextType>('ltr');
 
   /**
    * Explicitly define a direction or automatically infer a direction based on a string of text.
    * Will render an element with a `dir` attribute set.
    */
   function DirectionProvider({ children, direction, value, wrapper }: DirectionProviderProps) {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    const dir: Direction = direction || getDirection(value) || 'ltr';
+    const dir = (direction ||
+      (value && getDirection(value)) ||
+      aesthetic.getActiveDirection() ||
+      'ltr') as Direction;
 
     return (
       <DirectionContext.Provider value={dir}>
