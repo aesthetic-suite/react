@@ -12,7 +12,7 @@ import {
 interface StyleHelperOptions<Result, Block extends object> {
   generate: <T extends string>(
     keys: T[],
-    variants: string[],
+    variants: Set<string>,
     results: RenderResultSheet<Result>,
   ) => Result;
   useDirection: () => Direction;
@@ -28,15 +28,15 @@ export default function createStyleHelpers<Result, Block extends object>(
     results: RenderResultSheet<Result>,
     cache: Record<string, Result>,
   ): Result {
-    const variants: string[] = [];
+    const variants = new Set<string>();
     let cacheKey = '';
 
     // Variant objects may only be passed as the first argument
     if (isObject(keys[0])) {
-      objectLoop(keys.shift() as object, (value, subType) => {
-        const type = `${subType}_${value}`;
+      objectLoop(keys.shift() as object, (value, variant) => {
+        const type = `${variant}:${value}`;
 
-        variants.push(type);
+        variants.add(type);
         cacheKey += type;
       });
     }

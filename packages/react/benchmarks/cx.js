@@ -6,7 +6,7 @@ const Benchmark = require('benchmark');
 
 const suite = new Benchmark.Suite();
 const sizes = ['xs', 'sm', 'df', 'lg', 'xl'];
-const palettes = ['brand', 'neutral', 'success', 'failure', 'warning', 'info'];
+const palettes = ['brand', 'neutral', 'positive', 'negative', 'warning'];
 
 function random(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -56,15 +56,14 @@ const cxClassNames = {
     class: 'element_modifier2',
     variants: {
       palette_neutral: 'element_modifier2@palette_neutral',
-      palette_success: 'element_modifier2@palette_success',
-      palette_failure: 'element_modifier2@palette_failure',
+      palette_positive: 'element_modifier2@palette_positive',
+      palette_negative: 'element_modifier2@palette_negative',
     },
   },
   element_modifier3: {
     class: 'element_modifier3',
     variants: {
       palette_brand: 'element_modifier3@palette_brand',
-      palette_info: 'element_modifier3@palette_info',
       palette_warning: 'element_modifier3@palette_warning',
     },
   },

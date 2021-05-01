@@ -12,7 +12,7 @@ import React from 'react';
 import { createComponentStyles, useStyles } from '@aesthetic/react';
 
 export const styleSheet = createComponentStyles((css) => ({
-  button: css.mixin('pattern-reset-button', {
+  button: css.mixin('reset-button', {
     padding: css.var('spacing-df'),
   }),
 

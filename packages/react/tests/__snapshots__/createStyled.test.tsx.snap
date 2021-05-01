@@ -189,8 +189,8 @@ exports[`createStyled() variants doesnt pass the variant prop to the HTML elemen
   <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>
     <div dir=\\"ltr\\">
       <ThemeProvider name=\\"twilight\\">
-        <Memo(ForwardRef) palette=\\"success\\">
-          <ForwardRef palette=\\"success\\">
+        <Memo(ForwardRef) palette=\\"positive\\">
+          <ForwardRef palette=\\"positive\\">
             <div className=\\"a b\\" />
           </ForwardRef>
         </Memo(ForwardRef)>
@@ -205,10 +205,10 @@ exports[`createStyled() variants inherits and merges variant props and types whe
   <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>
     <div dir=\\"ltr\\">
       <ThemeProvider name=\\"twilight\\">
-        <Memo(ForwardRef) palette=\\"success\\" size=\\"lg\\">
-          <ForwardRef palette=\\"success\\" size=\\"lg\\">
-            <Memo(ForwardRef) className=\\"f\\" palette=\\"success\\">
-              <ForwardRef className=\\"f\\" palette=\\"success\\">
+        <Memo(ForwardRef) palette=\\"positive\\" size=\\"lg\\">
+          <ForwardRef palette=\\"positive\\" size=\\"lg\\">
+            <Memo(ForwardRef) className=\\"f\\" palette=\\"positive\\">
+              <ForwardRef className=\\"f\\" palette=\\"positive\\">
                 <div className=\\"a b f\\" />
               </ForwardRef>
             </Memo(ForwardRef)>
@@ -225,8 +225,8 @@ exports[`createStyled() variants supports variants 1`] = `
   <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>
     <div dir=\\"ltr\\">
       <ThemeProvider name=\\"twilight\\">
-        <Memo(ForwardRef) palette=\\"success\\">
-          <ForwardRef palette=\\"success\\">
+        <Memo(ForwardRef) palette=\\"positive\\">
+          <ForwardRef palette=\\"positive\\">
             <div className=\\"a b\\">
               <div>
                 <h1>Title</h1>
@@ -241,15 +241,15 @@ exports[`createStyled() variants supports variants 1`] = `
 </Wrapper>"
 `;
 
-exports[`createStyled() variants supports variants 2`] = `".a {background: var(--palette-neutral-bg-base);}.b {background: var(--palette-success-bg-base);}.c {background: var(--palette-failure-bg-base);}.d {background: var(--palette-warning-bg-base);}"`;
+exports[`createStyled() variants supports variants 2`] = `".a {background: var(--palette-neutral-bg-base);}.b {background: var(--palette-positive-bg-base);}.c {background: var(--palette-negative-bg-base);}.d {background: var(--palette-warning-bg-base);}"`;
 
 exports[`createStyled() variants supports variants 3`] = `
 "<Wrapper>
   <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>
     <div dir=\\"ltr\\">
       <ThemeProvider name=\\"twilight\\">
-        <Memo(ForwardRef) palette=\\"failure\\">
-          <ForwardRef palette=\\"failure\\">
+        <Memo(ForwardRef) palette=\\"negative\\">
+          <ForwardRef palette=\\"negative\\">
             <div className=\\"a c\\">
               <div>
                 <h1>Title</h1>

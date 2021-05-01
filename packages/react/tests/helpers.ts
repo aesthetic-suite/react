@@ -1,5 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import mixins from '@aesthetic/addon-mixins';
 import {
   darkTheme,
   design,
@@ -10,14 +8,12 @@ import {
 import { createTestStyleEngine, purgeStyles } from '@aesthetic/style/test';
 import aesthetic from '../src/aesthetic';
 
-export const designWithMixins = design.extend('react', {}, mixins);
-
-export const dawnTheme = designWithMixins.createTheme(
+export const dawnTheme = design.createTheme(
   { contrast: 'normal', scheme: 'light' },
   lightTheme.tokens,
 );
 
-export const twilightTheme = designWithMixins.createTheme(
+export const twilightTheme = design.createTheme(
   { contrast: 'normal', scheme: 'dark' },
   darkTheme.tokens,
 );

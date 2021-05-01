@@ -7,53 +7,50 @@ import aesthetic from '../../src/aesthetic';
 
 export function createStyleSheet() {
   return aesthetic.createComponentStyles((css) => ({
-    button: css.mixin.resetButton(
-      css.mixin.border(
-        { size: 'df' },
-        {
-          position: 'relative',
-          display: 'inline-flex',
-          textAlign: 'center',
-          backgroundColor: css.var('palette-brand-color-40'),
-          color: css.var('palette-neutral-color-00'),
+    button: css.mixin('reset-button', {
+      position: 'relative',
+      display: 'inline-flex',
+      textAlign: 'center',
+      backgroundColor: css.var('palette-brand-color-40'),
+      color: css.var('palette-neutral-color-00'),
+      borderColor: css.var('palette-neutral-color-40'),
+      borderStyle: 'solid',
+      borderWidth: css.var('border-df-width'),
+      borderRadius: css.var('border-df-radius'),
 
-          ':hover': {
-            backgroundColor: css.var('palette-brand-color-50'),
-          },
+      ':hover': {
+        backgroundColor: css.var('palette-brand-color-50'),
+      },
 
-          ':active': {
-            backgroundColor: css.var('palette-brand-color-60'),
-          },
+      ':active': {
+        backgroundColor: css.var('palette-brand-color-60'),
+      },
 
-          '@selectors': {
-            '::-moz-focus-inner': {
-              border: 0,
-              padding: 0,
-              margin: 0,
-            },
-          },
-
-          '@variants': {
-            size: {
-              sm: {
-                minWidth: css.unit(6),
-                padding: `${css.var('spacing-sm')} ${css.var('spacing-df')}`,
-              },
-              df: {
-                minWidth: css.unit(8),
-                padding: `${css.var('spacing-df')} ${css.var('spacing-md')}`,
-              },
-              lg: {
-                minWidth: css.unit(10),
-                padding: `${css.var('spacing-md')} ${css.var('spacing-lg')}`,
-              },
-            },
-          },
+      '@selectors': {
+        '::-moz-focus-inner': {
+          border: 0,
+          padding: 0,
+          margin: 0,
         },
-      ),
-    ),
+      },
 
-    button_block: css.mixin.textWrap({
+      '@variants': {
+        'size:sm': {
+          minWidth: css.unit(6),
+          padding: `${css.var('spacing-sm')} ${css.var('spacing-df')}`,
+        },
+        'size:df': {
+          minWidth: css.unit(8),
+          padding: `${css.var('spacing-df')} ${css.var('spacing-md')}`,
+        },
+        'size:lg': {
+          minWidth: css.unit(10),
+          padding: `${css.var('spacing-md')} ${css.var('spacing-lg')}`,
+        },
+      },
+    }),
+
+    button_block: css.mixin('text-wrap', {
       display: 'block',
       width: '100%',
       whiteSpace: 'normal',
@@ -62,16 +59,14 @@ export function createStyleSheet() {
 
     button_disabled: {
       '@variants': {
-        size: {
-          sm: {
-            opacity: 0.4,
-          },
-          df: {
-            opacity: 0.5,
-          },
-          lg: {
-            opacity: 0.6,
-          },
+        'size:sm': {
+          opacity: 0.4,
+        },
+        'size:df': {
+          opacity: 0.5,
+        },
+        'size:lg': {
+          opacity: 0.6,
         },
       },
     },

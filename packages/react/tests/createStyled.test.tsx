@@ -123,23 +123,21 @@ describe('createStyled()', () => {
 
   describe('variants', () => {
     interface AlertProps {
-      palette?: 'failure' | 'success' | 'warning';
+      palette?: 'negative' | 'positive' | 'warning';
     }
 
     function createAlert() {
       return createStyled<'div', AlertProps>('div', (css) => ({
         background: css.var('palette-neutral-bg-base'),
         '@variants': {
-          palette: {
-            success: {
-              background: css.var('palette-success-bg-base'),
-            },
-            failure: {
-              background: css.var('palette-failure-bg-base'),
-            },
-            warning: {
-              background: css.var('palette-warning-bg-base'),
-            },
+          'palette:positive': {
+            background: css.var('palette-positive-bg-base'),
+          },
+          'palette:negative': {
+            background: css.var('palette-negative-bg-base'),
+          },
+          'palette:warning': {
+            background: css.var('palette-warning-bg-base'),
           },
         },
       }));
@@ -149,7 +147,7 @@ describe('createStyled()', () => {
       const Alert = createAlert();
 
       const { debug, update } = render<AlertProps>(
-        <Alert palette="success">
+        <Alert palette="positive">
           <div>
             <h1>Title</h1>And other content!
           </div>
@@ -162,7 +160,7 @@ describe('createStyled()', () => {
       expect(debug({ log: false })).toMatchSnapshot();
       expect(getRenderedStyles('standard')).toMatchSnapshot();
 
-      update({ palette: 'failure' });
+      update({ palette: 'negative' });
 
       expect(debug({ log: false })).toMatchSnapshot();
 
@@ -174,7 +172,7 @@ describe('createStyled()', () => {
     it('doesnt pass the variant prop to the HTML element', () => {
       const Alert = createAlert();
 
-      const { debug } = render<AlertProps>(<Alert palette="success" />, {
+      const { debug } = render<AlertProps>(<Alert palette="positive" />, {
         wrapper: <Wrapper />,
       });
 
@@ -186,14 +184,12 @@ describe('createStyled()', () => {
 
       const SubAlert = createStyled<typeof Alert, { size?: 'lg' | 'sm' }>(Alert, {
         '@variants': {
-          size: {
-            sm: { padding: 1 },
-            lg: { padding: 2 },
-          },
+          'size:sm': { padding: 1 },
+          'size:lg': { padding: 2 },
         },
       });
 
-      const { debug } = render<AlertProps>(<SubAlert palette="success" size="lg" />, {
+      const { debug } = render<AlertProps>(<SubAlert palette="positive" size="lg" />, {
         wrapper: <Wrapper />,
       });
 

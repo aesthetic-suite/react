@@ -2,14 +2,14 @@
 
 import React from 'react';
 import { renderToStaticMarkup, renderToString } from 'react-dom/server';
-import { StyleEngine } from '@aesthetic/style';
-import { createServerEngine, extractStyles, renderToStyleMarkup } from '@aesthetic/style/server';
+import { ServerStyleEngine } from '@aesthetic/style';
+import { createServerEngine, renderToStyleMarkup } from '@aesthetic/style/server';
 import { ThemeProvider, useStyles } from '../src';
 import { ButtonProps, createStyleSheet } from './__mocks__/Button';
 import { setupAestheticReact, teardownAestheticReact } from './helpers';
 
 describe('SSR', () => {
-  let engine: StyleEngine;
+  let engine: ServerStyleEngine;
 
   function Button({ children, block, disabled, large, small }: ButtonProps) {
     const cx = useStyles(createStyleSheet());
@@ -59,14 +59,14 @@ describe('SSR', () => {
 
   describe('renderToString()', () => {
     it('renders markup', () => {
-      expect(renderToString(extractStyles(engine, <App />))).toMatchSnapshot();
+      expect(renderToString(engine.extractStyles(<App />))).toMatchSnapshot();
       expect(renderToStyleMarkup(engine)).toMatchSnapshot();
     });
   });
 
   describe('renderToStaticMarkup()', () => {
     it('renders markup', () => {
-      expect(renderToStaticMarkup(extractStyles(engine, <App />))).toMatchSnapshot();
+      expect(renderToStaticMarkup(engine.extractStyles(<App />))).toMatchSnapshot();
       expect(renderToStyleMarkup(engine)).toMatchSnapshot();
     });
   });

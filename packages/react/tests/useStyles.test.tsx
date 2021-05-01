@@ -91,7 +91,7 @@ describe('useStyles()', () => {
 
     expect(root.findOne('button')).toHaveProp(
       'className',
-      'a b c d e f g h i j k l m n o p q r s t u v w b1 c1 d1 e1 f1 g1 h1 i1 j1 m1',
+      'a b c d e f g h i j k l m n o p q r s t u v w d1 e1 f1 g1 h1 i1 j1 b1 c1 m1',
     );
   });
 
