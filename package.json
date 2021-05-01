@@ -1,6 +1,6 @@
 {
-  "name": "aesthetic-react",
   "private": true,
+  "name": "aesthetic-react-root",
   "version": "0.0.0",
   "scripts": {
     "prepare": "beemo create-config --silent",
@@ -19,7 +19,7 @@
     "posttest": "yarn run lint"
   },
   "engines": {
-    "node": ">=10.10.0"
+    "node": ">=10.3.0"
   },
   "devDependencies": {
     "@milesj/build-tools": "^2.17.0",
@@ -56,11 +56,6 @@
     "settings": {
       "decorators": true,
       "react": true
-    },
-    "eslint": {
-      "extends": [
-        "plugin:rut/recommended"
-      ]
     }
   },
   "workspaces": [

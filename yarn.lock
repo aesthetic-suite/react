@@ -2,13 +2,6 @@
 # yarn lockfile v1
 
 
-"@aesthetic/addon-mixins@^0.2.11":
-  version "0.2.11"
-  resolved "https://registry.yarnpkg.com/@aesthetic/addon-mixins/-/addon-mixins-0.2.11.tgz#f27df54d091ee8c750858b5dffa623a33d9571b3"
-  integrity sha512-CPEx+uiqT5com6iYHqCZ/LMNcTIPdZCPJFvww4chtv+cm1hi3RYdTC0Nh5t8zBsSAkNlj4BW0yYKkWDXR9I6iA==
-  dependencies:
-    "@aesthetic/utils" "^0.7.0"
-
 "@aesthetic/core@^0.9.0":
   version "0.9.0"
   resolved "https://registry.yarnpkg.com/@aesthetic/core/-/core-0.9.0.tgz#56495b461d906ef7dacaf48a806dd680b7d5ec98"
