@@ -1,8 +1,8 @@
-import React, { createElement, forwardRef, memo } from 'react';
-import { StyleProp, StyleSheet } from 'react-native';
+import React, { createElement, forwardRef, memo, useMemo } from 'react';
+import { StyleProp } from 'react-native';
 import { Utilities } from '@aesthetic/core';
 import { createStyleHelpers } from '@aesthetic/core-react';
-import { arrayLoop } from '@aesthetic/utils';
+import { arrayLoop, toArray } from '@aesthetic/utils';
 import aesthetic from './aesthetic';
 import { useDirection } from './direction';
 import { useTheme } from './theme';
@@ -51,7 +51,9 @@ export function createStyled<T extends React.ComponentType<any>, V extends objec
     const typeOfFactory = typeof factory;
 
     if (typeOfType !== 'string' && typeOfType !== 'function' && typeOfType !== 'object') {
-      throw new TypeError(`Styled components must extend a View component, found ${typeOfType}.`);
+      throw new TypeError(
+        `Styled components must extend a View or React component, found ${typeOfType}.`,
+      );
     }
 
     if (typeOfFactory !== 'function' && typeOfFactory !== 'object') {
@@ -69,20 +71,23 @@ export function createStyled<T extends React.ComponentType<any>, V extends objec
     forwardRef((baseProps, ref) => {
       const sx = useStyles(styleSheet);
       const { props, variants } = getVariantsFromProps<'style'>(sx.result.element, baseProps);
-      let style = variants ? sx(variants, 'element') : sx('element');
+      const style = variants ? sx(variants, 'element') : sx('element');
 
-      if (props.style) {
-        if (Array.isArray(style)) {
-          style.push(props.style);
-        } else {
-          style = StyleSheet.compose(style, props.style);
+      // Cache the style prop so that we avoid unwanted rerenders
+      const styleProp = useMemo(() => {
+        const viewStyles = toArray(style) as NativeStyles[];
+
+        if (props.style) {
+          viewStyles.push(...toArray(props.style));
         }
-      }
+
+        return viewStyles;
+      }, [style, props.style]);
 
       return createElement(type, {
         ...props,
         ref,
-        style,
+        style: styleProp,
       });
     }),
   );

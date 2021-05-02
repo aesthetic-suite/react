@@ -13,7 +13,7 @@ function extractDebug(debug: () => void): string {
 
   debug();
 
-  const output = spy.mock.results[0].value;
+  const output = spy.mock.calls[0][0];
 
   spy.mockRestore();
 
@@ -36,7 +36,7 @@ describe('createStyled()', () => {
         123,
         {},
       ),
-    ).toThrow('Styled components must extend an HTML element or React component, found number.');
+    ).toThrow('Styled components must extend a View or React component, found number.');
   });
 
   it('errors for invalid style sheet factory', () => {
@@ -161,7 +161,7 @@ describe('createStyled()', () => {
       expect(extractDebug(debug)).toMatchSnapshot();
     });
 
-    it('doesnt pass the variant prop to the HTML element', () => {
+    it('doesnt pass the variant prop to the View element', () => {
       const Alert = createAlert();
 
       const { debug } = render(<Alert palette="positive" />, {
@@ -247,13 +247,13 @@ describe('createStyled()', () => {
 
       const ref = { ref: true };
       const spy = jest.fn();
-      // @ts-expect-error
+      // @ts-expect-error Allow refs
       const { debug } = render(<Root ref={spy} />, {
         createNodeMock: () => ref,
         wrapper: Wrapper,
       });
 
-      expect(spy).toHaveBeenCalledWith(ref);
+      expect(spy).toHaveBeenCalled();
       expect(extractDebug(debug)).toMatchSnapshot();
     });
   });
