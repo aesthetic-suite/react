@@ -8,7 +8,7 @@ import { ButtonProps, createStyleSheet, Wrapper } from './__mocks__/Button';
 import { dawnTheme, setupAestheticReact, teardownAestheticReact, twilightTheme } from './helpers';
 
 describe('useStyles()', () => {
-  function Button({ children, block, disabled, large, small }: ButtonProps) {
+  function Button({ children, compound, block, disabled, large, small }: ButtonProps) {
     const cx = useStyles(createStyleSheet());
 
     return (
@@ -16,6 +16,7 @@ describe('useStyles()', () => {
         type="button"
         className={cx(
           {
+            compound,
             // eslint-disable-next-line no-nested-ternary
             size: large ? 'lg' : small ? 'sm' : 'df',
           },
@@ -84,14 +85,46 @@ describe('useStyles()', () => {
 
     expect(root.findOne('button')).toHaveProp(
       'className',
-      'a b c d e f g h i j k l m n o p q r s t u v w z a1 l1',
+      'a b c d e f g h i j k l m n o p q r s t u v w z a1 m1',
     );
 
     update({ block: true, large: true });
 
     expect(root.findOne('button')).toHaveProp(
       'className',
-      'a b c d e f g h i j k l m n o p q r s t u v w d1 e1 f1 g1 h1 i1 j1 b1 c1 m1',
+      'a b c d e f g h i j k l m n o p q r s t u v w e1 f1 g1 h1 i1 j1 k1 b1 c1 n1',
+    );
+  });
+
+  it('includes variants and compound variants when activated', () => {
+    const { root, update } = render<ButtonProps>(
+      <Button large compound="test">
+        Child
+      </Button>,
+      {
+        wrapper: <Wrapper />,
+      },
+    );
+
+    expect(root.findOne('button')).toHaveProp(
+      'className',
+      'a b c d e f g h i j k l m n o p q r s t u v w b1 c1 d1',
+    );
+
+    // Test compound no longer matches
+    update({ large: true, compound: 'invalid' });
+
+    expect(root.findOne('button')).toHaveProp(
+      'className',
+      'a b c d e f g h i j k l m n o p q r s t u v w b1 c1',
+    );
+
+    // Test other element variants are applied
+    update({ large: true, compound: 'test', disabled: true });
+
+    expect(root.findOne('button')).toHaveProp(
+      'className',
+      'a b c d e f g h i j k l m n o p q r s t u v w b1 c1 d1 n1 o1',
     );
   });
 

@@ -22,7 +22,7 @@ export const { useStyles, withStyles } = createStyleHelpers(aesthetic, {
 
 export function useCss(
   rule: Rule,
-  options?: Omit<RenderOptions, 'className' | 'rankings' | 'type'>,
+  options?: Pick<RenderOptions, 'media' | 'selector' | 'supports'>,
 ): ClassName {
   return useMemo(() => aesthetic.getEngine().renderRule(rule, options), [rule, options]);
 }

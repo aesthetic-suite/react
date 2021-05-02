@@ -4,6 +4,7 @@ import { isObject, objectLoop } from '@aesthetic/utils';
 import createHOC from './createHOC';
 import {
   StyleResultGenerator,
+  StyleResultVariants,
   WithStylesWrappedProps,
   WrapperComponent,
   WrapperProps,
@@ -33,11 +34,13 @@ export default function createStyleHelpers<Result, Block extends object>(
 
     // Variant objects may only be passed as the first argument
     if (isObject(keys[0])) {
-      objectLoop(keys.shift() as object, (value, variant) => {
-        const type = `${variant}:${value}`;
+      objectLoop(keys.shift() as StyleResultVariants, (value, variant) => {
+        if (value) {
+          const type = `${variant}:${value}`;
 
-        variants.add(type);
-        cacheKey += type;
+          variants.add(type);
+          cacheKey += type;
+        }
       });
     }
 
