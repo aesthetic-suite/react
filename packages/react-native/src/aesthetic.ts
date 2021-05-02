@@ -1,6 +1,6 @@
 import { Appearance, I18nManager } from 'react-native';
 import { Aesthetic } from '@aesthetic/core';
-import { NativeEngine, NativeBlock, NativeStyles } from './types';
+import { NativeBlock, NativeEngine, NativeStyles } from './types';
 
 const noop = () => {};
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { render } from '@testing-library/react-native';
-import { withDirection, DirectionProvider, WithDirectionWrappedProps } from '../src';
+import { DirectionProvider, withDirection, WithDirectionWrappedProps } from '../src';
 import { setupAestheticReact, teardownAestheticReact } from './helpers';
 
 describe('withDirection()', () => {

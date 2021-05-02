@@ -3,8 +3,8 @@
 import React from 'react';
 import { View } from 'react-native';
 import { render } from '@testing-library/react-native';
-import { withStyles, ThemeProvider, WithStylesWrappedProps, NativeStyles } from '../src';
-import { createStyleSheet, ButtonProps, Wrapper } from './__mocks__/Button';
+import { NativeStyles, ThemeProvider, withStyles, WithStylesWrappedProps } from '../src';
+import { ButtonProps, createStyleSheet, Wrapper } from './__mocks__/Button';
 import { dawnTheme, setupAestheticReact, teardownAestheticReact, twilightTheme } from './helpers';
 
 describe('withStyles()', () => {
@@ -25,7 +25,7 @@ describe('withStyles()', () => {
     small,
   }: ButtonProps &
     WithStylesWrappedProps<
-      'button' | 'button_block' | 'button_disabled' | 'button_large' | 'button_small',
+      'button_block' | 'button_disabled' | 'button_large' | 'button_small' | 'button',
       NativeStyles
     >) {
     return (

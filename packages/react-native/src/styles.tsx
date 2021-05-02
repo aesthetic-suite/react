@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createElement, forwardRef, memo } from 'react';
 import { StyleProp, StyleSheet } from 'react-native';
 import { Utilities } from '@aesthetic/core';
 import { createStyleHelpers } from '@aesthetic/core-react';
@@ -6,7 +6,7 @@ import { arrayLoop } from '@aesthetic/utils';
 import aesthetic from './aesthetic';
 import { useDirection } from './direction';
 import { useTheme } from './theme';
-import { InferProps, StyledComponent, NativeBlock, NativeStyles } from './types';
+import { InferProps, NativeBlock, NativeStyles, StyledComponent } from './types';
 
 export const { getVariantsFromProps, useStyles, withStyles } = createStyleHelpers<
   NativeStyles,
@@ -28,9 +28,9 @@ export const { getVariantsFromProps, useStyles, withStyles } = createStyleHelper
       }
 
       if (hash.variants) {
-        arrayLoop(variants, (variant) => {
-          if (hash.variants?.[variant]) {
-            style.push(hash.variants[variant]);
+        arrayLoop(hash.variants, ({ match, result }) => {
+          if (match.every((type) => variants.has(type))) {
+            style.push(result);
           }
         });
       }
@@ -65,11 +65,11 @@ export function createStyled<T extends React.ComponentType<any>, V extends objec
     element: typeof factory === 'function' ? factory(utils) : factory,
   }));
 
-  const Component = React.memo(
-    React.forwardRef((baseProps, ref) => {
+  const Component = memo(
+    forwardRef((baseProps, ref) => {
       const sx = useStyles(styleSheet);
-      const { props, variants } = getVariantsFromProps<'style'>(styleSheet, baseProps);
-      let style = sx(variants, 'element');
+      const { props, variants } = getVariantsFromProps<'style'>(sx.result.element, baseProps);
+      let style = variants ? sx(variants, 'element') : sx('element');
 
       if (props.style) {
         if (Array.isArray(style)) {
@@ -79,7 +79,7 @@ export function createStyled<T extends React.ComponentType<any>, V extends objec
         }
       }
 
-      return React.createElement(type, {
+      return createElement(type, {
         ...props,
         ref,
         style,

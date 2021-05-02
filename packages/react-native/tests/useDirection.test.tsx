@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { render } from '@testing-library/react-native';
-import { useDirection, DirectionProvider } from '../src';
+import { DirectionProvider, useDirection } from '../src';
 
 describe('useDirection()', () => {
   it('returns "ltr" if no context provided', () => {

@@ -41,19 +41,17 @@ export function createStyleSheet() {
       },
 
       '@variants': {
-        size: {
-          sm: {
-            minWidth: css.unit(6),
-            padding: `${css.tokens.spacing.md} ${css.tokens.spacing.df}`,
-          },
-          df: {
-            minWidth: css.unit(8),
-            padding: `${css.tokens.spacing.df} ${css.tokens.spacing.md}`,
-          },
-          lg: {
-            minWidth: css.unit(10),
-            padding: `${css.tokens.spacing.md} ${css.tokens.spacing.lg}`,
-          },
+        'size:sm': {
+          minWidth: css.unit(6),
+          padding: `${css.tokens.spacing.md} ${css.tokens.spacing.df}`,
+        },
+        'size:df': {
+          minWidth: css.unit(8),
+          padding: `${css.tokens.spacing.df} ${css.tokens.spacing.md}`,
+        },
+        'size:lg': {
+          minWidth: css.unit(10),
+          padding: `${css.tokens.spacing.md} ${css.tokens.spacing.lg}`,
         },
       },
     },
@@ -69,16 +67,14 @@ export function createStyleSheet() {
 
     button_disabled: {
       '@variants': {
-        size: {
-          sm: {
-            opacity: 0.4,
-          },
-          df: {
-            opacity: 0.5,
-          },
-          lg: {
-            opacity: 0.6,
-          },
+        'size:sm': {
+          opacity: 0.4,
+        },
+        'size:df': {
+          opacity: 0.5,
+        },
+        'size:lg': {
+          opacity: 0.6,
         },
       },
     },

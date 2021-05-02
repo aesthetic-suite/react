@@ -103,10 +103,10 @@ export default function createStyleHelpers<Result, Block extends object, Generat
 
     const cx = useCallback((...keys: unknown[]) => cxWithCache(keys, result, classCache.current), [
       result,
-    ]) as StyleResultGenerator<keyof T, Result>;
+    ]) as StyleResultGenerator<keyof T, GeneratedResult>;
 
     // Make the result available if need be, but behind a hidden API
-    cx.result = result;
+    cx.result = result as RenderResultSheet<GeneratedResult>;
 
     return cx;
   }
@@ -134,10 +134,10 @@ export default function createStyleHelpers<Result, Block extends object, Generat
     };
   }
 
-  function getVariantsFromProps(
+  function getVariantsFromProps<Keys extends string>(
     renderResult: RenderResult<unknown> | undefined,
     baseProps: object,
-  ): { props: { className?: string }; variants?: Record<string, string> } {
+  ): { props: { [K in Keys]?: Result }; variants?: Record<string, string> } {
     const types = renderResult?.variantTypes;
 
     if (!types) {
@@ -155,6 +155,7 @@ export default function createStyleHelpers<Result, Block extends object, Generat
       }
     });
 
+    // @ts-expect-error We know its safe
     return { props, variants };
   }
 

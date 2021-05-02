@@ -19,9 +19,13 @@
   "author": "Miles Johnson",
   "license": "MIT",
   "main": "./lib/index.js",
-  "module": "./esm/index.js",
   "types": "./dts/index.d.ts",
   "sideEffects": false,
+  "files": [
+    "dts/**/*.d.ts",
+    "lib/**/*.{js,map}",
+    "src/**/*.{ts,tsx,json}"
+  ],
   "publishConfig": {
     "access": "public"
   },

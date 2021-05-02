@@ -2,11 +2,11 @@
 
 import React from 'react';
 import { View } from 'react-native';
-import { render, act } from '@testing-library/react-native';
 import { OnChangeTheme } from '@aesthetic/core';
+import { act, render } from '@testing-library/react-native';
 import { ThemeProvider, useTheme } from '../src';
 import aesthetic from '../src/aesthetic';
-import { setupAestheticReact, teardownAestheticReact, twilightTheme, dawnTheme } from './helpers';
+import { dawnTheme, setupAestheticReact, teardownAestheticReact, twilightTheme } from './helpers';
 
 describe('ThemeProvider', () => {
   beforeEach(() => {

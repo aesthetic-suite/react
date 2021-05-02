@@ -1,11 +1,11 @@
 import React from 'react';
+import { ImageStyle, TextStyle, ViewStyle } from 'react-native';
 import { Engine, LocalSheet } from '@aesthetic/core';
-import { ViewStyle, TextStyle, ImageStyle } from 'react-native';
 
 export interface NativeStyles extends ViewStyle, TextStyle, Omit<ImageStyle, 'overflow'> {}
 
 export type NativeBlock = NativeStyles & {
-  '@variants'?: Record<string, Record<string, NativeStyles>>;
+  '@variants'?: Record<string, NativeStyles>;
 };
 
 export type NativeEngine = Engine<NativeStyles>;

@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { View } from 'react-native';
-import { render } from '@testing-library/react-native';
 import { darkTheme } from '@aesthetic/core/test';
+import { render } from '@testing-library/react-native';
 import { ContextualThemeProvider, useTheme } from '../src';
 import { setupAestheticReact, teardownAestheticReact } from './helpers';
 

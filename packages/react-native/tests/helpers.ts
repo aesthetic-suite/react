@@ -1,9 +1,9 @@
 import {
-  lightTheme,
   darkTheme,
   design,
-  teardownAesthetic,
+  lightTheme,
   setupAesthetic,
+  teardownAesthetic,
 } from '@aesthetic/core/test';
 import aesthetic from '../src/aesthetic';
 

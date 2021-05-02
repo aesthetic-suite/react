@@ -50,7 +50,7 @@ export function createStyled<
   const Component = memo(
     forwardRef((baseProps, ref) => {
       const cx = useStyles(styleSheet);
-      const { props, variants } = getVariantsFromProps(cx.result.element, baseProps);
+      const { props, variants } = getVariantsFromProps<'className'>(cx.result.element, baseProps);
       let className = variants ? cx(variants, 'element') : cx('element');
 
       if (props.className) {

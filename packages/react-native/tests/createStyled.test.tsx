@@ -1,9 +1,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid, react/jsx-no-literals */
 
 import React from 'react';
-import { Text, View, ViewStyle, TextInput } from 'react-native';
-import { render } from '@testing-library/react-native';
+import { Text, TextInput, View, ViewStyle } from 'react-native';
 import { StyleSheet } from '@aesthetic/core';
+import { render } from '@testing-library/react-native';
 import { createStyled } from '../src';
 import { Wrapper } from './__mocks__/Button';
 import { setupAestheticReact, teardownAestheticReact } from './helpers';
@@ -20,7 +20,7 @@ function extractDebug(debug: () => void): string {
   return output;
 }
 
-describe.skip('createStyled()', () => {
+describe('createStyled()', () => {
   beforeEach(() => {
     setupAestheticReact();
   });
@@ -122,23 +122,21 @@ describe.skip('createStyled()', () => {
 
   describe('variants', () => {
     interface AlertProps {
-      palette?: 'success' | 'failure' | 'warning';
+      palette?: 'negative' | 'positive' | 'warning';
     }
 
     function createAlert() {
       return createStyled<typeof View, AlertProps>(View, (css) => ({
         backgroundColor: css.tokens.palette.neutral.bg.base,
         '@variants': {
-          palette: {
-            success: {
-              backgroundColor: css.tokens.palette.success.bg.base,
-            },
-            failure: {
-              backgroundColor: css.tokens.palette.failure.bg.base,
-            },
-            warning: {
-              backgroundColor: css.tokens.palette.warning.bg.base,
-            },
+          'palette:success': {
+            backgroundColor: css.tokens.palette.positive.bg.base,
+          },
+          'palette:failure': {
+            backgroundColor: css.tokens.palette.negative.bg.base,
+          },
+          'palette:warning': {
+            backgroundColor: css.tokens.palette.warning.bg.base,
           },
         },
       }));
@@ -148,13 +146,13 @@ describe.skip('createStyled()', () => {
       const Alert = createAlert();
       const children = <Text>Title and other content!</Text>;
 
-      const { debug, update } = render(<Alert palette="success">{children}</Alert>, {
+      const { debug, update } = render(<Alert palette="positive">{children}</Alert>, {
         wrapper: Wrapper,
       });
 
       expect(extractDebug(debug)).toMatchSnapshot();
 
-      update(<Alert palette="failure">{children}</Alert>);
+      update(<Alert palette="negative">{children}</Alert>);
 
       expect(extractDebug(debug)).toMatchSnapshot();
 
@@ -166,7 +164,7 @@ describe.skip('createStyled()', () => {
     it('doesnt pass the variant prop to the HTML element', () => {
       const Alert = createAlert();
 
-      const { debug } = render(<Alert palette="success" />, {
+      const { debug } = render(<Alert palette="positive" />, {
         wrapper: Wrapper,
       });
 
@@ -176,16 +174,14 @@ describe.skip('createStyled()', () => {
     it('inherits and merges variant props and types when composing', () => {
       const Alert = createAlert();
 
-      const SubAlert = createStyled<typeof Alert, { size?: 'sm' | 'lg' }>(Alert, {
+      const SubAlert = createStyled<typeof Alert, { size?: 'lg' | 'sm' }>(Alert, {
         '@variants': {
-          size: {
-            sm: { padding: 1 },
-            lg: { padding: 2 },
-          },
+          'size:sm': { padding: 1 },
+          'size:lg': { padding: 2 },
         },
       });
 
-      const { debug } = render(<SubAlert palette="success" size="lg" />, {
+      const { debug } = render(<SubAlert palette="positive" size="lg" />, {
         wrapper: Wrapper,
       });
 

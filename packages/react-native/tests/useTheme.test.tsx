@@ -1,7 +1,7 @@
 import React from 'react';
-import { render } from '@testing-library/react-native';
 import { darkTheme } from '@aesthetic/core/test';
-import { useTheme, ThemeProvider } from '../src';
+import { render } from '@testing-library/react-native';
+import { ThemeProvider, useTheme } from '../src';
 import { dawnTheme, setupAestheticReact, teardownAestheticReact } from './helpers';
 
 describe('useTheme()', () => {
