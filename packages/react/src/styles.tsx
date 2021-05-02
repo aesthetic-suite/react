@@ -26,7 +26,7 @@ export function createStyled<
   type: T,
   factory: ElementStyles | ((utilities: Utilities<ElementStyles>) => ElementStyles),
 ): StyledComponent<InferProps<T> & V> {
-  if (process.env.NODE_ENV !== 'production') {
+  if (__DEV__) {
     const typeOfType = typeof type;
     const typeOfFactory = typeof factory;
 
