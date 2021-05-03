@@ -8,14 +8,15 @@ import { ButtonProps, createStyleSheet, Wrapper } from './__mocks__/Button';
 import { dawnTheme, setupAestheticReact, teardownAestheticReact, twilightTheme } from './helpers';
 
 describe('useStyles()', () => {
-  function Button({ children, block, disabled, large, small }: ButtonProps) {
-    const cx = useStyles(createStyleSheet());
+  function Button({ children, compound, block, disabled, large, small }: ButtonProps) {
+    const sx = useStyles(createStyleSheet());
 
     return (
       <View
         testID="button"
-        style={cx(
+        style={sx(
           {
+            compound,
             // eslint-disable-next-line no-nested-ternary
             size: large ? 'lg' : small ? 'sm' : 'df',
           },
@@ -123,6 +124,73 @@ describe('useStyles()', () => {
       expect.objectContaining({ width: 'auto' }),
       expect.objectContaining({ minWidth: '12.50rem' }),
       expect.objectContaining({ width: '100%' }),
+    ]);
+  });
+
+  it('includes variants and compound variants when activated', () => {
+    const result = render(
+      <Button large compound="test">
+        Child
+      </Button>,
+      {
+        wrapper: Wrapper,
+      },
+    );
+
+    expect(result.getByTestId('button').props.style).toEqual([
+      expect.objectContaining({
+        display: 'flex',
+      }),
+      {
+        minWidth: '12.50rem',
+        padding: '2.50rem 3.75rem',
+      },
+      {
+        transform: [{ scale: 2 }],
+      },
+    ]);
+
+    // Test compound no longer matches
+    result.update(
+      <Button large compound="invalid">
+        Child
+      </Button>,
+    );
+
+    expect(result.getByTestId('button').props.style).toEqual([
+      expect.objectContaining({
+        display: 'flex',
+      }),
+      {
+        minWidth: '12.50rem',
+        padding: '2.50rem 3.75rem',
+      },
+    ]);
+
+    // Test other element variants are applied
+    result.update(
+      <Button disabled large compound="test">
+        Child
+      </Button>,
+    );
+
+    expect(result.getByTestId('button').props.style).toEqual([
+      expect.objectContaining({
+        display: 'flex',
+      }),
+      {
+        minWidth: '12.50rem',
+        padding: '2.50rem 3.75rem',
+      },
+      {
+        transform: [{ scale: 2 }],
+      },
+      // Disabled styles
+      {},
+      { opacity: 0.6 },
+      {
+        transform: [{ scale: 0 }],
+      },
     ]);
   });
 

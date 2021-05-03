@@ -53,6 +53,10 @@ export function createStyleSheet() {
           minWidth: css.unit(10),
           padding: `${css.tokens.spacing.md} ${css.tokens.spacing.lg}`,
         },
+
+        'size:lg + compound:test': {
+          transform: [{ scale: 2 }],
+        },
       },
     },
 
@@ -76,6 +80,10 @@ export function createStyleSheet() {
         'size:lg': {
           opacity: 0.6,
         },
+
+        'size:lg + compound:test': {
+          transform: [{ scale: 0 }],
+        },
       },
     },
   }));
@@ -89,6 +97,8 @@ export interface ButtonProps {
   large?: boolean;
   small?: boolean;
   sheet?: LocalSheet<unknown, NativeBlock, NativeStyles>;
+  // Compound variant tests
+  compound?: string;
 }
 
 export interface WrapperProps {
