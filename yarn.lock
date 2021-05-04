@@ -2,20 +2,20 @@
 # yarn lockfile v1
 
 
-"@aesthetic/core@^0.9.0":
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/@aesthetic/core/-/core-0.9.0.tgz#56495b461d906ef7dacaf48a806dd680b7d5ec98"
-  integrity sha512-GUv6mu6cRPNXKbf0WAnJqvQcM3yBFy/kHcEF97ZMypRhiWKpZVNOfWzqMCpBuWP843iNj5EFR5pP3I7l5yb+5Q==
+"@aesthetic/core@^0.9.1":
+  version "0.9.1"
+  resolved "https://registry.yarnpkg.com/@aesthetic/core/-/core-0.9.1.tgz#3ade7a4ba1f395f35fc240ebba99531281bb0af1"
+  integrity sha512-s5pvpR2NDA16+IGsZNDJlKC+a1HlqsZal168ACpvWXxbzawvi7hL6W9CNwlBX4+olIwKVw3/JmMv6z1sOkQ+uA==
   dependencies:
-    "@aesthetic/sss" "^0.8.0"
+    "@aesthetic/sss" "^0.8.1"
     "@aesthetic/system" "^0.8.0"
     "@aesthetic/types" "^0.5.0"
     "@aesthetic/utils" "^0.7.0"
 
-"@aesthetic/sss@^0.8.0":
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/@aesthetic/sss/-/sss-0.8.0.tgz#e4cdb208d8df37b476bea2cd83e4c71c69e7ad7c"
-  integrity sha512-jErGK2LndNRUR/hCDNUkojYPOkHrktQiiO7gxCzpYOdmIb4tiJLNbTsaqzDGBRkv2q56pvL5mFKeTzM2oJLSrA==
+"@aesthetic/sss@^0.8.1":
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/@aesthetic/sss/-/sss-0.8.1.tgz#30f85e4bc01885a53b75153204680d2b9d678ddd"
+  integrity sha512-TM4pIwtc1fe8GDm02kx9JRBUzZX6xiLB7ECVhCuf+siubIBktT+7FYF/9JqjpbTFj2qMtAS7gKdNS1mEWtvLvQ==
   dependencies:
     "@aesthetic/types" "^0.5.0"
     "@aesthetic/utils" "^0.7.0"
