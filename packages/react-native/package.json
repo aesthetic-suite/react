@@ -1,10 +1,11 @@
 {
-  "name": "@aesthetic/react",
-  "version": "0.6.9",
-  "description": "React hooks, composers, and more for styling components with Aesthetic.",
+  "name": "@aesthetic/react-native",
+  "version": "0.0.0",
+  "description": "React Native hooks, composers, and more for styling components with Aesthetic.",
   "keywords": [
     "aesthetic",
     "react",
+    "native",
     "styles",
     "hook",
     "hoc",
@@ -13,61 +14,53 @@
   "repository": {
     "type": "git",
     "url": "git@github.com:aesthetic-suite/react.git",
-    "directory": "packages/react"
+    "directory": "packages/react-native"
   },
   "author": "Miles Johnson",
   "license": "MIT",
   "main": "./lib/index.js",
-  "module": "./esm/index.js",
   "types": "./dts/index.d.ts",
+  "sideEffects": false,
   "files": [
     "dts/**/*.d.ts",
-    "esm/**/*.{js,map}",
     "lib/**/*.{js,map}",
-    "server.d.ts",
-    "server.js",
     "src/**/*.{ts,tsx,json}"
   ],
-  "sideEffects": false,
   "publishConfig": {
     "access": "public"
   },
   "dependencies": {
     "@aesthetic/core": "^0.9.1",
-    "@aesthetic/core-react": "^0.1.8",
-    "@aesthetic/style": "^0.8.0",
+    "@aesthetic/core-react": "^0.1.5",
     "@aesthetic/utils": "^0.7.0"
   },
   "peerDependencies": {
-    "react": "^16.6.0 || ^17.0.0"
+    "react": "^17.0.0",
+    "react-native": "^0.64.0"
   },
   "devDependencies": {
-    "@types/react-dom": "^17.0.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "rut-dom": "^2.0.0"
+    "@testing-library/react-native": "^7.0.2",
+    "@types/react-native": "^0.64.4",
+    "react": "^17.0.1",
+    "react-native": "^0.64.0"
   },
   "funding": {
     "type": "ko-fi",
     "url": "https://ko-fi.com/milesjohnson"
   },
   "packemon": {
-    "inputs": {
-      "index": "src/index.ts",
-      "server": "src/server.tsx"
-    },
-    "platform": "browser"
+    "platform": "native"
   },
   "tsconfig": {
     "compilerOptions": {
       "jsx": "react",
       "lib": [
-        "dom",
         "esnext"
       ],
       "types": [
         "node",
-        "react"
+        "react",
+        "react-native"
       ]
     }
   }

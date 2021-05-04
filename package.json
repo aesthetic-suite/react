@@ -25,7 +25,6 @@
     "@milesj/build-tools": "^2.17.0",
     "@types/hoist-non-react-statics": "^3.3.1",
     "@types/react": "^17.0.4",
-    "@types/react-dom": "^17.0.3",
     "benchmark": "^2.1.4",
     "builtin-modules": "^3.2.0",
     "conventional-changelog-beemo": "^2.1.0",
@@ -34,8 +33,7 @@
     "lerna": "^4.0.0",
     "packemon": "^0.15.1",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "rut-dom": "^2.0.0"
+    "react-test-renderer": "^17.0.2"
   },
   "beemo": {
     "module": "@milesj/build-tools",
@@ -52,11 +50,7 @@
         "buildFolder": "dts",
         "declarationOnly": true
       }
-    ],
-    "settings": {
-      "decorators": true,
-      "react": true
-    }
+    ]
   },
   "workspaces": [
     "packages/*"

@@ -259,6 +259,7 @@ describe('createStyled()', () => {
       const Trunk = createStyled(Branch, {});
       const Root = createStyled(Trunk, {});
 
+      // @ts-expect-error DOM isnt resolving for TS
       const svg = document.createElement('main');
       const spy = jest.fn();
       const { debug } = render<{}>(<Root ref={spy} />, {

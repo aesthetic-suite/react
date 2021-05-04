@@ -16,9 +16,10 @@
   },
   "author": "Miles Johnson",
   "license": "MIT",
-  "main": "./lib/index.js",
+  "main": "./lib/browser/index.js",
   "module": "./esm/index.js",
   "types": "./dts/index.d.ts",
+  "browser": "./lib/browser/index.js",
   "files": [
     "dts/**/*.d.ts",
     "esm/**/*.{js,map}",
@@ -43,10 +44,21 @@
     "hoist-non-react-statics": "^3.3.2"
   },
   "devDependencies": {
-    "@aesthetic/core": "^0.9.0",
+    "@aesthetic/core": "^0.9.1",
     "react": "^17.0.2"
   },
   "packemon": {
-    "platform": "browser"
+    "platform": [
+      "browser",
+      "native"
+    ]
+  },
+  "tsconfig": {
+    "compilerOptions": {
+      "jsx": "react",
+      "types": [
+        "react"
+      ]
+    }
   }
 }

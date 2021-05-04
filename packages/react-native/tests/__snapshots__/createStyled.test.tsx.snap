@@ -1,0 +1,262 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createStyled() can pass custom props/attributes 1`] = `
+"[36m<View[39m
+  [33mdir[39m=[32m\\"ltr\\"[39m
+[36m>[39m
+  [36m<TextInput[39m
+    [33mallowFontScaling[39m=[32m{true}[39m
+    [33meditable[39m=[32m{false}[39m
+    [33mplaceholder[39m=[32m\\"Search...\\"[39m
+    [33mrejectResponderTermination[39m=[32m{true}[39m
+    [33mstyle[39m=[32m{
+      Array [
+        Object {
+          \\"borderColor\\": \\"black\\",
+          \\"borderWidth\\": 1,
+          \\"padding\\": \\"1rem\\",
+        },
+        Object {
+          \\"borderStyle\\": \\"solid\\",
+        },
+      ]
+    }[39m
+    [33munderlineColorAndroid[39m=[32m\\"transparent\\"[39m
+  [36m/>[39m
+[36m</View>[39m"
+`;
+
+exports[`createStyled() composition can access the ref from multiple layers of composition 1`] = `
+"[36m<View[39m
+  [33mdir[39m=[32m\\"ltr\\"[39m
+[36m>[39m
+  [36m<View[39m
+    [33mstyle[39m=[32m{
+      Array [
+        Object {},
+        Object {},
+        Object {},
+        Object {},
+      ]
+    }[39m
+  [36m/>[39m
+[36m</View>[39m"
+`;
+
+exports[`createStyled() composition supports extending non-styled components 1`] = `
+"[36m<View[39m
+  [33mdir[39m=[32m\\"ltr\\"[39m
+[36m>[39m
+  [36m<View[39m
+    [33mstyle[39m=[32m{
+      Array [
+        Object {
+          \\"display\\": \\"flex\\",
+          \\"padding\\": \\"1rem\\",
+          \\"textAlign\\": \\"center\\",
+        },
+        Object {
+          \\"color\\": \\"red\\",
+        },
+      ]
+    }[39m
+  [36m>[39m
+    [0mNormal[0m
+  [36m</View>[39m
+[36m</View>[39m"
+`;
+
+exports[`createStyled() composition supports extending other styled components 1`] = `
+"[36m<View[39m
+  [33mdir[39m=[32m\\"ltr\\"[39m
+[36m>[39m
+  [36m<View[39m
+    [33mstyle[39m=[32m{
+      Array [
+        Object {
+          \\"display\\": \\"flex\\",
+          \\"padding\\": \\"1rem\\",
+          \\"textAlign\\": \\"center\\",
+        },
+      ]
+    }[39m
+  [36m>[39m
+    [0mNormal[0m
+  [36m</View>[39m
+  [36m<View[39m
+    [33mstyle[39m=[32m{
+      Array [
+        Object {
+          \\"display\\": \\"flex\\",
+          \\"padding\\": \\"1rem\\",
+          \\"textAlign\\": \\"center\\",
+        },
+        Object {
+          \\"display\\": \\"flex\\",
+          \\"width\\": \\"100%\\",
+        },
+      ]
+    }[39m
+  [36m>[39m
+    [0mBlock[0m
+  [36m</View>[39m
+  [36m<View[39m
+    [33mstyle[39m=[32m{
+      Array [
+        Object {
+          \\"display\\": \\"flex\\",
+          \\"padding\\": \\"1rem\\",
+          \\"textAlign\\": \\"center\\",
+        },
+        Object {
+          \\"display\\": \\"flex\\",
+          \\"width\\": \\"100%\\",
+        },
+        Object {
+          \\"fontSize\\": 18,
+          \\"padding\\": \\"2rem\\",
+        },
+      ]
+    }[39m
+  [36m>[39m
+    [0mLarge[0m
+  [36m</View>[39m
+[36m</View>[39m"
+`;
+
+exports[`createStyled() creates and renders a button with defined styles 1`] = `
+"[36m<View[39m
+  [33mdir[39m=[32m\\"ltr\\"[39m
+[36m>[39m
+  [36m<View[39m
+    [33mstyle[39m=[32m{
+      Array [
+        Object {
+          \\"display\\": \\"flex\\",
+          \\"padding\\": \\"1rem\\",
+          \\"textAlign\\": \\"center\\",
+        },
+      ]
+    }[39m
+  [36m>[39m
+    [36m<Text>[39m
+      [0mTest[0m
+    [36m</Text>[39m
+  [36m</View>[39m
+[36m</View>[39m"
+`;
+
+exports[`createStyled() only renders styles twice (create and mount), even when component rerenders 1`] = `
+"[36m<View[39m
+  [33mdir[39m=[32m\\"ltr\\"[39m
+[36m>[39m
+  [36m<Text[39m
+    [33monPress[39m=[32m{[Function cb]}[39m
+    [33mstyle[39m=[32m{
+      Array [
+        Object {
+          \\"fontWeight\\": \\"bold\\",
+        },
+      ]
+    }[39m
+  [36m>[39m
+    [0mTest[0m
+  [36m</Text>[39m
+[36m</View>[39m"
+`;
+
+exports[`createStyled() variants doesnt pass the variant prop to the View element 1`] = `
+"[36m<View[39m
+  [33mdir[39m=[32m\\"ltr\\"[39m
+[36m>[39m
+  [36m<View[39m
+    [33mstyle[39m=[32m{
+      Array [
+        Object {
+          \\"backgroundColor\\": \\"#000\\",
+        },
+      ]
+    }[39m
+  [36m/>[39m
+[36m</View>[39m"
+`;
+
+exports[`createStyled() variants inherits and merges variant props and types when composing 1`] = `
+"[36m<View[39m
+  [33mdir[39m=[32m\\"ltr\\"[39m
+[36m>[39m
+  [36m<View[39m
+    [33mstyle[39m=[32m{
+      Array [
+        Object {
+          \\"backgroundColor\\": \\"#000\\",
+        },
+        Object {},
+        Object {
+          \\"padding\\": 2,
+        },
+      ]
+    }[39m
+  [36m/>[39m
+[36m</View>[39m"
+`;
+
+exports[`createStyled() variants supports variants 1`] = `
+"[36m<View[39m
+  [33mdir[39m=[32m\\"ltr\\"[39m
+[36m>[39m
+  [36m<View[39m
+    [33mstyle[39m=[32m{
+      Array [
+        Object {
+          \\"backgroundColor\\": \\"#000\\",
+        },
+      ]
+    }[39m
+  [36m>[39m
+    [36m<Text>[39m
+      [0mTitle and other content![0m
+    [36m</Text>[39m
+  [36m</View>[39m
+[36m</View>[39m"
+`;
+
+exports[`createStyled() variants supports variants 2`] = `
+"[36m<View[39m
+  [33mdir[39m=[32m\\"ltr\\"[39m
+[36m>[39m
+  [36m<View[39m
+    [33mstyle[39m=[32m{
+      Array [
+        Object {
+          \\"backgroundColor\\": \\"#000\\",
+        },
+      ]
+    }[39m
+  [36m>[39m
+    [36m<Text>[39m
+      [0mTitle and other content![0m
+    [36m</Text>[39m
+  [36m</View>[39m
+[36m</View>[39m"
+`;
+
+exports[`createStyled() variants supports variants 3`] = `
+"[36m<View[39m
+  [33mdir[39m=[32m\\"ltr\\"[39m
+[36m>[39m
+  [36m<View[39m
+    [33mstyle[39m=[32m{
+      Array [
+        Object {
+          \\"backgroundColor\\": \\"#000\\",
+        },
+      ]
+    }[39m
+  [36m>[39m
+    [36m<Text>[39m
+      [0mTitle and other content![0m
+    [36m</Text>[39m
+  [36m</View>[39m
+[36m</View>[39m"
+`;
