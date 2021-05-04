@@ -1,6 +1,6 @@
 {
   "name": "@aesthetic/react",
-  "version": "0.6.9",
+  "version": "0.6.10",
   "description": "React hooks, composers, and more for styling components with Aesthetic.",
   "keywords": [
     "aesthetic",
@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "@aesthetic/core": "^0.9.1",
-    "@aesthetic/core-react": "^0.1.8",
+    "@aesthetic/core-react": "^0.1.9",
     "@aesthetic/style": "^0.8.0",
     "@aesthetic/utils": "^0.7.0"
   },
