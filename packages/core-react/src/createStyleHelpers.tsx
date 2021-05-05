@@ -10,9 +10,9 @@ import {
 import { isObject, objectLoop } from '@aesthetic/utils';
 import createHOC from './createHOC';
 import {
+  InternalWithStylesWrappedProps,
   StyleResultGenerator,
   StyleResultVariants,
-  WithStylesWrappedProps,
   WrapperComponent,
   WrapperProps,
 } from './types';
@@ -116,9 +116,11 @@ export default function createStyleHelpers<Result, Block extends object, Generat
    */
   function withStyles<T = unknown>(sheet: LocalSheet<T, Block, Result>) /* infer */ {
     return function withStylesComposer<Props extends object = {}>(
-      WrappedComponent: React.ComponentType<Props & WithStylesWrappedProps<keyof T, Result>>,
+      WrappedComponent: React.ComponentType<
+        InternalWithStylesWrappedProps<keyof T, Result> & Props
+      >,
     ): React.FunctionComponent<
-      Omit<Props, keyof WithStylesWrappedProps<keyof T, Result>> & WrapperProps
+      Omit<Props, keyof InternalWithStylesWrappedProps<keyof T, Result>> & WrapperProps
     > &
       WrapperComponent {
       return createHOC(
@@ -126,9 +128,9 @@ export default function createStyleHelpers<Result, Block extends object, Generat
         WrappedComponent,
         // eslint-disable-next-line prefer-arrow-callback
         function WithStyles({ wrappedRef, ...props }) {
-          const cx = useStyles(sheet);
+          const compose = useStyles(sheet);
 
-          return <WrappedComponent {...(props as any)} ref={wrappedRef} cx={cx} />;
+          return <WrappedComponent {...(props as any)} ref={wrappedRef} compose={compose} />;
         },
       );
     };

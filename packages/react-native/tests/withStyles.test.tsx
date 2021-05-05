@@ -3,7 +3,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { render } from '@testing-library/react-native';
-import { NativeStyles, ThemeProvider, withStyles, WithStylesWrappedProps } from '../src';
+import { ThemeProvider, withStyles, WithStylesWrappedProps } from '../src';
 import { ButtonProps, createStyleSheet, Wrapper } from './__mocks__/Button';
 import { dawnTheme, setupAestheticReact, teardownAestheticReact, twilightTheme } from './helpers';
 
@@ -18,20 +18,19 @@ describe('withStyles()', () => {
 
   function BaseButton({
     children,
-    cx,
+    compose: sx,
     block,
     disabled,
     large,
     small,
   }: ButtonProps &
     WithStylesWrappedProps<
-      'button_block' | 'button_disabled' | 'button_large' | 'button_small' | 'button',
-      NativeStyles
+      'button_block' | 'button_disabled' | 'button_large' | 'button_small' | 'button'
     >) {
     return (
       <View
         testID="button"
-        style={cx(
+        style={sx(
           {
             // eslint-disable-next-line no-nested-ternary
             size: large ? 'lg' : small ? 'sm' : 'df',
@@ -51,7 +50,7 @@ describe('withStyles()', () => {
     unknown?: unknown;
   }
 
-  function BaseComponent(props: BaseComponentProps & WithStylesWrappedProps<string, NativeStyles>) {
+  function BaseComponent(props: BaseComponentProps & WithStylesWrappedProps<string>) {
     return null;
   }
 
@@ -89,7 +88,7 @@ describe('withStyles()', () => {
     }
 
     // eslint-disable-next-line react/prefer-stateless-function
-    class RefComponent extends React.Component<RefProps & WithStylesWrappedProps<string, string>> {
+    class RefComponent extends React.Component<RefProps & WithStylesWrappedProps<string>> {
       render() {
         return <View />;
       }

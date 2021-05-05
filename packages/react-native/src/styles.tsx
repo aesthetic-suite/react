@@ -1,5 +1,4 @@
 import React, { createElement, forwardRef, memo, useMemo } from 'react';
-import { StyleProp } from 'react-native';
 import { Utilities } from '@aesthetic/core';
 import { createStyleHelpers } from '@aesthetic/core-react';
 import { arrayLoop, toArray } from '@aesthetic/utils';
@@ -11,10 +10,10 @@ import { InferProps, NativeBlock, NativeStyles, StyledComponent } from './types'
 export const { getVariantsFromProps, useStyles, withStyles } = createStyleHelpers<
   NativeStyles,
   NativeBlock,
-  StyleProp<NativeStyles>
+  NativeStyles[]
 >(aesthetic, {
   generate(keys, variants, results) {
-    const style: StyleProp<NativeStyles> = [];
+    const style: NativeStyles[] = [];
 
     arrayLoop(keys, (key) => {
       const hash = results[key];
@@ -36,7 +35,7 @@ export const { getVariantsFromProps, useStyles, withStyles } = createStyleHelper
       }
     });
 
-    return (style.length === 1 ? style[0] : style) as StyleProp<NativeStyles>;
+    return style;
   },
   useDirection,
   useTheme,
@@ -75,7 +74,7 @@ export function createStyled<T extends React.ComponentType<any>, V extends objec
 
       // Cache the style prop so that we avoid unwanted rerenders
       const styleProp = useMemo(() => {
-        const viewStyles = toArray(style) as NativeStyles[];
+        const viewStyles = [...style];
 
         if (props.style) {
           viewStyles.push(...toArray(props.style));

@@ -2,9 +2,9 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import { Aesthetic, Theme } from '@aesthetic/core';
 import createHOC from './createHOC';
 import {
+  InternalWithThemeWrappedProps,
   ThemeContextType,
   ThemeProviderProps,
-  WithThemeWrappedProps,
   WrapperComponent,
   WrapperProps,
 } from './types';
@@ -53,8 +53,10 @@ export default function createThemeHelpers<Result, Block extends object>(
    */
   function withTheme() /* infer */ {
     return function withThemeComposer<Props extends object = {}>(
-      WrappedComponent: React.ComponentType<Props & WithThemeWrappedProps<Block>>,
-    ): React.FunctionComponent<Omit<Props, keyof WithThemeWrappedProps<Block>> & WrapperProps> &
+      WrappedComponent: React.ComponentType<InternalWithThemeWrappedProps<Block> & Props>,
+    ): React.FunctionComponent<
+      Omit<Props, keyof InternalWithThemeWrappedProps<Block>> & WrapperProps
+    > &
       WrapperComponent {
       // eslint-disable-next-line prefer-arrow-callback
       return createHOC('withTheme', WrappedComponent, function WithTheme({ wrappedRef, ...props }) {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { render } from '@testing-library/react-native';
-import { NativeBlock, ThemeProvider, withTheme, WithThemeWrappedProps } from '../src';
+import { InternalWithThemeWrappedProps,NativeBlock, ThemeProvider, withTheme } from '../src';
 import { dawnTheme, setupAestheticReact, teardownAestheticReact, twilightTheme } from './helpers';
 
 describe('withTheme()', () => {
@@ -13,7 +13,7 @@ describe('withTheme()', () => {
     teardownAestheticReact();
   });
 
-  function BaseComponent(props: WithThemeWrappedProps<NativeBlock>) {
+  function BaseComponent(props: InternalWithThemeWrappedProps<NativeBlock>) {
     return null;
   }
 
@@ -62,7 +62,9 @@ describe('withTheme()', () => {
     }
 
     // eslint-disable-next-line react/prefer-stateless-function
-    class RefComponent extends React.Component<RefProps & WithThemeWrappedProps<NativeBlock>> {
+    class RefComponent extends React.Component<
+      InternalWithThemeWrappedProps<NativeBlock> & RefProps
+    > {
       render() {
         return <View />;
       }

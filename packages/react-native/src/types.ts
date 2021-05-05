@@ -1,6 +1,10 @@
 import React from 'react';
-import { ImageStyle, TextStyle, ViewStyle } from 'react-native';
+import { ImageStyle, StyleProp, TextStyle, ViewStyle } from 'react-native';
 import { Engine, LocalSheet } from '@aesthetic/core';
+import {
+  InternalWithStylesWrappedProps,
+  InternalWithThemeWrappedProps,
+} from '@aesthetic/core-react';
 
 export interface NativeStyles extends ViewStyle, TextStyle, Omit<ImageStyle, 'overflow'> {}
 
@@ -17,7 +21,7 @@ export interface StyledComponent<P extends object = {}>
 
 export interface StyledInheritedProps {
   children?: React.ReactNode;
-  style?: NativeStyles;
+  style?: StyleProp<NativeStyles>;
 }
 
 export type InferProps<T extends React.ComponentType<unknown>> = T extends React.ComponentType<
@@ -25,3 +29,7 @@ export type InferProps<T extends React.ComponentType<unknown>> = T extends React
 >
   ? P
   : never;
+
+export type WithStylesWrappedProps<T> = InternalWithStylesWrappedProps<T, NativeStyles[]>;
+
+export type WithThemeWrappedProps = InternalWithThemeWrappedProps<NativeBlock>;

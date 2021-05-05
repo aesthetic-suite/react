@@ -53,7 +53,7 @@ export interface ContextualThemeProviderProps extends Required<ThemeProviderProp
   wrapper: React.ReactElement;
 }
 
-export interface WithThemeWrappedProps<T extends object> extends WrappedProps {
+export interface InternalWithThemeWrappedProps<T extends object> extends WrappedProps {
   /** The theme object. Provided by `withTheme`. */
   theme: Theme<T>;
 }
@@ -70,7 +70,7 @@ export interface StyleResultGenerator<T, R> {
   (...keys: StyleResultTypes<T>): R;
 }
 
-export interface WithStylesWrappedProps<T, R> extends WrappedProps {
-  /** Function to generate styles from a sheet. Provided by `withStyles`. */
-  cx: StyleResultGenerator<T, R>;
+export interface InternalWithStylesWrappedProps<T, R> extends WrappedProps {
+  /** Function to compose styles from a sheet. Provided by `withStyles`. */
+  compose: StyleResultGenerator<T, R>;
 }
