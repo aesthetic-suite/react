@@ -2,7 +2,7 @@
 
 exports[`createStyled() can pass custom props/attributes 1`] = `
 "<Wrapper>
-  <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>
+  <DirectionProvider direction=\\"ltr\\">
     <div dir=\\"ltr\\">
       <ThemeProvider name=\\"twilight\\">
         <Memo(ForwardRef)
@@ -32,7 +32,7 @@ exports[`createStyled() can pass custom props/attributes 2`] = `".a {border: 1px
 
 exports[`createStyled() can use and define CSS variables 1`] = `
 "<Wrapper>
-  <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>
+  <DirectionProvider direction=\\"ltr\\">
     <div dir=\\"ltr\\">
       <ThemeProvider name=\\"twilight\\">
         <Memo(ForwardRef)>
@@ -50,7 +50,7 @@ exports[`createStyled() can use and define CSS variables 2`] = `".a {font-size: 
 
 exports[`createStyled() composition can access the ref from multiple layers of composition 1`] = `
 "<Wrapper>
-  <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>
+  <DirectionProvider direction=\\"ltr\\">
     <div dir=\\"ltr\\">
       <ThemeProvider name=\\"twilight\\">
         <Memo(ForwardRef)>
@@ -78,7 +78,7 @@ exports[`createStyled() composition can access the ref from multiple layers of c
 
 exports[`createStyled() composition supports extending non-styled components 1`] = `
 "<Wrapper>
-  <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>
+  <DirectionProvider direction=\\"ltr\\">
     <div dir=\\"ltr\\">
       <ThemeProvider name=\\"twilight\\">
         <Memo(ForwardRef) className=\\"test\\">
@@ -100,7 +100,7 @@ exports[`createStyled() composition supports extending non-styled components 2`]
 
 exports[`createStyled() composition supports extending other styled components 1`] = `
 "<Wrapper>
-  <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>
+  <DirectionProvider direction=\\"ltr\\">
     <div dir=\\"ltr\\">
       <ThemeProvider name=\\"twilight\\">
         <Memo(ForwardRef) type=\\"button\\">
@@ -146,7 +146,7 @@ exports[`createStyled() composition supports extending other styled components 2
 
 exports[`createStyled() creates and renders a button with defined styles 1`] = `
 "<Wrapper>
-  <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>
+  <DirectionProvider direction=\\"ltr\\">
     <div dir=\\"ltr\\">
       <ThemeProvider name=\\"twilight\\">
         <Memo(ForwardRef)>
@@ -166,7 +166,7 @@ exports[`createStyled() creates and renders a button with defined styles 2`] = `
 
 exports[`createStyled() only renders styles twice (create and mount), even when component rerenders 1`] = `
 "<Wrapper theme=\\"dawn\\">
-  <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>
+  <DirectionProvider direction=\\"ltr\\">
     <div dir=\\"ltr\\">
       <ThemeProvider name=\\"dawn\\">
         <Memo(ForwardRef) href=\\"/foo/bar\\">
@@ -186,7 +186,7 @@ exports[`createStyled() only renders styles twice (create and mount), even when 
 
 exports[`createStyled() variants doesnt pass the variant prop to the HTML element 1`] = `
 "<Wrapper>
-  <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>
+  <DirectionProvider direction=\\"ltr\\">
     <div dir=\\"ltr\\">
       <ThemeProvider name=\\"twilight\\">
         <Memo(ForwardRef) palette=\\"positive\\">
@@ -202,7 +202,7 @@ exports[`createStyled() variants doesnt pass the variant prop to the HTML elemen
 
 exports[`createStyled() variants inherits and merges variant props and types when composing 1`] = `
 "<Wrapper>
-  <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>
+  <DirectionProvider direction=\\"ltr\\">
     <div dir=\\"ltr\\">
       <ThemeProvider name=\\"twilight\\">
         <Memo(ForwardRef) palette=\\"positive\\" size=\\"lg\\">
@@ -222,7 +222,7 @@ exports[`createStyled() variants inherits and merges variant props and types whe
 
 exports[`createStyled() variants supports variants 1`] = `
 "<Wrapper>
-  <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>
+  <DirectionProvider direction=\\"ltr\\">
     <div dir=\\"ltr\\">
       <ThemeProvider name=\\"twilight\\">
         <Memo(ForwardRef) palette=\\"positive\\">
@@ -245,7 +245,7 @@ exports[`createStyled() variants supports variants 2`] = `".a {background: var(-
 
 exports[`createStyled() variants supports variants 3`] = `
 "<Wrapper>
-  <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>
+  <DirectionProvider direction=\\"ltr\\">
     <div dir=\\"ltr\\">
       <ThemeProvider name=\\"twilight\\">
         <Memo(ForwardRef) palette=\\"negative\\">
@@ -266,7 +266,7 @@ exports[`createStyled() variants supports variants 3`] = `
 
 exports[`createStyled() variants supports variants 4`] = `
 "<Wrapper>
-  <DirectionProvider direction=\\"ltr\\" wrapper={<div />}>
+  <DirectionProvider direction=\\"ltr\\">
     <div dir=\\"ltr\\">
       <ThemeProvider name=\\"twilight\\">
         <Memo(ForwardRef)>

@@ -1,5 +1,4 @@
 import React from 'react';
-import { View } from 'react-native';
 import { render } from '@testing-library/react-native';
 import { DirectionProvider, useDirection } from '../src';
 
@@ -28,7 +27,7 @@ describe('useDirection()', () => {
     }
 
     render(
-      <DirectionProvider direction="rtl" wrapper={<View />}>
+      <DirectionProvider direction="rtl">
         <Component />
       </DirectionProvider>,
     );

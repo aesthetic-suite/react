@@ -29,8 +29,6 @@ export interface DirectionProviderProps {
   direction?: Exclude<Direction, 'neutral'>;
   /** Locale aware string to deduce the direction from. */
   value?: string;
-  /** Element to wrap the children with. */
-  wrapper: React.ReactElement;
 }
 
 export interface WithDirectionWrappedProps extends WrappedProps {
@@ -48,10 +46,7 @@ export interface ThemeProviderProps {
   name?: ThemeName;
 }
 
-export interface ContextualThemeProviderProps extends Required<ThemeProviderProps> {
-  /** Element to wrap the children with. */
-  wrapper: React.ReactElement;
-}
+export type ContextualThemeProviderProps = Required<ThemeProviderProps>;
 
 export interface InternalWithThemeWrappedProps<T extends object> extends WrappedProps {
   /** The theme object. Provided by `withTheme`. */

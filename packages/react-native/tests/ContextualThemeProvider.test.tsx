@@ -18,7 +18,7 @@ describe('ContextualThemeProvider', () => {
 
   it('renders children', () => {
     const result = render(
-      <ContextualThemeProvider name="night" wrapper={<View />}>
+      <ContextualThemeProvider name="night">
         <View>1</View>
         <View>2</View>
         <View>3</View>
@@ -37,29 +37,12 @@ describe('ContextualThemeProvider', () => {
       return null;
     }
 
-    const wrapper = <View />;
     const child = <Child />;
-    const result = render(
-      <ContextualThemeProvider name="day" wrapper={wrapper}>
-        {child}
-      </ContextualThemeProvider>,
-    );
+    const result = render(<ContextualThemeProvider name="day">{child}</ContextualThemeProvider>);
 
-    result.update(
-      <ContextualThemeProvider name="day" wrapper={wrapper}>
-        {child}
-      </ContextualThemeProvider>,
-    );
-    result.update(
-      <ContextualThemeProvider name="day" wrapper={wrapper}>
-        {child}
-      </ContextualThemeProvider>,
-    );
-    result.update(
-      <ContextualThemeProvider name="day" wrapper={wrapper}>
-        {child}
-      </ContextualThemeProvider>,
-    );
+    result.update(<ContextualThemeProvider name="day">{child}</ContextualThemeProvider>);
+    result.update(<ContextualThemeProvider name="day">{child}</ContextualThemeProvider>);
+    result.update(<ContextualThemeProvider name="day">{child}</ContextualThemeProvider>);
 
     expect(count).toBe(1);
   });
@@ -76,7 +59,7 @@ describe('ContextualThemeProvider', () => {
     }
 
     render(
-      <ContextualThemeProvider name="night" wrapper={<View />}>
+      <ContextualThemeProvider name="night">
         <Test />
       </ContextualThemeProvider>,
     );

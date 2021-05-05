@@ -3,6 +3,7 @@
 exports[`createStyled() can pass custom props/attributes 1`] = `
 "[36m<View[39m
   [33mdir[39m=[32m\\"ltr\\"[39m
+  [33mtestID[39m=[32m\\"aesthetic-direction-provider\\"[39m
 [36m>[39m
   [36m<TextInput[39m
     [33mallowFontScaling[39m=[32m{true}[39m
@@ -29,6 +30,7 @@ exports[`createStyled() can pass custom props/attributes 1`] = `
 exports[`createStyled() composition can access the ref from multiple layers of composition 1`] = `
 "[36m<View[39m
   [33mdir[39m=[32m\\"ltr\\"[39m
+  [33mtestID[39m=[32m\\"aesthetic-direction-provider\\"[39m
 [36m>[39m
   [36m<View[39m
     [33mstyle[39m=[32m{
@@ -46,6 +48,7 @@ exports[`createStyled() composition can access the ref from multiple layers of c
 exports[`createStyled() composition supports extending non-styled components 1`] = `
 "[36m<View[39m
   [33mdir[39m=[32m\\"ltr\\"[39m
+  [33mtestID[39m=[32m\\"aesthetic-direction-provider\\"[39m
 [36m>[39m
   [36m<View[39m
     [33mstyle[39m=[32m{
@@ -69,6 +72,7 @@ exports[`createStyled() composition supports extending non-styled components 1`]
 exports[`createStyled() composition supports extending other styled components 1`] = `
 "[36m<View[39m
   [33mdir[39m=[32m\\"ltr\\"[39m
+  [33mtestID[39m=[32m\\"aesthetic-direction-provider\\"[39m
 [36m>[39m
   [36m<View[39m
     [33mstyle[39m=[32m{
@@ -127,6 +131,7 @@ exports[`createStyled() composition supports extending other styled components 1
 exports[`createStyled() creates and renders a button with defined styles 1`] = `
 "[36m<View[39m
   [33mdir[39m=[32m\\"ltr\\"[39m
+  [33mtestID[39m=[32m\\"aesthetic-direction-provider\\"[39m
 [36m>[39m
   [36m<View[39m
     [33mstyle[39m=[32m{
@@ -149,6 +154,7 @@ exports[`createStyled() creates and renders a button with defined styles 1`] = `
 exports[`createStyled() only renders styles twice (create and mount), even when component rerenders 1`] = `
 "[36m<View[39m
   [33mdir[39m=[32m\\"ltr\\"[39m
+  [33mtestID[39m=[32m\\"aesthetic-direction-provider\\"[39m
 [36m>[39m
   [36m<Text[39m
     [33monPress[39m=[32m{[Function cb]}[39m
@@ -168,6 +174,7 @@ exports[`createStyled() only renders styles twice (create and mount), even when 
 exports[`createStyled() variants doesnt pass the variant prop to the View element 1`] = `
 "[36m<View[39m
   [33mdir[39m=[32m\\"ltr\\"[39m
+  [33mtestID[39m=[32m\\"aesthetic-direction-provider\\"[39m
 [36m>[39m
   [36m<View[39m
     [33mstyle[39m=[32m{
@@ -184,6 +191,7 @@ exports[`createStyled() variants doesnt pass the variant prop to the View elemen
 exports[`createStyled() variants inherits and merges variant props and types when composing 1`] = `
 "[36m<View[39m
   [33mdir[39m=[32m\\"ltr\\"[39m
+  [33mtestID[39m=[32m\\"aesthetic-direction-provider\\"[39m
 [36m>[39m
   [36m<View[39m
     [33mstyle[39m=[32m{
@@ -204,6 +212,7 @@ exports[`createStyled() variants inherits and merges variant props and types whe
 exports[`createStyled() variants supports variants 1`] = `
 "[36m<View[39m
   [33mdir[39m=[32m\\"ltr\\"[39m
+  [33mtestID[39m=[32m\\"aesthetic-direction-provider\\"[39m
 [36m>[39m
   [36m<View[39m
     [33mstyle[39m=[32m{
@@ -224,6 +233,7 @@ exports[`createStyled() variants supports variants 1`] = `
 exports[`createStyled() variants supports variants 2`] = `
 "[36m<View[39m
   [33mdir[39m=[32m\\"ltr\\"[39m
+  [33mtestID[39m=[32m\\"aesthetic-direction-provider\\"[39m
 [36m>[39m
   [36m<View[39m
     [33mstyle[39m=[32m{
@@ -244,6 +254,7 @@ exports[`createStyled() variants supports variants 2`] = `
 exports[`createStyled() variants supports variants 3`] = `
 "[36m<View[39m
   [33mdir[39m=[32m\\"ltr\\"[39m
+  [33mtestID[39m=[32m\\"aesthetic-direction-provider\\"[39m
 [36m>[39m
   [36m<View[39m
     [33mstyle[39m=[32m{

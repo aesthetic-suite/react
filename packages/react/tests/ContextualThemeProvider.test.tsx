@@ -24,7 +24,7 @@ describe('ContextualThemeProvider', () => {
 
   it('renders children', () => {
     const { root } = render<ThemeProviderProps>(
-      <ContextualThemeProvider name="night" wrapper={<div />}>
+      <ContextualThemeProvider name="night">
         <div>1</div>
         <div>2</div>
         <div>3</div>
@@ -44,7 +44,7 @@ describe('ContextualThemeProvider', () => {
     }
 
     const { update } = render<ThemeProviderProps>(
-      <ContextualThemeProvider name="day" wrapper={<div />}>
+      <ContextualThemeProvider name="day">
         <Child />
       </ContextualThemeProvider>,
     );
@@ -68,7 +68,7 @@ describe('ContextualThemeProvider', () => {
     }
 
     render<ThemeProviderProps>(
-      <ContextualThemeProvider name="night" wrapper={<div />}>
+      <ContextualThemeProvider name="night">
         <Test />
       </ContextualThemeProvider>,
     );
@@ -80,7 +80,7 @@ describe('ContextualThemeProvider', () => {
       .mockImplementation(() => ['theme-night']);
 
     const { root } = render<ThemeProviderProps>(
-      <ContextualThemeProvider name="night" wrapper={<div />}>
+      <ContextualThemeProvider name="night">
         <span />
       </ContextualThemeProvider>,
     );
@@ -97,13 +97,13 @@ describe('ContextualThemeProvider', () => {
     const spy = jest.spyOn(aesthetic, 'renderThemeStyles');
 
     const { rerender } = render<ThemeProviderProps>(
-      <ContextualThemeProvider name="night" wrapper={<div />}>
+      <ContextualThemeProvider name="night">
         <div />
       </ContextualThemeProvider>,
     );
 
     rerender(
-      <ContextualThemeProvider name="day" wrapper={<div />}>
+      <ContextualThemeProvider name="day">
         <div />
       </ContextualThemeProvider>,
     );
@@ -118,16 +118,16 @@ describe('ContextualThemeProvider', () => {
     const spy = jest.spyOn(aesthetic, 'renderThemeStyles');
 
     const { rerender } = render<DirectionProviderProps>(
-      <DirectionProvider direction="ltr" wrapper={<div />}>
-        <ContextualThemeProvider name="night" wrapper={<div />}>
+      <DirectionProvider direction="ltr">
+        <ContextualThemeProvider name="night">
           <div />
         </ContextualThemeProvider>
       </DirectionProvider>,
     );
 
     rerender(
-      <DirectionProvider direction="rtl" wrapper={<div />}>
-        <ContextualThemeProvider name="night" wrapper={<div />}>
+      <DirectionProvider direction="rtl">
+        <ContextualThemeProvider name="night">
           <div />
         </ContextualThemeProvider>
       </DirectionProvider>,

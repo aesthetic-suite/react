@@ -6,4 +6,4 @@ export const {
   DirectionProvider,
   useDirection,
   withDirection,
-} = createDirectionHelpers(aesthetic);
+} = createDirectionHelpers(aesthetic, { wrapper: 'div' });

@@ -101,7 +101,7 @@ export interface WrapperProps {
 
 export function Wrapper({ children, direction = 'ltr', theme = 'twilight' }: WrapperProps) {
   return (
-    <DirectionProvider direction={direction} wrapper={<div />}>
+    <DirectionProvider direction={direction}>
       <ThemeProvider name={theme}>{children || <div />}</ThemeProvider>
     </DirectionProvider>
   );

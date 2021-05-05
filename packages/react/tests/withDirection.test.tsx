@@ -22,11 +22,7 @@ describe('withDirection()', () => {
   }
 
   function WrappingComponent({ children }: { children?: React.ReactNode }) {
-    return (
-      <DirectionProvider direction="ltr" wrapper={<div />}>
-        {children || <div />}
-      </DirectionProvider>
-    );
+    return <DirectionProvider direction="ltr">{children || <div />}</DirectionProvider>;
   }
 
   it('inherits name from component `constructor.name`', () => {
@@ -95,7 +91,7 @@ describe('withDirection()', () => {
   it('returns new direction if direction context changes', () => {
     const Wrapped = withDirection()(BaseComponent);
     const { root, update } = render<DirectionProviderProps>(
-      <DirectionProvider direction="rtl" wrapper={<div />}>
+      <DirectionProvider direction="rtl">
         <Wrapped />
       </DirectionProvider>,
     );

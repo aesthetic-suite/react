@@ -1,4 +1,4 @@
-import React, { cloneElement, createContext, useContext } from 'react';
+import React, { createContext, useContext } from 'react';
 import getDirection from 'direction';
 import { Aesthetic, Direction } from '@aesthetic/core';
 import createHOC from './createHOC';
@@ -10,8 +10,13 @@ import {
   WrapperProps,
 } from './types';
 
+interface DirectionHelperOptions {
+  wrapper: React.ElementType;
+}
+
 export default function createDirectionHelpers<Result, Block extends object>(
   aesthetic: Aesthetic<Result, Block>,
+  { wrapper: Wrapper }: DirectionHelperOptions,
 ) /* infer */ {
   const DirectionContext = createContext<DirectionContextType>('ltr');
 
@@ -19,7 +24,7 @@ export default function createDirectionHelpers<Result, Block extends object>(
    * Explicitly define a direction or automatically infer a direction based on a string of text.
    * Will render an element with a `dir` attribute set.
    */
-  function DirectionProvider({ children, direction, value, wrapper }: DirectionProviderProps) {
+  function DirectionProvider({ children, direction, value }: DirectionProviderProps) {
     const dir = (direction ||
       (value && getDirection(value)) ||
       aesthetic.getActiveDirection() ||
@@ -27,7 +32,7 @@ export default function createDirectionHelpers<Result, Block extends object>(
 
     return (
       <DirectionContext.Provider value={dir}>
-        {cloneElement(wrapper, { dir }, children)}
+        <Wrapper dir={dir}>{children}</Wrapper>
       </DirectionContext.Provider>
     );
   }

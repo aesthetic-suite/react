@@ -14,19 +14,9 @@ describe('DirectionProvider', () => {
     teardownAestheticReact();
   });
 
-  it('renders and wraps with the chosen element', () => {
-    const { root } = render<DirectionProviderProps>(
-      <DirectionProvider wrapper={<article />}>
-        <section>Content</section>
-      </DirectionProvider>,
-    );
-
-    expect(root.find('article')).toHaveLength(1);
-  });
-
   it('renders `ltr` explicitly with `dir`', () => {
     const { root } = render<DirectionProviderProps>(
-      <DirectionProvider direction="ltr" wrapper={<div />}>
+      <DirectionProvider direction="ltr">
         <section>Content</section>
       </DirectionProvider>,
     );
@@ -36,7 +26,7 @@ describe('DirectionProvider', () => {
 
   it('renders `rtl` explicitly with `dir`', () => {
     const { root } = render<DirectionProviderProps>(
-      <DirectionProvider direction="rtl" wrapper={<div />}>
+      <DirectionProvider direction="rtl">
         <section>Content</section>
       </DirectionProvider>,
     );
@@ -46,7 +36,7 @@ describe('DirectionProvider', () => {
 
   it('renders `dir` over `value`', () => {
     const { root } = render<DirectionProviderProps>(
-      <DirectionProvider direction="rtl" value="Hello!" wrapper={<div />}>
+      <DirectionProvider direction="rtl" value="Hello!">
         <section>Content</section>
       </DirectionProvider>,
     );
@@ -56,7 +46,7 @@ describe('DirectionProvider', () => {
 
   it('infers `ltr` from `value`', () => {
     const { root } = render<DirectionProviderProps>(
-      <DirectionProvider value="Hello!" wrapper={<div />}>
+      <DirectionProvider value="Hello!">
         <section>Content</section>
       </DirectionProvider>,
     );
@@ -66,7 +56,7 @@ describe('DirectionProvider', () => {
 
   it('infers `rtl` from `value`', () => {
     const { root } = render<DirectionProviderProps>(
-      <DirectionProvider value="بسيطة" wrapper={<div />}>
+      <DirectionProvider value="بسيطة">
         <section>Content</section>
       </DirectionProvider>,
     );
