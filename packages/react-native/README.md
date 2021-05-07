@@ -9,15 +9,16 @@ powerful [Aesthetic](https://github.com/aesthetic-suite/framework) core library.
 
 ```tsx
 import React from 'react';
-import { View } from 'react-native';
+import { Pressable, PressableProps } from 'react-native';
 import { createComponentStyles, useStyles } from '@aesthetic/react-native';
 
-export const styleSheet = createComponentStyles((css) => ({
+export const styleSheet = createComponentStyles((theme) => ({
   button: {
-    display: 'flex',
-    textAlign: 'center',
+    flex: 1,
+    flexWrap: 'nowrap',
+    alignItems: 'center',
     width: 'auto',
-    padding: css.tokens.spacing.df,
+    padding: theme.tokens.spacing.df,
   },
 
   button_block: {
@@ -25,23 +26,26 @@ export const styleSheet = createComponentStyles((css) => ({
   },
 }));
 
-export interface ButtonProps {
+export interface ButtonProps extends PressableProps {
   children: React.ReactNode;
   block?: boolean;
 }
 
-export default function Button({ children, block = false }: ButtonProps) {
+export default function Button({ children, block = false, ...props }: ButtonProps) {
   const sx = useStyles(styleSheet);
 
-  return <View style={sx('button', block && 'button_block')}>{children}</View>;
+  return (
+    <Pressable {...props} style={sx('button', block && 'button_block')}>
+      {children}
+    </Pressable>
+  );
 }
 ```
 
 ## Features
 
 - Hook and HOC based APIs for styling components, accessing themes, and handling directionality.
-- Global, document, and element level themes powered through context.
-- Nested themes that avoid polluting the global scope.
+- Element level style sheets and nested themes.
 - First-class directionality support (RTL, LTR).
 
 ## Requirements
