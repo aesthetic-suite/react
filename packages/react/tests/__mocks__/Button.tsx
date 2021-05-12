@@ -41,11 +41,11 @@ export function createStyleSheet() {
         },
         'size:df': {
           minWidth: css.unit(8),
-          padding: `${css.var('spacing-df')} ${css.var('spacing-md')}`,
+          padding: `${css.var('spacing-df')} ${css.var('spacing-lg')}`,
         },
         'size:lg': {
           minWidth: css.unit(10),
-          padding: `${css.var('spacing-md')} ${css.var('spacing-lg')}`,
+          padding: `${css.var('spacing-lg')} ${css.var('spacing-xl')}`,
         },
 
         'size:lg + compound:test': {

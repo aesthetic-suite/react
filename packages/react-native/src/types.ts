@@ -30,6 +30,10 @@ export type InferProps<T extends React.ComponentType<unknown>> = T extends React
   ? P
   : never;
 
-export type WithStylesWrappedProps<T> = InternalWithStylesWrappedProps<T, NativeStyles[]>;
+export type WithStylesWrappedProps<T> = InternalWithStylesWrappedProps<
+  T,
+  NativeStyles,
+  NativeStyles[]
+>;
 
 export type WithThemeWrappedProps = InternalWithThemeWrappedProps<NativeBlock>;

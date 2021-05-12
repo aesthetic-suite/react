@@ -12,11 +12,25 @@ export const { getVariantsFromProps, useStyles, withStyles } = createStyleHelper
   NativeBlock,
   NativeStyles[]
 >(aesthetic, {
-  generate(keys, variants, results) {
+  generate(args, variants, results) {
     const style: NativeStyles[] = [];
 
-    arrayLoop(keys, (key) => {
-      const hash = results[key];
+    arrayLoop(args, (arg) => {
+      if (!arg) {
+        return;
+      }
+
+      if (Array.isArray(arg)) {
+        arg.forEach((a) => {
+          if (a) {
+            style.push(a);
+          }
+        });
+
+        return;
+      }
+
+      const hash = results[arg];
 
       if (!hash) {
         return;

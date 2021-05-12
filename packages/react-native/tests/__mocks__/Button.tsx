@@ -43,15 +43,15 @@ export function createStyleSheet() {
       '@variants': {
         'size:sm': {
           minWidth: css.unit(6),
-          padding: `${css.tokens.spacing.md} ${css.tokens.spacing.df}`,
+          padding: `${css.tokens.spacing.sm} ${css.tokens.spacing.df}`,
         },
         'size:df': {
           minWidth: css.unit(8),
-          padding: `${css.tokens.spacing.df} ${css.tokens.spacing.md}`,
+          padding: `${css.tokens.spacing.df} ${css.tokens.spacing.lg}`,
         },
         'size:lg': {
           minWidth: css.unit(10),
-          padding: `${css.tokens.spacing.md} ${css.tokens.spacing.lg}`,
+          padding: `${css.tokens.spacing.lg} ${css.tokens.spacing.xl}`,
         },
 
         'size:lg + compound:test': {

@@ -5,24 +5,18 @@ import {
   LocalSheet,
   RenderResult,
   RenderResultSheet,
+  ResultComposer,
+  ResultComposerArgs,
+  ResultComposerVariants,
+  ResultGenerator,
   Theme,
 } from '@aesthetic/core';
 import { isObject, objectLoop } from '@aesthetic/utils';
 import createHOC from './createHOC';
-import {
-  InternalWithStylesWrappedProps,
-  StyleResultGenerator,
-  StyleResultVariants,
-  WrapperComponent,
-  WrapperProps,
-} from './types';
+import { InternalWithStylesWrappedProps, WrapperComponent, WrapperProps } from './types';
 
 interface StyleHelperOptions<Result, Block extends object, GeneratedResult> {
-  generate: <T extends string>(
-    keys: T[],
-    variants: Set<string>,
-    results: RenderResultSheet<Result>,
-  ) => GeneratedResult;
+  generate: ResultGenerator<string, Result, GeneratedResult>;
   useDirection: () => Direction;
   useTheme: () => Theme<Block>;
 }
@@ -32,7 +26,7 @@ export default function createStyleHelpers<Result, Block extends object, Generat
   { generate, useDirection, useTheme }: StyleHelperOptions<Result, Block, GeneratedResult>,
 ) /* infer */ {
   function cxWithCache(
-    keys: unknown[],
+    args: ResultComposerArgs<string, Result>,
     results: RenderResultSheet<Result>,
     cache: Record<string, GeneratedResult>,
   ): GeneratedResult {
@@ -40,8 +34,8 @@ export default function createStyleHelpers<Result, Block extends object, Generat
     let cacheKey = '';
 
     // Variant objects may only be passed as the first argument
-    if (isObject(keys[0])) {
-      objectLoop(keys.shift() as StyleResultVariants, (value, variant) => {
+    if (isObject(args[0])) {
+      objectLoop((args.shift() as unknown) as ResultComposerVariants, (value, variant) => {
         if (value) {
           const type = `${variant}:${value}`;
 
@@ -51,11 +45,11 @@ export default function createStyleHelpers<Result, Block extends object, Generat
       });
     }
 
-    cacheKey += keys.filter(Boolean).join('');
+    cacheKey += args.filter(Boolean).join('');
 
     if (!cache[cacheKey]) {
       // eslint-disable-next-line no-param-reassign
-      cache[cacheKey] = generate(keys as string[], variants, results);
+      cache[cacheKey] = generate(args, variants, results);
     }
 
     return cache[cacheKey];
@@ -66,7 +60,7 @@ export default function createStyleHelpers<Result, Block extends object, Generat
    */
   function useStyles<T = unknown>(
     sheet: LocalSheet<T, Block, Result>,
-  ): StyleResultGenerator<keyof T, GeneratedResult> {
+  ): ResultComposer<keyof T, Result, GeneratedResult> {
     const theme = useTheme();
     const direction = useDirection();
     const classCache = useRef<Record<string, GeneratedResult>>({});
@@ -101,12 +95,16 @@ export default function createStyleHelpers<Result, Block extends object, Generat
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [direction, theme.name]);
 
-    const cx = useCallback((...keys: unknown[]) => cxWithCache(keys, result, classCache.current), [
-      result,
-    ]) as StyleResultGenerator<keyof T, GeneratedResult>;
+    const composer = useCallback(
+      (...args: ResultComposerArgs<string, Result>) =>
+        cxWithCache(args, result, classCache.current),
+      [result],
+    );
+
+    const cx = (composer as unknown) as ResultComposer<keyof T, Result, GeneratedResult>;
 
     // Make the result available if need be, but behind a hidden API
-    cx.result = result as RenderResultSheet<GeneratedResult>;
+    cx.result = result!;
 
     return cx;
   }

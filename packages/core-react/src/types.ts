@@ -1,7 +1,7 @@
 // Any must be used here for consumers to be typed correctly.
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Direction, RenderResultSheet, Theme, ThemeName } from '@aesthetic/core';
+import { Direction, ResultComposer, Theme, ThemeName } from '@aesthetic/core';
 
 // HOCs
 
@@ -55,17 +55,7 @@ export interface InternalWithThemeWrappedProps<T extends object> extends Wrapped
 
 // STYLES
 
-export type StyleResultTypes<T> = (T | false | null | undefined)[];
-
-export type StyleResultVariants = Record<string, string | undefined>;
-
-export interface StyleResultGenerator<T, R> {
-  result: RenderResultSheet<R>;
-  (variants: StyleResultVariants, ...keys: StyleResultTypes<T>): R;
-  (...keys: StyleResultTypes<T>): R;
-}
-
-export interface InternalWithStylesWrappedProps<T, R> extends WrappedProps {
+export interface InternalWithStylesWrappedProps<T, R, GR = R> extends WrappedProps {
   /** Function to compose styles from a sheet. Provided by `withStyles`. */
-  compose: StyleResultGenerator<T, R>;
+  compose: ResultComposer<T, R, GR>;
 }
