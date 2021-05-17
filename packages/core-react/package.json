@@ -16,10 +16,9 @@
   },
   "author": "Miles Johnson",
   "license": "MIT",
-  "main": "./lib/browser/index.js",
+  "main": "./lib/index.js",
   "module": "./esm/index.js",
   "types": "./dts/index.d.ts",
-  "browser": "./lib/browser/index.js",
   "files": [
     "dts/**/*.d.ts",
     "esm/**/*.{js,map}",
@@ -48,10 +47,7 @@
     "react": "^17.0.2"
   },
   "packemon": {
-    "platform": [
-      "browser",
-      "native"
-    ]
+    "platform": "browser"
   },
   "tsconfig": {
     "compilerOptions": {
