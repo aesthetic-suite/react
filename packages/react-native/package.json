@@ -1,6 +1,6 @@
 {
   "name": "@aesthetic/react-native",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "React Native hooks, composers, and more for styling components with Aesthetic.",
   "keywords": [
     "aesthetic",
@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "@aesthetic/core": "^0.9.4",
-    "@aesthetic/core-react": "^0.1.11",
+    "@aesthetic/core-react": "^0.1.12",
     "@aesthetic/utils": "^0.7.0"
   },
   "peerDependencies": {
