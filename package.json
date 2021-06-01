@@ -34,7 +34,7 @@
     "@storybook/react": "^6.2.9",
     "@storybook/storybook-deployer": "^2.8.8",
     "@types/hoist-non-react-statics": "^3.3.1",
-    "@types/react": "^17.0.5",
+    "@types/react": "^17.0.8",
     "benchmark": "^2.1.4",
     "builtin-modules": "^3.2.0",
     "conventional-changelog-beemo": "^2.1.0",
