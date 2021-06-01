@@ -10,3 +10,14 @@ jobs:
       - uses: beemojs/conventional-pr-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  percy:
+    name: Generate Percy Snapshots
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+      - run: yarn install --ignore-engines --frozen-lockfile
+      - run: yarn run build
+      - run: yarn run snapshot
+        env:
+          PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}

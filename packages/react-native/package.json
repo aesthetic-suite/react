@@ -30,7 +30,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@aesthetic/core": "^0.9.4",
+    "@aesthetic/core": "^0.9.5",
     "@aesthetic/core-react": "^0.1.12",
     "@aesthetic/utils": "^0.7.0"
   },
@@ -40,7 +40,7 @@
   },
   "devDependencies": {
     "@testing-library/react-native": "^7.0.2",
-    "@types/react-native": "^0.64.5",
+    "@types/react-native": "^0.64.8",
     "react": "^17.0.1",
     "react-native": "^0.64.1"
   },
