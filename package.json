@@ -30,6 +30,7 @@
     "@storybook/addon-essentials": "^6.2.9",
     "@storybook/addon-links": "^6.2.9",
     "@storybook/react": "^6.2.9",
+    "@storybook/storybook-deployer": "^2.8.8",
     "@types/hoist-non-react-statics": "^3.3.1",
     "@types/react": "^17.0.5",
     "benchmark": "^2.1.4",
