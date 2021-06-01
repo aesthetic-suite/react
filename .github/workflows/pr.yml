@@ -20,3 +20,11 @@ jobs:
       - run: yarn storybook-to-ghpages --ci --host-token-env-variable=GITHUB_TOKEN
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  percy:
+    name: Generate Percy Snapshots
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+      - run: yarn install --ignore-engines --frozen-lockfile
+      - run: yarn run snapshot

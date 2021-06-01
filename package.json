@@ -18,7 +18,8 @@
     "test": "yarn run coverage",
     "posttest": "yarn run lint",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "snapshot": "build-storybook && percy-storybook --widths=640,960,1280,1600"
   },
   "engines": {
     "node": ">=10.3.0"
@@ -26,6 +27,7 @@
   "devDependencies": {
     "@aesthetic/design-systems": "^0.0.1",
     "@milesj/build-tools": "^2.17.0",
+    "@percy/storybook": "^3.3.1",
     "@storybook/addon-actions": "^6.2.9",
     "@storybook/addon-essentials": "^6.2.9",
     "@storybook/addon-links": "^6.2.9",
