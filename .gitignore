@@ -19,6 +19,7 @@ esm/
 lib/
 tmp/
 node_modules/
+storybook-static/
 
 # Custom
 *.min.js
