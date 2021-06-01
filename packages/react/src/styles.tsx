@@ -1,5 +1,11 @@
 import { createElement, forwardRef, memo, useMemo } from 'react';
-import { ClassName, ElementStyles, RenderOptions, Rule, Utilities } from '@aesthetic/core';
+import {
+  ClassName,
+  ElementStyles,
+  LocalElementSheetFactory,
+  RenderOptions,
+  Rule,
+} from '@aesthetic/core';
 import { createStyleHelpers } from '@aesthetic/core-react';
 import aesthetic from './aesthetic';
 import { useDirection } from './direction';
@@ -24,7 +30,7 @@ export function createStyled<
   V extends object = {}
 >(
   type: T,
-  factory: ElementStyles | ((utilities: Utilities<ElementStyles>) => ElementStyles),
+  factory: ElementStyles | LocalElementSheetFactory<ElementStyles>,
 ): StyledComponent<InferProps<T> & V> {
   if (__DEV__) {
     const typeOfType = typeof type;
@@ -43,9 +49,7 @@ export function createStyled<
     }
   }
 
-  const styleSheet = aesthetic.createComponentStyles((utils) => ({
-    element: typeof factory === 'function' ? factory(utils) : factory,
-  }));
+  const styleSheet = aesthetic.createElementStyles(factory);
 
   const Component = memo(
     forwardRef((baseProps, ref) => {

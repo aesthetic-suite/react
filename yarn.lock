@@ -2,20 +2,20 @@
 # yarn lockfile v1
 
 
-"@aesthetic/core@^0.9.5":
-  version "0.9.5"
-  resolved "https://registry.yarnpkg.com/@aesthetic/core/-/core-0.9.5.tgz#190b87e05e291aceacbb4df47ade8e744dde9af1"
-  integrity sha512-TD9Xf3y4CepBo5wtRw2gD5hTmRxfY+//cj48qs9va+qhz+awEE3ejz81ESaw3Gaep3dZWhWp3V0+KSdXvl7Cfw==
+"@aesthetic/core@^0.9.6":
+  version "0.9.6"
+  resolved "https://registry.yarnpkg.com/@aesthetic/core/-/core-0.9.6.tgz#4639d530144222156c786eeeb87819c6d57ac393"
+  integrity sha512-4v4ym0HTMXC7oeRBImppE/nVMSi0EeiRZhSoMzAQnqcxhQ1QTU5as/85Op8tnmaZvy1oFll62cZWE9q3JOI5VQ==
   dependencies:
     "@aesthetic/sss" "^0.8.2"
     "@aesthetic/system" "^0.8.3"
     "@aesthetic/types" "^0.5.1"
     "@aesthetic/utils" "^0.7.0"
 
-"@aesthetic/design-systems@^0.0.1":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@aesthetic/design-systems/-/design-systems-0.0.1.tgz#38dfd11c0a033af6d805589c166156ce172cb5fc"
-  integrity sha512-jUawFrHIhpzNRVDwc68afIcTPnp/3UHKZtCR8R05SY21LZMhe3V3UdyPpev26p8R3FSBBVNYT8B49NfW8hiSew==
+"@aesthetic/design-systems@^0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@aesthetic/design-systems/-/design-systems-0.0.2.tgz#3081d9483bd1044229746263de051684c391a33c"
+  integrity sha512-x4hQ8Wpm20vBtEHABMnJiHZB7Ys7HFQUA3KaQVJ23CUYaQQgs6PWXJpLX9PFWJ1FXde3OfAMw4o/qs5hADgr5Q==
 
 "@aesthetic/sss@^0.8.2":
   version "0.8.2"

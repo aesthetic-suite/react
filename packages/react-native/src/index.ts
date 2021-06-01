@@ -4,6 +4,7 @@
  */
 
 import aesthetic from './aesthetic';
+import { createStyled } from './styles';
 
 export * from './direction';
 export * from './styles';
@@ -17,6 +18,7 @@ export const {
   changeTheme,
   configure,
   createComponentStyles,
+  createElementStyles,
   getActiveDirection,
   getActiveTheme,
   getEngine,
@@ -27,3 +29,8 @@ export const {
   subscribe,
   unsubscribe,
 } = aesthetic;
+
+// Export aliases
+export const style = createElementStyles;
+export const styles = createComponentStyles;
+export const styled = createStyled;
