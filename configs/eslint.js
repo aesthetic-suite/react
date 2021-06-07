@@ -1,7 +1,6 @@
 /* eslint-disable sort-keys */
 
 module.exports = {
-  extends: ['plugin:rut/recommended'],
   overrides: [
     {
       files: 'styles.ts',

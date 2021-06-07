@@ -1,25 +1,24 @@
-import { ThemeProvider } from '@aesthetic/react';
 import { renderHook } from '@testing-library/react-hooks';
 import { useSpacing } from '../../../src/hooks/styles/useSpacing';
-import { getRenderedStyles } from '../../helpers';
+import { getRenderedStyles, Wrapper } from '../../helpers';
 
 describe('useSpacing()', () => {
   it('renders default styles', () => {
-    const { result } = renderHook(() => useSpacing({}), { wrapper: ThemeProvider });
+    const { result } = renderHook(() => useSpacing({}), { wrapper: Wrapper });
 
     expect(result.current).toEqual({ className: '', style: {} });
     expect(getRenderedStyles('standard')).toMatchSnapshot();
   });
 
   it('can set all sides', () => {
-    const { result } = renderHook(() => useSpacing({ spacing: 'df' }), { wrapper: ThemeProvider });
+    const { result } = renderHook(() => useSpacing({ spacing: 'df' }), { wrapper: Wrapper });
 
     expect(result.current).toEqual({ className: 'd', style: {} });
   });
 
   it('can set horizontal sides', () => {
     const { result } = renderHook(() => useSpacing({ spacingHorizontal: 'xs' }), {
-      wrapper: ThemeProvider,
+      wrapper: Wrapper,
     });
 
     expect(result.current).toEqual({ className: 'i j', style: {} });
@@ -27,7 +26,7 @@ describe('useSpacing()', () => {
 
   it('can set vertical sides', () => {
     const { result } = renderHook(() => useSpacing({ spacingVertical: 'xl' }), {
-      wrapper: ThemeProvider,
+      wrapper: Wrapper,
     });
 
     expect(result.current).toEqual({ className: 'c1 d1', style: {} });
@@ -35,7 +34,7 @@ describe('useSpacing()', () => {
 
   it('can set top side', () => {
     const { result } = renderHook(() => useSpacing({ spacingTop: 'sm' }), {
-      wrapper: ThemeProvider,
+      wrapper: Wrapper,
     });
 
     expect(result.current).toEqual({ className: 'g1', style: {} });
@@ -43,7 +42,7 @@ describe('useSpacing()', () => {
 
   it('can set right side', () => {
     const { result } = renderHook(() => useSpacing({ spacingEnd: 'df' }), {
-      wrapper: ThemeProvider,
+      wrapper: Wrapper,
     });
 
     expect(result.current).toEqual({ className: 'z1', style: {} });
@@ -51,7 +50,7 @@ describe('useSpacing()', () => {
 
   it('can set bottom side', () => {
     const { result } = renderHook(() => useSpacing({ spacingBottom: 'lg' }), {
-      wrapper: ThemeProvider,
+      wrapper: Wrapper,
     });
 
     expect(result.current).toEqual({ className: 'o1', style: {} });
@@ -59,7 +58,7 @@ describe('useSpacing()', () => {
 
   it('can set left side', () => {
     const { result } = renderHook(() => useSpacing({ spacingStart: 'xl' }), {
-      wrapper: ThemeProvider,
+      wrapper: Wrapper,
     });
 
     expect(result.current).toEqual({ className: 'v1', style: {} });
@@ -69,7 +68,7 @@ describe('useSpacing()', () => {
     const { result } = renderHook(
       () => useSpacing({ spacing: 'df', spacingVertical: 'sm', spacingTop: 'xs' }),
       {
-        wrapper: ThemeProvider,
+        wrapper: Wrapper,
       },
     );
 
@@ -89,7 +88,7 @@ describe('useSpacing()', () => {
           spacingEnd: -1,
         }),
       {
-        wrapper: ThemeProvider,
+        wrapper: Wrapper,
       },
     );
 

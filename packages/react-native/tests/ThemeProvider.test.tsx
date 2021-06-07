@@ -188,7 +188,6 @@ describe('ThemeProvider', () => {
         </ThemeProvider>,
       );
 
-      // eslint-disable-next-line rut/no-act
       act(() => {
         doChangeTheme('dawn', []);
       });

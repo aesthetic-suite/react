@@ -60,11 +60,6 @@
   },
   "tsconfig": {
     "compilerOptions": {
-      "jsx": "react",
-      "lib": [
-        "dom",
-        "esnext"
-      ],
       "types": [
         "node",
         "react"
