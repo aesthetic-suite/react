@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { render } from '@testing-library/react-native';
-import { InternalWithThemeWrappedProps,NativeBlock, ThemeProvider, withTheme } from '../src';
+import { InternalWithThemeWrappedProps, NativeBlock, ThemeProvider, withTheme } from '../src';
 import { dawnTheme, setupAestheticReact, teardownAestheticReact, twilightTheme } from './helpers';
 
 describe('withTheme()', () => {

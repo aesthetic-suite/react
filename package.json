@@ -19,7 +19,7 @@
     "posttest": "yarn run lint",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "snapshot": "build-storybook && percy-storybook --widths=640,960,1280,1600"
+    "snapshot": "build-storybook && percy-storybook --widths=640,960,1280"
   },
   "engines": {
     "node": ">=10.3.0"
