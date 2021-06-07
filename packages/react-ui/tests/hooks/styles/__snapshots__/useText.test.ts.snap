@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`useText() renders default styles 1`] = `".a {font-family: var(--typography-font-text);}.b {line-height: var(--text-sm-line-height);}.c {font-size: var(--text-sm-size);}.d {line-height: var(--text-df-line-height);}.e {font-size: var(--text-df-size);}.f {line-height: var(--text-lg-line-height);}.g {font-size: var(--text-lg-size);}"`;

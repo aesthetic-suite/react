@@ -39,12 +39,12 @@ export function useSpacing({
   const map = useMemo(
     () => ({
       all: spacing,
-      horizontal: spacingHorizontal,
-      vertical: spacingVertical,
-      top: spacingTop,
       bottom: spacingBottom,
-      start: spacingStart,
       end: spacingEnd,
+      horizontal: spacingHorizontal,
+      start: spacingStart,
+      top: spacingTop,
+      vertical: spacingVertical,
     }),
     [
       spacing,
@@ -83,7 +83,7 @@ export function useSpacing({
 }
 
 export const styleSheet = style((css) => {
-  const SIZES: InlineSpacingSize[] = ['inline', ...SPACING_SIZES];
+  const sizes: InlineSpacingSize[] = ['inline', ...SPACING_SIZES];
 
   function value(size: InlineSpacingSize, type: string) {
     return size === 'inline'
@@ -94,33 +94,33 @@ export const styleSheet = style((css) => {
   return {
     // Ordered from lowest to highest specificity
     '@variants': {
-      ...mapVariants('all', SIZES, (size, type) => ({
+      ...mapVariants('all', sizes, (size, type) => ({
         padding: value(size, type),
       })),
 
-      ...mapVariants('horizontal', SIZES, (size, type) => ({
+      ...mapVariants('horizontal', sizes, (size, type) => ({
         paddingLeft: value(size, type),
         paddingRight: value(size, type),
       })),
 
-      ...mapVariants('vertical', SIZES, (size, type) => ({
+      ...mapVariants('vertical', sizes, (size, type) => ({
         paddingTop: value(size, type),
         paddingBottom: value(size, type),
       })),
 
-      ...mapVariants('top', SIZES, (size, type) => ({
+      ...mapVariants('top', sizes, (size, type) => ({
         paddingTop: value(size, type),
       })),
 
-      ...mapVariants('bottom', SIZES, (size, type) => ({
+      ...mapVariants('bottom', sizes, (size, type) => ({
         paddingBottom: value(size, type),
       })),
 
-      ...mapVariants('start', SIZES, (size, type) => ({
+      ...mapVariants('start', sizes, (size, type) => ({
         paddingLeft: value(size, type),
       })),
 
-      ...mapVariants('end', SIZES, (size, type) => ({
+      ...mapVariants('end', sizes, (size, type) => ({
         paddingRight: value(size, type),
       })),
     },

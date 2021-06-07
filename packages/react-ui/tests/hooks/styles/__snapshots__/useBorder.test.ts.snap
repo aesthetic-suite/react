@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`useBorder() renders default styles 1`] = `".a {border-color: transparent;}.b {border-style: solid;}.c {border-width: var(--border-sm-width);}.d {border-width: var(--border-df-width);}.e {border-width: var(--border-lg-width);}.f {border-radius: var(--border-sm-radius);}.g {border-radius: var(--border-df-radius);}.h {border-radius: var(--border-lg-radius);}"`;
