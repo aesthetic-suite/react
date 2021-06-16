@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import { LocalSheet } from '@aesthetic/core';
+import { ComponentSheet } from '@aesthetic/core';
 import { DirectionProvider, NativeBlock, NativeStyles, ThemeProvider } from '../../src';
 import { aesthetic } from '../../src/aesthetic';
 
@@ -94,7 +94,7 @@ export interface ButtonProps {
 	href?: string;
 	large?: boolean;
 	small?: boolean;
-	sheet?: LocalSheet<unknown, NativeBlock, NativeStyles>;
+	sheet?: ComponentSheet<unknown, NativeStyles, NativeBlock>;
 	// Compound variant tests
 	compound?: string;
 }

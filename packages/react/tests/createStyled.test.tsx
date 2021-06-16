@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { render } from 'rut-dom';
-import { StyleSheet } from '@aesthetic/core';
+import { Sheet } from '@aesthetic/core';
 import { getRenderedStyles } from '@aesthetic/style/test';
 import { createStyled } from '../src';
 import { Wrapper } from './__fixtures__/Button';
@@ -41,12 +41,12 @@ describe('createStyled()', () => {
 		const Button = createStyled('button', {});
 
 		expect(Button.displayName).toBe('styled(button)');
-		expect(Button.styleSheet).toBeInstanceOf(StyleSheet);
+		expect(Button.styleSheet).toBeInstanceOf(Sheet);
 
 		const ComposedButton = createStyled(Button, {});
 
 		expect(ComposedButton.displayName).toBe('styled(styled(button))');
-		expect(ComposedButton.styleSheet).toBeInstanceOf(StyleSheet);
+		expect(ComposedButton.styleSheet).toBeInstanceOf(Sheet);
 	});
 
 	it('creates and renders a button with defined styles', () => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { ImageStyle, StyleProp, TextStyle, ViewStyle } from 'react-native';
-import { Engine, LocalSheet } from '@aesthetic/core';
+import { ComponentSheet, Engine } from '@aesthetic/core';
 import {
 	InternalWithStylesWrappedProps,
 	InternalWithThemeWrappedProps,
@@ -16,7 +16,7 @@ export type NativeEngine = Engine<NativeStyles>;
 
 export interface StyledComponent<P extends object = {}>
 	extends React.MemoExoticComponent<React.ForwardRefExoticComponent<P & StyledInheritedProps>> {
-	styleSheet: LocalSheet<unknown, NativeBlock, NativeStyles>;
+	styleSheet: ComponentSheet<unknown, NativeStyles, NativeBlock>;
 }
 
 export interface StyledInheritedProps {

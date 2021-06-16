@@ -1,14 +1,13 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {
 	Aesthetic,
+	ComponentSheet,
 	Direction,
-	LocalSheet,
-	RenderResult,
-	RenderResultSheet,
 	ResultComposer,
 	ResultComposerArgs,
 	ResultComposerVariants,
 	ResultGenerator,
+	SheetRenderResult,
 	Theme,
 } from '@aesthetic/core';
 import { isObject, objectLoop } from '@aesthetic/utils';
@@ -27,7 +26,7 @@ export function createStyleHelpers<Result, Block extends object, GeneratedResult
 ) /* infer */ {
 	function cxWithCache(
 		args: ResultComposerArgs<string, Result>,
-		results: RenderResultSheet<Result>,
+		results: SheetRenderResult<Result>,
 		cache: Record<string, GeneratedResult>,
 	): GeneratedResult {
 		const variants = new Set<string>();
@@ -35,7 +34,7 @@ export function createStyleHelpers<Result, Block extends object, GeneratedResult
 
 		// Variant objects may only be passed as the first argument
 		if (isObject(args[0])) {
-			objectLoop(args.shift() as unknown as ResultComposerVariants, (value, variant) => {
+			objectLoop((args.shift() as unknown) as ResultComposerVariants, (value, variant) => {
 				if (value) {
 					const type = `${variant}:${value}`;
 
@@ -59,13 +58,13 @@ export function createStyleHelpers<Result, Block extends object, GeneratedResult
 	 * Hook within a component to provide a style sheet.
 	 */
 	function useStyles<T = unknown>(
-		sheet: LocalSheet<T, Block, Result>,
+		sheet: ComponentSheet<T, Result, Block>,
 	): ResultComposer<keyof T, Result, GeneratedResult> {
 		const theme = useTheme();
 		const direction = useDirection();
 		const classCache = useRef<Record<string, GeneratedResult>>({});
 		const initialMount = useRef(true);
-		const [result, setResult] = useState<RenderResultSheet<Result>>(() =>
+		const [result, setResult] = useState<SheetRenderResult<Result>>(() =>
 			aesthetic.renderComponentStyles(sheet, {
 				direction,
 				theme: theme.name,
@@ -101,7 +100,7 @@ export function createStyleHelpers<Result, Block extends object, GeneratedResult
 			[result],
 		);
 
-		const cx = composer as unknown as ResultComposer<keyof T, Result, GeneratedResult>;
+		const cx = (composer as unknown) as ResultComposer<keyof T, Result, GeneratedResult>;
 
 		// Make the result available if need be, but behind a hidden API
 		cx.result = result!;
@@ -112,7 +111,7 @@ export function createStyleHelpers<Result, Block extends object, GeneratedResult
 	/**
 	 * Wrap a React component with an HOC that injects the style to class name transfer function.
 	 */
-	function withStyles<T = unknown>(sheet: LocalSheet<T, Block, Result>) /* infer */ {
+	function withStyles<T = unknown>(sheet: ComponentSheet<T, Result, Block>) /* infer */ {
 		return function withStylesComposer<Props extends object = {}>(
 			WrappedComponent: React.ComponentType<
 				InternalWithStylesWrappedProps<keyof T, Result> & Props
@@ -136,7 +135,7 @@ export function createStyleHelpers<Result, Block extends object, GeneratedResult
 	}
 
 	function getVariantsFromProps<Keys extends string>(
-		renderResult: RenderResult<unknown> | undefined,
+		renderResult: SheetRenderResult<Result>[string] | undefined,
 		baseProps: object,
 	): { props: { [K in Keys]?: Result }; variants?: Record<string, string> } {
 		const types = renderResult?.variantTypes;

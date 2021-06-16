@@ -26,7 +26,7 @@
     "react-docgen-typescript": "^2.0.0"
   },
   "devDependencies": {
-    "@aesthetic/design-systems": "^0.0.2",
+    "@aesthetic/design-systems": "^0.1.1",
     "@beemo/dev": "^0.2.3",
     "@percy/storybook": "^3.3.1",
     "@storybook/addon-actions": "^6.2.9",
@@ -42,7 +42,7 @@
     "eslint-plugin-rut": "^2.0.0",
     "jest-rut": "^2.0.0",
     "lerna": "^4.0.0",
-    "packemon": "^1.0.0-alpha.0",
+    "packemon": "^1.0.0-alpha.1",
     "react": "^17.0.2",
     "react-test-renderer": "^17.0.2"
   },

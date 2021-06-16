@@ -21,7 +21,7 @@ const engine: NativeEngine = {
 	renderFontFace: unsupported('renderFontFace()'),
 	renderImport: unsupported('renderImport()'),
 	renderKeyframes: unsupported('renderKeyframes()'),
-	renderRule: (rule) => rule as NativeStyles,
+	renderRule: (rule) => ({ result: rule as NativeStyles, variants: [] }),
 	renderRuleGrouped: unsupported('renderRuleGrouped()'),
 	renderVariable: unsupported('renderVariable()'),
 	ruleIndex: 0,

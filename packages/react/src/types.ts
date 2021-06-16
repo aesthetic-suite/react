@@ -1,4 +1,4 @@
-import { ClassName, LocalBlock, LocalSheet } from '@aesthetic/core';
+import { ClassName, ComponentSheet, Rule } from '@aesthetic/core';
 import {
 	InternalWithStylesWrappedProps,
 	InternalWithThemeWrappedProps,
@@ -8,7 +8,7 @@ export type ElementType = keyof JSX.IntrinsicElements;
 
 export interface StyledComponent<P extends object = {}>
 	extends React.MemoExoticComponent<React.ForwardRefExoticComponent<P & StyledInheritedProps>> {
-	styleSheet: LocalSheet<unknown, LocalBlock, ClassName>;
+	styleSheet: ComponentSheet<unknown, ClassName, Rule>;
 }
 
 export interface StyledInheritedProps {
@@ -23,4 +23,4 @@ export type InferProps<T extends ElementType | React.ComponentType<unknown>> = T
 
 export type WithStylesWrappedProps<T> = InternalWithStylesWrappedProps<T, ClassName>;
 
-export type WithThemeWrappedProps = InternalWithThemeWrappedProps<LocalBlock>;
+export type WithThemeWrappedProps = InternalWithThemeWrappedProps<Rule>;

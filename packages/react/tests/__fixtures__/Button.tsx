@@ -1,5 +1,5 @@
 import React from 'react';
-import { ClassName, ElementStyles, LocalSheet } from '@aesthetic/core';
+import { ClassName, ElementStyles, ComponentSheet } from '@aesthetic/core';
 import { DirectionProvider, ThemeProvider } from '../../src';
 import { aesthetic } from '../../src/aesthetic';
 
@@ -86,7 +86,7 @@ export interface ButtonProps {
 	href?: string;
 	large?: boolean;
 	small?: boolean;
-	sheet?: LocalSheet<unknown, ElementStyles, ClassName>;
+	sheet?: ComponentSheet<unknown, ClassName, ElementStyles>;
 	// Compound variant tests
 	compound?: string;
 }

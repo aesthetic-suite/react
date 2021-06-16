@@ -38,19 +38,15 @@
     "react": "^16.13.0 || ^17.0.0"
   },
   "dependencies": {
-    "@aesthetic/utils": "^0.7.0",
+    "@aesthetic/utils": "^0.8.1",
     "direction": "^1.0.4",
     "hoist-non-react-statics": "^3.3.2"
   },
   "devDependencies": {
-    "@aesthetic/core": "^0.9.6",
+    "@aesthetic/core": "^0.10.1",
     "react": "^17.0.2"
   },
   "packemon": {
-    "format": [
-      "lib",
-      "esm"
-    ],
     "platform": "browser"
   },
   "tsconfig": {

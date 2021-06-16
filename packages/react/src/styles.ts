@@ -1,11 +1,5 @@
 import { createElement, forwardRef, memo, useMemo } from 'react';
-import {
-	ClassName,
-	ElementStyles,
-	LocalElementSheetFactory,
-	RenderOptions,
-	Rule,
-} from '@aesthetic/core';
+import { ClassName, RenderOptions, Rule, SheetFactory } from '@aesthetic/core';
 import { createStyleHelpers } from '@aesthetic/core-react';
 import { aesthetic } from './aesthetic';
 import { useDirection } from './direction';
@@ -22,17 +16,14 @@ export function useCss(
 	rule: Rule,
 	options?: Pick<RenderOptions, 'media' | 'selector' | 'supports'>,
 ): ClassName {
-	return useMemo(() => aesthetic.getEngine().renderRule(rule, options), [rule, options]);
+	return useMemo(() => aesthetic.getEngine().renderRule(rule, options).result, [rule, options]);
 }
 
 export function createStyled<
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	T extends ElementType | React.ComponentType<any>,
-	V extends object = {},
->(
-	type: T,
-	factory: ElementStyles | LocalElementSheetFactory<ElementStyles>,
-): StyledComponent<InferProps<T> & V> {
+	V extends object = {}
+>(type: T, factory: Rule | SheetFactory<Rule, Rule>): StyledComponent<InferProps<T> & V> {
 	if (__DEV__) {
 		const typeOfType = typeof type;
 		const typeOfFactory = typeof factory;

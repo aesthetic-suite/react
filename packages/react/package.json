@@ -33,10 +33,10 @@
     "access": "public"
   },
   "dependencies": {
-    "@aesthetic/core": "^0.9.6",
+    "@aesthetic/core": "^0.10.1",
     "@aesthetic/core-react": "^0.1.12",
-    "@aesthetic/style": "^0.8.1",
-    "@aesthetic/utils": "^0.7.0"
+    "@aesthetic/style": "^0.9.1",
+    "@aesthetic/utils": "^0.8.1"
   },
   "peerDependencies": {
     "react": "^16.6.0 || ^17.0.0"
@@ -56,10 +56,6 @@
       "index": "src/index.ts",
       "server": "src/server.tsx"
     },
-    "format": [
-      "lib",
-      "esm"
-    ],
     "platform": "browser"
   },
   "tsconfig": {

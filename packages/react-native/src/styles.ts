@@ -41,8 +41,8 @@ export const { getVariantsFromProps, useStyles, withStyles } = createStyleHelper
 			}
 
 			if (hash.variants) {
-				arrayLoop(hash.variants, ({ match, result }) => {
-					if (match.every((type) => variants.has(type))) {
+				arrayLoop(hash.variants, ({ types, result }) => {
+					if (types.every((type) => variants.has(type))) {
 						style.push(result);
 					}
 				});
