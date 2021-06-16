@@ -15,5 +15,6 @@ export default {
 	],
 	settings: {
 		react: true,
+		projects: true,
 	},
 };
