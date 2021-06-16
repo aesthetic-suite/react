@@ -28,7 +28,7 @@ export function useCss(
 export function createStyled<
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	T extends ElementType | React.ComponentType<any>,
-	V extends object = {}
+	V extends object = {},
 >(
 	type: T,
 	factory: ElementStyles | LocalElementSheetFactory<ElementStyles>,

@@ -6,51 +6,51 @@ import { DirectionProvider } from '../src';
 import { setupAestheticReact, teardownAestheticReact } from './helpers';
 
 describe('DirectionProvider', () => {
-  beforeEach(() => {
-    setupAestheticReact();
-  });
+	beforeEach(() => {
+		setupAestheticReact();
+	});
 
-  afterEach(() => {
-    teardownAestheticReact();
-  });
+	afterEach(() => {
+		teardownAestheticReact();
+	});
 
-  it('renders and wraps with the chosen element', () => {
-    const result = render(<DirectionProvider>Content</DirectionProvider>);
+	it('renders and wraps with the chosen element', () => {
+		const result = render(<DirectionProvider>Content</DirectionProvider>);
 
-    expect(result.queryByTestId('aesthetic-direction-provider')).not.toBeNull();
-  });
+		expect(result.queryByTestId('aesthetic-direction-provider')).not.toBeNull();
+	});
 
-  it('renders `ltr` explicitly with `dir`', () => {
-    const result = render(<DirectionProvider direction="ltr">Content</DirectionProvider>);
+	it('renders `ltr` explicitly with `dir`', () => {
+		const result = render(<DirectionProvider direction="ltr">Content</DirectionProvider>);
 
-    expect(result.getByTestId('aesthetic-direction-provider').props.dir).toBe('ltr');
-  });
+		expect(result.getByTestId('aesthetic-direction-provider').props.dir).toBe('ltr');
+	});
 
-  it('renders `rtl` explicitly with `dir`', () => {
-    const result = render(<DirectionProvider direction="rtl">Content</DirectionProvider>);
+	it('renders `rtl` explicitly with `dir`', () => {
+		const result = render(<DirectionProvider direction="rtl">Content</DirectionProvider>);
 
-    expect(result.getByTestId('aesthetic-direction-provider').props.dir).toBe('rtl');
-  });
+		expect(result.getByTestId('aesthetic-direction-provider').props.dir).toBe('rtl');
+	});
 
-  it('renders `dir` over `value`', () => {
-    const result = render(
-      <DirectionProvider direction="rtl" value="Hello!">
-        Content
-      </DirectionProvider>,
-    );
+	it('renders `dir` over `value`', () => {
+		const result = render(
+			<DirectionProvider direction="rtl" value="Hello!">
+				Content
+			</DirectionProvider>,
+		);
 
-    expect(result.getByTestId('aesthetic-direction-provider').props.dir).toBe('rtl');
-  });
+		expect(result.getByTestId('aesthetic-direction-provider').props.dir).toBe('rtl');
+	});
 
-  it('infers `ltr` from `value`', () => {
-    const result = render(<DirectionProvider value="Hello!">Content</DirectionProvider>);
+	it('infers `ltr` from `value`', () => {
+		const result = render(<DirectionProvider value="Hello!">Content</DirectionProvider>);
 
-    expect(result.getByTestId('aesthetic-direction-provider').props.dir).toBe('ltr');
-  });
+		expect(result.getByTestId('aesthetic-direction-provider').props.dir).toBe('ltr');
+	});
 
-  it('infers `rtl` from `value`', () => {
-    const result = render(<DirectionProvider value="بسيطة">Content</DirectionProvider>);
+	it('infers `rtl` from `value`', () => {
+		const result = render(<DirectionProvider value="بسيطة">Content</DirectionProvider>);
 
-    expect(result.getByTestId('aesthetic-direction-provider').props.dir).toBe('rtl');
-  });
+		expect(result.getByTestId('aesthetic-direction-provider').props.dir).toBe('rtl');
+	});
 });

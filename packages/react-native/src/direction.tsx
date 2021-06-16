@@ -11,9 +11,5 @@ function DirectionWrapper({ children, ...props }: { children: React.ReactNode })
 	);
 }
 
-export const {
-	DirectionContext,
-	DirectionProvider,
-	useDirection,
-	withDirection,
-} = createDirectionHelpers(aesthetic, { wrapper: DirectionWrapper });
+export const { DirectionContext, DirectionProvider, useDirection, withDirection } =
+	createDirectionHelpers(aesthetic, { wrapper: DirectionWrapper });

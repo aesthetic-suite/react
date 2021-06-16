@@ -13,32 +13,32 @@ import { Pressable, PressableProps } from 'react-native';
 import { createComponentStyles, useStyles } from '@aesthetic/react-native';
 
 export const styleSheet = createComponentStyles((theme) => ({
-  button: {
-    flex: 1,
-    flexWrap: 'nowrap',
-    alignItems: 'center',
-    width: 'auto',
-    padding: theme.tokens.spacing.df,
-  },
+	button: {
+		flex: 1,
+		flexWrap: 'nowrap',
+		alignItems: 'center',
+		width: 'auto',
+		padding: theme.tokens.spacing.df,
+	},
 
-  button_block: {
-    width: '100%',
-  },
+	button_block: {
+		width: '100%',
+	},
 }));
 
 export interface ButtonProps extends PressableProps {
-  children: React.ReactNode;
-  block?: boolean;
+	children: React.ReactNode;
+	block?: boolean;
 }
 
 export default function Button({ children, block = false, ...props }: ButtonProps) {
-  const sx = useStyles(styleSheet);
+	const sx = useStyles(styleSheet);
 
-  return (
-    <Pressable {...props} style={sx('button', block && 'button_block')}>
-      {children}
-    </Pressable>
-  );
+	return (
+		<Pressable {...props} style={sx('button', block && 'button_block')}>
+			{children}
+		</Pressable>
+	);
 }
 ```
 

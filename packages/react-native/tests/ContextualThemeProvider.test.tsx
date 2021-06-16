@@ -8,60 +8,60 @@ import { ContextualThemeProvider, useTheme } from '../src';
 import { setupAestheticReact, teardownAestheticReact } from './helpers';
 
 describe('ContextualThemeProvider', () => {
-  beforeEach(() => {
-    setupAestheticReact();
-  });
+	beforeEach(() => {
+		setupAestheticReact();
+	});
 
-  afterEach(() => {
-    teardownAestheticReact();
-  });
+	afterEach(() => {
+		teardownAestheticReact();
+	});
 
-  it('renders children', () => {
-    const result = render(
-      <ContextualThemeProvider name="night">
-        <View>1</View>
-        <View>2</View>
-        <View>3</View>
-      </ContextualThemeProvider>,
-    );
+	it('renders children', () => {
+		const result = render(
+			<ContextualThemeProvider name="night">
+				<View>1</View>
+				<View>2</View>
+				<View>3</View>
+			</ContextualThemeProvider>,
+		);
 
-    expect(result.UNSAFE_getAllByType(View)).toHaveLength(4);
-  });
+		expect(result.UNSAFE_getAllByType(View)).toHaveLength(4);
+	});
 
-  it('doesnt re-render children if props never change', () => {
-    let count = 0;
+	it('doesnt re-render children if props never change', () => {
+		let count = 0;
 
-    function Child() {
-      count += 1;
+		function Child() {
+			count += 1;
 
-      return null;
-    }
+			return null;
+		}
 
-    const child = <Child />;
-    const result = render(<ContextualThemeProvider name="day">{child}</ContextualThemeProvider>);
+		const child = <Child />;
+		const result = render(<ContextualThemeProvider name="day">{child}</ContextualThemeProvider>);
 
-    result.update(<ContextualThemeProvider name="day">{child}</ContextualThemeProvider>);
-    result.update(<ContextualThemeProvider name="day">{child}</ContextualThemeProvider>);
-    result.update(<ContextualThemeProvider name="day">{child}</ContextualThemeProvider>);
+		result.update(<ContextualThemeProvider name="day">{child}</ContextualThemeProvider>);
+		result.update(<ContextualThemeProvider name="day">{child}</ContextualThemeProvider>);
+		result.update(<ContextualThemeProvider name="day">{child}</ContextualThemeProvider>);
 
-    expect(count).toBe(1);
-  });
+		expect(count).toBe(1);
+	});
 
-  it('provides explicit theme by name', () => {
-    expect.assertions(1);
+	it('provides explicit theme by name', () => {
+		expect.assertions(1);
 
-    function Test() {
-      const theme = useTheme();
+		function Test() {
+			const theme = useTheme();
 
-      expect(theme).toBe(darkTheme);
+			expect(theme).toBe(darkTheme);
 
-      return null;
-    }
+			return null;
+		}
 
-    render(
-      <ContextualThemeProvider name="night">
-        <Test />
-      </ContextualThemeProvider>,
-    );
-  });
+		render(
+			<ContextualThemeProvider name="night">
+				<Test />
+			</ContextualThemeProvider>,
+		);
+	});
 });

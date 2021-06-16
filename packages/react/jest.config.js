@@ -1,4 +1,4 @@
 module.exports = {
-  setupFilesAfterEnv: ['jest-rut'],
-  testEnvironment: 'jsdom',
+	setupFilesAfterEnv: ['jest-rut'],
+	testEnvironment: 'jsdom',
 };
