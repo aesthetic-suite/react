@@ -8,7 +8,7 @@ import {
 
 export interface NativeStyles extends ViewStyle, TextStyle, Omit<ImageStyle, 'overflow'> {}
 
-export type NativeBlock = NativeStyles & {
+export type NativeRule = NativeStyles & {
 	'@variants'?: Record<string, NativeStyles>;
 };
 
@@ -16,7 +16,7 @@ export type NativeEngine = Engine<NativeStyles>;
 
 export interface StyledComponent<P extends object = {}>
 	extends React.MemoExoticComponent<React.ForwardRefExoticComponent<P & StyledInheritedProps>> {
-	styleSheet: ComponentSheet<unknown, NativeStyles, NativeBlock>;
+	styleSheet: ComponentSheet<unknown, NativeStyles, NativeRule>;
 }
 
 export interface StyledInheritedProps {
@@ -36,4 +36,4 @@ export type WithStylesWrappedProps<T> = InternalWithStylesWrappedProps<
 	NativeStyles[]
 >;
 
-export type WithThemeWrappedProps = InternalWithThemeWrappedProps<NativeBlock>;
+export type WithThemeWrappedProps = InternalWithThemeWrappedProps<NativeRule>;

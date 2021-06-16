@@ -5,11 +5,11 @@ import { arrayLoop, toArray } from '@aesthetic/utils';
 import { aesthetic } from './aesthetic';
 import { useDirection } from './direction';
 import { useTheme } from './theme';
-import { InferProps, NativeBlock, NativeStyles, StyledComponent } from './types';
+import { InferProps, NativeRule, NativeStyles, StyledComponent } from './types';
 
 export const { getVariantsFromProps, useStyles, withStyles } = createStyleHelpers<
 	NativeStyles,
-	NativeBlock,
+	NativeRule,
 	NativeStyles[]
 >(aesthetic, {
 	generate(args, variants, results) {
@@ -58,7 +58,7 @@ export const { getVariantsFromProps, useStyles, withStyles } = createStyleHelper
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function createStyled<T extends React.ComponentType<any>, V extends object = {}>(
 	type: T,
-	factory: NativeBlock | ((utilities: Utilities<NativeBlock>) => NativeBlock),
+	factory: NativeRule | ((utilities: Utilities<NativeRule>) => NativeRule),
 ): StyledComponent<InferProps<T> & V> {
 	if (process.env.NODE_ENV !== 'production') {
 		const typeOfType = typeof type;

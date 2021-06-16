@@ -1,5 +1,5 @@
 import React from 'react';
-import { ClassName, ElementStyles, ComponentSheet } from '@aesthetic/core';
+import { ClassName, ComponentSheet,ElementStyles } from '@aesthetic/core';
 import { DirectionProvider, ThemeProvider } from '../../src';
 import { aesthetic } from '../../src/aesthetic';
 

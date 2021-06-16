@@ -118,11 +118,6 @@ describe('withStyles()', () => {
 
 		expect(result.getByTestId('button').props.style).toEqual([
 			{
-				'::-moz-focus-inner': {
-					border: 0,
-					margin: 0,
-					padding: 0,
-				},
 				':active': {
 					backgroundColor: '#000',
 				},
