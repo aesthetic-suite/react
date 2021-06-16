@@ -22,6 +22,9 @@
   "engines": {
     "node": ">=10.3.0"
   },
+  "resolutions": {
+    "react-docgen-typescript": "^2.0.0"
+  },
   "devDependencies": {
     "@aesthetic/design-systems": "^0.0.2",
     "@beemo/dev": "^0.2.3",
