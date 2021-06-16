@@ -22,7 +22,7 @@ describe('withDirection()', () => {
   }
 
   function WrappingComponent({ children }: { children?: React.ReactNode }) {
-    return <DirectionProvider direction="ltr">{children || <div />}</DirectionProvider>;
+    return <DirectionProvider direction="ltr">{children ?? <div />}</DirectionProvider>;
   }
 
   it('inherits name from component `constructor.name`', () => {

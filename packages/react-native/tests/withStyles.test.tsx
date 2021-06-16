@@ -4,7 +4,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { render } from '@testing-library/react-native';
 import { ThemeProvider, withStyles, WithStylesWrappedProps } from '../src';
-import { ButtonProps, createStyleSheet, Wrapper } from './__mocks__/Button';
+import { ButtonProps, createStyleSheet, Wrapper } from './__fixtures__/Button';
 import { dawnTheme, setupAestheticReact, teardownAestheticReact, twilightTheme } from './helpers';
 
 describe('withStyles()', () => {
@@ -55,7 +55,7 @@ describe('withStyles()', () => {
   }
 
   function WrappingComponent({ children }: { children?: React.ReactNode }) {
-    return <ThemeProvider name="dawn">{children || <View />}</ThemeProvider>;
+    return <ThemeProvider name="dawn">{children ??<View />}</ThemeProvider>;
   }
 
   it('inherits name from component `constructor.name`', () => {

@@ -23,7 +23,7 @@ describe('withTheme()', () => {
   }
 
   function WrappingComponent({ children }: { children?: React.ReactNode }) {
-    return <ThemeProvider name="dawn">{children || <div />}</ThemeProvider>;
+    return <ThemeProvider name="dawn">{children ?? <div />}</ThemeProvider>;
   }
 
   it('inherits name from component `constructor.name`', () => {

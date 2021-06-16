@@ -25,10 +25,10 @@ export function createDirectionHelpers<Result, Block extends object>(
 	 * Will render an element with a `dir` attribute set.
 	 */
 	function DirectionProvider({ children, direction, value }: DirectionProviderProps) {
-		const dir = (direction ||
+		const dir = direction ||
 			(value && getDirection(value)) ||
 			aesthetic.getActiveDirection() ||
-			'ltr') as Direction;
+			'ltr'!;
 
 		return (
 			<DirectionContext.Provider value={dir}>
