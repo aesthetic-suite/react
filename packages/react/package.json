@@ -17,8 +17,7 @@
   },
   "author": "Miles Johnson",
   "license": "MIT",
-  "type": "module",
-  "main": "./esm/index.js",
+  "main": "./lib/index.js",
   "module": "./esm/index.js",
   "types": "./dts/index.d.ts",
   "files": [
@@ -57,6 +56,10 @@
       "index": "src/index.ts",
       "server": "src/server.tsx"
     },
+    "format": [
+      "lib",
+      "esm"
+    ],
     "platform": "browser"
   },
   "tsconfig": {
