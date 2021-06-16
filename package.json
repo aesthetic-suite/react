@@ -43,23 +43,6 @@
     "react": "^17.0.2",
     "react-test-renderer": "^17.0.2"
   },
-  "beemo": {
-    "module": "@milesj/build-tools",
-    "drivers": [
-      {
-        "driver": "babel",
-        "strategy": "none"
-      },
-      "eslint",
-      "jest",
-      "prettier",
-      {
-        "driver": "typescript",
-        "buildFolder": "dts",
-        "declarationOnly": true
-      }
-    ]
-  },
   "workspaces": [
     "packages/*"
   ]

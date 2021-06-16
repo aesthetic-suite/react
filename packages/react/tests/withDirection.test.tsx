@@ -67,7 +67,7 @@ describe('withDirection()', () => {
 
     // eslint-disable-next-line react/prefer-stateless-function
     class RefComponent extends React.Component<RefProps & WithDirectionWrappedProps> {
-      render() {
+      override render() {
         return <div />;
       }
     }

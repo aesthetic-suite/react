@@ -89,7 +89,7 @@ describe('withStyles()', () => {
 
     // eslint-disable-next-line react/prefer-stateless-function
     class RefComponent extends React.Component<RefProps & WithStylesWrappedProps<string>> {
-      render() {
+      override render() {
         return <View />;
       }
     }

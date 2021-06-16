@@ -70,7 +70,7 @@ describe('withTheme()', () => {
     class RefComponent extends React.Component<
       InternalWithThemeWrappedProps<LocalBlock> & RefProps
     > {
-      render() {
+      override render() {
         return <div />;
       }
     }

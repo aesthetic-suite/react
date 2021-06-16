@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   compilerOptions: {
     jsx: 'react',
     lib: ['dom', 'esnext'],

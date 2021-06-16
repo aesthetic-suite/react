@@ -65,7 +65,7 @@ describe('withTheme()', () => {
     class RefComponent extends React.Component<
       InternalWithThemeWrappedProps<NativeBlock> & RefProps
     > {
-      render() {
+      override render() {
         return <View />;
       }
     }
