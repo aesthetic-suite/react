@@ -45,7 +45,7 @@ export const Heading = createDynamicComponent<HeadingProps, HeadingElement>(func
       ]),
     [cx, align, overflow, palette, transform, weight, headingClassName, inheritedClassName],
   );
-  const Tag = (as ?? `h${level}`) as HeadingElement;
+  const Tag = as ?? `h${level}`!;
 
   return (
     <Tag ref={ref} {...props} className={className}>
