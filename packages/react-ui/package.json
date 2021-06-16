@@ -50,6 +50,10 @@
   },
   "packemon": {
     "bundle": false,
+    "format": [
+      "lib",
+      "esm"
+    ],
     "platform": "browser"
   },
   "tsconfig": {

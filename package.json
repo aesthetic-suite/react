@@ -20,7 +20,7 @@
     "snapshot": "build-storybook && percy-storybook --widths=640,960,1280"
   },
   "engines": {
-    "node": ">=10.3.0"
+    "node": ">=12.17.0"
   },
   "resolutions": {
     "react-docgen-typescript": "^2.0.0"
@@ -42,7 +42,7 @@
     "eslint-plugin-rut": "^2.0.0",
     "jest-rut": "^2.0.0",
     "lerna": "^4.0.0",
-    "packemon": "^0.16.6",
+    "packemon": "^1.0.0-alpha.0",
     "react": "^17.0.2",
     "react-test-renderer": "^17.0.2"
   },

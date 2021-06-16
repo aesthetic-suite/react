@@ -56,6 +56,10 @@
       "index": "src/index.ts",
       "server": "src/server.tsx"
     },
+    "format": [
+      "lib",
+      "esm"
+    ],
     "platform": "browser"
   },
   "tsconfig": {
