@@ -13,7 +13,6 @@ describe('useStyles()', () => {
 
     return (
       <button
-        type="button"
         className={cx(
           {
             compound,
@@ -24,6 +23,7 @@ describe('useStyles()', () => {
           block && 'button_block',
           disabled && 'button_disabled',
         )}
+        type="button"
       >
         {children}
       </button>
@@ -34,7 +34,7 @@ describe('useStyles()', () => {
     const cx = useStyles(sheet!);
 
     return (
-      <button type="button" className={cx()}>
+      <button className={cx()} type="button">
         {children}
       </button>
     );
@@ -44,7 +44,7 @@ describe('useStyles()', () => {
     const cx = useStyles(createStyleSheet());
 
     return (
-      <button type="button" className={cx(disabled && 'button_disabled')}>
+      <button className={cx(disabled && 'button_disabled')} type="button">
         {children}
       </button>
     );

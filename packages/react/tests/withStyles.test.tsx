@@ -28,7 +28,6 @@ describe('withStyles()', () => {
     >) {
     return (
       <button
-        type="button"
         className={cx(
           {
             // eslint-disable-next-line no-nested-ternary
@@ -38,6 +37,7 @@ describe('withStyles()', () => {
           block && 'button_block',
           disabled && 'button_disabled',
         )}
+        type="button"
       >
         {children}
       </button>

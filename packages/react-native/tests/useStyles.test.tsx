@@ -13,7 +13,6 @@ describe('useStyles()', () => {
 
     return (
       <View
-        testID="button"
         style={sx(
           {
             compound,
@@ -24,6 +23,7 @@ describe('useStyles()', () => {
           block && 'button_block',
           disabled && 'button_disabled',
         )}
+        testID="button"
       >
         {children}
       </View>
@@ -34,7 +34,7 @@ describe('useStyles()', () => {
     const cx = useStyles(sheet!);
 
     return (
-      <View testID="button" style={cx()}>
+      <View style={cx()} testID="button">
         {children}
       </View>
     );
@@ -44,7 +44,7 @@ describe('useStyles()', () => {
     const cx = useStyles(createStyleSheet());
 
     return (
-      <View testID="button" style={cx(disabled && 'button_disabled')}>
+      <View style={cx(disabled && 'button_disabled')} testID="button">
         {children}
       </View>
     );

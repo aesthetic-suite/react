@@ -45,13 +45,13 @@ describe('Text', () => {
   it('can change all props', () => {
     render(
       <Text
-        size="lg"
+        monospaced
         align="center"
         overflow="break"
         palette="danger"
+        size="lg"
         transform="capitalize"
         weight="bold"
-        monospaced
       >
         Copy
       </Text>,
@@ -63,7 +63,7 @@ describe('Text', () => {
 
   it('can pass native attributes', () => {
     render(
-      <Text id="foo" aria-label="Label">
+      <Text aria-label="Label" id="foo">
         Copy
       </Text>,
       { wrapper: Wrapper },

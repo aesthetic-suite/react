@@ -36,7 +36,7 @@ describe('Heading', () => {
 
   it('can pass a custom class name', () => {
     render(
-      <Heading level={1} className="foo">
+      <Heading className="foo" level={1}>
         Title
       </Heading>,
       { wrapper: Wrapper },
@@ -48,8 +48,8 @@ describe('Heading', () => {
   it('can change all props', () => {
     render(
       <Heading
-        level={3}
         align="center"
+        level={3}
         overflow="break"
         palette="danger"
         transform="capitalize"
@@ -65,7 +65,7 @@ describe('Heading', () => {
 
   it('can pass native attributes', () => {
     render(
-      <Heading level={1} id="foo" aria-label="Label">
+      <Heading aria-label="Label" id="foo" level={1}>
         Title
       </Heading>,
       { wrapper: Wrapper },

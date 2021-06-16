@@ -29,7 +29,6 @@ describe('withStyles()', () => {
     >) {
     return (
       <View
-        testID="button"
         style={sx(
           {
             // eslint-disable-next-line no-nested-ternary
@@ -39,6 +38,7 @@ describe('withStyles()', () => {
           block && 'button_block',
           disabled && 'button_disabled',
         )}
+        testID="button"
       >
         {children}
       </View>

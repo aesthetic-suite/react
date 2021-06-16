@@ -21,7 +21,7 @@ describe('useCss()', () => {
     const className = useCss(styles);
 
     return (
-      <button type="button" className={className}>
+      <button className={className} type="button">
         {children}
       </button>
     );
@@ -38,7 +38,7 @@ describe('useCss()', () => {
     const className = useCss(styles, options);
 
     return (
-      <button type="button" className={className}>
+      <button className={className} type="button">
         {children}
       </button>
     );

@@ -3,17 +3,17 @@
 import hoistNonReactStatics from 'hoist-non-react-statics';
 import { WrapperComponent } from './types';
 
-export default function createHOC<T extends React.FunctionComponent<any>>(
-  name: string,
-  WrappedComponent: React.ComponentType<any>,
-  BaseComponent: T,
+export function createHOC<T extends React.FunctionComponent<any>>(
+	name: string,
+	WrappedComponent: React.ComponentType<any>,
+	BaseComponent: T,
 ): T & WrapperComponent {
-  const Component = BaseComponent as T & WrapperComponent;
+	const Component = BaseComponent as T & WrapperComponent;
 
-  hoistNonReactStatics(Component, WrappedComponent);
+	hoistNonReactStatics(Component, WrappedComponent);
 
-  Component.displayName = `${name}(${WrappedComponent.displayName || WrappedComponent.name})`;
-  Component.WrappedComponent = WrappedComponent;
+	Component.displayName = `${name}(${WrappedComponent.displayName ?? WrappedComponent.name})`;
+	Component.WrappedComponent = WrappedComponent;
 
-  return Component;
+	return Component;
 }

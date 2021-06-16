@@ -16,7 +16,6 @@ describe('SSR', () => {
 
     return (
       <button
-        type="button"
         className={cx(
           {
             // eslint-disable-next-line no-nested-ternary
@@ -26,6 +25,7 @@ describe('SSR', () => {
           block && 'button_block',
           disabled && 'button_disabled',
         )}
+        type="button"
       >
         {children}
       </button>

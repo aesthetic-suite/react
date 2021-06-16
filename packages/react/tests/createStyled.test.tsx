@@ -94,7 +94,7 @@ describe('createStyled()', () => {
     });
 
     const { debug } = render<{}>(
-      <Input disabled={false} type="text" placeholder="Search..." className="will-be-appended" />,
+      <Input className="will-be-appended" disabled={false} placeholder="Search..." type="text" />,
       {
         wrapper: <Wrapper />,
       },
@@ -201,7 +201,7 @@ describe('createStyled()', () => {
     it('supports extending non-styled components', () => {
       function Base({ children, className }: { children: React.ReactNode; className?: string }) {
         return (
-          <button type="button" className={className}>
+          <button className={className} type="button">
             {children}
           </button>
         );
