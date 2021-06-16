@@ -3,35 +3,35 @@ import { render } from '@testing-library/react-native';
 import { DirectionProvider, useDirection } from '../src';
 
 describe('useDirection()', () => {
-  it('returns "ltr" if no context provided', () => {
-    let dir;
+	it('returns "ltr" if no context provided', () => {
+		let dir;
 
-    function Component() {
-      dir = useDirection();
+		function Component() {
+			dir = useDirection();
 
-      return null;
-    }
+			return null;
+		}
 
-    render(<Component />);
+		render(<Component />);
 
-    expect(dir).toBe('ltr');
-  });
+		expect(dir).toBe('ltr');
+	});
 
-  it('returns the direction defined by the provider', () => {
-    let dir;
+	it('returns the direction defined by the provider', () => {
+		let dir;
 
-    function Component() {
-      dir = useDirection();
+		function Component() {
+			dir = useDirection();
 
-      return null;
-    }
+			return null;
+		}
 
-    render(
-      <DirectionProvider direction="rtl">
-        <Component />
-      </DirectionProvider>,
-    );
+		render(
+			<DirectionProvider direction="rtl">
+				<Component />
+			</DirectionProvider>,
+		);
 
-    expect(dir).toBe('rtl');
-  });
+		expect(dir).toBe('rtl');
+	});
 });

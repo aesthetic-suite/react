@@ -3,7 +3,7 @@
  * @license     https://opensource.org/licenses/MIT
  */
 
-import aesthetic from './aesthetic';
+import { aesthetic } from './aesthetic';
 import { createStyled } from './styles';
 
 export * from './direction';
@@ -14,26 +14,26 @@ export * from '@aesthetic/core';
 export * from '@aesthetic/core-react';
 
 export const {
-  changeDirection,
-  changeTheme,
-  configure,
-  createComponentStyles,
-  createElementStyles,
-  createThemeStyles,
-  generateClassName,
-  getActiveDirection,
-  getActiveTheme,
-  getEngine,
-  getTheme,
-  registerDefaultTheme,
-  registerTheme,
-  renderComponentStyles,
-  renderFontFace,
-  renderImport,
-  renderKeyframes,
-  renderThemeStyles,
-  subscribe,
-  unsubscribe,
+	changeDirection,
+	changeTheme,
+	configure,
+	createComponentStyles,
+	createElementStyles,
+	createThemeStyles,
+	generateClassName,
+	getActiveDirection,
+	getActiveTheme,
+	getEngine,
+	getTheme,
+	registerDefaultTheme,
+	registerTheme,
+	renderComponentStyles,
+	renderFontFace,
+	renderImport,
+	renderKeyframes,
+	renderThemeStyles,
+	subscribe,
+	unsubscribe,
 } = aesthetic;
 
 // Export aliases

@@ -3,11 +3,8 @@
  * @license     https://opensource.org/licenses/MIT
  */
 
-import createDirectionHelpers from './createDirectionHelpers';
-import createHOC from './createHOC';
-import createStyleHelpers from './createStyleHelpers';
-import createThemeHelpers from './createThemeHelpers';
-
-export { createDirectionHelpers, createHOC, createStyleHelpers, createThemeHelpers };
-
+export * from './createDirectionHelpers';
+export * from './createHOC';
+export * from './createStyleHelpers';
+export * from './createThemeHelpers';
 export * from './types';

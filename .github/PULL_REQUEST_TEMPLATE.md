@@ -17,8 +17,8 @@ https://github.com/aesthetic-suite/react/blob/main/CONTRIBUTING.md
 
 ## Checklist
 
-- [ ] Build passes with `yarn test`.
-- [ ] Code is formatted with `yarn format`.
+- [ ] Build passes with `yarn run check`.
+- [ ] Code is formatted with `yarn run format`.
 - [ ] Tests have been added for my changes.
 - [ ] Code coverage for my change is 100%.
 - [ ] Documentation has been updated for my changes.

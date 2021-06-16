@@ -12,28 +12,28 @@ import React from 'react';
 import { createComponentStyles, useStyles } from '@aesthetic/react';
 
 export const styleSheet = createComponentStyles((css) => ({
-  button: css.mixin('reset-button', {
-    padding: css.var('spacing-df'),
-  }),
+	button: css.mixin('reset-button', {
+		padding: css.var('spacing-df'),
+	}),
 
-  button_block: {
-    display: 'block',
-  },
+	button_block: {
+		display: 'block',
+	},
 }));
 
 export interface ButtonProps {
-  children: React.ReactNode;
-  block?: boolean;
+	children: React.ReactNode;
+	block?: boolean;
 }
 
 export default function Button({ children, block = false }: ButtonProps) {
-  const cx = useStyles(styleSheet);
+	const cx = useStyles(styleSheet);
 
-  return (
-    <button type="button" className={cx('button', block && 'button_block')}>
-      {children}
-    </button>
-  );
+	return (
+		<button type="button" className={cx('button', block && 'button_block')}>
+			{children}
+		</button>
+	);
 }
 ```
 

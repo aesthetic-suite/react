@@ -3,20 +3,18 @@
   "name": "aesthetic-react-root",
   "version": "0.0.0",
   "scripts": {
-    "prepare": "beemo create-config --silent",
+    "prepare": "beemo create-config",
     "build": "packemon build --addEngines",
     "pack": "NODE_ENV=production packemon pack --addEngines --declaration=standard",
     "clean": "packemon clean",
-    "coverage": "yarn run jest --coverage",
+    "check": "yarn run type && yarn run test && yarn run lint",
+    "coverage": "yarn run test --coverage",
     "format": "beemo prettier",
     "lint": "beemo eslint",
-    "jest": "beemo jest --use-projects",
+    "test": "beemo jest",
     "release": "lerna publish",
-    "type": "beemo typescript --build --reference-workspaces",
-    "prerelease": "yarn run pack && yarn test",
-    "pretest": "yarn run type",
-    "test": "yarn run coverage",
-    "posttest": "yarn run lint",
+    "type": "beemo typescript --build",
+    "prerelease": "yarn run pack && yarn run check",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "snapshot": "build-storybook && percy-storybook --widths=640,960,1280"
@@ -24,9 +22,12 @@
   "engines": {
     "node": ">=10.3.0"
   },
+  "resolutions": {
+    "react-docgen-typescript": "^2.0.0"
+  },
   "devDependencies": {
     "@aesthetic/design-systems": "^0.0.2",
-    "@milesj/build-tools": "^2.17.0",
+    "@beemo/dev": "^0.2.3",
     "@percy/storybook": "^3.3.1",
     "@storybook/addon-actions": "^6.2.9",
     "@storybook/addon-essentials": "^6.2.9",
@@ -44,23 +45,6 @@
     "packemon": "^0.16.6",
     "react": "^17.0.2",
     "react-test-renderer": "^17.0.2"
-  },
-  "beemo": {
-    "module": "@milesj/build-tools",
-    "drivers": [
-      {
-        "driver": "babel",
-        "strategy": "none"
-      },
-      "eslint",
-      "jest",
-      "prettier",
-      {
-        "driver": "typescript",
-        "buildFolder": "dts",
-        "declarationOnly": true
-      }
-    ]
   },
   "workspaces": [
     "packages/*"

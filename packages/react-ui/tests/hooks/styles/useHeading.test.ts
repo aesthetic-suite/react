@@ -3,16 +3,16 @@ import { useHeading } from '../../../src/hooks/styles/useHeading';
 import { getRenderedStyles, Wrapper } from '../../helpers';
 
 describe('useHeading()', () => {
-  it('renders default styles', () => {
-    const { result } = renderHook(() => useHeading(1), { wrapper: Wrapper });
+	it('renders default styles', () => {
+		const { result } = renderHook(() => useHeading(1), { wrapper: Wrapper });
 
-    expect(result.current).toBe('a b c d');
-    expect(getRenderedStyles('standard')).toMatchSnapshot();
-  });
+		expect(result.current).toBe('a b c d');
+		expect(getRenderedStyles('standard')).toMatchSnapshot();
+	});
 
-  it('can change the level', () => {
-    const { result } = renderHook(() => useHeading(4), { wrapper: Wrapper });
+	it('can change the level', () => {
+		const { result } = renderHook(() => useHeading(4), { wrapper: Wrapper });
 
-    expect(result.current).toBe('a k l m');
-  });
+		expect(result.current).toBe('a k l m');
+	});
 });

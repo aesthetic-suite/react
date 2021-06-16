@@ -5,69 +5,69 @@ import { renderToStaticMarkup, renderToString } from 'react-dom/server';
 import { ServerStyleEngine } from '@aesthetic/style';
 import { createServerEngine, renderToStyleMarkup } from '@aesthetic/style/server';
 import { ThemeProvider, useStyles } from '../src';
-import { ButtonProps, createStyleSheet } from './__mocks__/Button';
+import { ButtonProps, createStyleSheet } from './__fixtures__/Button';
 import { setupAestheticReact, teardownAestheticReact } from './helpers';
 
 describe('SSR', () => {
-  let engine: ServerStyleEngine;
+	let engine: ServerStyleEngine;
 
-  function Button({ children, block, disabled, large, small }: ButtonProps) {
-    const cx = useStyles(createStyleSheet());
+	function Button({ children, block, disabled, large, small }: ButtonProps) {
+		const cx = useStyles(createStyleSheet());
 
-    return (
-      <button
-        type="button"
-        className={cx(
-          {
-            // eslint-disable-next-line no-nested-ternary
-            size: large ? 'lg' : small ? 'sm' : 'df',
-          },
-          'button',
-          block && 'button_block',
-          disabled && 'button_disabled',
-        )}
-      >
-        {children}
-      </button>
-    );
-  }
+		return (
+			<button
+				className={cx(
+					{
+						// eslint-disable-next-line no-nested-ternary
+						size: large ? 'lg' : small ? 'sm' : 'df',
+					},
+					'button',
+					block && 'button_block',
+					disabled && 'button_disabled',
+				)}
+				type="button"
+			>
+				{children}
+			</button>
+		);
+	}
 
-  function App() {
-    return (
-      <ThemeProvider name="twilight">
-        <main>
-          <div>You are not logged in!</div>
-          <Button href="/login">Login</Button>
-          <Button href="/register">Register</Button>
-        </main>
-      </ThemeProvider>
-    );
-  }
+	function App() {
+		return (
+			<ThemeProvider name="twilight">
+				<main>
+					<div>You are not logged in!</div>
+					<Button href="/login">Login</Button>
+					<Button href="/register">Register</Button>
+				</main>
+			</ThemeProvider>
+		);
+	}
 
-  beforeEach(() => {
-    setupAestheticReact();
+	beforeEach(() => {
+		setupAestheticReact();
 
-    engine = createServerEngine();
-  });
+		engine = createServerEngine();
+	});
 
-  afterEach(() => {
-    teardownAestheticReact();
+	afterEach(() => {
+		teardownAestheticReact();
 
-    // @ts-expect-error
-    delete global.AESTHETIC_CUSTOM_ENGINE;
-  });
+		// @ts-expect-error Allow delete
+		delete global.AESTHETIC_CUSTOM_ENGINE;
+	});
 
-  describe('renderToString()', () => {
-    it('renders markup', () => {
-      expect(renderToString(engine.extractStyles(<App />))).toMatchSnapshot();
-      expect(renderToStyleMarkup(engine)).toMatchSnapshot();
-    });
-  });
+	describe('renderToString()', () => {
+		it('renders markup', () => {
+			expect(renderToString(engine.extractStyles(<App />))).toMatchSnapshot();
+			expect(renderToStyleMarkup(engine)).toMatchSnapshot();
+		});
+	});
 
-  describe('renderToStaticMarkup()', () => {
-    it('renders markup', () => {
-      expect(renderToStaticMarkup(engine.extractStyles(<App />))).toMatchSnapshot();
-      expect(renderToStyleMarkup(engine)).toMatchSnapshot();
-    });
-  });
+	describe('renderToStaticMarkup()', () => {
+		it('renders markup', () => {
+			expect(renderToStaticMarkup(engine.extractStyles(<App />))).toMatchSnapshot();
+			expect(renderToStyleMarkup(engine)).toMatchSnapshot();
+		});
+	});
 });
