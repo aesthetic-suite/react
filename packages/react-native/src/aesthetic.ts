@@ -1,6 +1,7 @@
 import { Appearance, I18nManager } from 'react-native';
-import { Aesthetic } from '@aesthetic/core';
-import { NativeBlock, NativeEngine, NativeStyles } from './types';
+import { Aesthetic, RenderResult, RenderResultVariant } from '@aesthetic/core';
+import { objectLoop } from '@aesthetic/utils';
+import { NativeEngine, NativeRule, NativeStyles } from './types';
 
 const noop = () => {};
 
@@ -12,6 +13,22 @@ function unsupported(method: string) {
 	};
 }
 
+function renderRule(rule: NativeRule): RenderResult<NativeStyles> {
+	const { '@variants': variantStyles, ...result } = rule;
+	const variants: RenderResultVariant<NativeStyles>[] = [];
+
+	if (variantStyles) {
+		objectLoop(variantStyles, (variant, type) => {
+			variants.push({
+				result: variant,
+				types: type.split('+').map((v) => v.trim()),
+			});
+		});
+	}
+
+	return { result, variants };
+}
+
 const engine: NativeEngine = {
 	atomic: false,
 	direction: I18nManager.isRTL ? 'rtl' : 'ltr',
@@ -21,7 +38,7 @@ const engine: NativeEngine = {
 	renderFontFace: unsupported('renderFontFace()'),
 	renderImport: unsupported('renderImport()'),
 	renderKeyframes: unsupported('renderKeyframes()'),
-	renderRule: (rule) => rule as NativeStyles,
+	renderRule,
 	renderRuleGrouped: unsupported('renderRuleGrouped()'),
 	renderVariable: unsupported('renderVariable()'),
 	ruleIndex: 0,
@@ -30,6 +47,6 @@ const engine: NativeEngine = {
 	setTheme: noop,
 };
 
-export const aesthetic = new Aesthetic<NativeStyles, NativeBlock>();
+export const aesthetic = new Aesthetic<NativeRule, NativeStyles>();
 
 aesthetic.configureEngine(engine);

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Text, TextInput, View, ViewStyle } from 'react-native';
-import { StyleSheet } from '@aesthetic/core';
+import { Sheet } from '@aesthetic/core';
 import { render } from '@testing-library/react-native';
 import { createStyled } from '../src';
 import { Wrapper } from './__fixtures__/Button';
@@ -53,12 +53,12 @@ describe('createStyled()', () => {
 		const Button = createStyled(View, {});
 
 		expect(Button.displayName).toBe('styled(View)');
-		expect(Button.styleSheet).toBeInstanceOf(StyleSheet);
+		expect(Button.styleSheet).toBeInstanceOf(Sheet);
 
 		const ComposedButton = createStyled(Button, {});
 
 		expect(ComposedButton.displayName).toBe('styled(styled(View))');
-		expect(ComposedButton.styleSheet).toBeInstanceOf(StyleSheet);
+		expect(ComposedButton.styleSheet).toBeInstanceOf(Sheet);
 	});
 
 	it('creates and renders a button with defined styles', () => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { ImageStyle, StyleProp, TextStyle, ViewStyle } from 'react-native';
-import { Engine, LocalSheet } from '@aesthetic/core';
+import { ComponentSheet, Engine } from '@aesthetic/core';
 import {
 	InternalWithStylesWrappedProps,
 	InternalWithThemeWrappedProps,
@@ -8,15 +8,15 @@ import {
 
 export interface NativeStyles extends ViewStyle, TextStyle, Omit<ImageStyle, 'overflow'> {}
 
-export type NativeBlock = NativeStyles & {
+export type NativeRule = NativeStyles & {
 	'@variants'?: Record<string, NativeStyles>;
 };
 
-export type NativeEngine = Engine<NativeStyles>;
+export type NativeEngine = Engine<NativeRule, NativeStyles>;
 
 export interface StyledComponent<P extends object = {}>
 	extends React.MemoExoticComponent<React.ForwardRefExoticComponent<P & StyledInheritedProps>> {
-	styleSheet: LocalSheet<unknown, NativeBlock, NativeStyles>;
+	styleSheet: ComponentSheet<unknown, NativeRule, NativeStyles>;
 }
 
 export interface StyledInheritedProps {
@@ -36,4 +36,4 @@ export type WithStylesWrappedProps<T> = InternalWithStylesWrappedProps<
 	NativeStyles[]
 >;
 
-export type WithThemeWrappedProps = InternalWithThemeWrappedProps<NativeBlock>;
+export type WithThemeWrappedProps = InternalWithThemeWrappedProps<NativeRule>;

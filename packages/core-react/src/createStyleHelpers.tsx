@@ -1,41 +1,40 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {
 	Aesthetic,
+	ComponentSheet,
 	Direction,
-	LocalSheet,
-	RenderResult,
-	RenderResultSheet,
 	ResultComposer,
 	ResultComposerArgs,
 	ResultComposerVariants,
 	ResultGenerator,
+	SheetRenderResult,
 	Theme,
 } from '@aesthetic/core';
 import { isObject, objectLoop } from '@aesthetic/utils';
 import { createHOC } from './createHOC';
 import { InternalWithStylesWrappedProps, WrapperComponent, WrapperProps } from './types';
 
-export interface StyleHelperOptions<Result, Block extends object, GeneratedResult> {
-	generate: ResultGenerator<string, Result, GeneratedResult>;
+export interface StyleHelperOptions<Input extends object, Output, GeneratedOutput> {
+	generate: ResultGenerator<string, Output, GeneratedOutput>;
 	useDirection: () => Direction;
-	useTheme: () => Theme<Block>;
+	useTheme: () => Theme<Input>;
 }
 
-export function createStyleHelpers<Result, Block extends object, GeneratedResult = Result>(
-	aesthetic: Aesthetic<Result, Block>,
-	{ generate, useDirection, useTheme }: StyleHelperOptions<Result, Block, GeneratedResult>,
+export function createStyleHelpers<Input extends object, Output, GeneratedOutput = Output>(
+	aesthetic: Aesthetic<Input, Output>,
+	{ generate, useDirection, useTheme }: StyleHelperOptions<Input, Output, GeneratedOutput>,
 ) /* infer */ {
 	function cxWithCache(
-		args: ResultComposerArgs<string, Result>,
-		results: RenderResultSheet<Result>,
-		cache: Record<string, GeneratedResult>,
-	): GeneratedResult {
+		args: ResultComposerArgs<string, Output>,
+		results: SheetRenderResult<Output>,
+		cache: Record<string, GeneratedOutput>,
+	): GeneratedOutput {
 		const variants = new Set<string>();
 		let cacheKey = '';
 
 		// Variant objects may only be passed as the first argument
 		if (isObject(args[0])) {
-			objectLoop(args.shift() as unknown as ResultComposerVariants, (value, variant) => {
+			objectLoop((args.shift() as unknown) as ResultComposerVariants, (value, variant) => {
 				if (value) {
 					const type = `${variant}:${value}`;
 
@@ -59,13 +58,13 @@ export function createStyleHelpers<Result, Block extends object, GeneratedResult
 	 * Hook within a component to provide a style sheet.
 	 */
 	function useStyles<T = unknown>(
-		sheet: LocalSheet<T, Block, Result>,
-	): ResultComposer<keyof T, Result, GeneratedResult> {
+		sheet: ComponentSheet<T, Input, Output>,
+	): ResultComposer<keyof T, Output, GeneratedOutput> {
 		const theme = useTheme();
 		const direction = useDirection();
-		const classCache = useRef<Record<string, GeneratedResult>>({});
+		const classCache = useRef<Record<string, GeneratedOutput>>({});
 		const initialMount = useRef(true);
-		const [result, setResult] = useState<RenderResultSheet<Result>>(() =>
+		const [result, setResult] = useState<SheetRenderResult<Output>>(() =>
 			aesthetic.renderComponentStyles(sheet, {
 				direction,
 				theme: theme.name,
@@ -96,12 +95,12 @@ export function createStyleHelpers<Result, Block extends object, GeneratedResult
 		}, [direction, theme.name]);
 
 		const composer = useCallback(
-			(...args: ResultComposerArgs<string, Result>) =>
+			(...args: ResultComposerArgs<string, Output>) =>
 				cxWithCache(args, result, classCache.current),
 			[result],
 		);
 
-		const cx = composer as unknown as ResultComposer<keyof T, Result, GeneratedResult>;
+		const cx = (composer as unknown) as ResultComposer<keyof T, Output, GeneratedOutput>;
 
 		// Make the result available if need be, but behind a hidden API
 		cx.result = result!;
@@ -112,13 +111,13 @@ export function createStyleHelpers<Result, Block extends object, GeneratedResult
 	/**
 	 * Wrap a React component with an HOC that injects the style to class name transfer function.
 	 */
-	function withStyles<T = unknown>(sheet: LocalSheet<T, Block, Result>) /* infer */ {
+	function withStyles<T = unknown>(sheet: ComponentSheet<T, Input, Output>) /* infer */ {
 		return function withStylesComposer<Props extends object = {}>(
 			WrappedComponent: React.ComponentType<
-				InternalWithStylesWrappedProps<keyof T, Result> & Props
+				InternalWithStylesWrappedProps<keyof T, Output> & Props
 			>,
 		): React.FunctionComponent<
-			Omit<Props, keyof InternalWithStylesWrappedProps<keyof T, Result>> & WrapperProps
+			Omit<Props, keyof InternalWithStylesWrappedProps<keyof T, Output>> & WrapperProps
 		> &
 			WrapperComponent {
 			return createHOC(
@@ -136,9 +135,9 @@ export function createStyleHelpers<Result, Block extends object, GeneratedResult
 	}
 
 	function getVariantsFromProps<Keys extends string>(
-		renderResult: RenderResult<unknown> | undefined,
+		renderResult: SheetRenderResult<Output>[string] | undefined,
 		baseProps: object,
-	): { props: { [K in Keys]?: Result }; variants?: Record<string, string> } {
+	): { props: { [K in Keys]?: Output }; variants?: Record<string, string> } {
 		const types = renderResult?.variantTypes;
 
 		if (!types) {

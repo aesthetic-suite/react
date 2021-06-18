@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
-import { LocalSheet } from '@aesthetic/core';
-import { DirectionProvider, NativeBlock, NativeStyles, ThemeProvider } from '../../src';
+import { ComponentSheet } from '@aesthetic/core';
+import { DirectionProvider, NativeRule, NativeStyles, ThemeProvider } from '../../src';
 import { aesthetic } from '../../src/aesthetic';
 
 export function createStyleSheet() {
@@ -28,14 +28,6 @@ export function createStyleSheet() {
 
 			':active': {
 				backgroundColor: css.tokens.palette.brand.color['60'],
-			},
-
-			'@selectors': {
-				'::-moz-focus-inner': {
-					border: 0,
-					padding: 0,
-					margin: 0,
-				},
 			},
 
 			'@variants': {
@@ -94,7 +86,7 @@ export interface ButtonProps {
 	href?: string;
 	large?: boolean;
 	small?: boolean;
-	sheet?: LocalSheet<unknown, NativeBlock, NativeStyles>;
+	sheet?: ComponentSheet<unknown, NativeRule, NativeStyles>;
 	// Compound variant tests
 	compound?: string;
 }

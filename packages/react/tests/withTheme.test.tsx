@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from 'rut-dom';
 import {
 	InternalWithThemeWrappedProps,
-	LocalBlock,
+	Rule,
 	ThemeProvider,
 	ThemeProviderProps,
 	withTheme,
@@ -18,7 +18,7 @@ describe('withTheme()', () => {
 		teardownAestheticReact();
 	});
 
-	function BaseComponent(props: InternalWithThemeWrappedProps<LocalBlock>) {
+	function BaseComponent(props: InternalWithThemeWrappedProps<Rule>) {
 		return null;
 	}
 
@@ -68,7 +68,7 @@ describe('withTheme()', () => {
 
 		// eslint-disable-next-line react/prefer-stateless-function
 		class RefComponent extends React.Component<
-			InternalWithThemeWrappedProps<LocalBlock> & RefProps
+			InternalWithThemeWrappedProps<Rule> & RefProps
 		> {
 			override render() {
 				return <div />;

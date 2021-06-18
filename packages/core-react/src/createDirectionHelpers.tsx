@@ -14,8 +14,8 @@ export interface DirectionHelperOptions {
 	wrapper: React.ElementType;
 }
 
-export function createDirectionHelpers<Result, Block extends object>(
-	aesthetic: Aesthetic<Result, Block>,
+export function createDirectionHelpers<Input extends object, Output>(
+	aesthetic: Aesthetic<Input, Output>,
 	{ wrapper: Wrapper }: DirectionHelperOptions,
 ) /* infer */ {
 	const DirectionContext = createContext<DirectionContextType>('ltr');
