@@ -9,10 +9,10 @@ import {
 	WrapperProps,
 } from './types';
 
-export function createThemeHelpers<Result, Block extends object>(
-	aesthetic: Aesthetic<Result, Block>,
+export function createThemeHelpers<Input extends object, Output>(
+	aesthetic: Aesthetic<Input, Output>,
 ) /* infer */ {
-	const ThemeContext = createContext<ThemeContextType<Block> | null>(null);
+	const ThemeContext = createContext<ThemeContextType<Input> | null>(null);
 
 	/**
 	 * Rendered at the root to provide the theme to the entire application.
@@ -38,7 +38,7 @@ export function createThemeHelpers<Result, Block extends object>(
 	/**
 	 * Hook within a component to provide the current theme object.
 	 */
-	function useTheme(): Theme<Block> {
+	function useTheme(): Theme<Input> {
 		const theme = useContext(ThemeContext);
 
 		if (!theme) {
@@ -53,9 +53,9 @@ export function createThemeHelpers<Result, Block extends object>(
 	 */
 	function withTheme() /* infer */ {
 		return function withThemeComposer<Props extends object = {}>(
-			WrappedComponent: React.ComponentType<InternalWithThemeWrappedProps<Block> & Props>,
+			WrappedComponent: React.ComponentType<InternalWithThemeWrappedProps<Input> & Props>,
 		): React.FunctionComponent<
-			Omit<Props, keyof InternalWithThemeWrappedProps<Block>> & WrapperProps
+			Omit<Props, keyof InternalWithThemeWrappedProps<Input>> & WrapperProps
 		> &
 			WrapperComponent {
 			// eslint-disable-next-line prefer-arrow-callback

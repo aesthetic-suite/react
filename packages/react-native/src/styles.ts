@@ -1,5 +1,5 @@
 import React, { createElement, forwardRef, memo, useMemo } from 'react';
-import { Utilities } from '@aesthetic/core';
+import { ElementSheetFactory } from '@aesthetic/core';
 import { createStyleHelpers } from '@aesthetic/core-react';
 import { arrayLoop, toArray } from '@aesthetic/utils';
 import { aesthetic } from './aesthetic';
@@ -8,8 +8,8 @@ import { useTheme } from './theme';
 import { InferProps, NativeRule, NativeStyles, StyledComponent } from './types';
 
 export const { getVariantsFromProps, useStyles, withStyles } = createStyleHelpers<
-	NativeStyles,
 	NativeRule,
+	NativeStyles,
 	NativeStyles[]
 >(aesthetic, {
 	generate(args, variants, results) {
@@ -58,7 +58,7 @@ export const { getVariantsFromProps, useStyles, withStyles } = createStyleHelper
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function createStyled<T extends React.ComponentType<any>, V extends object = {}>(
 	type: T,
-	factory: NativeRule | ((utilities: Utilities<NativeRule>) => NativeRule),
+	factory: ElementSheetFactory<NativeRule> | NativeRule,
 ): StyledComponent<InferProps<T> & V> {
 	if (process.env.NODE_ENV !== 'production') {
 		const typeOfType = typeof type;
@@ -77,9 +77,7 @@ export function createStyled<T extends React.ComponentType<any>, V extends objec
 		}
 	}
 
-	const styleSheet = aesthetic.createComponentStyles((utils) => ({
-		element: typeof factory === 'function' ? factory(utils) : factory,
-	}));
+	const styleSheet = aesthetic.createElementStyles(factory);
 
 	const Component = memo(
 		forwardRef((baseProps, ref) => {

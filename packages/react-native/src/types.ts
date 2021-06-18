@@ -12,11 +12,11 @@ export type NativeRule = NativeStyles & {
 	'@variants'?: Record<string, NativeStyles>;
 };
 
-export type NativeEngine = Engine<NativeStyles>;
+export type NativeEngine = Engine<NativeRule, NativeStyles>;
 
 export interface StyledComponent<P extends object = {}>
 	extends React.MemoExoticComponent<React.ForwardRefExoticComponent<P & StyledInheritedProps>> {
-	styleSheet: ComponentSheet<unknown, NativeStyles, NativeRule>;
+	styleSheet: ComponentSheet<unknown, NativeRule, NativeStyles>;
 }
 
 export interface StyledInheritedProps {

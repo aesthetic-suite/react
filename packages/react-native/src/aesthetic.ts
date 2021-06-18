@@ -1,5 +1,5 @@
 import { Appearance, I18nManager } from 'react-native';
-import { Aesthetic, RenderResult, RenderResultVariant, Rule } from '@aesthetic/core';
+import { Aesthetic, RenderResult, RenderResultVariant } from '@aesthetic/core';
 import { objectLoop } from '@aesthetic/utils';
 import { NativeEngine, NativeRule, NativeStyles } from './types';
 
@@ -13,8 +13,8 @@ function unsupported(method: string) {
 	};
 }
 
-function renderRule(rule: Rule): RenderResult<NativeStyles> {
-	const { '@variants': variantStyles, ...result } = rule as NativeRule;
+function renderRule(rule: NativeRule): RenderResult<NativeStyles> {
+	const { '@variants': variantStyles, ...result } = rule;
 	const variants: RenderResultVariant<NativeStyles>[] = [];
 
 	if (variantStyles) {
@@ -47,6 +47,6 @@ const engine: NativeEngine = {
 	setTheme: noop,
 };
 
-export const aesthetic = new Aesthetic<NativeStyles, NativeRule>();
+export const aesthetic = new Aesthetic<NativeRule, NativeStyles>();
 
 aesthetic.configureEngine(engine);
