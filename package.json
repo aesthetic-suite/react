@@ -23,6 +23,7 @@
     "node": ">=12.17.0"
   },
   "resolutions": {
+    "acorn": "^8.4.0",
     "react-docgen-typescript": "^2.0.0"
   },
   "devDependencies": {
