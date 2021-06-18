@@ -1,5 +1,5 @@
 import { createElement, forwardRef, memo, useMemo } from 'react';
-import { ClassName, ElementSheetFactory, RenderOptions, Rule } from '@aesthetic/core';
+import { ElementSheetFactory, RenderOptions, Rule } from '@aesthetic/core';
 import { createStyleHelpers } from '@aesthetic/core-react';
 import { aesthetic } from './aesthetic';
 import { useDirection } from './direction';
@@ -15,8 +15,10 @@ export const { getVariantsFromProps, useStyles, withStyles } = createStyleHelper
 export function useCss(
 	rule: Rule,
 	options?: Pick<RenderOptions, 'media' | 'selector' | 'supports'>,
-): ClassName {
-	return useMemo(() => aesthetic.getEngine().renderRule(rule, options).result, [rule, options]);
+) {
+	const result = useMemo(() => aesthetic.getEngine().renderRule(rule, options), [rule, options]);
+
+	return { className: result.result, variants: result.variants };
 }
 
 export function createStyled<
