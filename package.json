@@ -17,7 +17,7 @@
     "prerelease": "yarn run pack && yarn run check",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "snapshot": "build-storybook && percy storybook"
+    "snapshot": "build-storybook && percy storybook ./storybook-static"
   },
   "engines": {
     "node": ">=12.17.0"
