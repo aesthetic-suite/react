@@ -136,22 +136,22 @@ export function createStyleHelpers<Input extends object, Output, GeneratedOutput
 
 	function getVariantsFromProps<Keys extends string>(
 		renderResult: SheetRenderResult<Output>[string] | undefined,
-		baseProps: object,
-	): { props: { [K in Keys]?: Output }; variants?: Record<string, string> } {
+		baseProps: Record<string, unknown>,
+	): { props: { [K in Keys]?: Output }; variants?: ResultComposerVariants } {
 		const types = renderResult?.variantTypes;
 
 		if (!types) {
+			// @ts-expect-error We know its safe
 			return { props: baseProps };
 		}
 
-		const variants: Record<string, string> = {};
-		const props: Record<string, unknown> = {};
+		const props = { ...baseProps };
+		const variants: ResultComposerVariants = {};
 
-		objectLoop(baseProps, (value, key) => {
-			if (types.has(key)) {
-				variants[key] = value;
-			} else {
-				props[key] = value;
+		types.forEach((type) => {
+			if (type in props) {
+				variants[type] = props[type] as string;
+				props[type] = undefined;
 			}
 		});
 
