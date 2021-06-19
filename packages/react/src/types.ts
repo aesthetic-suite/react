@@ -7,7 +7,7 @@ import {
 export type ElementType = keyof JSX.IntrinsicElements;
 
 export interface StyledComponent<P extends object = {}>
-	extends React.MemoExoticComponent<React.ForwardRefExoticComponent<P & StyledInheritedProps>> {
+	extends React.ForwardRefExoticComponent<P & StyledInheritedProps> {
 	styleSheet: ComponentSheet<unknown, Rule, ClassName>;
 }
 

@@ -1,4 +1,4 @@
-import React, { createElement, forwardRef, memo, useMemo } from 'react';
+import React, { createElement, forwardRef, useMemo } from 'react';
 import { ElementSheetFactory } from '@aesthetic/core';
 import { createStyleHelpers } from '@aesthetic/core-react';
 import { arrayLoop, toArray } from '@aesthetic/utils';
@@ -79,30 +79,28 @@ export function createStyled<T extends React.ComponentType<any>, V extends objec
 
 	const styleSheet = aesthetic.createElementStyles(factory);
 
-	const Component = memo(
-		forwardRef((baseProps, ref) => {
-			const sx = useStyles(styleSheet);
-			const { props, variants } = getVariantsFromProps<'style'>(sx.result.element, baseProps);
-			const style = variants ? sx(variants, 'element') : sx('element');
+	const Component = forwardRef((baseProps, ref) => {
+		const sx = useStyles(styleSheet);
+		const { props, variants } = getVariantsFromProps<'style'>(sx.result.element, baseProps);
+		const style = variants ? sx(variants, 'element') : sx('element');
 
-			// Cache the style prop so that we avoid unwanted rerenders
-			const styleProp = useMemo(() => {
-				const viewStyles = [...style];
+		// Cache the style prop so that we avoid unwanted rerenders
+		const styleProp = useMemo(() => {
+			const viewStyles = [...style];
 
-				if (props.style) {
-					viewStyles.push(...toArray(props.style));
-				}
+			if (props.style) {
+				viewStyles.push(...toArray(props.style));
+			}
 
-				return viewStyles;
-			}, [style, props.style]);
+			return viewStyles;
+		}, [style, props.style]);
 
-			return createElement(type, {
-				...props,
-				ref,
-				style: styleProp,
-			});
-		}),
-	);
+		return createElement(type, {
+			...props,
+			ref,
+			style: styleProp,
+		});
+	});
 
 	const displayName =
 		typeof type === 'string'

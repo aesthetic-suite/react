@@ -5,23 +5,17 @@ exports[`createStyled() can pass custom props/attributes 1`] = `
   <DirectionProvider direction=\\"ltr\\">
     <div dir=\\"ltr\\">
       <ThemeProvider name=\\"twilight\\">
-        <Memo(ForwardRef)
+        <ForwardRef
           className=\\"will-be-appended\\"
           placeholder=\\"Search...\\"
           type=\\"text\\"
         >
-          <ForwardRef
-            className=\\"will-be-appended\\"
+          <input
+            className=\\"a b c will-be-appended\\"
             placeholder=\\"Search...\\"
             type=\\"text\\"
-          >
-            <input
-              className=\\"a b c will-be-appended\\"
-              placeholder=\\"Search...\\"
-              type=\\"text\\"
-            />
-          </ForwardRef>
-        </Memo(ForwardRef)>
+          />
+        </ForwardRef>
       </ThemeProvider>
     </div>
   </DirectionProvider>
@@ -35,11 +29,9 @@ exports[`createStyled() can use and define CSS variables 1`] = `
   <DirectionProvider direction=\\"ltr\\">
     <div dir=\\"ltr\\">
       <ThemeProvider name=\\"twilight\\">
-        <Memo(ForwardRef)>
-          <ForwardRef>
-            <code className=\\"a b c\\" />
-          </ForwardRef>
-        </Memo(ForwardRef)>
+        <ForwardRef>
+          <code className=\\"a b c\\" />
+        </ForwardRef>
       </ThemeProvider>
     </div>
   </DirectionProvider>
@@ -53,23 +45,15 @@ exports[`createStyled() composition can access the ref from multiple layers of c
   <DirectionProvider direction=\\"ltr\\">
     <div dir=\\"ltr\\">
       <ThemeProvider name=\\"twilight\\">
-        <Memo(ForwardRef)>
-          <ForwardRef>
-            <Memo(ForwardRef) className=\\"\\">
+        <ForwardRef>
+          <ForwardRef className=\\"\\">
+            <ForwardRef className=\\"\\">
               <ForwardRef className=\\"\\">
-                <Memo(ForwardRef) className=\\"\\">
-                  <ForwardRef className=\\"\\">
-                    <Memo(ForwardRef) className=\\"\\">
-                      <ForwardRef className=\\"\\">
-                        <main ref={mockConstructor()} className=\\"\\" />
-                      </ForwardRef>
-                    </Memo(ForwardRef)>
-                  </ForwardRef>
-                </Memo(ForwardRef)>
+                <main ref={mockConstructor()} className=\\"\\" />
               </ForwardRef>
-            </Memo(ForwardRef)>
+            </ForwardRef>
           </ForwardRef>
-        </Memo(ForwardRef)>
+        </ForwardRef>
       </ThemeProvider>
     </div>
   </DirectionProvider>
@@ -81,15 +65,13 @@ exports[`createStyled() composition supports extending non-styled components 1`]
   <DirectionProvider direction=\\"ltr\\">
     <div dir=\\"ltr\\">
       <ThemeProvider name=\\"twilight\\">
-        <Memo(ForwardRef) className=\\"test\\">
-          <ForwardRef className=\\"test\\">
-            <Base className=\\"a b c test\\">
-              <button className=\\"a b c test\\" type=\\"button\\">
-                Normal
-              </button>
-            </Base>
-          </ForwardRef>
-        </Memo(ForwardRef)>
+        <ForwardRef className=\\"test\\">
+          <Base className=\\"a b c test\\">
+            <button className=\\"a b c test\\" type=\\"button\\">
+              Normal
+            </button>
+          </Base>
+        </ForwardRef>
       </ThemeProvider>
     </div>
   </DirectionProvider>
@@ -103,39 +85,27 @@ exports[`createStyled() composition supports extending other styled components 1
   <DirectionProvider direction=\\"ltr\\">
     <div dir=\\"ltr\\">
       <ThemeProvider name=\\"twilight\\">
-        <Memo(ForwardRef) type=\\"button\\">
-          <ForwardRef type=\\"button\\">
-            <button className=\\"a b c\\" type=\\"button\\">
-              Normal
+        <ForwardRef type=\\"button\\">
+          <button className=\\"a b c\\" type=\\"button\\">
+            Normal
+          </button>
+        </ForwardRef>
+        <ForwardRef type=\\"submit\\">
+          <ForwardRef className=\\"d e\\" type=\\"submit\\">
+            <button className=\\"a b c d e\\" type=\\"submit\\">
+              Block
             </button>
           </ForwardRef>
-        </Memo(ForwardRef)>
-        <Memo(ForwardRef) type=\\"submit\\">
-          <ForwardRef type=\\"submit\\">
-            <Memo(ForwardRef) className=\\"d e\\" type=\\"submit\\">
-              <ForwardRef className=\\"d e\\" type=\\"submit\\">
-                <button className=\\"a b c d e\\" type=\\"submit\\">
-                  Block
-                </button>
-              </ForwardRef>
-            </Memo(ForwardRef)>
+        </ForwardRef>
+        <ForwardRef disabled>
+          <ForwardRef disabled className=\\"f g\\">
+            <ForwardRef disabled className=\\"d e f g\\">
+              <button disabled className=\\"a b c d e f g\\">
+                Large
+              </button>
+            </ForwardRef>
           </ForwardRef>
-        </Memo(ForwardRef)>
-        <Memo(ForwardRef) disabled>
-          <ForwardRef disabled>
-            <Memo(ForwardRef) disabled className=\\"f g\\">
-              <ForwardRef disabled className=\\"f g\\">
-                <Memo(ForwardRef) disabled className=\\"d e f g\\">
-                  <ForwardRef disabled className=\\"d e f g\\">
-                    <button disabled className=\\"a b c d e f g\\">
-                      Large
-                    </button>
-                  </ForwardRef>
-                </Memo(ForwardRef)>
-              </ForwardRef>
-            </Memo(ForwardRef)>
-          </ForwardRef>
-        </Memo(ForwardRef)>
+        </ForwardRef>
       </ThemeProvider>
     </div>
   </DirectionProvider>
@@ -149,13 +119,11 @@ exports[`createStyled() creates and renders a button with defined styles 1`] = `
   <DirectionProvider direction=\\"ltr\\">
     <div dir=\\"ltr\\">
       <ThemeProvider name=\\"twilight\\">
-        <Memo(ForwardRef)>
-          <ForwardRef>
-            <button className=\\"a b c\\">
-              Test
-            </button>
-          </ForwardRef>
-        </Memo(ForwardRef)>
+        <ForwardRef>
+          <button className=\\"a b c\\">
+            Test
+          </button>
+        </ForwardRef>
       </ThemeProvider>
     </div>
   </DirectionProvider>
@@ -169,13 +137,11 @@ exports[`createStyled() only renders styles twice (create and mount), even when 
   <DirectionProvider direction=\\"ltr\\">
     <div dir=\\"ltr\\">
       <ThemeProvider name=\\"dawn\\">
-        <Memo(ForwardRef) href=\\"/foo/bar\\">
-          <ForwardRef href=\\"/foo/bar\\">
-            <a className=\\"a\\" href=\\"/foo/bar\\">
-              Test
-            </a>
-          </ForwardRef>
-        </Memo(ForwardRef)>
+        <ForwardRef href=\\"/foo/bar\\">
+          <a className=\\"a\\" href=\\"/foo/bar\\">
+            Test
+          </a>
+        </ForwardRef>
       </ThemeProvider>
     </div>
   </DirectionProvider>
@@ -189,11 +155,9 @@ exports[`createStyled() variants doesnt pass the variant prop to the HTML elemen
   <DirectionProvider direction=\\"ltr\\">
     <div dir=\\"ltr\\">
       <ThemeProvider name=\\"twilight\\">
-        <Memo(ForwardRef) palette=\\"positive\\">
-          <ForwardRef palette=\\"positive\\">
-            <div className=\\"a b\\" />
-          </ForwardRef>
-        </Memo(ForwardRef)>
+        <ForwardRef palette=\\"positive\\">
+          <div className=\\"a b\\" />
+        </ForwardRef>
       </ThemeProvider>
     </div>
   </DirectionProvider>
@@ -205,15 +169,11 @@ exports[`createStyled() variants inherits and merges variant props and types whe
   <DirectionProvider direction=\\"ltr\\">
     <div dir=\\"ltr\\">
       <ThemeProvider name=\\"twilight\\">
-        <Memo(ForwardRef) palette=\\"positive\\" size=\\"lg\\">
-          <ForwardRef palette=\\"positive\\" size=\\"lg\\">
-            <Memo(ForwardRef) className=\\"f\\" palette=\\"positive\\">
-              <ForwardRef className=\\"f\\" palette=\\"positive\\">
-                <div className=\\"a b f\\" />
-              </ForwardRef>
-            </Memo(ForwardRef)>
+        <ForwardRef palette=\\"positive\\" size=\\"lg\\">
+          <ForwardRef className=\\"f\\" palette=\\"positive\\">
+            <div className=\\"a b f\\" />
           </ForwardRef>
-        </Memo(ForwardRef)>
+        </ForwardRef>
       </ThemeProvider>
     </div>
   </DirectionProvider>
@@ -225,16 +185,14 @@ exports[`createStyled() variants supports variants 1`] = `
   <DirectionProvider direction=\\"ltr\\">
     <div dir=\\"ltr\\">
       <ThemeProvider name=\\"twilight\\">
-        <Memo(ForwardRef) palette=\\"positive\\">
-          <ForwardRef palette=\\"positive\\">
-            <div className=\\"a b\\">
-              <div>
-                <h1>Title</h1>
-                And other content!
-              </div>
+        <ForwardRef palette=\\"positive\\">
+          <div className=\\"a b\\">
+            <div>
+              <h1>Title</h1>
+              And other content!
             </div>
-          </ForwardRef>
-        </Memo(ForwardRef)>
+          </div>
+        </ForwardRef>
       </ThemeProvider>
     </div>
   </DirectionProvider>
@@ -248,16 +206,14 @@ exports[`createStyled() variants supports variants 3`] = `
   <DirectionProvider direction=\\"ltr\\">
     <div dir=\\"ltr\\">
       <ThemeProvider name=\\"twilight\\">
-        <Memo(ForwardRef) palette=\\"negative\\">
-          <ForwardRef palette=\\"negative\\">
-            <div className=\\"a c\\">
-              <div>
-                <h1>Title</h1>
-                And other content!
-              </div>
+        <ForwardRef palette=\\"negative\\">
+          <div className=\\"a c\\">
+            <div>
+              <h1>Title</h1>
+              And other content!
             </div>
-          </ForwardRef>
-        </Memo(ForwardRef)>
+          </div>
+        </ForwardRef>
       </ThemeProvider>
     </div>
   </DirectionProvider>
@@ -269,16 +225,14 @@ exports[`createStyled() variants supports variants 4`] = `
   <DirectionProvider direction=\\"ltr\\">
     <div dir=\\"ltr\\">
       <ThemeProvider name=\\"twilight\\">
-        <Memo(ForwardRef)>
-          <ForwardRef>
-            <div className=\\"a\\">
-              <div>
-                <h1>Title</h1>
-                And other content!
-              </div>
+        <ForwardRef>
+          <div className=\\"a\\">
+            <div>
+              <h1>Title</h1>
+              And other content!
             </div>
-          </ForwardRef>
-        </Memo(ForwardRef)>
+          </div>
+        </ForwardRef>
       </ThemeProvider>
     </div>
   </DirectionProvider>

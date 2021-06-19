@@ -1,4 +1,4 @@
-import { createElement, forwardRef, memo, useMemo } from 'react';
+import { createElement, forwardRef, useMemo } from 'react';
 import { ElementSheetFactory, RenderOptions, Rule } from '@aesthetic/core';
 import { createStyleHelpers } from '@aesthetic/core-react';
 import { aesthetic } from './aesthetic';
@@ -45,23 +45,21 @@ export function createStyled<
 
 	const styleSheet = aesthetic.createElementStyles(factory);
 
-	const Component = memo(
-		forwardRef((baseProps, ref) => {
-			const cx = useStyles(styleSheet);
-			const { props, variants } = getVariantsFromProps<'className'>(cx.result.element, baseProps);
-			let className = variants ? cx(variants, 'element') : cx('element');
+	const Component = forwardRef((baseProps, ref) => {
+		const cx = useStyles(styleSheet);
+		const { props, variants } = getVariantsFromProps<'className'>(cx.result.element, baseProps);
+		let className = variants ? cx(variants, 'element') : cx('element');
 
-			if (props.className) {
-				className += ` ${props.className}`;
-			}
+		if (props.className) {
+			className += ` ${props.className}`;
+		}
 
-			return createElement(type, {
-				...props,
-				className,
-				ref,
-			});
-		}),
-	);
+		return createElement(type, {
+			...props,
+			className,
+			ref,
+		});
+	});
 
 	const displayName =
 		typeof type === 'string'
