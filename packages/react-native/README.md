@@ -61,4 +61,4 @@ yarn add @aesthetic/react-native react react-native
 
 ## Documentation
 
-[https://aestheticsuite.dev/docs/integrations/react-native](https://aestheticsuite.dev/docs/integrations/react-native)
+[https://aestheticsuite.dev/docs/react-native](https://aestheticsuite.dev/docs/react-native)

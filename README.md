@@ -10,4 +10,4 @@ integrations.
 
 ## Documentation
 
-[https://aestheticsuite.dev](https://aestheticsuite.dev/docs/integrations/react)
+[https://aestheticsuite.dev](https://aestheticsuite.dev/docs/react)
