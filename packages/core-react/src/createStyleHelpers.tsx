@@ -6,7 +6,6 @@ import {
 	ResultComposer,
 	ResultComposerArgs,
 	ResultComposerVariants,
-	ResultGenerator,
 	SheetRenderResult,
 	Theme,
 } from '@aesthetic/core';
@@ -15,7 +14,7 @@ import { createHOC } from './createHOC';
 import { InternalWithStylesWrappedProps, WrapperComponent, WrapperProps } from './types';
 
 export interface StyleHelperOptions<Input extends object, Output, GeneratedOutput> {
-	generate: ResultGenerator<string, Output, GeneratedOutput>;
+	generate: (results: Output[]) => GeneratedOutput;
 	useDirection: () => Direction;
 	useTheme: () => Theme<Input>;
 }
@@ -48,7 +47,7 @@ export function createStyleHelpers<Input extends object, Output, GeneratedOutput
 
 		if (!cache[cacheKey]) {
 			// eslint-disable-next-line no-param-reassign
-			cache[cacheKey] = generate(args, variants, results);
+			cache[cacheKey] = generate(aesthetic.generateResults(args, variants, results));
 		}
 
 		return cache[cacheKey];

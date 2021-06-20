@@ -30,9 +30,9 @@
     "access": "public"
   },
   "dependencies": {
-    "@aesthetic/core": "^0.10.3",
+    "@aesthetic/core": "^0.10.5",
     "@aesthetic/core-react": "^0.2.0",
-    "@aesthetic/utils": "^0.8.2"
+    "@aesthetic/utils": "^0.8.4"
   },
   "peerDependencies": {
     "react": "^17.0.0",

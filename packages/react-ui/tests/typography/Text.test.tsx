@@ -13,7 +13,7 @@ describe('Text', () => {
 
 		const el = getElement();
 
-		expect(el.className).toBe('h i j a d e k v w x c1 o1');
+		expect(el.className).toBe('h i j k v w x c1 o1 a d e');
 		expect(el.tagName).toBe('P');
 		expect(getRenderedStyles('standard')).toMatchSnapshot();
 	});
@@ -21,13 +21,13 @@ describe('Text', () => {
 	it('renders size small', () => {
 		render(<Text size="sm">Copy</Text>, { wrapper: Wrapper });
 
-		expect(getElement().className).toBe('h i j a b c k v w x c1 o1');
+		expect(getElement().className).toBe('h i j k v w x c1 o1 a b c');
 	});
 
 	it('renders size large', () => {
 		render(<Text size="lg">Copy</Text>, { wrapper: Wrapper });
 
-		expect(getElement().className).toBe('h i j a f g k v w x c1 o1');
+		expect(getElement().className).toBe('h i j k v w x c1 o1 a f g');
 	});
 
 	it('can change element', () => {
@@ -39,7 +39,7 @@ describe('Text', () => {
 	it('can pass a custom class name', () => {
 		render(<Text className="foo">Copy</Text>, { wrapper: Wrapper });
 
-		expect(getElement().className).toBe('h i j a d e foo k v w x c1 o1');
+		expect(getElement().className).toBe('h i j k v w x c1 o1 a d e foo');
 	});
 
 	it('can change all props', () => {
@@ -58,7 +58,7 @@ describe('Text', () => {
 			{ wrapper: Wrapper },
 		);
 
-		expect(getElement().className).toBe('h i j r1 a f g l o p q e1 i1 p1');
+		expect(getElement().className).toBe('h i j l o p q e1 i1 p1 r1 a f g');
 	});
 
 	it('can pass native attributes', () => {

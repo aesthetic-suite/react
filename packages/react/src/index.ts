@@ -20,7 +20,6 @@ export const {
 	createComponentStyles,
 	createElementStyles,
 	createThemeStyles,
-	generateClassName,
 	getActiveDirection,
 	getActiveTheme,
 	getEngine,

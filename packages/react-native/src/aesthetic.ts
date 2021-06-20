@@ -30,7 +30,6 @@ function renderRule(rule: NativeRule): RenderResult<NativeStyles> {
 }
 
 const engine: NativeEngine = {
-	atomic: false,
 	direction: I18nManager.isRTL ? 'rtl' : 'ltr',
 	prefersColorScheme: (scheme) => scheme === Appearance.getColorScheme(),
 	prefersContrastLevel: () => false,

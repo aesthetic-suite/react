@@ -7,7 +7,7 @@ import { useTheme } from './theme';
 import { ElementType, InferProps, StyledComponent } from './types';
 
 export const { getVariantsFromProps, useStyles, withStyles } = createStyleHelpers(aesthetic, {
-	generate: aesthetic.generateClassName,
+	generate: (results) => results.join(' '),
 	useDirection,
 	useTheme,
 });

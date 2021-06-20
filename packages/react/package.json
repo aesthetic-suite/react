@@ -33,16 +33,16 @@
     "access": "public"
   },
   "dependencies": {
-    "@aesthetic/core": "^0.10.3",
+    "@aesthetic/core": "^0.10.5",
     "@aesthetic/core-react": "^0.2.0",
-    "@aesthetic/style": "^0.9.3",
-    "@aesthetic/utils": "^0.8.2"
+    "@aesthetic/style": "^0.9.5",
+    "@aesthetic/utils": "^0.8.4"
   },
   "peerDependencies": {
     "react": "^16.6.0 || ^17.0.0"
   },
   "devDependencies": {
-    "@types/react-dom": "^17.0.7",
+    "@types/react-dom": "^17.0.8",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "rut-dom": "^2.0.0"

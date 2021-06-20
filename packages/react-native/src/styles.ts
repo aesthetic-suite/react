@@ -1,7 +1,7 @@
 import React, { createElement, forwardRef, useMemo } from 'react';
 import { ElementSheetFactory } from '@aesthetic/core';
 import { createStyleHelpers } from '@aesthetic/core-react';
-import { arrayLoop, toArray } from '@aesthetic/utils';
+import { toArray } from '@aesthetic/utils';
 import { aesthetic } from './aesthetic';
 import { useDirection } from './direction';
 import { useTheme } from './theme';
@@ -12,45 +12,7 @@ export const { getVariantsFromProps, useStyles, withStyles } = createStyleHelper
 	NativeStyles,
 	NativeStyles[]
 >(aesthetic, {
-	generate(args, variants, results) {
-		const style: NativeStyles[] = [];
-
-		arrayLoop(args, (arg) => {
-			if (!arg) {
-				return;
-			}
-
-			if (Array.isArray(arg)) {
-				arg.forEach((a) => {
-					if (a) {
-						style.push(a);
-					}
-				});
-
-				return;
-			}
-
-			const hash = results[arg];
-
-			if (!hash) {
-				return;
-			}
-
-			if (hash.result) {
-				style.push(hash.result);
-			}
-
-			if (hash.variants) {
-				arrayLoop(hash.variants, ({ types, result }) => {
-					if (types.every((type) => variants.has(type))) {
-						style.push(result);
-					}
-				});
-			}
-		});
-
-		return style;
-	},
+	generate: (results) => results,
 	useDirection,
 	useTheme,
 });

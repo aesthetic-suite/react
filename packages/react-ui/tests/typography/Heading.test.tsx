@@ -11,7 +11,7 @@ describe('Heading', () => {
 	it('renders the title with default styles', () => {
 		render(<Heading level={1}>Title</Heading>, { wrapper: Wrapper });
 
-		expect(getElement().className).toBe('t u v a b c d w h1 i1 j1 o1 a2');
+		expect(getElement().className).toBe('t u v w h1 i1 j1 o1 a2 a b c d');
 		expect(getRenderedStyles('standard')).toMatchSnapshot();
 	});
 
@@ -42,7 +42,7 @@ describe('Heading', () => {
 			{ wrapper: Wrapper },
 		);
 
-		expect(getElement().className).toBe('t u v a b c d foo w h1 i1 j1 o1 a2');
+		expect(getElement().className).toBe('t u v w h1 i1 j1 o1 a2 a b c d foo');
 	});
 
 	it('can change all props', () => {
@@ -60,7 +60,7 @@ describe('Heading', () => {
 			{ wrapper: Wrapper },
 		);
 
-		expect(getElement().className).toBe('t u v a h i j x a1 b1 c1 q1 u1 b2');
+		expect(getElement().className).toBe('t u v x a1 b1 c1 q1 u1 b2 a h i j');
 	});
 
 	it('can pass native attributes', () => {
