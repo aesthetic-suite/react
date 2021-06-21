@@ -11,7 +11,9 @@ describe('Heading', () => {
 	it('renders the title with default styles', () => {
 		render(<Heading level={1}>Title</Heading>, { wrapper: Wrapper });
 
-		expect(getElement().className).toBe('t u v w h1 i1 j1 o1 a2 a b c d');
+		expect(getElement().className).toBe(
+			'c1u0bpqh c13kbekr cqmlbj8 c1p4ubeg c1xww3tf c1f1iw5d cn25lgq c1u0bpqh czkiasv c6u9ihh c9kwtas crgd4fe c1d7w45w',
+		);
 		expect(getRenderedStyles('standard')).toMatchSnapshot();
 	});
 
@@ -42,7 +44,9 @@ describe('Heading', () => {
 			{ wrapper: Wrapper },
 		);
 
-		expect(getElement().className).toBe('t u v w h1 i1 j1 o1 a2 a b c d foo');
+		expect(getElement().className).toBe(
+			'c1u0bpqh c13kbekr cqmlbj8 c1p4ubeg c1xww3tf c1f1iw5d cn25lgq c1u0bpqh czkiasv c6u9ihh c9kwtas crgd4fe c1d7w45w foo',
+		);
 	});
 
 	it('can change all props', () => {
@@ -60,7 +64,9 @@ describe('Heading', () => {
 			{ wrapper: Wrapper },
 		);
 
-		expect(getElement().className).toBe('t u v x a1 b1 c1 q1 u1 b2 a h i j');
+		expect(getElement().className).toBe(
+			'c1u0bpqh c13kbekr cqmlbj8 cngw5jn cnvui58 cc50pji c1gvf4w5 cbrsnfr cfg0erx c1b6fj3h c6u9ihh c1kouy52 c1nd9zqg c1qysrx2',
+		);
 	});
 
 	it('can pass native attributes', () => {

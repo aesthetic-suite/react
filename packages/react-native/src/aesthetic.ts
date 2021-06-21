@@ -40,7 +40,7 @@ const engine: NativeEngine = {
 	renderRule,
 	renderRuleGrouped: unsupported('renderRuleGrouped()'),
 	renderVariable: unsupported('renderVariable()'),
-	ruleIndex: 0,
+	ruleCount: 0,
 	setDirection: noop,
 	setRootVariables: noop,
 	setTheme: noop,

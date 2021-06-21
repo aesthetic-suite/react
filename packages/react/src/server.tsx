@@ -6,14 +6,14 @@ import type { Sheet, SheetType } from '@aesthetic/types';
 export * from '@aesthetic/style/server';
 
 interface SheetProps {
-	ruleIndex: number;
+	ruleCount: number;
 	sheet: Sheet;
 	type: SheetType;
 }
 
-function Style({ ruleIndex, sheet, type }: SheetProps) {
+function Style({ ruleCount, sheet, type }: SheetProps) {
 	return (
-		<style {...getStyleElementAttributes(type, sheet, ruleIndex)}>
+		<style {...getStyleElementAttributes(type, sheet, ruleCount)}>
 			{extractCssFromSheet(sheet)}
 		</style>
 	);
@@ -22,16 +22,16 @@ function Style({ ruleIndex, sheet, type }: SheetProps) {
 export function renderToStyleElements(engine: StyleEngine): JSX.Element {
 	return (
 		<>
-			<Style ruleIndex={engine.ruleIndex} sheet={engine.sheetManager.sheets.global} type="global" />
+			<Style ruleCount={engine.ruleCount} sheet={engine.sheetManager.sheets.global} type="global" />
 
 			<Style
-				ruleIndex={engine.ruleIndex}
+				ruleCount={engine.ruleCount}
 				sheet={engine.sheetManager.sheets.standard}
 				type="standard"
 			/>
 
 			<Style
-				ruleIndex={engine.ruleIndex}
+				ruleCount={engine.ruleCount}
 				sheet={engine.sheetManager.sheets.conditions}
 				type="conditions"
 			/>

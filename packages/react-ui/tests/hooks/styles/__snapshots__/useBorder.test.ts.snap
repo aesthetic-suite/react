@@ -1,3 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`useBorder() renders default styles 1`] = `".a {border-color: transparent;}.b {border-style: solid;}.c {border-width: var(--border-sm-width);}.d {border-width: var(--border-df-width);}.e {border-width: var(--border-lg-width);}.f {border-radius: var(--border-sm-radius);}.g {border-radius: var(--border-df-radius);}.h {border-radius: var(--border-lg-radius);}"`;
+exports[`useBorder() renders default styles 1`] = `".c1oowyan {border-color: transparent;}.cfdmyha {border-style: solid;}.c1e95qeq {border-width: var(--border-sm-width);}.c1q9bcr2 {border-width: var(--border-df-width);}.c1xgoolj {border-width: var(--border-lg-width);}.c18pn6tu {border-radius: var(--border-sm-radius);}.c1rooa26 {border-radius: var(--border-df-radius);}.cmt9y9z {border-radius: var(--border-lg-radius);}"`;

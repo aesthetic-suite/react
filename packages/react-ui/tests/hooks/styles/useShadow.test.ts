@@ -6,13 +6,13 @@ describe('useShadow()', () => {
 	it('renders default styles', () => {
 		const { result } = renderHook(() => useShadow('md'), { wrapper: Wrapper });
 
-		expect(result.current).toBe('c');
+		expect(result.current).toBe('c1a5uvxz');
 		expect(getRenderedStyles('standard')).toMatchSnapshot();
 	});
 
 	it('can change the size', () => {
 		const { result } = renderHook(() => useShadow('xs'), { wrapper: Wrapper });
 
-		expect(result.current).toBe('a');
+		expect(result.current).toBe('cojt247');
 	});
 });

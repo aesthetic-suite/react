@@ -13,7 +13,9 @@ describe('Text', () => {
 
 		const el = getElement();
 
-		expect(el.className).toBe('h i j k v w x c1 o1 a d e');
+		expect(el.className).toBe(
+			'c1u0bpqh c13kbekr cqmlbj8 c1p4ubeg c1xww3tf c1f1iw5d cn25lgq c1u0bpqh czkiasv cwhyrls c1q1da5a cpfxegw',
+		);
 		expect(el.tagName).toBe('P');
 		expect(getRenderedStyles('standard')).toMatchSnapshot();
 	});
@@ -21,13 +23,17 @@ describe('Text', () => {
 	it('renders size small', () => {
 		render(<Text size="sm">Copy</Text>, { wrapper: Wrapper });
 
-		expect(getElement().className).toBe('h i j k v w x c1 o1 a b c');
+		expect(getElement().className).toBe(
+			'c1u0bpqh c13kbekr cqmlbj8 c1p4ubeg c1xww3tf c1f1iw5d cn25lgq c1u0bpqh czkiasv cwhyrls cxzk1cy c1qx7d18',
+		);
 	});
 
 	it('renders size large', () => {
 		render(<Text size="lg">Copy</Text>, { wrapper: Wrapper });
 
-		expect(getElement().className).toBe('h i j k v w x c1 o1 a f g');
+		expect(getElement().className).toBe(
+			'c1u0bpqh c13kbekr cqmlbj8 c1p4ubeg c1xww3tf c1f1iw5d cn25lgq c1u0bpqh czkiasv cwhyrls c10l4oaf ckfuq95',
+		);
 	});
 
 	it('can change element', () => {
@@ -39,7 +45,9 @@ describe('Text', () => {
 	it('can pass a custom class name', () => {
 		render(<Text className="foo">Copy</Text>, { wrapper: Wrapper });
 
-		expect(getElement().className).toBe('h i j k v w x c1 o1 a d e foo');
+		expect(getElement().className).toBe(
+			'c1u0bpqh c13kbekr cqmlbj8 c1p4ubeg c1xww3tf c1f1iw5d cn25lgq c1u0bpqh czkiasv cwhyrls c1q1da5a cpfxegw foo',
+		);
 	});
 
 	it('can change all props', () => {
@@ -58,7 +66,9 @@ describe('Text', () => {
 			{ wrapper: Wrapper },
 		);
 
-		expect(getElement().className).toBe('h i j l o p q e1 i1 p1 r1 a f g');
+		expect(getElement().className).toBe(
+			'c1u0bpqh c13kbekr cqmlbj8 cngw5jn cnvui58 cc50pji c1gvf4w5 cbrsnfr cfg0erx c1b6fj3h c1hg8m62 cwhyrls c10l4oaf ckfuq95',
+		);
 	});
 
 	it('can pass native attributes', () => {

@@ -13,7 +13,7 @@ describe('useSpacing()', () => {
 	it('can set all sides', () => {
 		const { result } = renderHook(() => useSpacing({ spacing: 'df' }), { wrapper: Wrapper });
 
-		expect(result.current).toEqual({ className: 'd', style: {} });
+		expect(result.current).toEqual({ className: 'c1xb6ewu', style: {} });
 	});
 
 	it('can set horizontal sides', () => {
@@ -21,7 +21,7 @@ describe('useSpacing()', () => {
 			wrapper: Wrapper,
 		});
 
-		expect(result.current).toEqual({ className: 'i j', style: {} });
+		expect(result.current).toEqual({ className: 'c11b8tkx c1pyn0u2', style: {} });
 	});
 
 	it('can set vertical sides', () => {
@@ -29,7 +29,7 @@ describe('useSpacing()', () => {
 			wrapper: Wrapper,
 		});
 
-		expect(result.current).toEqual({ className: 'c1 d1', style: {} });
+		expect(result.current).toEqual({ className: 'c1atx52m c11w6nd6', style: {} });
 	});
 
 	it('can set top side', () => {
@@ -37,7 +37,7 @@ describe('useSpacing()', () => {
 			wrapper: Wrapper,
 		});
 
-		expect(result.current).toEqual({ className: 'g1', style: {} });
+		expect(result.current).toEqual({ className: 'cwdul6s', style: {} });
 	});
 
 	it('can set right side', () => {
@@ -45,7 +45,7 @@ describe('useSpacing()', () => {
 			wrapper: Wrapper,
 		});
 
-		expect(result.current).toEqual({ className: 'z1', style: {} });
+		expect(result.current).toEqual({ className: 'c1mj2ayb', style: {} });
 	});
 
 	it('can set bottom side', () => {
@@ -53,7 +53,7 @@ describe('useSpacing()', () => {
 			wrapper: Wrapper,
 		});
 
-		expect(result.current).toEqual({ className: 'o1', style: {} });
+		expect(result.current).toEqual({ className: 'cs15051', style: {} });
 	});
 
 	it('can set left side', () => {
@@ -61,7 +61,7 @@ describe('useSpacing()', () => {
 			wrapper: Wrapper,
 		});
 
-		expect(result.current).toEqual({ className: 'v1', style: {} });
+		expect(result.current).toEqual({ className: 'c11mjqpq', style: {} });
 	});
 
 	it('can set multiple sides with correct specificity', () => {
@@ -72,7 +72,7 @@ describe('useSpacing()', () => {
 			},
 		);
 
-		expect(result.current).toEqual({ className: 'd w x f1', style: {} });
+		expect(result.current).toEqual({ className: 'c1xb6ewu cwdul6s c16ip6ow c1yh1hbl', style: {} });
 	});
 
 	it('can set sides using a number', () => {
@@ -93,7 +93,7 @@ describe('useSpacing()', () => {
 		);
 
 		expect(result.current).toEqual({
-			className: 'a g h s t e1 k1 q1 w1',
+			className: 'c1g5rurh cw2ew7o c1yx0hov cplmy08 c13z83ws c1f31uz5 c1o3yudt c1yeaeq2 cdpbbi6',
 			style: {
 				'--spacing-all': '1.25rem',
 				'--spacing-bottom': '6.25rem',

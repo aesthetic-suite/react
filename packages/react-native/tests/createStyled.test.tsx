@@ -25,10 +25,6 @@ describe('createStyled()', () => {
 		setupAestheticReact();
 	});
 
-	afterEach(() => {
-		teardownAestheticReact();
-	});
-
 	it('errors for a non-react element type', () => {
 		expect(() =>
 			createStyled(
@@ -80,7 +76,7 @@ describe('createStyled()', () => {
 		expect(extractDebug(debug)).toMatchSnapshot();
 	});
 
-	it('only renders styles twice (create and mount), even when component rerenders', () => {
+	it('only renders styles once (create and mount), even when component rerenders', () => {
 		const spy = jest.fn(
 			() =>
 				({
@@ -99,7 +95,7 @@ describe('createStyled()', () => {
 		update(<Link onPress={cb}>Test</Link>);
 		update(<Link onPress={cb}>Test</Link>);
 
-		expect(spy).toHaveBeenCalledTimes(2);
+		expect(spy).toHaveBeenCalledTimes(1);
 		expect(extractDebug(debug)).toMatchSnapshot();
 	});
 

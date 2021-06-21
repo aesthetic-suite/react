@@ -151,7 +151,7 @@ exports[`createStyled() creates and renders a button with defined styles 1`] = `
 [36m</View>[39m"
 `;
 
-exports[`createStyled() only renders styles twice (create and mount), even when component rerenders 1`] = `
+exports[`createStyled() only renders styles once (create and mount), even when component rerenders 1`] = `
 "[36m<View[39m
   [33mdir[39m=[32m\\"ltr\\"[39m
   [33mtestID[39m=[32m\\"aesthetic-direction-provider\\"[39m

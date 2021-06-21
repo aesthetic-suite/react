@@ -1,7 +1,11 @@
-import { registerDefaultTheme } from '@aesthetic/react';
+import { configure, registerDefaultTheme } from '@aesthetic/react';
 import { lightTheme } from '@aesthetic/system/test';
 
 registerDefaultTheme('default', lightTheme);
+
+configure({
+	deterministicClasses: true,
+});
 
 Object.defineProperty(window, 'matchMedia', {
 	writable: true,
