@@ -58,7 +58,7 @@ export function Overflow() {
 	);
 }
 
-export function Palette() {
+export function Palettes() {
 	return (
 		<>
 			<Text palette="neutral">Neutral (default): {children}</Text>

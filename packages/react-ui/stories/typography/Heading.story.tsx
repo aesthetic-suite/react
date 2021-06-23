@@ -21,7 +21,7 @@ Default.parameters = {
 
 export function Alignment() {
 	return (
-		<div>
+		<>
 			<Heading align="start" level={3}>
 				Start: {children}
 			</Heading>
@@ -37,7 +37,7 @@ export function Alignment() {
 			<Heading align="justify" level={3}>
 				Justify: {children} {children}
 			</Heading>
-		</div>
+		</>
 	);
 }
 
@@ -63,7 +63,7 @@ export function Overflow() {
 	);
 }
 
-export function Palette() {
+export function Palettes() {
 	return (
 		<>
 			<Heading level={3} palette="neutral">

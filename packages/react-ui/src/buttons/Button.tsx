@@ -49,7 +49,7 @@ export interface ButtonAsAnchorProps
 export interface ButtonAsButtonProps
 	extends ButtonCommonProps,
 		Omit<HtmlButtonProps, 'children' | 'onClick'> {
-	onClick: React.MouseEventHandler<HTMLButtonElement>;
+	onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 export type ButtonProps = ButtonAsAnchorProps | ButtonAsButtonProps;

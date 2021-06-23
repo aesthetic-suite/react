@@ -1,29 +1,61 @@
-import { PaletteType, styles } from '@aesthetic/react';
+import { PALETTE_TYPES, RuleMap, StateType, styles, Rule, ColorShade } from '@aesthetic/react';
 
 export const styleSheet = styles((css) => {
-	function solid(palette: PaletteType) {
+	const paletteVariants: RuleMap = {};
+	const emptyBackgroundHues: Record<Exclude<StateType, 'disabled'>, ColorShade> = {
+		focused: '00',
+		hovered: '00',
+		selected: '10',
+	};
+
+	function composeRule(stateFactory: (state: StateType | 'base') => Rule) {
 		return {
-			color: css.var(`palette-${palette}-text`),
-			backgroundColor: css.var(`palette-${palette}-bg-base`),
-			borderColor: css.var(`palette-${palette}-bg-base`),
+			...stateFactory('base'),
+			'@selectors': {
+				':focus, .is-focused': stateFactory('focused'),
+				':hover, .is-hovered': stateFactory('hovered'),
+				':active, .is-active': stateFactory('selected'),
+				':disabled, .is-disabled': stateFactory('disabled'),
+			},
 		};
 	}
 
-	function hollow(palette: PaletteType) {
-		return {
-			color: css.var(`palette-${palette}-text`),
-			backgroundColor: css.var('palette-neutral-color-00'),
-			borderColor: css.var(`palette-${palette}-bg-base`),
-		};
-	}
+	PALETTE_TYPES.forEach((palette) => {
+		// Solid
+		paletteVariants[`palette:${palette} + fill:solid`] = composeRule((state) => ({
+			color: css.var(`palette-${palette}-fg-${state}`),
+			backgroundColor: css.var(`palette-${palette}-bg-${state}`),
+			borderColor: css.var(`palette-${palette}-bg-${state}`),
+		}));
 
-	function empty(palette: PaletteType) {
-		return {
-			color: css.var(`palette-${palette}-text`),
-			backgroundColor: 'transparent',
-			borderColor: 'transparent',
-		};
-	}
+		// Hollow
+		paletteVariants[`palette:${palette} + fill:hollow`] = composeRule((state) => {
+			const backgroundColor =
+				state === 'base' || state === 'disabled'
+					? 'transparent'
+					: css.var(`palette-${palette}-color-${emptyBackgroundHues[state]}`);
+
+			return {
+				color: css.var(`palette-${palette}-bg-${state}`),
+				backgroundColor,
+				borderColor: css.var(`palette-${palette}-bg-${state}`),
+			};
+		});
+
+		// Empty
+		paletteVariants[`palette:${palette} + fill:empty`] = composeRule((state) => {
+			const color =
+				state === 'base' || state === 'disabled'
+					? 'transparent'
+					: css.var(`palette-${palette}-color-${emptyBackgroundHues[state]}`);
+
+			return {
+				color: css.var(`palette-${palette}-bg-${state}`),
+				backgroundColor: color,
+				borderColor: color,
+			};
+		});
+	});
 
 	return {
 		button: {
@@ -39,7 +71,7 @@ export const styleSheet = styles((css) => {
 			fontFamily: css.var('typography-font-text'),
 			cursor: 'pointer',
 			borderStyle: 'solid',
-			border: 0,
+			borderWidth: 0,
 			margin: 0,
 			padding: 0,
 
@@ -85,26 +117,24 @@ export const styleSheet = styles((css) => {
 				'size:sm': {
 					lineHeight: css.var('text-sm-line-height'),
 					fontSize: css.var('text-sm-size'),
-					padding: css.var('spacing-sm'),
-					minWidth: 8 * css.tokens.spacing.unit,
+					padding: css.var('spacing-xs'),
+					minWidth: 4 * css.tokens.spacing.unit,
 				},
 				'size:df': {
 					lineHeight: css.var('text-df-line-height'),
 					fontSize: css.var('text-df-size'),
-					padding: css.var('spacing-df'),
-					minWidth: 10 * css.tokens.spacing.unit,
+					padding: css.var('spacing-sm'),
+					minWidth: 5 * css.tokens.spacing.unit,
 				},
 				'size:lg': {
 					lineHeight: css.var('text-lg-line-height'),
 					fontSize: css.var('text-lg-size'),
-					padding: css.var('spacing-lg'),
-					minWidth: 12 * css.tokens.spacing.unit,
+					padding: css.var('spacing-df'),
+					minWidth: 6 * css.tokens.spacing.unit,
 				},
 
 				// Palettes
-				'palette:primary + fill:solid': solid('primary'),
-				'palette:primary + fill:hollow': hollow('primary'),
-				'palette:primary + fill:empty': empty('primary'),
+				...paletteVariants,
 			},
 		},
 	};
