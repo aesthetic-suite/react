@@ -3,12 +3,13 @@ import { ButtonOptions } from 'reakit';
 import { BorderSize, CommonSize, PaletteType, useStyles } from '@aesthetic/react';
 import { createComponent } from '../helpers/createComponent';
 import { Pressable } from '../internal/Pressable';
+import { CommonProps } from '../types';
 import { styleSheet } from './styles';
 import { ButtonFill, ButtonShape, HtmlAnchorProps, HtmlButtonProps } from './types';
 
 export * from './types';
 
-export interface ButtonCommonProps extends ButtonOptions {
+export interface ButtonCommonProps extends ButtonOptions, CommonProps {
 	/**
 	 * Increase or decrease the border width.
 	 * @default df
@@ -29,7 +30,7 @@ export interface ButtonCommonProps extends ButtonOptions {
 	 */
 	palette?: PaletteType;
 	/**
-	 * Customize the shape of the button (primarily border corners).
+	 * Customize the shape of the button (primarily border corner radius).
 	 * @default round
 	 */
 	shape?: ButtonShape;
@@ -70,7 +71,7 @@ export const Button = createComponent<ButtonProps>(function Button(
 ) {
 	const cx = useStyles(styleSheet);
 	const className = useMemo(
-		() => cx({ border, fill, palette, shape, size }, 'button', [inheritedClassName]),
+		() => cx({ border, fill, palette, shape, size }, 'element', [inheritedClassName]),
 		[cx, border, fill, palette, shape, size, inheritedClassName],
 	);
 

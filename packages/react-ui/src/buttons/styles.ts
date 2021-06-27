@@ -1,6 +1,6 @@
-import { ColorShade, PALETTE_TYPES, Rule, RuleMap, StateType, styles } from '@aesthetic/react';
+import { ColorShade, PALETTE_TYPES, Rule, RuleMap, StateType, style } from '@aesthetic/react';
 
-export const styleSheet = styles((css) => {
+export const styleSheet = style((css) => {
 	const paletteVariants: RuleMap = {};
 	const emptyBackgroundHues: Record<Exclude<StateType, 'disabled'>, ColorShade> = {
 		focused: '00',
@@ -58,84 +58,82 @@ export const styleSheet = styles((css) => {
 	});
 
 	return {
-		button: {
-			display: 'inline-flex',
-			flexWrap: 'nowrap',
-			alignItems: 'center',
-			justifyContent: 'center',
-			position: 'relative',
-			verticalAlign: 'middle',
-			textAlign: 'center',
-			textDecoration: 'none',
-			fontWeight: 'bold',
-			fontFamily: css.var('typography-font-text'),
-			cursor: 'pointer',
-			borderStyle: 'solid',
-			borderWidth: 0,
-			margin: 0,
-			padding: 0,
+		display: 'inline-flex',
+		flexWrap: 'nowrap',
+		alignItems: 'center',
+		justifyContent: 'center',
+		position: 'relative',
+		verticalAlign: 'middle',
+		textAlign: 'center',
+		textDecoration: 'none',
+		fontWeight: 'bold',
+		fontFamily: css.var('typography-font-text'),
+		cursor: 'pointer',
+		borderStyle: 'solid',
+		borderWidth: 0,
+		margin: 0,
+		padding: 0,
 
-			'@selectors': {
-				// Removes weird bonus padding from button in Firefox
-				'::-moz-focus-inner': {
-					border: 0,
-					padding: 0,
-					margin: 0,
-				},
+		'@selectors': {
+			// Removes weird bonus padding from button in Firefox
+			'::-moz-focus-inner': {
+				border: 0,
+				padding: 0,
+				margin: 0,
+			},
+		},
+
+		'@variants': {
+			// Borders
+			'border:sm': {
+				borderWidth: css.var('border-sm-width'),
+			},
+			'border:df': {
+				borderWidth: css.var('border-df-width'),
+			},
+			'border:lg': {
+				borderWidth: css.var('border-lg-width'),
 			},
 
-			'@variants': {
-				// Borders
-				'border:sm': {
-					borderWidth: css.var('border-sm-width'),
-				},
-				'border:df': {
-					borderWidth: css.var('border-df-width'),
-				},
-				'border:lg': {
-					borderWidth: css.var('border-lg-width'),
-				},
-
-				// Border shapes
-				'shape:pill': {
-					borderRadius: 100,
-				},
-				'shape:round + border:sm': {
-					borderRadius: css.var('border-sm-radius'),
-				},
-				'shape:round + border:df': {
-					borderRadius: css.var('border-df-radius'),
-				},
-				'shape:round + border:lg': {
-					borderRadius: css.var('border-lg-radius'),
-				},
-				'shape:sharp': {
-					borderRadius: 0,
-				},
-
-				// Sizes
-				'size:sm': {
-					lineHeight: css.var('text-sm-line-height'),
-					fontSize: css.var('text-sm-size'),
-					padding: `${css.unit(0.25)} ${css.unit(0.75)}`,
-					minWidth: 4 * css.tokens.spacing.unit,
-				},
-				'size:df': {
-					lineHeight: css.var('text-df-line-height'),
-					fontSize: css.var('text-df-size'),
-					padding: `${css.unit(0.75)} ${css.unit(1.25)}`,
-					minWidth: 5 * css.tokens.spacing.unit,
-				},
-				'size:lg': {
-					lineHeight: css.var('text-lg-line-height'),
-					fontSize: css.var('text-lg-size'),
-					padding: `${css.unit(1.25)} ${css.unit(2)}`,
-					minWidth: 6 * css.tokens.spacing.unit,
-				},
-
-				// Palettes
-				...paletteVariants,
+			// Border shapes
+			'shape:pill': {
+				borderRadius: 100,
 			},
+			'shape:round + border:sm': {
+				borderRadius: css.var('border-sm-radius'),
+			},
+			'shape:round + border:df': {
+				borderRadius: css.var('border-df-radius'),
+			},
+			'shape:round + border:lg': {
+				borderRadius: css.var('border-lg-radius'),
+			},
+			'shape:sharp': {
+				borderRadius: 0,
+			},
+
+			// Sizes
+			'size:sm': {
+				lineHeight: css.var('text-sm-line-height'),
+				fontSize: css.var('text-sm-size'),
+				padding: `${css.unit(0.25)} ${css.unit(0.75)}`,
+				minWidth: 4 * css.tokens.spacing.unit,
+			},
+			'size:df': {
+				lineHeight: css.var('text-df-line-height'),
+				fontSize: css.var('text-df-size'),
+				padding: `${css.unit(0.75)} ${css.unit(1.25)}`,
+				minWidth: 5 * css.tokens.spacing.unit,
+			},
+			'size:lg': {
+				lineHeight: css.var('text-lg-line-height'),
+				fontSize: css.var('text-lg-size'),
+				padding: `${css.unit(1.25)} ${css.unit(2)}`,
+				minWidth: 6 * css.tokens.spacing.unit,
+			},
+
+			// Palettes
+			...paletteVariants,
 		},
 	};
 });
