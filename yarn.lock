@@ -11,10 +11,10 @@
     "@aesthetic/types" "^0.6.5"
     "@aesthetic/utils" "^0.8.4"
 
-"@aesthetic/design-systems@^0.1.2":
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/@aesthetic/design-systems/-/design-systems-0.1.3.tgz#6653ccf5a50f85498723e86c6b7200e0db00b504"
-  integrity sha512-k9Is14P2Vo8gdcMXNsRGXh7X4XnGURXkR6F4KqFzhlq+NgbT8J1dNCBOLKAacMpg15Ha8MbhB1rGMrcIUqbDYw==
+"@aesthetic/design-systems@^0.1.5":
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/@aesthetic/design-systems/-/design-systems-0.1.5.tgz#6b1d5908481379af52ee277acf175684a0c3ef0b"
+  integrity sha512-/KYRRdrBxeMDmwGla7Sxtjig0gkk72zDM7Apghw3Gkn7Jf8X3pQyfH5YdIqPzHXdQfp6TlCynMb5rw7GuSxtFw==
 
 "@aesthetic/style@^0.9.6":
   version "0.9.6"

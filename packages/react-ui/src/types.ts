@@ -22,6 +22,13 @@ declare global {
 	}
 }
 
+// REACT
+
+export interface CommonProps {
+	/** Provide a test ID for locating the element within tests. */
+	testID?: string;
+}
+
 // HTML
 
 export type OmitUnwantedHtmlProps<T> = Omit<T, 'as' | 'children' | 'is' | 'radioGroup'>;

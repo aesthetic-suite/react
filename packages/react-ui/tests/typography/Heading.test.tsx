@@ -38,15 +38,13 @@ describe('Heading', () => {
 
 	it('can pass a custom class name', () => {
 		render(
-			<Heading className="foo" level={1}>
+			<Heading className="foobar" level={1}>
 				Title
 			</Heading>,
 			{ wrapper: Wrapper },
 		);
 
-		expect(getElement().className).toBe(
-			'c1u0bpqh c13kbekr cqmlbj8 c1p4ubeg c1xww3tf c1f1iw5d cn25lgq c1u0bpqh czkiasv c6u9ihh c9kwtas crgd4fe c1d7w45w foo',
-		);
+		expect(getElement().className).toEqual(expect.stringContaining('foobar'));
 	});
 
 	it('can change all props', () => {
