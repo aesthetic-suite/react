@@ -28,13 +28,14 @@
   "devDependencies": {
     "@aesthetic/design-systems": "^0.1.5",
     "@beemo/dev": "^0.2.3",
-    "@percy/cli": "^1.0.0-beta.52",
-    "@percy/storybook": "^4.0.0-beta.1",
-    "@storybook/addon-actions": "^6.2.9",
-    "@storybook/addon-essentials": "^6.2.9",
-    "@storybook/addon-links": "^6.2.9",
-    "@storybook/builder-webpack5": "^6.2.9",
-    "@storybook/react": "^6.2.9",
+    "@percy/cli": "^1.0.0-beta.56",
+    "@percy/storybook": "^4.0.0-beta.2",
+    "@storybook/addon-actions": "^6.3.0",
+    "@storybook/addon-essentials": "^6.3.0",
+    "@storybook/addon-links": "^6.3.0",
+    "@storybook/builder-webpack5": "^6.3.0",
+    "@storybook/manager-webpack5": "^6.3.0",
+    "@storybook/react": "^6.3.0",
     "@storybook/storybook-deployer": "^2.8.10",
     "@types/hoist-non-react-statics": "^3.3.1",
     "@types/react": "^17.0.11",
@@ -46,7 +47,8 @@
     "lerna": "^4.0.0",
     "packemon": "^1.0.0",
     "react": "^17.0.2",
-    "react-test-renderer": "^17.0.2"
+    "react-test-renderer": "^17.0.2",
+    "webpack": "^5.40.0"
   },
   "workspaces": [
     "packages/*"
