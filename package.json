@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@aesthetic/design-systems": "^0.1.5",
-    "@beemo/dev": "^0.2.3",
+    "@beemo/dev": "^1.0.0",
     "@percy/cli": "^1.0.0-beta.56",
     "@percy/storybook": "^4.0.0-beta.2",
     "@storybook/addon-actions": "^6.3.0",
