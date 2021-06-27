@@ -1,7 +1,11 @@
 import React from 'react';
 import { Button as ReakitButton } from 'reakit';
 import { createComponent } from '../helpers/createComponent';
-import { CommonHtmlProps, CommonProps } from '../types';
+import { CommonHtmlProps, CommonProps, OmitUnwantedHtmlProps } from '../types';
+
+export type HtmlAnchorProps = OmitUnwantedHtmlProps<React.AnchorHTMLAttributes<HTMLAnchorElement>>;
+
+export type HtmlButtonProps = OmitUnwantedHtmlProps<React.ButtonHTMLAttributes<HTMLButtonElement>>;
 
 export interface PressableProps extends CommonHtmlProps, CommonProps {
 	as?: React.ComponentType<PressableProps>;

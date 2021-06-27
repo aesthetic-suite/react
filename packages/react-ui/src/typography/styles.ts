@@ -45,7 +45,7 @@ export const styleSheet = styles((css) => {
 
 				// Palettes
 				...mapVariants('palette', PALETTE_TYPES, (palette) => ({
-					color: css.var(`palette-${palette}-text` as 'palette-neutral-text'),
+					color: css.var(`palette-${palette}-text`),
 				})),
 
 				// Transforms
@@ -65,6 +65,20 @@ export const styleSheet = styles((css) => {
 
 		monospace: {
 			fontFamily: css.var('typography-font-monospace'),
+		},
+
+		link: {
+			'@variants': {
+				// Palettes
+				...mapVariants('palette', PALETTE_TYPES, (palette) => ({
+					color: css.var(`palette-${palette}-text`),
+					'@selectors': {
+						':visited': { color: css.var(`palette-${palette}-color-60`) },
+						':hover': { color: css.var(`palette-${palette}-color-80`) },
+						':active': { color: css.var(`palette-${palette}-color-90`) },
+					},
+				})),
+			},
 		},
 	};
 });

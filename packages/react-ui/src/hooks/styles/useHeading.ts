@@ -13,9 +13,9 @@ export const styleSheet = style((css) => ({
 
 	'@variants': {
 		...mapVariants('level', HEADING_LEVELS, (level) => ({
-			lineHeight: css.var(`heading-l${level}-line-height` as 'heading-l1-line-height'),
-			fontSize: css.var(`heading-l${level}-size` as 'heading-l1-size'),
-			letterSpacing: css.var(`heading-l${level}-letter-spacing` as 'heading-l1-letter-spacing'),
+			lineHeight: css.var(`heading-l${level}-line-height`),
+			fontSize: css.var(`heading-l${level}-size`),
+			letterSpacing: css.var(`heading-l${level}-letter-spacing`),
 		})),
 	},
 }));

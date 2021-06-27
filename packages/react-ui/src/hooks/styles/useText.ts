@@ -13,8 +13,8 @@ export const styleSheet = style((css) => ({
 
 	'@variants': {
 		...mapVariants('size', SIZES, (size) => ({
-			lineHeight: css.var(`text-${size}-line-height` as 'text-df-line-height'),
-			fontSize: css.var(`text-${size}-size` as 'text-df-size'),
+			lineHeight: css.var(`text-${size}-line-height`),
+			fontSize: css.var(`text-${size}-size`),
 		})),
 	},
 }));

@@ -2,10 +2,10 @@ import React, { useMemo } from 'react';
 import { ButtonOptions } from 'reakit';
 import { BorderSize, CommonSize, PaletteType, useStyles } from '@aesthetic/react';
 import { createComponent } from '../helpers/createComponent';
-import { Pressable } from '../internal/Pressable';
+import { HtmlAnchorProps, HtmlButtonProps, Pressable } from '../internal/Pressable';
 import { CommonProps } from '../types';
 import { styleSheet } from './styles';
-import { ButtonFill, ButtonShape, HtmlAnchorProps, HtmlButtonProps } from './types';
+import { ButtonFill, ButtonShape } from './types';
 
 export * from './types';
 
