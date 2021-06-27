@@ -1,10 +1,12 @@
 import React, { useMemo } from 'react';
 import { useStyles } from '@aesthetic/react';
 import { createComponent } from '../helpers/createComponent';
+import { useContextRequirement } from '../hooks/useContextRequirement';
 import { HtmlAnchorProps, Pressable } from '../internal/Pressable';
 import { CommonProps } from '../types';
 import { styleSheet } from './styles';
 import { TypographyProps } from './types';
+import { TypographyContext } from './TypographyContext';
 
 export * from './types';
 
@@ -38,6 +40,11 @@ export const Link = createComponent<LinkProps>(function Link(
 	const className = useMemo(
 		() => cx({ palette, transform, weight }, 'typography', 'link', [inheritedClassName]),
 		[cx, palette, transform, weight, inheritedClassName],
+	);
+
+	useContextRequirement(
+		TypographyContext,
+		'`Link` component must be rendered within a `Text` or `Heading` component.',
 	);
 
 	return (

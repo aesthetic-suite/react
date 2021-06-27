@@ -5,6 +5,7 @@ import { useText } from '../hooks/styles/useText';
 import { CommonProps } from '../types';
 import { styleSheet } from './styles';
 import { TypographyProps } from './types';
+import { TypographyContext } from './TypographyContext';
 
 export * from './types';
 
@@ -91,7 +92,7 @@ export const Text = createDynamicComponent<TextProps, TextElement>(function Text
 
 	return (
 		<Tag ref={ref} data-testid={testID} {...props} className={className}>
-			{children}
+			<TypographyContext.Provider value>{children}</TypographyContext.Provider>
 		</Tag>
 	);
 });

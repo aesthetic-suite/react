@@ -5,6 +5,7 @@ import { useHeading } from '../hooks/styles/useHeading';
 import { CommonProps } from '../types';
 import { styleSheet } from './styles';
 import { TypographyProps } from './types';
+import { TypographyContext } from './TypographyContext';
 
 export * from './types';
 
@@ -51,7 +52,7 @@ export const Heading = createDynamicComponent<HeadingProps, HeadingElement>(func
 
 	return (
 		<Tag ref={ref} data-testid={testID} {...props} className={className}>
-			{children}
+			<TypographyContext.Provider value>{children}</TypographyContext.Provider>
 		</Tag>
 	);
 });

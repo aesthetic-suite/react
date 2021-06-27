@@ -77,18 +77,6 @@ export const styleSheet = styles((css) => {
 			fontFamily: 'inherit',
 			fontSize: 'inherit',
 			lineHeight: 'inherit',
-
-			'@variants': {
-				// Palettes
-				...mapVariants('palette', PALETTE_TYPES, (palette) => ({
-					color: css.var(`palette-${palette}-text`),
-					'@selectors': {
-						':visited': { color: css.var(`palette-${palette}-color-60`) },
-						':hover': { color: css.var(`palette-${palette}-color-80`) },
-						':active': { color: css.var(`palette-${palette}-color-90`) },
-					},
-				})),
-			},
 		},
 	};
 });
