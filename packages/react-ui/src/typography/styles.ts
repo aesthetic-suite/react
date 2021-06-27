@@ -68,6 +68,16 @@ export const styleSheet = styles((css) => {
 		},
 
 		link: {
+			display: 'inline-block',
+			backgroundColor: 'transparent',
+			borderColor: 'transparent',
+			borderWidth: 0,
+			cursor: 'pointer',
+			textDecoration: 'none',
+			fontFamily: 'inherit',
+			fontSize: 'inherit',
+			lineHeight: 'inherit',
+
 			'@variants': {
 				// Palettes
 				...mapVariants('palette', PALETTE_TYPES, (palette) => ({

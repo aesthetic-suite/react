@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { TextSize, useStyles } from '@aesthetic/react';
 import { createDynamicComponent } from '../helpers/createComponent';
 import { useText } from '../hooks/styles/useText';
+import { CommonProps } from '../types';
 import { styleSheet } from './styles';
 import { TypographyProps } from './types';
 
@@ -31,7 +32,7 @@ export type TextElement =
 	| 'var'
 	| 'wbr';
 
-export interface TextProps extends TypographyProps {
+export interface TextProps extends TypographyProps, CommonProps {
 	/**
 	 * Switch to a monospace font family defined in the current design system theme.
 	 */
@@ -55,6 +56,7 @@ export const Text = createDynamicComponent<TextProps, TextElement>(function Text
 		overflow = 'wrap',
 		palette = 'neutral',
 		size = 'df',
+		testID,
 		transform,
 		weight = 'normal',
 		// Inherited
@@ -88,7 +90,7 @@ export const Text = createDynamicComponent<TextProps, TextElement>(function Text
 	);
 
 	return (
-		<Tag ref={ref} {...props} className={className}>
+		<Tag ref={ref} data-testid={testID} {...props} className={className}>
 			{children}
 		</Tag>
 	);
