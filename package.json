@@ -26,7 +26,7 @@
     "react-docgen-typescript": "^2.0.0"
   },
   "devDependencies": {
-    "@aesthetic/design-systems": "^0.1.2",
+    "@aesthetic/design-systems": "^0.1.5",
     "@beemo/dev": "^0.2.3",
     "@percy/cli": "^1.0.0-beta.52",
     "@percy/storybook": "^4.0.0-beta.1",

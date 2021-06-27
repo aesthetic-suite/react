@@ -23,7 +23,7 @@ export const Pressable = createComponent<PressableProps>(function Pressable(
 	const props = restProps as PressableProps;
 
 	if (link) {
-		props.href = href;
+		props.href = link;
 		props.rel = rel || target === '_blank' ? 'noopener noreferrer' : undefined;
 		props.target = target;
 	} else {

@@ -1,5 +1,5 @@
 import React from 'react';
-import defaultTheme from '@aesthetic/design-systems/esm/aesthetic/themes/default';
+import defaultTheme from '@aesthetic/design-systems/material';
 import { ThemeProvider, createThemeStyles, registerDefaultTheme } from '@aesthetic/react';
 
 const themeSheet = createThemeStyles((css) => ({
