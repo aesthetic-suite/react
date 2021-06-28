@@ -15,13 +15,13 @@ export interface LinkProps
 		Omit<HtmlAnchorProps, 'children' | 'href' | 'onClick'>,
 		CommonProps {
 	/**
-	 * Document to link to.
+	 * Document or address to link to.
 	 */
 	to?: string;
 	/**
 	 * Callback fired when the link is clicked.
 	 */
-	onClick?: React.MouseEventHandler;
+	onClick?: React.MouseEventHandler<HTMLElement>;
 }
 
 export const Link = createComponent<LinkProps>(function Link(
@@ -44,7 +44,7 @@ export const Link = createComponent<LinkProps>(function Link(
 
 	useContextRequirement(
 		TypographyContext,
-		'`Link` component must be rendered within a `Text` or `Heading` component.',
+		__DEV__ ? '`Link` component must be rendered within a `Text` or `Heading` component.' : '',
 	);
 
 	return (
