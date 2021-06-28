@@ -43,7 +43,7 @@
     "hoist-non-react-statics": "^3.3.2"
   },
   "devDependencies": {
-    "@aesthetic/core": "^0.10.6",
+    "@aesthetic/core": "^0.10.7",
     "react": "^17.0.2"
   },
   "packemon": {

@@ -1,4 +1,5 @@
-import { configure, registerDefaultTheme } from '@aesthetic/react';
+import { configure, internalAestheticRuntime, registerDefaultTheme } from '@aesthetic/react';
+import { createTestEngine } from '@aesthetic/react/test';
 import { lightTheme } from '@aesthetic/system/test';
 
 registerDefaultTheme('default', lightTheme);
@@ -6,6 +7,8 @@ registerDefaultTheme('default', lightTheme);
 configure({
 	deterministicClasses: true,
 });
+
+internalAestheticRuntime.configureEngine(createTestEngine());
 
 Object.defineProperty(window, 'matchMedia', {
 	writable: true,

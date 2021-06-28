@@ -7,3 +7,5 @@ export { getRenderedStyles };
 export function Wrapper({ children }: { children?: React.ReactNode }) {
 	return <ThemeProvider>{children ?? <div />}</ThemeProvider>;
 }
+
+export function withStyles() {}
