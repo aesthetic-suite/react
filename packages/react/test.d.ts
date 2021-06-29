@@ -1,1 +1,1 @@
-export * from './dts/server';
+export * from '@aesthetic/core/test';

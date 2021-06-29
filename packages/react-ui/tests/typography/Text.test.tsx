@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { Text } from '../../src/typography/Text';
-import { getRenderedStyles, Wrapper } from '../helpers';
+import { getRenderedStyles, withStyles, Wrapper } from '../helpers';
 
 function getElement() {
 	return screen.getByText('Copy') as HTMLParagraphElement;
@@ -14,26 +14,30 @@ describe('Text', () => {
 		const el = getElement();
 
 		expect(el.className).toBe(
-			'c1u0bpqh c13kbekr cqmlbj8 c1p4ubeg c1xww3tf c1f1iw5d cn25lgq c1u0bpqh czkiasv cwhyrls c1q1da5a cpfxegw',
+			'typography variant:align:start variant:overflow:wrap variant:palette:neutral variant:weight:normal element variant:size:df',
 		);
 		expect(el.tagName).toBe('P');
-		expect(getRenderedStyles('standard')).toMatchSnapshot();
 	});
+
+	it(
+		'renders the text styles',
+		withStyles(() => {
+			render(<Text>Copy</Text>, { wrapper: Wrapper });
+
+			expect(getRenderedStyles('standard')).toMatchSnapshot();
+		}),
+	);
 
 	it('renders size small', () => {
 		render(<Text size="sm">Copy</Text>, { wrapper: Wrapper });
 
-		expect(getElement().className).toBe(
-			'c1u0bpqh c13kbekr cqmlbj8 c1p4ubeg c1xww3tf c1f1iw5d cn25lgq c1u0bpqh czkiasv cwhyrls cxzk1cy c1qx7d18',
-		);
+		expect(getElement().className).toEqual(expect.stringContaining('variant:size:sm'));
 	});
 
 	it('renders size large', () => {
 		render(<Text size="lg">Copy</Text>, { wrapper: Wrapper });
 
-		expect(getElement().className).toBe(
-			'c1u0bpqh c13kbekr cqmlbj8 c1p4ubeg c1xww3tf c1f1iw5d cn25lgq c1u0bpqh czkiasv cwhyrls c10l4oaf ckfuq95',
-		);
+		expect(getElement().className).toEqual(expect.stringContaining('variant:size:lg'));
 	});
 
 	it('can change element', () => {
@@ -43,11 +47,9 @@ describe('Text', () => {
 	});
 
 	it('can pass a custom class name', () => {
-		render(<Text className="foo">Copy</Text>, { wrapper: Wrapper });
+		render(<Text className="foobar">Copy</Text>, { wrapper: Wrapper });
 
-		expect(getElement().className).toBe(
-			'c1u0bpqh c13kbekr cqmlbj8 c1p4ubeg c1xww3tf c1f1iw5d cn25lgq c1u0bpqh czkiasv cwhyrls c1q1da5a cpfxegw foo',
-		);
+		expect(getElement().className).toEqual(expect.stringContaining('foobar'));
 	});
 
 	it('can change all props', () => {
@@ -67,7 +69,7 @@ describe('Text', () => {
 		);
 
 		expect(getElement().className).toBe(
-			'c1u0bpqh c13kbekr cqmlbj8 cngw5jn cnvui58 cc50pji c1gvf4w5 cbrsnfr cfg0erx c1b6fj3h c1hg8m62 cwhyrls c10l4oaf ckfuq95',
+			'typography variant:align:center variant:overflow:break variant:palette:danger variant:transform:capitalize variant:weight:bold monospace element variant:size:lg',
 		);
 	});
 
