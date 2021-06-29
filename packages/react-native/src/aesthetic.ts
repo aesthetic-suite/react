@@ -31,6 +31,7 @@ function renderRule(rule: NativeRule): RenderResult<NativeStyles> {
 
 const engine: NativeEngine = {
 	direction: I18nManager.isRTL ? 'rtl' : 'ltr',
+	name: 'react-native',
 	prefersColorScheme: (scheme) => scheme === Appearance.getColorScheme(),
 	prefersContrastLevel: () => false,
 	renderDeclaration: unsupported('renderDeclaration()'),
@@ -38,7 +39,7 @@ const engine: NativeEngine = {
 	renderImport: unsupported('renderImport()'),
 	renderKeyframes: unsupported('renderKeyframes()'),
 	renderRule,
-	renderRuleGrouped: unsupported('renderRuleGrouped()'),
+	renderRuleGrouped: renderRule,
 	renderVariable: unsupported('renderVariable()'),
 	ruleCount: 0,
 	setDirection: noop,
