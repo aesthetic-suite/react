@@ -42,10 +42,13 @@ export const Link = createComponent<LinkProps>(function Link(
 		[cx, palette, transform, weight, inheritedClassName],
 	);
 
-	useContextRequirement(
-		TypographyContext,
-		__DEV__ ? '`Link` component must be rendered within a `Text` or `Heading` component.' : '',
-	);
+	if (__DEV__) {
+		// eslint-disable-next-line react-hooks/rules-of-hooks
+		useContextRequirement(
+			TypographyContext,
+			'`Link` component must be rendered within a `Text` or `Heading` component.',
+		);
+	}
 
 	return (
 		<Pressable ref={ref} {...props} className={className}>

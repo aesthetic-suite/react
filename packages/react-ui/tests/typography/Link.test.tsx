@@ -1,82 +1,86 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import { Link } from '../../src/typography/Link';
 import { Text } from '../../src/typography/Text';
-import { getRenderedStyles, Wrapper } from '../helpers';
+import { getRenderedStyles, withStyles, Wrapper, WrapperProps } from '../helpers';
 
 function getElement() {
 	return screen.getByText('Copy') as HTMLParagraphElement;
 }
 
-describe('Text', () => {
-	it('renders the text with default styles', () => {
-		render(<Text>Copy</Text>, { wrapper: Wrapper });
+function LinkWrapper({ children }: WrapperProps) {
+	return (
+		<Wrapper>
+			<Text>{children ?? <div />}</Text>
+		</Wrapper>
+	);
+}
 
-		const el = getElement();
+describe('Link', () => {
+	it('errors if not wrapped in typography', () => {
+		const spy = jest.spyOn(console, 'error').mockImplementation();
 
-		expect(el.className).toBe(
-			'c1u0bpqh c13kbekr cqmlbj8 c1p4ubeg c1xww3tf c1f1iw5d cn25lgq c1u0bpqh czkiasv cwhyrls c1q1da5a cpfxegw',
-		);
-		expect(el.tagName).toBe('P');
-		expect(getRenderedStyles('standard')).toMatchSnapshot();
+		expect(() => {
+			render(<Link>Copy</Link>, { wrapper: Wrapper });
+		}).toThrow('`Link` component must be rendered within a `Text` or `Heading` component.');
+
+		spy.mockRestore();
 	});
 
-	it('renders size small', () => {
-		render(<Text size="sm">Copy</Text>, { wrapper: Wrapper });
+	it('renders the link', () => {
+		render(<Link>Copy</Link>, { wrapper: LinkWrapper });
 
 		expect(getElement().className).toBe(
-			'c1u0bpqh c13kbekr cqmlbj8 c1p4ubeg c1xww3tf c1f1iw5d cn25lgq c1u0bpqh czkiasv cwhyrls cxzk1cy c1qx7d18',
+			'typography variant:palette:primary variant:weight:normal link',
 		);
 	});
 
-	it('renders size large', () => {
-		render(<Text size="lg">Copy</Text>, { wrapper: Wrapper });
+	it(
+		'renders the link styles',
+		withStyles(() => {
+			render(<Link>Copy</Link>, { wrapper: LinkWrapper });
 
-		expect(getElement().className).toBe(
-			'c1u0bpqh c13kbekr cqmlbj8 c1p4ubeg c1xww3tf c1f1iw5d cn25lgq c1u0bpqh czkiasv cwhyrls c10l4oaf ckfuq95',
-		);
+			expect(getRenderedStyles('standard')).toMatchSnapshot();
+		}),
+	);
+
+	it('renders an `button` by default', () => {
+		render(<Link>Copy</Link>, { wrapper: LinkWrapper });
+
+		expect(getElement().tagName).toBe('BUTTON');
 	});
 
-	it('can change element', () => {
-		render(<Text as="kbd">Copy</Text>, { wrapper: Wrapper });
+	it('renders an `a` when linking', () => {
+		render(<Link to="/">Copy</Link>, { wrapper: LinkWrapper });
 
-		expect(getElement().tagName).toBe('KBD');
+		expect(getElement().tagName).toBe('A');
 	});
 
 	it('can pass a custom class name', () => {
-		render(<Text className="foo">Copy</Text>, { wrapper: Wrapper });
+		render(<Link className="foobar">Copy</Link>, { wrapper: LinkWrapper });
 
-		expect(getElement().className).toBe(
-			'c1u0bpqh c13kbekr cqmlbj8 c1p4ubeg c1xww3tf c1f1iw5d cn25lgq c1u0bpqh czkiasv cwhyrls c1q1da5a cpfxegw foo',
-		);
+		expect(getElement().className).toEqual(expect.stringContaining('foobar'));
 	});
 
 	it('can change all props', () => {
 		render(
-			<Text
-				monospaced
-				align="center"
-				overflow="break"
-				palette="danger"
-				size="lg"
-				transform="capitalize"
-				weight="bold"
-			>
+			<Link palette="danger" transform="capitalize" weight="bold">
 				Copy
-			</Text>,
-			{ wrapper: Wrapper },
+			</Link>,
+			{ wrapper: LinkWrapper },
 		);
 
 		expect(getElement().className).toBe(
-			'c1u0bpqh c13kbekr cqmlbj8 cngw5jn cnvui58 cc50pji c1gvf4w5 cbrsnfr cfg0erx c1b6fj3h c1hg8m62 cwhyrls c10l4oaf ckfuq95',
+			'typography variant:palette:danger variant:transform:capitalize variant:weight:bold link',
 		);
 	});
 
 	it('can pass native attributes', () => {
 		render(
-			<Text aria-label="Label" id="foo">
+			<Link aria-label="Label" id="foo">
 				Copy
-			</Text>,
-			{ wrapper: Wrapper },
+			</Link>,
+			{ wrapper: LinkWrapper },
 		);
 
 		const el = getElement();
