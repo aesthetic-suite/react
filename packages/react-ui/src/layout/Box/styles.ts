@@ -5,6 +5,9 @@ import { BoxAlignContent, BoxAlignItems, BoxJustifyContent } from './types';
 export const styleSheet = styles(() => ({
 	box: {
 		display: 'flex',
+		margin: 0,
+		padding: 0,
+		listStyle: 'none',
 
 		'@variants': {
 			// Align content

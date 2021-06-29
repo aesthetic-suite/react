@@ -1,6 +1,19 @@
 import { ShadowSize } from '@aesthetic/react';
 import { SpacingProps } from '../../types/spacing';
 
+export type BoxElement =
+	| 'article'
+	| 'aside'
+	| 'div'
+	| 'footer'
+	| 'header'
+	| 'li'
+	| 'nav'
+	| 'ol'
+	| 'section'
+	| 'span'
+	| 'ul';
+
 export type BoxAlignContent =
 	| 'baseline'
 	| 'center'

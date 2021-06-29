@@ -4,14 +4,14 @@ import { createDynamicComponent } from '../../helpers/createComponent';
 import { useShadow } from '../../hooks/styles/useShadow';
 import { useSpacing } from '../../hooks/styles/useSpacing';
 import { styleSheet } from './styles';
-import { BoxProps } from './types';
+import { BoxElement, BoxProps } from './types';
 
 export * from './types';
 
 /**
  * @link https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Content_categories#sectioning_content
  */
-export const Box = createDynamicComponent<BoxProps>(function Box(
+export const Box = createDynamicComponent<BoxProps, BoxElement>(function Box(
 	{
 		alignContent = 'normal',
 		alignItems = 'normal',
