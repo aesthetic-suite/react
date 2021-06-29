@@ -5,6 +5,8 @@ export interface UtilityStyles {
 	style: React.CSSProperties;
 }
 
+// REACT
+
 declare global {
 	namespace React {
 		interface CSSProperties {
@@ -21,8 +23,6 @@ declare global {
 		}
 	}
 }
-
-// REACT
 
 export interface CommonProps {
 	/** Provide a test ID for locating the element within tests. */

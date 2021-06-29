@@ -86,9 +86,7 @@ export const styleSheet = style((css) => {
 	const sizes: InlineSpacingSize[] = ['inline', ...SPACING_SIZES];
 
 	function value(size: InlineSpacingSize, type: string) {
-		return size === 'inline'
-			? `var(--spacing-${type})`
-			: css.var(`spacing-${size}` as 'spacing-df');
+		return size === 'inline' ? `var(--spacing-${type})` : css.var(`spacing-${size}`);
 	}
 
 	return {

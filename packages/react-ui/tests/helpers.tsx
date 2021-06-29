@@ -4,8 +4,26 @@ import { createTestStyleEngine, getRenderedStyles, purgeStyles } from '@aestheti
 
 export { getRenderedStyles, purgeStyles };
 
-export function Wrapper({ children }: { children?: React.ReactNode }) {
-	return <ThemeProvider>{children ?? <div />}</ThemeProvider>;
+export interface WrapperProps {
+	children?: React.ReactNode;
+}
+
+class ErrorBoundary extends React.Component<WrapperProps> {
+	static getDerivedStateFromError() {
+		return {};
+	}
+
+	override componentDidCatch() {}
+
+	override render() {
+		const { children } = this.props;
+
+		return children;
+	}
+}
+
+export function Wrapper({ children }: WrapperProps) {
+	return <ErrorBoundary><ThemeProvider>{children ?? <div />}</ThemeProvider></ErrorBoundary>;
 }
 
 export function withStyles(unit: () => void): jest.ProvidesCallback {
