@@ -1,19 +1,27 @@
 import { renderHook } from '@testing-library/react-hooks';
 import { useSpacing } from '../../../src/hooks/styles/useSpacing';
-import { getRenderedStyles, Wrapper } from '../../helpers';
+import { getRenderedStyles, withStyles, Wrapper } from '../../helpers';
 
 describe('useSpacing()', () => {
-	it('renders default styles', () => {
+	it('renders default', () => {
 		const { result } = renderHook(() => useSpacing({}), { wrapper: Wrapper });
 
-		expect(result.current).toEqual({ className: '', style: {} });
-		expect(getRenderedStyles('standard')).toMatchSnapshot();
+		expect(result.current).toEqual({ className: 'element', style: {} });
 	});
+
+	it(
+		'renders default styles',
+		withStyles(() => {
+			renderHook(() => useSpacing({}), { wrapper: Wrapper });
+
+			expect(getRenderedStyles('standard')).toMatchSnapshot();
+		}),
+	);
 
 	it('can set all sides', () => {
 		const { result } = renderHook(() => useSpacing({ spacing: 'df' }), { wrapper: Wrapper });
 
-		expect(result.current).toEqual({ className: 'c1xb6ewu', style: {} });
+		expect(result.current).toEqual({ className: 'element variant:all:df', style: {} });
 	});
 
 	it('can set horizontal sides', () => {
@@ -21,7 +29,7 @@ describe('useSpacing()', () => {
 			wrapper: Wrapper,
 		});
 
-		expect(result.current).toEqual({ className: 'c11b8tkx c1pyn0u2', style: {} });
+		expect(result.current).toEqual({ className: 'element variant:horizontal:xs', style: {} });
 	});
 
 	it('can set vertical sides', () => {
@@ -29,7 +37,7 @@ describe('useSpacing()', () => {
 			wrapper: Wrapper,
 		});
 
-		expect(result.current).toEqual({ className: 'c1atx52m c11w6nd6', style: {} });
+		expect(result.current).toEqual({ className: 'element variant:vertical:xl', style: {} });
 	});
 
 	it('can set top side', () => {
@@ -37,7 +45,7 @@ describe('useSpacing()', () => {
 			wrapper: Wrapper,
 		});
 
-		expect(result.current).toEqual({ className: 'cwdul6s', style: {} });
+		expect(result.current).toEqual({ className: 'element variant:top:sm', style: {} });
 	});
 
 	it('can set right side', () => {
@@ -45,7 +53,7 @@ describe('useSpacing()', () => {
 			wrapper: Wrapper,
 		});
 
-		expect(result.current).toEqual({ className: 'c1mj2ayb', style: {} });
+		expect(result.current).toEqual({ className: 'element variant:end:df', style: {} });
 	});
 
 	it('can set bottom side', () => {
@@ -53,7 +61,7 @@ describe('useSpacing()', () => {
 			wrapper: Wrapper,
 		});
 
-		expect(result.current).toEqual({ className: 'cs15051', style: {} });
+		expect(result.current).toEqual({ className: 'element variant:bottom:lg', style: {} });
 	});
 
 	it('can set left side', () => {
@@ -61,7 +69,7 @@ describe('useSpacing()', () => {
 			wrapper: Wrapper,
 		});
 
-		expect(result.current).toEqual({ className: 'c11mjqpq', style: {} });
+		expect(result.current).toEqual({ className: 'element variant:start:xl', style: {} });
 	});
 
 	it('can set multiple sides with correct specificity', () => {
@@ -72,7 +80,10 @@ describe('useSpacing()', () => {
 			},
 		);
 
-		expect(result.current).toEqual({ className: 'c1xb6ewu cwdul6s c16ip6ow c1yh1hbl', style: {} });
+		expect(result.current).toEqual({
+			className: 'element variant:all:df variant:vertical:sm variant:top:xs',
+			style: {},
+		});
 	});
 
 	it('can set sides using a number', () => {
@@ -93,7 +104,8 @@ describe('useSpacing()', () => {
 		);
 
 		expect(result.current).toEqual({
-			className: 'c1g5rurh cw2ew7o c1yx0hov cplmy08 c13z83ws c1f31uz5 c1o3yudt c1yeaeq2 cdpbbi6',
+			className:
+				'element variant:all:inline variant:horizontal:inline variant:vertical:inline variant:top:inline variant:bottom:inline variant:start:inline variant:end:inline',
 			style: {
 				'--spacing-all': '1.25rem',
 				'--spacing-bottom': '6.25rem',

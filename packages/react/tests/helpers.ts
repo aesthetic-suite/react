@@ -23,7 +23,12 @@ export function setupAestheticReact() {
 	aesthetic.registerTheme('twilight', twilightTheme);
 	aesthetic.registerTheme('dawn', dawnTheme);
 	aesthetic.configureEngine(createTestStyleEngine());
+
 	setupAesthetic(aesthetic);
+
+	aesthetic.configure({
+		injectStrategy: 'create',
+	});
 }
 
 export function teardownAestheticReact() {

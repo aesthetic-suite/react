@@ -21,7 +21,12 @@ export function setupAestheticReact() {
 	// Order is important here!
 	aesthetic.registerTheme('twilight', twilightTheme);
 	aesthetic.registerTheme('dawn', dawnTheme);
+
 	setupAesthetic(aesthetic);
+
+	aesthetic.configure({
+		injectStrategy: 'create',
+	});
 }
 
 export function teardownAestheticReact() {
