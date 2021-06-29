@@ -1,5 +1,5 @@
 module.exports = {
-	setupFilesAfterEnv: ['jest-rut', '<rootDir>/tests/setup.ts'],
+	setupFilesAfterEnv: ['jest-rut'],
 	testEnvironment: 'jsdom',
 	testPathIgnorePatterns: ['test.js'],
 	timers: 'legacy',
