@@ -3,6 +3,7 @@ import { ShadowSize, useStyles } from '@aesthetic/react';
 import { createDynamicComponent } from '../helpers/createComponent';
 import { useShadow } from '../hooks/styles/useShadow';
 import { useSpacing } from '../hooks/styles/useSpacing';
+import { CommonProps } from '../types';
 import { SpacingProps } from '../types/spacing';
 import { styleSheet } from './styles';
 import {
@@ -16,7 +17,7 @@ import {
 
 export * from './types';
 
-export interface BoxProps extends SpacingProps {
+export interface BoxProps extends SpacingProps, CommonProps {
 	/**
 	 * Content to render within the box. Each child will be treated as a flex item.
 	 */
@@ -90,6 +91,7 @@ export const Box = createDynamicComponent<BoxProps, BoxElement>(function Box(
 		order,
 		shadow,
 		shrink,
+		testID,
 		wrap = false,
 		// Spacing
 		spacing,
@@ -152,7 +154,7 @@ export const Box = createDynamicComponent<BoxProps, BoxElement>(function Box(
 	);
 
 	return (
-		<Tag ref={ref} {...props} className={className} style={style}>
+		<Tag ref={ref} data-testid={testID} {...props} className={className} style={style}>
 			{children}
 		</Tag>
 	);

@@ -16,7 +16,7 @@ export const styleSheet = style((css) => ({
 				css.var(`shadow-${size}-y`),
 				css.var(`shadow-${size}-blur`),
 				css.var(`shadow-${size}-spread`),
-				css.var('palette-neutral-color-90'),
+				'rgba(0, 0, 0, .8)',
 			].join(' '),
 		})),
 	},

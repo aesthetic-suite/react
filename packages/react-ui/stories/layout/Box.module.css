@@ -1,0 +1,9 @@
+.parent {
+	background-color: var(--palette-neutral-color-20);
+	margin-bottom: var(--spacing-df);
+}
+
+.child {
+	background-color: var(--palette-neutral-color-40);
+	margin: var(--spacing-sm);
+}

@@ -2,11 +2,15 @@ import React, { Children, useMemo } from 'react';
 import { useStyles } from '@aesthetic/react';
 import { createDynamicComponent } from '../../helpers/createComponent';
 import { useSpacingUnit } from '../../hooks/useSpacingUnit';
+import { CommonProps } from '../../types';
 import { Space, SpacingProps } from '../../types/spacing';
 import { Box, BoxElement, BoxProps } from '../Box';
 import { styleSheet } from '../styles';
 
-export interface ItemsContainerProps extends Pick<BoxProps, 'alignItems' | 'wrap'>, SpacingProps {
+export interface ItemsContainerProps
+	extends Pick<BoxProps, 'alignItems' | 'wrap'>,
+		SpacingProps,
+		CommonProps {
 	/**
 	 * Content to render within the list. Each child will be wrapped with an intermediate element.
 	 */
@@ -29,7 +33,6 @@ export function createItemsContainer<T extends ItemsContainerProps>(
 	const Component = createDynamicComponent<T, BoxElement>(function ItemsContainer(
 		{
 			as = 'ul',
-			alignItems = 'stretch',
 			children,
 			gap,
 			reversed,
@@ -60,7 +63,6 @@ export function createItemsContainer<T extends ItemsContainerProps>(
 			<Box
 				ref={ref}
 				{...props}
-				alignItems={alignItems}
 				className={className}
 				direction={reversed ? `${direction}-reverse` : direction}
 				style={style}
