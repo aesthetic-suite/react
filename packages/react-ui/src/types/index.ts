@@ -13,6 +13,7 @@ declare global {
 			'--box-grow'?: number;
 			'--box-order'?: number;
 			'--box-shrink'?: number;
+			'--gap'?: string;
 			'--spacing-all'?: string;
 			'--spacing-horizontal'?: string;
 			'--spacing-vertical'?: string;

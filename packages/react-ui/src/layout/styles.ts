@@ -1,5 +1,5 @@
 import { styles } from '@aesthetic/react';
-import { mapVariants } from '../../helpers/mapVariants';
+import { mapVariants } from '../helpers/mapVariants';
 import { BoxAlignContent, BoxAlignItems, BoxJustifyContent } from './types';
 
 export const styleSheet = styles(() => ({
@@ -112,16 +112,32 @@ export const styleSheet = styles(() => ({
 		},
 	},
 
-	inline: {
+	boxInline: {
 		display: 'inline-flex',
 	},
 
-	vars: {
+	boxVars: {
 		// @ts-expect-error csstype not typed for variables
 		flexGrow: 'var(--box-grow)',
 		// @ts-expect-error csstype not typed for variables
 		flexShrink: 'var(--box-shrink)',
 		// @ts-expect-error csstype not typed for variables
 		order: 'var(--box-order)',
+	},
+
+	inlineGap: {
+		'@selectors': {
+			'> *:not(:last-child)': {
+				marginRight: 'var(--gap)',
+			},
+		},
+	},
+
+	stackGap: {
+		'@selectors': {
+			'> *:not(:last-child)': {
+				marginBottom: 'var(--gap)',
+			},
+		},
 	},
 }));
