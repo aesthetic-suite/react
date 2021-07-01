@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { ShadowSize, useStyles } from '@aesthetic/react';
 import { createDynamicComponent } from '../helpers/createComponent';
+import { isDefined } from '../helpers/isDefined';
 import { useShadow } from '../hooks/styles/useShadow';
 import { useSpacing } from '../hooks/styles/useSpacing';
 import { CommonProps } from '../types';
@@ -124,8 +125,8 @@ export const Box = createDynamicComponent<BoxProps, BoxElement>(function Box(
 			cx(
 				{ alignContent, alignItems, alignSelf, direction, justifyContent, wrap: String(wrap) },
 				'box',
-				'boxVars',
 				inline && 'boxInline',
+				isDefined(grow, order, shrink) && 'boxVars',
 				[spacingClassName, shadowClassName, inheritedClassName],
 			),
 		[
@@ -134,8 +135,11 @@ export const Box = createDynamicComponent<BoxProps, BoxElement>(function Box(
 			alignItems,
 			alignSelf,
 			direction,
+			grow,
 			inline,
 			justifyContent,
+			order,
+			shrink,
 			wrap,
 			spacingClassName,
 			shadowClassName,

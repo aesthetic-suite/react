@@ -62,7 +62,7 @@ export function createItemsContainer<T extends ItemsContainerProps>(
 			[gapUnit, inheritedStyle],
 		);
 
-		const Child = as === 'ul' || as === 'li' ? 'li' : 'div';
+		const Child = as === 'ul' || as === 'ol' ? 'li' : 'div';
 
 		return (
 			<Box
