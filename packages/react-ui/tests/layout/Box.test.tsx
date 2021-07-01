@@ -2,7 +2,7 @@ import React from 'react';
 import { hyphenate } from '@aesthetic/utils';
 import { render, screen } from '@testing-library/react';
 import { Box, BoxProps } from '../../src/layout/Box';
-import { getRenderedStyles, withStyles, Wrapper } from '../helpers';
+import { getRenderedStyles, withAccessibility, withStyles, Wrapper } from '../helpers';
 
 function getElement() {
 	return screen.getByTestId('box')!;
@@ -23,6 +23,22 @@ describe('Box', () => {
 			render(<Box testID="box">Child</Box>, { wrapper: Wrapper });
 
 			expect(getRenderedStyles('standard')).toMatchSnapshot();
+		}),
+	);
+
+	it(
+		'passes accessibility',
+		withAccessibility(async (axe) => {
+			const { container } = render(
+				<Box>
+					<Box>Child</Box>
+					<Box>Child</Box>
+					<Box>Child</Box>
+				</Box>,
+				{ wrapper: Wrapper },
+			);
+
+			expect(await axe(container)).toHaveNoViolations();
 		}),
 	);
 

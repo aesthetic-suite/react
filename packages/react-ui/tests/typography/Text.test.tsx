@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { Text } from '../../src/typography/Text';
-import { getRenderedStyles, withStyles, Wrapper } from '../helpers';
+import { getRenderedStyles, withAccessibility, withStyles, Wrapper } from '../helpers';
 
 function getElement() {
 	return screen.getByText('Copy') as HTMLParagraphElement;
@@ -25,6 +25,15 @@ describe('Text', () => {
 			render(<Text>Copy</Text>, { wrapper: Wrapper });
 
 			expect(getRenderedStyles('standard')).toMatchSnapshot();
+		}),
+	);
+
+	it(
+		'passes accessibility',
+		withAccessibility(async (axe) => {
+			const { container } = render(<Text>Copy</Text>, { wrapper: Wrapper });
+
+			expect(await axe(container)).toHaveNoViolations();
 		}),
 	);
 

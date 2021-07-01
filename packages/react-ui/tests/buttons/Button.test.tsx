@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { Button } from '../../src/buttons/Button';
-import { getRenderedStyles, withStyles, Wrapper } from '../helpers';
+import { getRenderedStyles, withAccessibility, withStyles, Wrapper } from '../helpers';
 
 function getElement() {
 	return screen.getByText('Button')!;
@@ -22,6 +22,24 @@ describe('Button', () => {
 			render(<Button>Button</Button>, { wrapper: Wrapper });
 
 			expect(getRenderedStyles('standard')).toMatchSnapshot();
+		}),
+	);
+
+	it(
+		'passes accessibility as a button',
+		withAccessibility(async (axe) => {
+			const { container } = render(<Button>Button</Button>, { wrapper: Wrapper });
+
+			expect(await axe(container)).toHaveNoViolations();
+		}),
+	);
+
+	it(
+		'passes accessibility as a link',
+		withAccessibility(async (axe) => {
+			const { container } = render(<Button to="/">Button</Button>, { wrapper: Wrapper });
+
+			expect(await axe(container)).toHaveNoViolations();
 		}),
 	);
 

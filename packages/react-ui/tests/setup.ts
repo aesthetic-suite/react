@@ -1,6 +1,9 @@
+import { toHaveNoViolations } from 'jest-axe';
 import { configure, internalAestheticRuntime, registerDefaultTheme } from '@aesthetic/react';
 import { createTestEngine } from '@aesthetic/react/test';
 import { lightTheme } from '@aesthetic/system/test';
+
+// AESTHETIC
 
 registerDefaultTheme('default', lightTheme);
 
@@ -10,6 +13,10 @@ configure({
 });
 
 internalAestheticRuntime.configureEngine(createTestEngine());
+
+// JEST
+
+expect.extend(toHaveNoViolations);
 
 Object.defineProperty(window, 'matchMedia', {
 	writable: true,

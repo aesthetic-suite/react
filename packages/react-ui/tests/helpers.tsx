@@ -1,4 +1,5 @@
 import React from 'react';
+import { axe } from 'jest-axe';
 import { internalAestheticRuntime, ThemeProvider } from '@aesthetic/react';
 import { createTestStyleEngine, getRenderedStyles, purgeStyles } from '@aesthetic/style/test';
 
@@ -26,6 +27,12 @@ export function Wrapper({ children }: WrapperProps) {
 			<ThemeProvider>{children!}</ThemeProvider>
 		</ErrorBoundary>
 	);
+}
+
+export function withAccessibility(unit: (axeCore: typeof axe) => Promise<void>): jest.ProvidesCallback {
+	return async () => {
+		await unit(axe);
+	};
 }
 
 export function withEnvironment(env: string, unit: () => void): jest.ProvidesCallback {

@@ -1,7 +1,8 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import { Box } from '../../src/layout/Box';
 import { Inline } from '../../src/layout/Inline';
-import { Wrapper } from '../helpers';
+import { withAccessibility, Wrapper } from '../helpers';
 
 function getElement() {
 	return screen.getByTestId('box')!;
@@ -15,6 +16,22 @@ describe('Inline', () => {
 			'box variant:align-content:normal variant:align-items:center variant:align-self:auto variant:direction:row variant:justify-content:flex-start variant:wrap:false element element',
 		);
 	});
+
+	it(
+		'passes accessibility',
+		withAccessibility(async (axe) => {
+			const { container } = render(
+				<Inline>
+					<Box>Child</Box>
+					<Box>Child</Box>
+					<Box>Child</Box>
+				</Inline>,
+				{ wrapper: Wrapper },
+			);
+
+			expect(await axe(container)).toHaveNoViolations();
+		}),
+	);
 
 	it('can change the element tag', () => {
 		render(

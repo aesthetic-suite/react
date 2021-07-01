@@ -23,6 +23,7 @@
     "node": ">=12.17.0"
   },
   "resolutions": {
+    "axe-core": "^4.2.1",
     "react-docgen-typescript": "^2.0.0"
   },
   "devDependencies": {

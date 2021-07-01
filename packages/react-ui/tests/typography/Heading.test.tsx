@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { Heading } from '../../src/typography/Heading';
-import { getRenderedStyles, withStyles, Wrapper } from '../helpers';
+import { getRenderedStyles, withAccessibility, withStyles, Wrapper } from '../helpers';
 
 function getElement() {
 	return screen.getByText('Title')!;
@@ -22,6 +22,15 @@ describe('Heading', () => {
 			render(<Heading level={1}>Title</Heading>, { wrapper: Wrapper });
 
 			expect(getRenderedStyles('standard')).toMatchSnapshot();
+		}),
+	);
+
+	it(
+		'passes accessibility',
+		withAccessibility(async (axe) => {
+			const { container } = render(<Heading level={1}>Title</Heading>, { wrapper: Wrapper });
+
+			expect(await axe(container)).toHaveNoViolations();
 		}),
 	);
 

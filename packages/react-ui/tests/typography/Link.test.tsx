@@ -2,7 +2,14 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { Link } from '../../src/typography/Link';
 import { Text } from '../../src/typography/Text';
-import { getRenderedStyles, withEnvironment, withStyles, Wrapper, WrapperProps } from '../helpers';
+import {
+	getRenderedStyles,
+	withAccessibility,
+	withEnvironment,
+	withStyles,
+	Wrapper,
+	WrapperProps,
+} from '../helpers';
 
 function getElement() {
 	return screen.getByText('Copy') as HTMLParagraphElement;
@@ -54,6 +61,15 @@ describe('Link', () => {
 			render(<Link>Copy</Link>, { wrapper: LinkWrapper });
 
 			expect(getRenderedStyles('standard')).toMatchSnapshot();
+		}),
+	);
+
+	it(
+		'passes accessibility',
+		withAccessibility(async (axe) => {
+			const { container } = render(<Link>Copy</Link>, { wrapper: LinkWrapper });
+
+			expect(await axe(container)).toHaveNoViolations();
 		}),
 	);
 
