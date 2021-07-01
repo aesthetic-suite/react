@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { Link } from '../../src/typography/Link';
 import { Text } from '../../src/typography/Text';
-import { getRenderedStyles, withStyles, Wrapper, WrapperProps } from '../helpers';
+import { getRenderedStyles, withEnvironment, withStyles, Wrapper, WrapperProps } from '../helpers';
 
 function getElement() {
 	return screen.getByText('Copy') as HTMLParagraphElement;
@@ -26,6 +26,19 @@ describe('Link', () => {
 
 		spy.mockRestore();
 	});
+
+	it(
+		'doesnt error if not wrapped in typography when in production',
+		withEnvironment('production', () => {
+			const spy = jest.spyOn(console, 'error').mockImplementation();
+
+			expect(() => {
+				render(<Link>Copy</Link>, { wrapper: Wrapper });
+			}).not.toThrow();
+
+			spy.mockRestore();
+		}),
+	);
 
 	it('renders the link', () => {
 		render(<Link>Copy</Link>, { wrapper: LinkWrapper });

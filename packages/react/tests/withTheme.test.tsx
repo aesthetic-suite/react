@@ -67,9 +67,7 @@ describe('withTheme()', () => {
 		}
 
 		// eslint-disable-next-line react/prefer-stateless-function
-		class RefComponent extends React.Component<
-			InternalWithThemeWrappedProps<Rule> & RefProps
-		> {
+		class RefComponent extends React.Component<InternalWithThemeWrappedProps<Rule> & RefProps> {
 			override render() {
 				return <div />;
 			}

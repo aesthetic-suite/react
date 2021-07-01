@@ -13,8 +13,6 @@ class ErrorBoundary extends React.Component<WrapperProps> {
 		return {};
 	}
 
-	override componentDidCatch() {}
-
 	override render() {
 		const { children } = this.props;
 
@@ -23,7 +21,23 @@ class ErrorBoundary extends React.Component<WrapperProps> {
 }
 
 export function Wrapper({ children }: WrapperProps) {
-	return <ErrorBoundary><ThemeProvider>{children ?? <div />}</ThemeProvider></ErrorBoundary>;
+	return (
+		<ErrorBoundary>
+			<ThemeProvider>{children!}</ThemeProvider>
+		</ErrorBoundary>
+	);
+}
+
+export function withEnvironment(env: string, unit: () => void): jest.ProvidesCallback {
+	return () => {
+		const oldEnv = process.env.NODE_ENV;
+
+		process.env.NODE_ENV = env;
+
+		unit();
+
+		process.env.NODE_ENV = oldEnv;
+	};
 }
 
 export function withStyles(unit: () => void): jest.ProvidesCallback {

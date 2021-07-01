@@ -33,7 +33,7 @@ export function createStyleHelpers<Input extends object, Output, GeneratedOutput
 
 		// Variant objects may only be passed as the first argument
 		if (isObject(args[0])) {
-			objectLoop((args.shift() as unknown) as ResultComposerVariants, (value, variant) => {
+			objectLoop(args.shift() as unknown as ResultComposerVariants, (value, variant) => {
 				if (value) {
 					const type = `${variant}:${value}`;
 
@@ -99,7 +99,7 @@ export function createStyleHelpers<Input extends object, Output, GeneratedOutput
 			[result],
 		);
 
-		const cx = (composer as unknown) as ResultComposer<keyof T, Output, GeneratedOutput>;
+		const cx = composer as unknown as ResultComposer<keyof T, Output, GeneratedOutput>;
 
 		// Make the result available if need be, but behind a hidden API
 		cx.result = result!;
