@@ -28,7 +28,7 @@ export const Heading = createDynamicComponent<HeadingProps, HeadingElement>(func
 		children,
 		overflow = 'wrap',
 		palette = 'neutral',
-		level = 1,
+		level,
 		testID,
 		transform,
 		weight = 'normal',

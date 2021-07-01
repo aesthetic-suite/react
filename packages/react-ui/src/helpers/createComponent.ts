@@ -11,7 +11,7 @@ export function createComponent<Props extends object, Element extends HTMLElemen
 
 export type DynamicProps<
 	As extends React.ElementType,
-	Props extends object
+	Props extends object,
 > = OmitUnwantedHtmlProps<React.ComponentPropsWithRef<As>> &
 	Props & {
 		/**
@@ -40,7 +40,7 @@ export type InferAsProps<T> = T extends HtmlElementType
 
 export function createDynamicComponent<
 	Props extends object,
-	As extends React.ElementType = HtmlElementType
+	As extends React.ElementType = HtmlElementType,
 >(component: React.ForwardRefRenderFunction<any, InferAsProps<As> & Props & { as?: As }>) {
-	return (createComponent(component) as unknown) as DynamicComponent<Props, As>;
+	return createComponent(component) as unknown as DynamicComponent<Props, As>;
 }

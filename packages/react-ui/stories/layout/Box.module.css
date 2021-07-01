@@ -1,0 +1,13 @@
+.parent {
+	background-color: var(--palette-neutral-color-20);
+	margin-bottom: var(--spacing-lg);
+}
+
+.child {
+	background-color: var(--palette-neutral-color-40);
+	margin: var(--spacing-sm);
+}
+
+.item {
+	background-color: var(--palette-neutral-color-20);
+}

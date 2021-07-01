@@ -3,27 +3,7 @@ import { SPACING_SIZES, SpacingSize, style, useStyles, useTheme } from '@aesthet
 import { mapObject } from '../../helpers/mapObject';
 import { mapVariants } from '../../helpers/mapVariants';
 import { UtilityStyles } from '../../types';
-
-type InlineSpacingSize = SpacingSize | 'inline';
-
-export type Space = SpacingSize | number;
-
-export interface SpacingProps {
-	/** Apply padding to all edges. */
-	spacing?: Space;
-	/** Apply padding to the bottom edge. */
-	spacingBottom?: Space;
-	/** Apply padding to the end/trailing edge. */
-	spacingEnd?: Space;
-	/** Apply padding to the side edges. */
-	spacingHorizontal?: Space;
-	/** Apply padding to the start/leading edge. */
-	spacingStart?: Space;
-	/** Apply padding to the top edge. */
-	spacingTop?: Space;
-	/** Apply padding to the top and bottom edges. */
-	spacingVertical?: Space;
-}
+import { SpacingProps } from '../../types/spacing';
 
 export function useSpacing({
 	spacing,
@@ -83,6 +63,8 @@ export function useSpacing({
 }
 
 export const styleSheet = style((css) => {
+	type InlineSpacingSize = SpacingSize | 'inline';
+
 	const sizes: InlineSpacingSize[] = ['inline', ...SPACING_SIZES];
 
 	function value(size: InlineSpacingSize, type: string) {
