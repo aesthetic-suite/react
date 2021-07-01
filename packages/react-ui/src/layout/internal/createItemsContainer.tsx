@@ -8,7 +8,7 @@ import { Box, BoxElement, BoxProps } from '../Box';
 import { styleSheet } from '../styles';
 
 export interface ItemsContainerProps
-	extends Pick<BoxProps, 'alignItems' | 'wrap'>,
+	extends Pick<BoxProps, 'alignContent' | 'alignItems' | 'justifyContent' | 'wrap'>,
 		SpacingProps,
 		CommonProps {
 	/**
@@ -19,6 +19,10 @@ export interface ItemsContainerProps
 	 * Apply a gap between each item in the list, based on a defined spacing unit.
 	 */
 	gap?: Space;
+	/**
+	 * Class name to append to each item element wrapper.
+	 */
+	itemClassName?: string;
 	/**
 	 * Reverse the direction of each item in the list.
 	 * @default false
@@ -35,6 +39,7 @@ export function createItemsContainer<T extends ItemsContainerProps>(
 			as = 'ul',
 			children,
 			gap,
+			itemClassName,
 			reversed,
 			// Inherited
 			className: inheritedClassName,
@@ -62,13 +67,15 @@ export function createItemsContainer<T extends ItemsContainerProps>(
 		return (
 			<Box
 				ref={ref}
+				alignItems={direction === 'column' ? 'stretch' : 'center'}
 				{...props}
+				as={as}
 				className={className}
 				direction={reversed ? `${direction}-reverse` : direction}
 				style={style}
 			>
 				{Children.map(children, (child) => (
-					<Child>{child}</Child>
+					<Child className={itemClassName}>{child}</Child>
 				))}
 			</Box>
 		);
