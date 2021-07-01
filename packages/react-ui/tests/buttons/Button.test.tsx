@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { Button } from '../../src/buttons/Button';
+import { Button, ButtonProps } from '../../src/buttons/Button';
 import { getRenderedStyles, withAccessibility, withStyles, Wrapper } from '../helpers';
 
 function getElement() {
@@ -8,7 +8,7 @@ function getElement() {
 }
 
 describe('Button', () => {
-	it('renders the button with default styles', () => {
+	it('renders the button', () => {
 		render(<Button>Button</Button>, { wrapper: Wrapper });
 
 		expect(getElement().className).toBe(
@@ -55,23 +55,16 @@ describe('Button', () => {
 		expect(getElement().tagName).toBe('A');
 	});
 
+	it('can pass a test ID', () => {
+		render(<Button testID="test">Button</Button>, { wrapper: Wrapper });
+
+		expect(getElement().getAttribute('data-testid')).toBe('test');
+	});
+
 	it('can pass a custom class name', () => {
 		render(<Button className="foobar">Button</Button>, { wrapper: Wrapper });
 
 		expect(getElement().className).toEqual(expect.stringContaining('foobar'));
-	});
-
-	it('can change all props', () => {
-		render(
-			<Button border="sm" fill="empty" palette="danger" shape="pill" size="lg">
-				Button
-			</Button>,
-			{ wrapper: Wrapper },
-		);
-
-		expect(getElement().className).toBe(
-			'element variant:border:sm variant:shape:pill variant:size:lg variant:palette:danger variant:fill:empty',
-		);
 	});
 
 	it('can pass native attributes', () => {
@@ -87,5 +80,23 @@ describe('Button', () => {
 		expect(el.id).toBe('foo');
 		expect(el.getAttribute('aria-label')).toBe('Label');
 		expect(el.getAttribute('type')).toBe('submit');
+	});
+
+	describe('props', () => {
+		const props: Partial<ButtonProps> = {
+			border: 'sm',
+			fill: 'empty',
+			palette: 'danger',
+			shape: 'pill',
+			size: 'lg',
+		};
+
+		Object.entries(props).forEach(([prop, value]) => {
+			it(`sets "${prop}" class name`, () => {
+				render(<Button {...{ [prop]: value }}>Button</Button>, { wrapper: Wrapper });
+
+				expect(getElement().className).toEqual(expect.stringContaining(`variant:${prop}:${value}`));
+			});
+		});
 	});
 });

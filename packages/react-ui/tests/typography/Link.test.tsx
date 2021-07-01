@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { Link } from '../../src/typography/Link';
+import { Link, LinkProps } from '../../src/typography/Link';
 import { Text } from '../../src/typography/Text';
 import {
 	getRenderedStyles,
@@ -85,23 +85,16 @@ describe('Link', () => {
 		expect(getElement().tagName).toBe('A');
 	});
 
+	it('can pass a test ID', () => {
+		render(<Link testID="test">Copy</Link>, { wrapper: LinkWrapper });
+
+		expect(getElement().getAttribute('data-testid')).toBe('test');
+	});
+
 	it('can pass a custom class name', () => {
 		render(<Link className="foobar">Copy</Link>, { wrapper: LinkWrapper });
 
 		expect(getElement().className).toEqual(expect.stringContaining('foobar'));
-	});
-
-	it('can change all props', () => {
-		render(
-			<Link palette="danger" transform="capitalize" weight="bold">
-				Copy
-			</Link>,
-			{ wrapper: LinkWrapper },
-		);
-
-		expect(getElement().className).toBe(
-			'typography variant:palette:danger variant:transform:capitalize variant:weight:bold link',
-		);
 	});
 
 	it('can pass native attributes', () => {
@@ -116,5 +109,21 @@ describe('Link', () => {
 
 		expect(el.id).toBe('foo');
 		expect(el.getAttribute('aria-label')).toBe('Label');
+	});
+
+	describe('props', () => {
+		const props: Partial<LinkProps> = {
+			palette: 'danger',
+			transform: 'capitalize',
+			weight: 'bold',
+		};
+
+		Object.entries(props).forEach(([prop, value]) => {
+			it(`sets "${prop}" class name`, () => {
+				render(<Link {...{ [prop]: value }}>Copy</Link>, { wrapper: LinkWrapper });
+
+				expect(getElement().className).toEqual(expect.stringContaining(`variant:${prop}:${value}`));
+			});
+		});
 	});
 });

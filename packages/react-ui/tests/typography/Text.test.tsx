@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { Text } from '../../src/typography/Text';
+import { Text, TextProps } from '../../src/typography/Text';
 import { getRenderedStyles, withAccessibility, withStyles, Wrapper } from '../helpers';
 
 function getElement() {
@@ -55,31 +55,16 @@ describe('Text', () => {
 		expect(getElement().tagName).toBe('KBD');
 	});
 
+	it('can pass a test ID', () => {
+		render(<Text testID="test">Copy</Text>, { wrapper: Wrapper });
+
+		expect(getElement().getAttribute('data-testid')).toBe('test');
+	});
+
 	it('can pass a custom class name', () => {
 		render(<Text className="foobar">Copy</Text>, { wrapper: Wrapper });
 
 		expect(getElement().className).toEqual(expect.stringContaining('foobar'));
-	});
-
-	it('can change all props', () => {
-		render(
-			<Text
-				monospaced
-				align="center"
-				overflow="break"
-				palette="danger"
-				size="lg"
-				transform="capitalize"
-				weight="bold"
-			>
-				Copy
-			</Text>,
-			{ wrapper: Wrapper },
-		);
-
-		expect(getElement().className).toBe(
-			'typography variant:align:center variant:overflow:break variant:palette:danger variant:transform:capitalize variant:weight:bold monospace element variant:size:lg',
-		);
 	});
 
 	it('can pass native attributes', () => {
@@ -94,5 +79,32 @@ describe('Text', () => {
 
 		expect(el.id).toBe('foo');
 		expect(el.getAttribute('aria-label')).toBe('Label');
+	});
+
+	describe('props', () => {
+		const props: Partial<TextProps> = {
+			align: 'center',
+			overflow: 'break',
+			palette: 'danger',
+			size: 'lg',
+			transform: 'capitalize',
+			weight: 'bold',
+		};
+
+		Object.entries(props).forEach(([prop, value]) => {
+			it(`sets "${prop}" class name`, () => {
+				render(<Text {...{ [prop]: value }}>Copy</Text>, { wrapper: Wrapper });
+
+				expect(getElement().className).toEqual(
+					expect.stringContaining(`variant:${prop}:${value as string}`),
+				);
+			});
+		});
+
+		it('sets "monospaced" class name', () => {
+			render(<Text monospaced>Copy</Text>, { wrapper: Wrapper });
+
+			expect(getElement().className).toEqual(expect.stringContaining('monospace'));
+		});
 	});
 });

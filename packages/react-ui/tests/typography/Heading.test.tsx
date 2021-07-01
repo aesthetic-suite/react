@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { Heading } from '../../src/typography/Heading';
+import { Heading, HeadingProps } from '../../src/typography/Heading';
 import { getRenderedStyles, withAccessibility, withStyles, Wrapper } from '../helpers';
 
 function getElement() {
@@ -53,6 +53,17 @@ describe('Heading', () => {
 		expect(getElement().tagName).toBe('H4');
 	});
 
+	it('can pass a test ID', () => {
+		render(
+			<Heading level={1} testID="test">
+				Title
+			</Heading>,
+			{ wrapper: Wrapper },
+		);
+
+		expect(getElement().getAttribute('data-testid')).toBe('test');
+	});
+
 	it('can pass a custom class name', () => {
 		render(
 			<Heading className="foobar" level={1}>
@@ -62,26 +73,6 @@ describe('Heading', () => {
 		);
 
 		expect(getElement().className).toEqual(expect.stringContaining('foobar'));
-	});
-
-	it('can change all props', () => {
-		render(
-			<Heading
-				align="center"
-				level={3}
-				overflow="break"
-				palette="danger"
-				transform="capitalize"
-				weight="bold"
-			>
-				Title
-			</Heading>,
-			{ wrapper: Wrapper },
-		);
-
-		expect(getElement().className).toBe(
-			'typography variant:align:center variant:overflow:break variant:palette:danger variant:transform:capitalize variant:weight:bold element variant:level:3',
-		);
 	});
 
 	it('can pass native attributes', () => {
@@ -96,5 +87,31 @@ describe('Heading', () => {
 
 		expect(el.id).toBe('foo');
 		expect(el.getAttribute('aria-label')).toBe('Label');
+	});
+
+	describe('props', () => {
+		const props: Partial<HeadingProps> = {
+			align: 'center',
+			level: 3,
+			overflow: 'break',
+			palette: 'danger',
+			transform: 'capitalize',
+			weight: 'bold',
+		};
+
+		Object.entries(props).forEach(([prop, value]) => {
+			it(`sets "${prop}" class name`, () => {
+				render(
+					<Heading level={1} {...{ [prop]: value }}>
+						Title
+					</Heading>,
+					{ wrapper: Wrapper },
+				);
+
+				expect(getElement().className).toEqual(
+					expect.stringContaining(`variant:${prop}:${value as string}`),
+				);
+			});
+		});
 	});
 });
