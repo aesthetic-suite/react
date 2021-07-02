@@ -1,6 +1,14 @@
 import { BreakpointSize } from '@aesthetic/react';
 import { useBreakpointsMatches } from './useBreakpointsMatches';
 
+export const BREAKPOINT_INDEXES: Record<BreakpointSize, number> = {
+	xs: 0,
+	sm: 1,
+	md: 2,
+	lg: 3,
+	xl: 4,
+};
+
 export function useResponsiveProp<T>(
 	prop: Partial<Record<BreakpointSize | 'default', T>>,
 	bound: boolean = false,

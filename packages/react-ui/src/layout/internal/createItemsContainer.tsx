@@ -1,6 +1,7 @@
 import React, { Children, useMemo } from 'react';
-import { useStyles } from '@aesthetic/react';
+import { BreakpointSize, useStyles } from '@aesthetic/react';
 import { createDynamicComponent } from '../../helpers/createComponent';
+import { BREAKPOINT_INDEXES, useResponsiveProp } from '../../hooks/responsive/useResponsiveProp';
 import { useSpacingUnit } from '../../hooks/useSpacingUnit';
 import { CommonProps } from '../../types';
 import { Space, SpacingProps } from '../../types/spacing';
@@ -20,6 +21,12 @@ export interface ItemsContainerProps
 	 */
 	gap?: Space;
 	/**
+	 * Display items inline horizontally when viewport is larger than the defined breakpoint.
+	 * By default, items will be stacked vertically on smaller viewports.
+	 * @default xs
+	 */
+	inlineAbove?: BreakpointSize;
+	/**
 	 * Class name to append to each item element wrapper.
 	 */
 	itemClassName?: string;
@@ -30,15 +37,19 @@ export interface ItemsContainerProps
 	reversed?: boolean;
 }
 
-export function createItemsContainer<T extends ItemsContainerProps>(
-	component: 'Inline' | 'Stack',
-	direction: 'column' | 'row',
-) {
+type ItemsDirection = 'column' | 'row';
+
+function getDirectionFromBreakpoint(threshold: number, breakpoint: BreakpointSize): ItemsDirection {
+	return BREAKPOINT_INDEXES[breakpoint] > threshold ? 'row' : 'column';
+}
+
+export function createItemsContainer<T extends ItemsContainerProps>(component: 'Inline' | 'Stack') {
 	const Component = createDynamicComponent<T, BoxElement>(function ItemsContainer(
 		{
 			as = 'ul',
 			children,
 			gap,
+			inlineAbove = 'xs',
 			itemClassName,
 			reversed,
 			// Inherited
@@ -62,6 +73,22 @@ export function createItemsContainer<T extends ItemsContainerProps>(
 			[gapUnit, inheritedStyle],
 		);
 
+		// Responsive
+		const inlineAboveIndex = BREAKPOINT_INDEXES[inlineAbove];
+		const direction = useResponsiveProp<ItemsDirection>(
+			component === 'Stack'
+				? { default: 'column' }
+				: {
+						default: 'column',
+						xs: getDirectionFromBreakpoint(inlineAboveIndex, 'xs'),
+						sm: getDirectionFromBreakpoint(inlineAboveIndex, 'sm'),
+						md: getDirectionFromBreakpoint(inlineAboveIndex, 'md'),
+						lg: getDirectionFromBreakpoint(inlineAboveIndex, 'lg'),
+						xl: getDirectionFromBreakpoint(inlineAboveIndex, 'xl'),
+				  },
+		)!;
+
+		// Items
 		const Child = as === 'ul' || as === 'ol' ? 'li' : 'div';
 
 		return (
