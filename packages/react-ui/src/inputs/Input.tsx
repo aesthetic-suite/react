@@ -18,7 +18,6 @@ export interface InputProps
 	border?: BorderSize;
 	/**
 	 * Customize the text, background, and border colors.
-	 * @default neutral
 	 */
 	palette?: Extract<PaletteType, 'negative' | 'positive' | 'primary' | 'warning'>;
 	/**
@@ -37,7 +36,7 @@ export const Input = createComponent<InputProps, HTMLInputElement>(function Inpu
 	{
 		border = 'df',
 		children,
-		palette = 'neutral',
+		palette,
 		shape = 'round',
 		size = 'df',
 		// Inherited

@@ -69,6 +69,7 @@ export const styleSheet = style((css) => {
 		fontWeight: 'bold',
 		fontFamily: css.var('typography-font-text'),
 		cursor: 'pointer',
+		borderColor: 'transparent',
 		borderStyle: 'solid',
 		borderWidth: 0,
 		margin: 0,

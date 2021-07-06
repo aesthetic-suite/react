@@ -127,6 +127,10 @@ export const styleSheet = styles(() => ({
 
 	inlineGap: {
 		'@selectors': {
+			'> *': {
+				flexGrow: 1,
+			},
+
 			'> *:not(:last-child)': {
 				marginRight: 'var(--gap)',
 			},
@@ -135,6 +139,10 @@ export const styleSheet = styles(() => ({
 
 	stackGap: {
 		'@selectors': {
+			'> *': {
+				flexGrow: 1,
+			},
+
 			'> *:not(:last-child)': {
 				marginBottom: 'var(--gap)',
 			},

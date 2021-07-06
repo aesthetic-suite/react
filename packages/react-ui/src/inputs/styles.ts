@@ -4,9 +4,14 @@ import { mapVariants } from '../helpers/mapVariants';
 export const styleSheet = style((css) => ({
 	width: '100%',
 	display: 'block',
-	backgroundColor: css.var('palette-neutral-bg-base'),
 	color: css.var('palette-neutral-text'),
+	backgroundColor: css.var('palette-neutral-color-00'),
+	borderColor: css.var(`palette-neutral-bg-base`),
 	borderStyle: 'solid',
+	appearance: 'none',
+	outline: 'none',
+	margin: 0,
+	padding: 0,
 
 	':disabled': {
 		cursor: 'default',
@@ -25,7 +30,11 @@ export const styleSheet = style((css) => ({
 
 				':focus': { borderColor: css.var(`palette-${palette}-bg-focused`) },
 				':hover': { borderColor: css.var(`palette-${palette}-bg-hovered`) },
-				':disabled': { borderColor: css.var(`palette-${palette}-bg-disabled`) },
+
+				':disabled': {
+					borderColor: css.var(`palette-${palette}-bg-disabled`),
+					color: css.var(`palette-${palette}-fg-disabled`),
+				},
 			}),
 		),
 	},

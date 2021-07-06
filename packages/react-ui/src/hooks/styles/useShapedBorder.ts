@@ -9,7 +9,6 @@ export function useShapedBorder(size?: BorderSize, shape?: Shape): ClassName {
 }
 
 export const styleSheet = style((css) => ({
-	borderColor: 'transparent',
 	borderStyle: 'solid',
 
 	'@variants': {
