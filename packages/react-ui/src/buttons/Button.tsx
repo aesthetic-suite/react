@@ -2,10 +2,13 @@ import React, { useMemo } from 'react';
 import { ButtonOptions } from 'reakit';
 import { BorderSize, CommonSize, PaletteType, useStyles } from '@aesthetic/react';
 import { createComponent } from '../helpers/createComponent';
+import { useInteractableSize } from '../hooks/styles/useInteractableSize';
+import { useShapedBorder } from '../hooks/styles/useShapedBorder';
 import { HtmlAnchorProps, HtmlButtonProps, Pressable } from '../internal/Pressable';
 import { CommonProps } from '../types';
+import { Shape } from '../types/shape';
 import { styleSheet } from './styles';
-import { ButtonFill, ButtonShape } from './types';
+import { ButtonFill } from './types';
 
 export * from './types';
 
@@ -33,7 +36,7 @@ export interface ButtonCommonProps extends ButtonOptions, CommonProps {
 	 * Customize the shape of the button (primarily border corner radius).
 	 * @default round
 	 */
-	shape?: ButtonShape;
+	shape?: Shape;
 	/**
 	 * Increase or decrease the font size and spacing.
 	 * @default df
@@ -70,9 +73,16 @@ export const Button = createComponent<ButtonProps>(function Button(
 	ref,
 ) {
 	const cx = useStyles(styleSheet);
+	const borderClassName = useShapedBorder(border, shape);
+	const sizeClassName = useInteractableSize(size);
 	const className = useMemo(
-		() => cx({ border, fill, palette, shape, size }, 'element', [inheritedClassName]),
-		[cx, border, fill, palette, shape, size, inheritedClassName],
+		() =>
+			cx({ border, fill, palette, shape }, 'element', [
+				borderClassName,
+				sizeClassName,
+				inheritedClassName,
+			]),
+		[cx, border, fill, palette, shape, borderClassName, sizeClassName, inheritedClassName],
 	);
 
 	return (

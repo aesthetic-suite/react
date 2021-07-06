@@ -2,7 +2,10 @@ import React, { useMemo } from 'react';
 import { Input as ReakitInput, InputOptions } from 'reakit';
 import { BorderSize, CommonSize, PaletteType, useStyles } from '@aesthetic/react';
 import { createComponent } from '../helpers/createComponent';
+import { useInteractableSize } from '../hooks/styles/useInteractableSize';
+import { useShapedBorder } from '../hooks/styles/useShapedBorder';
 import { OmitUnwantedHtmlProps } from '../types';
+import { Shape } from '../types/shape';
 import { styleSheet } from './styles';
 
 export interface InputProps
@@ -17,7 +20,12 @@ export interface InputProps
 	 * Customize the text, background, and border colors.
 	 * @default neutral
 	 */
-	palette?: Extract<PaletteType, 'negative' | 'neutral' | 'positive' | 'primary' | 'warning'>;
+	palette?: Extract<PaletteType, 'negative' | 'positive' | 'primary' | 'warning'>;
+	/**
+	 * Customize the shape of the input (primarily border corner radius).
+	 * @default round
+	 */
+	shape?: Shape;
 	/**
 	 * Increase or decrease the font size and spacing.
 	 * @default df
@@ -30,6 +38,7 @@ export const Input = createComponent<InputProps, HTMLInputElement>(function Inpu
 		border = 'df',
 		children,
 		palette = 'neutral',
+		shape = 'round',
 		size = 'df',
 		// Inherited
 		className: inheritedClassName,
@@ -38,13 +47,12 @@ export const Input = createComponent<InputProps, HTMLInputElement>(function Inpu
 	ref,
 ) {
 	const cx = useStyles(styleSheet);
-	const className = useMemo(() => cx({ border, palette, size }, 'element', [inheritedClassName]), [
-		cx,
-		border,
-		palette,
-		size,
-		inheritedClassName,
-	]);
+	const borderClassName = useShapedBorder(border, shape);
+	const sizeClassName = useInteractableSize(size);
+	const className = useMemo(
+		() => cx({ border, palette }, 'element', [borderClassName, sizeClassName, inheritedClassName]),
+		[cx, border, palette, borderClassName, sizeClassName, inheritedClassName],
+	);
 
 	return (
 		<ReakitInput ref={ref} type="text" {...props} className={className}>
