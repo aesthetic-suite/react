@@ -32,7 +32,10 @@ export interface CommonProps {
 
 // HTML
 
-export type OmitUnwantedHtmlProps<T> = Omit<T, 'as' | 'children' | 'is' | 'radioGroup'>;
+export type OmitUnwantedHtmlProps<T, K extends string = ''> = Omit<
+	T,
+	K | 'as' | 'children' | 'is' | 'radioGroup'
+>;
 
 export type CommonHtmlProps = OmitUnwantedHtmlProps<React.HTMLAttributes<HTMLElement>>;
 
