@@ -3,13 +3,15 @@
 import React from 'react';
 import { render } from 'rut-dom';
 import { getRenderedStyles } from '@aesthetic/style/test';
-import { useStyles } from '../src';
+import { ClassName, ComponentSheet, Rule, useStyles } from '../src';
 import { ButtonProps, createStyleSheet, Wrapper } from './__fixtures__/Button';
 import { dawnTheme, setupAestheticReact, teardownAestheticReact, twilightTheme } from './helpers';
 
 describe('useStyles()', () => {
+	let sheet: ComponentSheet<'button_block' | 'button_disabled' | 'button', Rule, ClassName>;
+
 	function Button({ children, compound, block, disabled, large, small }: ButtonProps) {
-		const cx = useStyles(createStyleSheet());
+		const cx = useStyles(sheet);
 
 		return (
 			<button
@@ -30,8 +32,8 @@ describe('useStyles()', () => {
 		);
 	}
 
-	function CustomSheetButton({ children, sheet }: ButtonProps) {
-		const cx = useStyles(sheet!);
+	function CustomSheetButton({ children, sheet: customSheet }: ButtonProps) {
+		const cx = useStyles(customSheet!);
 
 		return (
 			<button className={cx()} type="button">
@@ -41,7 +43,7 @@ describe('useStyles()', () => {
 	}
 
 	function StylelessButton({ children, disabled }: ButtonProps) {
-		const cx = useStyles(createStyleSheet());
+		const cx = useStyles(sheet);
 
 		return (
 			<button className={cx(disabled && 'button_disabled')} type="button">
@@ -52,6 +54,7 @@ describe('useStyles()', () => {
 
 	beforeEach(() => {
 		setupAestheticReact();
+		sheet = createStyleSheet();
 	});
 
 	afterEach(() => {
@@ -137,7 +140,6 @@ describe('useStyles()', () => {
 	});
 
 	it('only renders once unless theme or direction change', () => {
-		const sheet = createStyleSheet();
 		const spy = jest.spyOn(sheet, 'render');
 
 		const { update } = render<ButtonProps>(
@@ -155,7 +157,6 @@ describe('useStyles()', () => {
 	});
 
 	it('re-renders if direction changes', () => {
-		const sheet = createStyleSheet();
 		const spy = jest.spyOn(sheet, 'render');
 
 		const { rerender } = render<ButtonProps>(
@@ -192,7 +193,6 @@ describe('useStyles()', () => {
 	});
 
 	it('re-renders if theme changes', () => {
-		const sheet = createStyleSheet();
 		const spy = jest.spyOn(sheet, 'render');
 
 		const { rerender } = render<ButtonProps>(
@@ -229,7 +229,6 @@ describe('useStyles()', () => {
 	});
 
 	it('re-renders when direction and theme change', () => {
-		const sheet = createStyleSheet();
 		const spy = jest.spyOn(sheet, 'render');
 
 		const { rerender } = render<ButtonProps>(

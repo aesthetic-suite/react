@@ -13,7 +13,7 @@ describe('Inline', () => {
 		render(<Inline testID="box">Child</Inline>, { wrapper: Wrapper });
 
 		expect(getElement().className).toBe(
-			'box variant:align-content:normal variant:align-items:center variant:align-self:auto variant:direction:row variant:justify-content:flex-start variant:wrap:false element element',
+			'box variant:alignContent:normal variant:alignItems:center variant:alignSelf:auto variant:direction:row variant:justifyContent:flex-start variant:wrap:false element element',
 		);
 	});
 

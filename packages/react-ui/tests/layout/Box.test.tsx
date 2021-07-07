@@ -1,5 +1,4 @@
 import React from 'react';
-import { hyphenate } from '@aesthetic/utils';
 import { render, screen } from '@testing-library/react';
 import { Box, BoxProps } from '../../src/layout/Box';
 import { getRenderedStyles, withAccessibility, withStyles, Wrapper } from '../helpers';
@@ -13,7 +12,7 @@ describe('Box', () => {
 		render(<Box testID="box">Child</Box>, { wrapper: Wrapper });
 
 		expect(getElement().className).toBe(
-			'box variant:align-content:normal variant:align-items:normal variant:align-self:auto variant:direction:row variant:justify-content:flex-start variant:wrap:false element element',
+			'box variant:alignContent:normal variant:alignItems:normal variant:alignSelf:auto variant:direction:row variant:justifyContent:flex-start variant:wrap:false element element',
 		);
 	});
 
@@ -114,9 +113,7 @@ describe('Box', () => {
 					{ wrapper: Wrapper },
 				);
 
-				expect(getElement().className).toEqual(
-					expect.stringContaining(`variant:${hyphenate(prop)}:${value}`),
-				);
+				expect(getElement().className).toEqual(expect.stringContaining(`variant:${prop}:${value}`));
 			});
 		});
 

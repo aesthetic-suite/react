@@ -132,7 +132,7 @@ exports[`createStyled() creates and renders a button with defined styles 1`] = `
 
 exports[`createStyled() creates and renders a button with defined styles 2`] = `".a {display: inline-flex;}.b {text-align: center;}.c {padding: 1rem;}"`;
 
-exports[`createStyled() only renders styles twice (create and mount), even when component rerenders 1`] = `
+exports[`createStyled() only renders styles once, even when component rerenders 1`] = `
 "<Wrapper theme=\\"dawn\\">
   <DirectionProvider direction=\\"ltr\\">
     <div dir=\\"ltr\\">
@@ -148,7 +148,7 @@ exports[`createStyled() only renders styles twice (create and mount), even when 
 </Wrapper>"
 `;
 
-exports[`createStyled() only renders styles twice (create and mount), even when component rerenders 2`] = `".a {text-decoration: none;}"`;
+exports[`createStyled() only renders styles once, even when component rerenders 2`] = `".a {text-decoration: none;}"`;
 
 exports[`createStyled() variants doesnt pass the variant prop to the HTML element 1`] = `
 "<Wrapper>
@@ -170,8 +170,8 @@ exports[`createStyled() variants inherits and merges variant props and types whe
     <div dir=\\"ltr\\">
       <ThemeProvider name=\\"twilight\\">
         <ForwardRef palette=\\"positive\\" size=\\"lg\\">
-          <ForwardRef className=\\"f\\" palette=\\"positive\\">
-            <div className=\\"a b f\\" />
+          <ForwardRef className=\\"b\\" palette=\\"positive\\">
+            <div className=\\"c d b\\" />
           </ForwardRef>
         </ForwardRef>
       </ThemeProvider>

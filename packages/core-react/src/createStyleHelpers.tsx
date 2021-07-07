@@ -15,11 +15,11 @@ import { createHOC } from './createHOC';
 import { InternalWithStylesWrappedProps, WrapperComponent, WrapperProps } from './types';
 
 function useDeferredEffect(effect: React.EffectCallback, deps: React.DependencyList) {
-	const initialMount = useRef(true);
+	const mounting = useRef(true);
 
 	useEffect(() => {
-		if (initialMount.current) {
-			initialMount.current = false;
+		if (mounting.current) {
+			mounting.current = false;
 		} else {
 			effect();
 		}
