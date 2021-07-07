@@ -79,6 +79,17 @@ export function createStyleSheet() {
 	}));
 }
 
+export function createAdditionalStyleSheet() {
+	return aesthetic.createStyleSheet(() => ({
+		button: {
+			position: 'absolute',
+		},
+		icon: {
+			flex: 1,
+		},
+	}));
+}
+
 export interface ButtonProps {
 	children: NonNullable<React.ReactNode>;
 	block?: boolean;
@@ -86,7 +97,7 @@ export interface ButtonProps {
 	href?: string;
 	large?: boolean;
 	small?: boolean;
-	sheet?: ComponentSheet<string, NativeRule, NativeStyles>;
+	icon?: boolean;
 	// Compound variant tests
 	compound?: string;
 }

@@ -1,10 +1,15 @@
 /* eslint-disable react/jsx-no-literals */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { View } from 'react-native';
 import { render } from '@testing-library/react-native';
 import { ComponentSheet, NativeRule, NativeStyles, useStyles } from '../src';
-import { ButtonProps, createStyleSheet, Wrapper } from './__fixtures__/Button';
+import {
+	ButtonProps,
+	createAdditionalStyleSheet,
+	createStyleSheet,
+	Wrapper,
+} from './__fixtures__/Button';
 import { dawnTheme, setupAestheticReact, teardownAestheticReact, twilightTheme } from './helpers';
 
 describe('useStyles()', () => {
@@ -36,11 +41,22 @@ describe('useStyles()', () => {
 		);
 	}
 
-	function CustomSheetButton({ children, sheet: customSheet }: ButtonProps) {
-		const cx = useStyles(customSheet!);
+	function CustomSheetButton({ children }: ButtonProps) {
+		const cx = useStyles(sheet!);
 
 		return (
 			<View style={cx()} testID="button">
+				{children}
+			</View>
+		);
+	}
+
+	function MultiSheetButton({ children, icon }: ButtonProps) {
+		const [otherSheet] = useState(createAdditionalStyleSheet());
+		const cx = useStyles(sheet, otherSheet);
+
+		return (
+			<View style={cx('button', icon && 'icon')} testID="button">
 				{children}
 			</View>
 		);
@@ -207,13 +223,13 @@ describe('useStyles()', () => {
 	it('only renders once unless theme or direction change', () => {
 		const spy = jest.spyOn(sheet, 'render');
 
-		const { update } = render(<CustomSheetButton sheet={sheet}>Child</CustomSheetButton>, {
+		const { update } = render(<CustomSheetButton>Child</CustomSheetButton>, {
 			wrapper: Wrapper,
 		});
 
-		update(<CustomSheetButton sheet={sheet}>Child</CustomSheetButton>);
-		update(<CustomSheetButton sheet={sheet}>Child</CustomSheetButton>);
-		update(<CustomSheetButton sheet={sheet}>Child</CustomSheetButton>);
+		update(<CustomSheetButton>Child</CustomSheetButton>);
+		update(<CustomSheetButton>Child</CustomSheetButton>);
+		update(<CustomSheetButton>Child</CustomSheetButton>);
 
 		expect(spy).toHaveBeenCalledTimes(1);
 	});
@@ -223,7 +239,7 @@ describe('useStyles()', () => {
 
 		const { rerender } = render(
 			<Wrapper>
-				<CustomSheetButton sheet={sheet}>Child</CustomSheetButton>
+				<CustomSheetButton>Child</CustomSheetButton>
 			</Wrapper>,
 		);
 
@@ -239,7 +255,7 @@ describe('useStyles()', () => {
 
 		rerender(
 			<Wrapper direction="rtl">
-				<CustomSheetButton sheet={sheet}>Child</CustomSheetButton>
+				<CustomSheetButton>Child</CustomSheetButton>
 			</Wrapper>,
 		);
 
@@ -259,7 +275,7 @@ describe('useStyles()', () => {
 
 		const { rerender } = render(
 			<Wrapper>
-				<CustomSheetButton sheet={sheet}>Child</CustomSheetButton>
+				<CustomSheetButton>Child</CustomSheetButton>
 			</Wrapper>,
 		);
 
@@ -275,7 +291,7 @@ describe('useStyles()', () => {
 
 		rerender(
 			<Wrapper theme="dawn">
-				<CustomSheetButton sheet={sheet}>Child</CustomSheetButton>
+				<CustomSheetButton>Child</CustomSheetButton>
 			</Wrapper>,
 		);
 
@@ -295,7 +311,7 @@ describe('useStyles()', () => {
 
 		const { rerender } = render(
 			<Wrapper>
-				<CustomSheetButton sheet={sheet}>Child</CustomSheetButton>
+				<CustomSheetButton>Child</CustomSheetButton>
 			</Wrapper>,
 		);
 
@@ -311,7 +327,7 @@ describe('useStyles()', () => {
 
 		rerender(
 			<Wrapper direction="rtl" theme="dawn">
-				<CustomSheetButton sheet={sheet}>Child</CustomSheetButton>
+				<CustomSheetButton>Child</CustomSheetButton>
 			</Wrapper>,
 		);
 
@@ -335,5 +351,22 @@ describe('useStyles()', () => {
 				theme: 'dawn',
 			}),
 		);
+	});
+
+	it('supports rendering multiple style sheets', () => {
+		const result = render(<MultiSheetButton>Child</MultiSheetButton>, {
+			wrapper: Wrapper,
+		});
+
+		expect(result.getByTestId('button').props.style).toEqual([
+			expect.objectContaining({ position: 'absolute' }),
+		]);
+
+		result.update(<MultiSheetButton icon>Child</MultiSheetButton>);
+
+		expect(result.getByTestId('button').props.style).toEqual([
+			expect.objectContaining({ position: 'absolute' }),
+			expect.objectContaining({ flex: 1 }),
+		]);
 	});
 });

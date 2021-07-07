@@ -119,11 +119,14 @@ export function createStyleHelpers<Input extends object, Output, GeneratedOutput
 	/**
 	 * Wrap a React component with an HOC that injects the style to class name transfer function.
 	 */
-	function withStyles<T>(sheet: ComponentSheet<T, Input, Output>) /* infer */ {
+	function withStyles<
+		T extends ComponentSheet<string, Input, Output>[],
+		K = InferKeysFromSheets<T>
+	>(...sheets: T) /* infer */ {
 		return function withStylesComposer<Props extends object = {}>(
-			WrappedComponent: React.ComponentType<InternalWithStylesWrappedProps<T, Output> & Props>,
+			WrappedComponent: React.ComponentType<InternalWithStylesWrappedProps<K, Output> & Props>,
 		): React.FunctionComponent<
-			Omit<Props, keyof InternalWithStylesWrappedProps<T, Output>> & WrapperProps
+			Omit<Props, keyof InternalWithStylesWrappedProps<K, Output>> & WrapperProps
 		> &
 			WrapperComponent {
 			return createHOC(
@@ -131,7 +134,7 @@ export function createStyleHelpers<Input extends object, Output, GeneratedOutput
 				WrappedComponent,
 				// eslint-disable-next-line prefer-arrow-callback
 				function WithStyles({ wrappedRef, ...props }) {
-					const compose = useStyles(sheet);
+					const compose = useStyles(...sheets);
 
 					// eslint-disable-next-line @typescript-eslint/no-explicit-any
 					return <WrappedComponent {...(props as any)} ref={wrappedRef} compose={compose} />;
