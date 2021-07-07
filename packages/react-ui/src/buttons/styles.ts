@@ -1,4 +1,12 @@
-import { ColorShade, PALETTE_TYPES, Rule, RuleMap, StateType, style } from '@aesthetic/react';
+import {
+	ColorShade,
+	PALETTE_TYPES,
+	Rule,
+	RuleMap,
+	StateType,
+	style,
+	styles,
+} from '@aesthetic/react';
 
 export const styleSheet = style((css) => {
 	const paletteVariants: RuleMap = {};
@@ -137,3 +145,12 @@ export const styleSheet = style((css) => {
 		},
 	};
 });
+
+export const testSheet = styles(() => ({
+	another: {
+		color: 'red',
+	},
+	test: {
+		color: 'red',
+	},
+}));

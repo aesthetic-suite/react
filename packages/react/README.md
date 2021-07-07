@@ -9,9 +9,9 @@ Provides styles for React components through hook or HOC based APIs. Built aroun
 
 ```tsx
 import React from 'react';
-import { createComponentStyles, useStyles } from '@aesthetic/react';
+import { createStyleSheet, useStyles } from '@aesthetic/react';
 
-export const styleSheet = createComponentStyles((css) => ({
+export const styleSheet = createStyleSheet((css) => ({
 	button: css.mixin('reset-button', {
 		padding: css.var('spacing-df'),
 	}),

@@ -39,7 +39,7 @@ export function createStyled<T extends React.ComponentType<any>, V extends objec
 		}
 	}
 
-	const styleSheet = aesthetic.createElementStyles(factory);
+	const styleSheet = aesthetic.createScopedStyleSheet(factory);
 
 	const Component = forwardRef((baseProps, ref) => {
 		const sx = useStyles(styleSheet);

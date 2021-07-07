@@ -1,8 +1,8 @@
 import React from 'react';
 import defaultTheme from '@aesthetic/design-systems/material';
-import { ThemeProvider, createThemeStyles, registerDefaultTheme } from '@aesthetic/react';
+import { ThemeProvider, createThemeSheet, registerDefaultTheme } from '@aesthetic/react';
 
-const themeSheet = createThemeStyles((css) => ({
+const themeSheet = createThemeSheet((css) => ({
 	'@root': css.mixin('root'),
 }));
 

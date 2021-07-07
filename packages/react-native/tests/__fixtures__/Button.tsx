@@ -5,7 +5,7 @@ import { DirectionProvider, NativeRule, NativeStyles, ThemeProvider } from '../.
 import { aesthetic } from '../../src/aesthetic';
 
 export function createStyleSheet() {
-	return aesthetic.createComponentStyles((css) => ({
+	return aesthetic.createStyleSheet((css) => ({
 		button: {
 			appearance: 'none',
 			border: 0,

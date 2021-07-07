@@ -4,7 +4,7 @@ import { DirectionProvider, ThemeProvider } from '../../src';
 import { aesthetic } from '../../src/aesthetic';
 
 export function createStyleSheet() {
-	return aesthetic.createComponentStyles((css) => ({
+	return aesthetic.createStyleSheet((css) => ({
 		button: css.mixin('reset-button', {
 			position: 'relative',
 			display: 'inline-flex',

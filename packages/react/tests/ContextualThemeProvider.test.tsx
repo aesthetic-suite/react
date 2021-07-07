@@ -75,9 +75,7 @@ describe('ContextualThemeProvider', () => {
 	});
 
 	it('wraps in a div with a class name and data attribute', () => {
-		const spy = jest
-			.spyOn(aesthetic, 'renderThemeStyles')
-			.mockImplementation(() => ['theme-night']);
+		const spy = jest.spyOn(aesthetic, 'renderThemeSheet').mockImplementation(() => ['theme-night']);
 
 		const { root } = render<ThemeProviderProps>(
 			<ContextualThemeProvider name="night">
@@ -94,7 +92,7 @@ describe('ContextualThemeProvider', () => {
 	});
 
 	it('re-renders theme styles if `name` changes', () => {
-		const spy = jest.spyOn(aesthetic, 'renderThemeStyles');
+		const spy = jest.spyOn(aesthetic, 'renderThemeSheet');
 
 		const { rerender } = render<ThemeProviderProps>(
 			<ContextualThemeProvider name="night">
@@ -115,7 +113,7 @@ describe('ContextualThemeProvider', () => {
 	});
 
 	it('re-renders theme styles if direction changes', () => {
-		const spy = jest.spyOn(aesthetic, 'renderThemeStyles');
+		const spy = jest.spyOn(aesthetic, 'renderThemeSheet');
 
 		const { rerender } = render<DirectionProviderProps>(
 			<DirectionProvider direction="ltr">
