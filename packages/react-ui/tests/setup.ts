@@ -9,7 +9,6 @@ registerDefaultTheme('default', lightTheme);
 
 configure({
 	deterministicClasses: true,
-	injectStrategy: 'render',
 });
 
 internalAestheticRuntime.configureEngine(createTestEngine());

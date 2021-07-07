@@ -23,10 +23,6 @@ export function setupAestheticReact() {
 	aesthetic.registerTheme('dawn', dawnTheme);
 
 	setupAesthetic(aesthetic);
-
-	aesthetic.configure({
-		injectStrategy: 'create',
-	});
 }
 
 export function teardownAestheticReact() {

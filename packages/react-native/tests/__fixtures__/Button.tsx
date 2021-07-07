@@ -86,7 +86,7 @@ export interface ButtonProps {
 	href?: string;
 	large?: boolean;
 	small?: boolean;
-	sheet?: ComponentSheet<unknown, NativeRule, NativeStyles>;
+	sheet?: ComponentSheet<string, NativeRule, NativeStyles>;
 	// Compound variant tests
 	compound?: string;
 }

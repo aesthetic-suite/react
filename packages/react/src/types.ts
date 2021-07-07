@@ -8,7 +8,7 @@ export type ElementType = keyof JSX.IntrinsicElements;
 
 export interface StyledComponent<P extends object = {}>
 	extends React.ForwardRefExoticComponent<P & StyledInheritedProps> {
-	styleSheet: ComponentSheet<unknown, Rule, ClassName>;
+	styleSheet: ComponentSheet<string, Rule, ClassName>;
 }
 
 export interface StyledInheritedProps {

@@ -55,7 +55,7 @@ export interface InternalWithThemeWrappedProps<T extends object> extends Wrapped
 
 // STYLES
 
-export interface InternalWithStylesWrappedProps<T, O, GO = O> extends WrappedProps {
+export interface InternalWithStylesWrappedProps<K, O, GO = O> extends WrappedProps {
 	/** Function to compose styles from a sheet. Provided by `withStyles`. */
-	compose: ResultComposer<T, O, GO>;
+	compose: ResultComposer<K, O, GO>;
 }

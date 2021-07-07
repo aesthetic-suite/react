@@ -108,14 +108,10 @@ export function createStyleHelpers<Input extends object, Output, GeneratedOutput
 			[result],
 		);
 
-		const cx = (composer as unknown) as ResultComposer<
-			InferKeysFromSheets<T>,
-			Output,
-			GeneratedOutput
-		>;
+		const cx = composer as ResultComposer<InferKeysFromSheets<T>, Output, GeneratedOutput>;
 
 		// Make the result available if need be, but behind a hidden API
-		cx.result = result!;
+		cx.result = result;
 
 		return cx;
 	}
@@ -123,13 +119,11 @@ export function createStyleHelpers<Input extends object, Output, GeneratedOutput
 	/**
 	 * Wrap a React component with an HOC that injects the style to class name transfer function.
 	 */
-	function withStyles<T = unknown>(sheet: ComponentSheet<T, Input, Output>) /* infer */ {
+	function withStyles<T>(sheet: ComponentSheet<T, Input, Output>) /* infer */ {
 		return function withStylesComposer<Props extends object = {}>(
-			WrappedComponent: React.ComponentType<
-				InternalWithStylesWrappedProps<keyof T, Output> & Props
-			>,
+			WrappedComponent: React.ComponentType<InternalWithStylesWrappedProps<T, Output> & Props>,
 		): React.FunctionComponent<
-			Omit<Props, keyof InternalWithStylesWrappedProps<keyof T, Output>> & WrapperProps
+			Omit<Props, keyof InternalWithStylesWrappedProps<T, Output>> & WrapperProps
 		> &
 			WrapperComponent {
 			return createHOC(
