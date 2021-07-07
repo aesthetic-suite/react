@@ -4,7 +4,7 @@ import { BorderSize, CommonSize, PaletteType, useStyles } from '@aesthetic/react
 import { createComponent } from '../helpers/createComponent';
 import { HtmlAnchorProps, HtmlButtonProps, Pressable } from '../internal/Pressable';
 import { CommonProps } from '../types';
-import { styleSheet, testSheet } from './styles';
+import { styleSheet } from './styles';
 import { ButtonFill, ButtonShape } from './types';
 
 export * from './types';
@@ -69,7 +69,7 @@ export const Button = createComponent<ButtonProps>(function Button(
 	},
 	ref,
 ) {
-	const cx = useStyles(styleSheet, testSheet);
+	const cx = useStyles(styleSheet);
 	const className = useMemo(
 		() => cx({ border, fill, palette, shape, size }, 'element', [inheritedClassName]),
 		[cx, border, fill, palette, shape, size, inheritedClassName],

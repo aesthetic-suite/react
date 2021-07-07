@@ -145,12 +145,3 @@ export const styleSheet = style((css) => {
 		},
 	};
 });
-
-export const testSheet = styles(() => ({
-	another: {
-		color: 'red',
-	},
-	test: {
-		color: 'red',
-	},
-}));
