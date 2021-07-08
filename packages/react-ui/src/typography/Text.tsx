@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { TextSize, useStyles } from '@aesthetic/react';
 import { createDynamicComponent } from '../helpers/createComponent';
-import { textStyleSheet, useText } from '../sheets/text';
+import { textStyleSheet } from '../sheets/text';
 import { CommonProps } from '../types';
 import { styleSheet } from './styles';
 import { TypographyProps } from './types';
@@ -72,7 +72,6 @@ export const Text = createDynamicComponent<TextProps, TextElement>(function Text
 			cx(
 				{ align, overflow, palette, size, transform, weight },
 				'typography',
-				'text',
 				monospaced && 'monospace',
 				[inheritedClassName],
 			),

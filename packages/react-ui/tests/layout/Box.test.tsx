@@ -12,7 +12,7 @@ describe('Box', () => {
 		render(<Box testID="box">Child</Box>, { wrapper: Wrapper });
 
 		expect(getElement().className).toBe(
-			'box variant:alignContent:normal variant:alignItems:normal variant:alignSelf:auto variant:direction:row variant:justifyContent:flex-start variant:wrap:false element element',
+			'box variant:alignContent:normal variant:alignItems:normal variant:alignSelf:auto variant:direction:row variant:justifyContent:flex-start variant:wrap:false spacing',
 		);
 	});
 

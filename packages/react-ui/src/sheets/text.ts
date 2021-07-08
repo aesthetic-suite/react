@@ -12,5 +12,5 @@ export const textStyleSheet = style(
 			})),
 		},
 	}),
-	'text',
+	'typography',
 );

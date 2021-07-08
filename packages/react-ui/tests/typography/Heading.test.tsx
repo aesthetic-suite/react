@@ -12,7 +12,7 @@ describe('Heading', () => {
 		render(<Heading level={1}>Title</Heading>, { wrapper: Wrapper });
 
 		expect(getElement().className).toBe(
-			'typography variant:align:start variant:overflow:wrap variant:palette:neutral variant:weight:normal element variant:level:1',
+			'typography variant:align:start variant:overflow:wrap variant:palette:neutral variant:weight:normal variant:level:1',
 		);
 	});
 

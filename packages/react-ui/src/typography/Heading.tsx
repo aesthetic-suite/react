@@ -41,10 +41,10 @@ export const Heading = createDynamicComponent<HeadingProps, HeadingElement>(func
 	const cx = useStyles(styleSheet, headingStyleSheet);
 	const className = useMemo(
 		() =>
-			cx({ align, overflow, palette, transform, weight }, 'typography', 'heading', [
+			cx({ align, level, overflow, palette, transform, weight }, 'typography', [
 				inheritedClassName,
 			]),
-		[cx, align, overflow, palette, transform, weight, inheritedClassName],
+		[cx, align, level, overflow, palette, transform, weight, inheritedClassName],
 	);
 	const Tag = as ?? `h${level}`!;
 

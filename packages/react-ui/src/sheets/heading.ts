@@ -13,5 +13,5 @@ export const headingStyleSheet = style(
 			})),
 		},
 	}),
-	'heading',
+	'typography',
 );
