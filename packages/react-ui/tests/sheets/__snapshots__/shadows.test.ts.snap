@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`shadows renders styles 1`] = `".c15c9dnj {box-shadow: var(--shadow-xs-x) var(--shadow-xs-y) var(--shadow-xs-blur) var(--shadow-xs-spread) rgba(0, 0, 0, .8);}.co1m4cf {box-shadow: var(--shadow-sm-x) var(--shadow-sm-y) var(--shadow-sm-blur) var(--shadow-sm-spread) rgba(0, 0, 0, .8);}.c7d7xjz {box-shadow: var(--shadow-md-x) var(--shadow-md-y) var(--shadow-md-blur) var(--shadow-md-spread) rgba(0, 0, 0, .8);}.cm94rxb {box-shadow: var(--shadow-lg-x) var(--shadow-lg-y) var(--shadow-lg-blur) var(--shadow-lg-spread) rgba(0, 0, 0, .8);}.c18d7en {box-shadow: var(--shadow-xl-x) var(--shadow-xl-y) var(--shadow-xl-blur) var(--shadow-xl-spread) rgba(0, 0, 0, .8);}"`;

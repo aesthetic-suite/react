@@ -14,7 +14,7 @@ describe('Text', () => {
 		const el = getElement();
 
 		expect(el.className).toBe(
-			'typography variant:align:start variant:overflow:wrap variant:palette:neutral variant:weight:normal element variant:size:df',
+			'typography variant:align:start variant:overflow:wrap variant:palette:neutral variant:weight:normal variant:size:df',
 		);
 		expect(el.tagName).toBe('P');
 	});

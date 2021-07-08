@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`text renders styles 1`] = `".cwhyrls {font-family: var(--typography-font-text);}.cxzk1cy {line-height: var(--text-sm-line-height);}.c1qx7d18 {font-size: var(--text-sm-size);}.c1q1da5a {line-height: var(--text-df-line-height);}.cpfxegw {font-size: var(--text-df-size);}.c10l4oaf {line-height: var(--text-lg-line-height);}.ckfuq95 {font-size: var(--text-lg-size);}"`;

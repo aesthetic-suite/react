@@ -12,7 +12,7 @@ describe('Box', () => {
 		render(<Box testID="box">Child</Box>, { wrapper: Wrapper });
 
 		expect(getElement().className).toBe(
-			'box variant:alignContent:normal variant:alignItems:normal variant:alignSelf:auto variant:direction:row variant:justifyContent:flex-start variant:wrap:false element element',
+			'box variant:alignContent:normal variant:alignItems:normal variant:alignSelf:auto variant:direction:row variant:justifyContent:flex-start variant:wrap:false spacing',
 		);
 	});
 
@@ -174,6 +174,17 @@ describe('Box', () => {
 
 			expect(getElement().style.getPropertyValue('--spacing-all')).toBe('1.25rem');
 			expect(getElement().style.getPropertyValue('--spacing-horizontal')).toBe('2.50rem');
+		});
+
+		it('sets "shadow" class name', () => {
+			render(
+				<Box shadow="xl" shrink={2} testID="box">
+					Child
+				</Box>,
+				{ wrapper: Wrapper },
+			);
+
+			expect(getElement().className).toEqual(expect.stringContaining('variant:shadow:xl'));
 		});
 	});
 });

@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { HeadingLevel, useStyles } from '@aesthetic/react';
 import { createDynamicComponent } from '../helpers/createComponent';
-import { useHeading } from '../hooks/styles/useHeading';
+import { headingStyleSheet } from '../sheets/heading';
 import { CommonProps } from '../types';
 import { styleSheet } from './styles';
 import { TypographyProps } from './types';
@@ -38,15 +38,13 @@ export const Heading = createDynamicComponent<HeadingProps, HeadingElement>(func
 	},
 	ref,
 ) {
-	const cx = useStyles(styleSheet);
-	const headingClassName = useHeading(level);
+	const cx = useStyles(styleSheet, headingStyleSheet);
 	const className = useMemo(
 		() =>
-			cx({ align, overflow, palette, transform, weight }, 'typography', [
-				headingClassName,
+			cx({ align, level, overflow, palette, transform, weight }, 'typography', [
 				inheritedClassName,
 			]),
-		[cx, align, overflow, palette, transform, weight, headingClassName, inheritedClassName],
+		[cx, align, level, overflow, palette, transform, weight, inheritedClassName],
 	);
 	const Tag = as ?? `h${level}`!;
 

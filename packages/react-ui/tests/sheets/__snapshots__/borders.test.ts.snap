@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`borders renders styles 1`] = `".c1oowyan {border-color: transparent;}.cfdmyha {border-style: solid;}.c1e95qeq {border-width: var(--border-sm-width);}.c18pn6tu {border-radius: var(--border-sm-radius);}.c1q9bcr2 {border-width: var(--border-df-width);}.c1rooa26 {border-radius: var(--border-df-radius);}.c1xgoolj {border-width: var(--border-lg-width);}.cmt9y9z {border-radius: var(--border-lg-radius);}"`;
