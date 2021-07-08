@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react-hooks';
-import { useBorder } from '../../../src/hooks/styles/useBorder';
+import { useBorder } from '../../../src/sheets/borders';
 import { getRenderedStyles, withStyles, Wrapper } from '../../helpers';
 
 describe('useBorder()', () => {

@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react-hooks';
-import { useShadow } from '../../../src/hooks/styles/useShadow';
+import { useShadow } from '../../../src/sheets/shadows';
 import { getRenderedStyles, withStyles, Wrapper } from '../../helpers';
 
 describe('useShadow()', () => {

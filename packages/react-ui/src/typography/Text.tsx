@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { TextSize, useStyles } from '@aesthetic/react';
 import { createDynamicComponent } from '../helpers/createComponent';
-import { useText } from '../hooks/styles/useText';
+import { textStyleSheet, useText } from '../sheets/text';
 import { CommonProps } from '../types';
 import { styleSheet } from './styles';
 import { TypographyProps } from './types';
@@ -66,28 +66,17 @@ export const Text = createDynamicComponent<TextProps, TextElement>(function Text
 	},
 	ref,
 ) {
-	const cx = useStyles(styleSheet);
-	const textClassName = useText(size);
+	const cx = useStyles(styleSheet, textStyleSheet);
 	const className = useMemo(
 		() =>
 			cx(
 				{ align, overflow, palette, size, transform, weight },
 				'typography',
+				'text',
 				monospaced && 'monospace',
-				[textClassName, inheritedClassName],
+				[inheritedClassName],
 			),
-		[
-			cx,
-			align,
-			overflow,
-			palette,
-			size,
-			transform,
-			weight,
-			monospaced,
-			textClassName,
-			inheritedClassName,
-		],
+		[cx, align, overflow, palette, size, transform, weight, monospaced, inheritedClassName],
 	);
 
 	return (

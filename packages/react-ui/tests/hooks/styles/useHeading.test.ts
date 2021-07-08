@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react-hooks';
-import { useHeading } from '../../../src/hooks/styles/useHeading';
+import { useHeading } from '../../../src/sheets/heading';
 import { getRenderedStyles, withStyles, Wrapper } from '../../helpers';
 
 describe('useHeading()', () => {

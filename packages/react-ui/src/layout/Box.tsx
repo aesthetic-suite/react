@@ -2,8 +2,8 @@ import React, { useMemo } from 'react';
 import { ShadowSize, useStyles } from '@aesthetic/react';
 import { createDynamicComponent } from '../helpers/createComponent';
 import { isDefined } from '../helpers/isDefined';
-import { useShadow } from '../hooks/styles/useShadow';
 import { useSpacing } from '../hooks/styles/useSpacing';
+import { shadowStyleSheet } from '../sheets/shadows';
 import { CommonProps } from '../types';
 import { SpacingProps } from '../types/spacing';
 import { styleSheet } from './styles';
@@ -109,7 +109,7 @@ export const Box = createDynamicComponent<BoxProps, BoxElement>(function Box(
 	},
 	ref,
 ) {
-	const cx = useStyles(styleSheet);
+	const cx = useStyles(styleSheet, shadowStyleSheet);
 	const { className: spacingClassName, style: spacingStyle } = useSpacing({
 		spacing,
 		spacingBottom,
@@ -119,15 +119,23 @@ export const Box = createDynamicComponent<BoxProps, BoxElement>(function Box(
 		spacingTop,
 		spacingVertical,
 	});
-	const shadowClassName = useShadow(shadow);
 	const className = useMemo(
 		() =>
 			cx(
-				{ alignContent, alignItems, alignSelf, direction, justifyContent, wrap: String(wrap) },
+				{
+					alignContent,
+					alignItems,
+					alignSelf,
+					direction,
+					justifyContent,
+					shadow,
+					wrap: String(wrap),
+				},
 				'box',
 				inline && 'boxInline',
 				isDefined(grow, order, shrink) && 'boxVars',
-				[spacingClassName, shadowClassName, inheritedClassName],
+				shadow && 'shadows',
+				[inheritedClassName, spacingClassName],
 			),
 		[
 			cx,
@@ -139,10 +147,10 @@ export const Box = createDynamicComponent<BoxProps, BoxElement>(function Box(
 			inline,
 			justifyContent,
 			order,
+			shadow,
 			shrink,
 			wrap,
 			spacingClassName,
-			shadowClassName,
 			inheritedClassName,
 		],
 	);

@@ -72,6 +72,9 @@ export const styleSheet = style((css) => {
 	}
 
 	return {
+		// Do this first for lowest specificity
+		padding: 0,
+
 		// Ordered from lowest to highest specificity
 		'@variants': {
 			...mapVariants('all', sizes, (size, type) => ({

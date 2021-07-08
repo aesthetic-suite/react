@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react-hooks';
-import { useText } from '../../../src/hooks/styles/useText';
+import { useText } from '../../../src/sheets/text';
 import { getRenderedStyles, withStyles, Wrapper } from '../../helpers';
 
 describe('useText()', () => {
