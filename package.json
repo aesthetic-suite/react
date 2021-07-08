@@ -29,17 +29,17 @@
   "devDependencies": {
     "@aesthetic/design-systems": "^0.1.6",
     "@beemo/dev": "^1.0.0",
-    "@percy/cli": "^1.0.0-beta.56",
+    "@percy/cli": "^1.0.0-beta.58",
     "@percy/storybook": "^4.0.0-beta.2",
-    "@storybook/addon-actions": "^6.3.0",
-    "@storybook/addon-essentials": "^6.3.0",
-    "@storybook/addon-links": "^6.3.0",
-    "@storybook/builder-webpack5": "^6.3.0",
-    "@storybook/manager-webpack5": "^6.3.0",
-    "@storybook/react": "^6.3.0",
+    "@storybook/addon-actions": "^6.3.3",
+    "@storybook/addon-essentials": "^6.3.3",
+    "@storybook/addon-links": "^6.3.3",
+    "@storybook/builder-webpack5": "^6.3.3",
+    "@storybook/manager-webpack5": "^6.3.3",
+    "@storybook/react": "^6.3.3",
     "@storybook/storybook-deployer": "^2.8.10",
     "@types/hoist-non-react-statics": "^3.3.1",
-    "@types/react": "^17.0.11",
+    "@types/react": "^17.0.14",
     "benchmark": "^2.1.4",
     "builtin-modules": "^3.2.0",
     "conventional-changelog-beemo": "^2.1.0",
@@ -49,7 +49,7 @@
     "packemon": "^1.0.0",
     "react": "^17.0.2",
     "react-test-renderer": "^17.0.2",
-    "webpack": "^5.40.0"
+    "webpack": "^5.43.0"
   },
   "workspaces": [
     "packages/*"
