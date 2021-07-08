@@ -17,29 +17,29 @@ export const {
 	changeDirection,
 	changeTheme,
 	configure,
-	createComponentStyles,
-	createElementStyles,
-	createThemeStyles,
+	createStyleSheet,
+	createScopedStyleSheet,
+	createThemeSheet,
 	getActiveDirection,
 	getActiveTheme,
 	getEngine,
 	getTheme,
 	registerDefaultTheme,
 	registerTheme,
-	renderComponentStyles,
+	renderStyleSheet,
 	renderFontFace,
 	renderImport,
 	renderKeyframes,
-	renderThemeStyles,
+	renderThemeSheet,
 	subscribe,
 	unsubscribe,
 } = aesthetic;
 
 // Export aliases
-export const style = createElementStyles;
-export const styles = createComponentStyles;
+export const style = createScopedStyleSheet;
+export const styles = createStyleSheet;
 export const styled = createStyled;
-export const themeStyle = createThemeStyles;
+export const themeStyle = createThemeSheet;
 
 // Do not use! This is for bundler pre-compilation usage!
 // @private

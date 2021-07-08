@@ -15,7 +15,7 @@ export function ContextualThemeProvider({ children, name }: ContextualThemeProvi
 
 	// Render styles when theme/direction change
 	useEffect(() => {
-		setClassName(aesthetic.renderThemeStyles(theme, { direction }).join(' '));
+		setClassName(aesthetic.renderThemeSheet(theme, { direction }).join(' '));
 	}, [theme, direction]);
 
 	return (

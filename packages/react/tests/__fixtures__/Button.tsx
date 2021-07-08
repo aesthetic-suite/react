@@ -4,7 +4,7 @@ import { DirectionProvider, ThemeProvider } from '../../src';
 import { aesthetic } from '../../src/aesthetic';
 
 export function createStyleSheet() {
-	return aesthetic.createComponentStyles((css) => ({
+	return aesthetic.createStyleSheet((css) => ({
 		button: css.mixin('reset-button', {
 			position: 'relative',
 			display: 'inline-flex',
@@ -79,6 +79,17 @@ export function createStyleSheet() {
 	}));
 }
 
+export function createAdditionalStyleSheet() {
+	return aesthetic.createStyleSheet(() => ({
+		button: {
+			position: 'absolute',
+		},
+		icon: {
+			display: 'inline-block',
+		},
+	}));
+}
+
 export interface ButtonProps {
 	children: NonNullable<React.ReactNode>;
 	block?: boolean;
@@ -86,7 +97,7 @@ export interface ButtonProps {
 	href?: string;
 	large?: boolean;
 	small?: boolean;
-	sheet?: ComponentSheet<unknown, Rule, ClassName>;
+	icon?: boolean;
 	// Compound variant tests
 	compound?: string;
 }

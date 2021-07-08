@@ -3,13 +3,32 @@
 import React from 'react';
 import { View } from 'react-native';
 import { render } from '@testing-library/react-native';
-import { ThemeProvider, withStyles, WithStylesWrappedProps } from '../src';
-import { ButtonProps, createStyleSheet, Wrapper } from './__fixtures__/Button';
+import {
+	ComponentSheet,
+	NativeRule,
+	NativeStyles,
+	ThemeProvider,
+	withStyles,
+	WithStylesWrappedProps,
+} from '../src';
+import {
+	ButtonProps,
+	createAdditionalStyleSheet,
+	createStyleSheet,
+	Wrapper,
+} from './__fixtures__/Button';
 import { dawnTheme, setupAestheticReact, teardownAestheticReact, twilightTheme } from './helpers';
 
 describe('withStyles()', () => {
+	let sheet: ComponentSheet<
+		'button_block' | 'button_disabled' | 'button',
+		NativeRule,
+		NativeStyles
+	>;
+
 	beforeEach(() => {
 		setupAestheticReact();
+		sheet = createStyleSheet();
 	});
 
 	afterEach(() => {
@@ -45,6 +64,18 @@ describe('withStyles()', () => {
 		);
 	}
 
+	function MultiSheetButton({
+		children,
+		compose: cx,
+		icon,
+	}: ButtonProps & WithStylesWrappedProps<'button' | 'icon'>) {
+		return (
+			<View style={cx('button', icon && 'icon')} testID="button">
+				{children}
+			</View>
+		);
+	}
+
 	// Props need to exist for generic inheritance to work correctly
 	interface BaseComponentProps {
 		unknown?: unknown;
@@ -59,7 +90,7 @@ describe('withStyles()', () => {
 	}
 
 	it('inherits name from component `constructor.name`', () => {
-		const Wrapped = withStyles(createStyleSheet())(BaseComponent);
+		const Wrapped = withStyles(sheet)(BaseComponent);
 
 		expect(Wrapped.displayName).toBe('withStyles(BaseComponent)');
 	});
@@ -71,13 +102,13 @@ describe('withStyles()', () => {
 
 		DisplayComponent.displayName = 'CustomDisplayName';
 
-		const Wrapped = withStyles(createStyleSheet())(DisplayComponent);
+		const Wrapped = withStyles(sheet)(DisplayComponent);
 
 		expect(Wrapped.displayName).toBe('withStyles(CustomDisplayName)');
 	});
 
 	it('stores the original component as a static property', () => {
-		const Wrapped = withStyles(createStyleSheet())(BaseComponent);
+		const Wrapped = withStyles(sheet)(BaseComponent);
 
 		expect(Wrapped.WrappedComponent).toBe(BaseComponent);
 	});
@@ -95,7 +126,7 @@ describe('withStyles()', () => {
 		}
 
 		let foundRef: Function | null = null;
-		const Wrapped = withStyles(createStyleSheet())(RefComponent);
+		const Wrapped = withStyles(sheet)(RefComponent);
 
 		render(
 			<Wrapped
@@ -111,7 +142,7 @@ describe('withStyles()', () => {
 	});
 
 	it('renders a button and its base styles', () => {
-		const Button = withStyles(createStyleSheet())(BaseButton);
+		const Button = withStyles(sheet)(BaseButton);
 		const result = render(<Button>Child</Button>, {
 			wrapper: Wrapper,
 		});
@@ -144,29 +175,27 @@ describe('withStyles()', () => {
 	});
 
 	it('only renders once unless theme or direction change', () => {
-		const sheet = createStyleSheet();
 		const Button = withStyles(sheet)(BaseButton);
 		const spy = jest.spyOn(sheet, 'render');
 
-		const { update } = render(<Button sheet={sheet}>Child</Button>, {
+		const { update } = render(<Button>Child</Button>, {
 			wrapper: Wrapper,
 		});
 
-		update(<Button sheet={sheet}>Child</Button>);
-		update(<Button sheet={sheet}>Child</Button>);
-		update(<Button sheet={sheet}>Child</Button>);
+		update(<Button>Child</Button>);
+		update(<Button>Child</Button>);
+		update(<Button>Child</Button>);
 
 		expect(spy).toHaveBeenCalledTimes(1);
 	});
 
 	it('re-renders if direction changes', () => {
-		const sheet = createStyleSheet();
 		const Button = withStyles(sheet)(BaseButton);
 		const spy = jest.spyOn(sheet, 'render');
 
 		const { rerender } = render(
 			<Wrapper>
-				<Button sheet={sheet}>Child</Button>
+				<Button>Child</Button>
 			</Wrapper>,
 		);
 
@@ -182,7 +211,7 @@ describe('withStyles()', () => {
 
 		rerender(
 			<Wrapper direction="rtl">
-				<Button sheet={sheet}>Child</Button>
+				<Button>Child</Button>
 			</Wrapper>,
 		);
 
@@ -198,13 +227,12 @@ describe('withStyles()', () => {
 	});
 
 	it('re-renders if theme changes', () => {
-		const sheet = createStyleSheet();
 		const Button = withStyles(sheet)(BaseButton);
 		const spy = jest.spyOn(sheet, 'render');
 
 		const { rerender } = render(
 			<Wrapper>
-				<Button sheet={sheet}>Child</Button>
+				<Button>Child</Button>
 			</Wrapper>,
 		);
 
@@ -220,7 +248,7 @@ describe('withStyles()', () => {
 
 		rerender(
 			<Wrapper theme="dawn">
-				<Button sheet={sheet}>Child</Button>
+				<Button>Child</Button>
 			</Wrapper>,
 		);
 
@@ -233,5 +261,24 @@ describe('withStyles()', () => {
 				theme: 'dawn',
 			}),
 		);
+	});
+
+	it('supports rendering multiple style sheets', () => {
+		const Button = withStyles(sheet, createAdditionalStyleSheet())(MultiSheetButton);
+
+		const result = render(<Button>Child</Button>, {
+			wrapper: Wrapper,
+		});
+
+		expect(result.getByTestId('button').props.style).toEqual([
+			expect.objectContaining({ position: 'absolute' }),
+		]);
+
+		result.update(<Button icon>Child</Button>);
+
+		expect(result.getByTestId('button').props.style).toEqual([
+			expect.objectContaining({ position: 'absolute' }),
+			expect.objectContaining({ flex: 1 }),
+		]);
 	});
 });

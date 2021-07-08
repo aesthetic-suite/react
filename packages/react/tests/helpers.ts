@@ -25,10 +25,6 @@ export function setupAestheticReact() {
 	aesthetic.configureEngine(createTestStyleEngine());
 
 	setupAesthetic(aesthetic);
-
-	aesthetic.configure({
-		injectStrategy: 'create',
-	});
 }
 
 export function teardownAestheticReact() {

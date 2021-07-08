@@ -1,15 +1,22 @@
 /* eslint-disable react/jsx-no-literals */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { render } from 'rut-dom';
 import { getRenderedStyles } from '@aesthetic/style/test';
-import { useStyles } from '../src';
-import { ButtonProps, createStyleSheet, Wrapper } from './__fixtures__/Button';
+import { ClassName, ComponentSheet, Rule, useStyles } from '../src';
+import {
+	ButtonProps,
+	createAdditionalStyleSheet,
+	createStyleSheet,
+	Wrapper,
+} from './__fixtures__/Button';
 import { dawnTheme, setupAestheticReact, teardownAestheticReact, twilightTheme } from './helpers';
 
 describe('useStyles()', () => {
+	let sheet: ComponentSheet<'button_block' | 'button_disabled' | 'button', Rule, ClassName>;
+
 	function Button({ children, compound, block, disabled, large, small }: ButtonProps) {
-		const cx = useStyles(createStyleSheet());
+		const cx = useStyles(sheet);
 
 		return (
 			<button
@@ -30,8 +37,8 @@ describe('useStyles()', () => {
 		);
 	}
 
-	function CustomSheetButton({ children, sheet }: ButtonProps) {
-		const cx = useStyles(sheet!);
+	function CustomSheetButton({ children }: ButtonProps) {
+		const cx = useStyles(sheet);
 
 		return (
 			<button className={cx()} type="button">
@@ -40,8 +47,19 @@ describe('useStyles()', () => {
 		);
 	}
 
+	function MultiSheetButton({ children, icon }: ButtonProps) {
+		const [otherSheet] = useState(createAdditionalStyleSheet());
+		const cx = useStyles(sheet, otherSheet);
+
+		return (
+			<button className={cx('button', icon && 'icon')} type="button">
+				{children}
+			</button>
+		);
+	}
+
 	function StylelessButton({ children, disabled }: ButtonProps) {
-		const cx = useStyles(createStyleSheet());
+		const cx = useStyles(sheet);
 
 		return (
 			<button className={cx(disabled && 'button_disabled')} type="button">
@@ -52,6 +70,7 @@ describe('useStyles()', () => {
 
 	beforeEach(() => {
 		setupAestheticReact();
+		sheet = createStyleSheet();
 	});
 
 	afterEach(() => {
@@ -137,15 +156,11 @@ describe('useStyles()', () => {
 	});
 
 	it('only renders once unless theme or direction change', () => {
-		const sheet = createStyleSheet();
 		const spy = jest.spyOn(sheet, 'render');
 
-		const { update } = render<ButtonProps>(
-			<CustomSheetButton sheet={sheet}>Child</CustomSheetButton>,
-			{
-				wrapper: <Wrapper />,
-			},
-		);
+		const { update } = render<ButtonProps>(<CustomSheetButton>Child</CustomSheetButton>, {
+			wrapper: <Wrapper />,
+		});
 
 		update();
 		update();
@@ -155,12 +170,11 @@ describe('useStyles()', () => {
 	});
 
 	it('re-renders if direction changes', () => {
-		const sheet = createStyleSheet();
 		const spy = jest.spyOn(sheet, 'render');
 
 		const { rerender } = render<ButtonProps>(
 			<Wrapper>
-				<CustomSheetButton sheet={sheet}>Child</CustomSheetButton>
+				<CustomSheetButton>Child</CustomSheetButton>
 			</Wrapper>,
 		);
 
@@ -176,7 +190,7 @@ describe('useStyles()', () => {
 
 		rerender(
 			<Wrapper direction="rtl">
-				<CustomSheetButton sheet={sheet}>Child</CustomSheetButton>
+				<CustomSheetButton>Child</CustomSheetButton>
 			</Wrapper>,
 		);
 
@@ -192,12 +206,11 @@ describe('useStyles()', () => {
 	});
 
 	it('re-renders if theme changes', () => {
-		const sheet = createStyleSheet();
 		const spy = jest.spyOn(sheet, 'render');
 
 		const { rerender } = render<ButtonProps>(
 			<Wrapper>
-				<CustomSheetButton sheet={sheet}>Child</CustomSheetButton>
+				<CustomSheetButton>Child</CustomSheetButton>
 			</Wrapper>,
 		);
 
@@ -213,7 +226,7 @@ describe('useStyles()', () => {
 
 		rerender(
 			<Wrapper theme="dawn">
-				<CustomSheetButton sheet={sheet}>Child</CustomSheetButton>
+				<CustomSheetButton>Child</CustomSheetButton>
 			</Wrapper>,
 		);
 
@@ -229,12 +242,11 @@ describe('useStyles()', () => {
 	});
 
 	it('re-renders when direction and theme change', () => {
-		const sheet = createStyleSheet();
 		const spy = jest.spyOn(sheet, 'render');
 
 		const { rerender } = render<ButtonProps>(
 			<Wrapper>
-				<CustomSheetButton sheet={sheet}>Child</CustomSheetButton>
+				<CustomSheetButton>Child</CustomSheetButton>
 			</Wrapper>,
 		);
 
@@ -250,7 +262,7 @@ describe('useStyles()', () => {
 
 		rerender(
 			<Wrapper direction="rtl" theme="dawn">
-				<CustomSheetButton sheet={sheet}>Child</CustomSheetButton>
+				<CustomSheetButton>Child</CustomSheetButton>
 			</Wrapper>,
 		);
 
@@ -273,6 +285,24 @@ describe('useStyles()', () => {
 				direction: 'rtl',
 				theme: 'dawn',
 			}),
+		);
+	});
+
+	it('supports rendering multiple style sheets', () => {
+		const { root, update } = render<ButtonProps>(<MultiSheetButton>Child</MultiSheetButton>, {
+			wrapper: <Wrapper />,
+		});
+
+		expect(root.findOne('button')).toHaveProp(
+			'className',
+			'a b c d e f g h i j k l m n o p q r s t u v w',
+		);
+
+		update({ icon: true });
+
+		expect(root.findOne('button')).toHaveProp(
+			'className',
+			'a b c d e f g h i j k l m n o p q r s t u v w p1',
 		);
 	});
 });

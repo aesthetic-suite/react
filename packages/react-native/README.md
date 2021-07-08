@@ -10,9 +10,9 @@ powerful [Aesthetic](https://github.com/aesthetic-suite/framework) core library.
 ```tsx
 import React from 'react';
 import { Pressable, PressableProps } from 'react-native';
-import { createComponentStyles, useStyles } from '@aesthetic/react-native';
+import { createStyleSheet, useStyles } from '@aesthetic/react-native';
 
-export const styleSheet = createComponentStyles((theme) => ({
+export const styleSheet = createStyleSheet((theme) => ({
 	button: {
 		flex: 1,
 		flexWrap: 'nowrap',

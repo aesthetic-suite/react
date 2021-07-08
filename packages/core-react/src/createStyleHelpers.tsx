@@ -3,6 +3,7 @@ import {
 	Aesthetic,
 	ComponentSheet,
 	Direction,
+	InferKeysFromSheets,
 	ResultComposer,
 	ResultComposerArgs,
 	ResultComposerVariants,
@@ -12,6 +13,19 @@ import {
 import { isObject, objectLoop } from '@aesthetic/utils';
 import { createHOC } from './createHOC';
 import { InternalWithStylesWrappedProps, WrapperComponent, WrapperProps } from './types';
+
+function useDeferredEffect(effect: React.EffectCallback, deps: React.DependencyList) {
+	const mounting = useRef(true);
+
+	useEffect(() => {
+		if (mounting.current) {
+			mounting.current = false;
+		} else {
+			effect();
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, deps);
+}
 
 export interface StyleHelperOptions<Input extends object, Output, GeneratedOutput> {
 	generate: (results: Output[]) => GeneratedOutput;
@@ -33,7 +47,7 @@ export function createStyleHelpers<Input extends object, Output, GeneratedOutput
 
 		// Variant objects may only be passed as the first argument
 		if (isObject(args[0])) {
-			objectLoop(args.shift() as unknown as ResultComposerVariants, (value, variant) => {
+			objectLoop((args.shift() as unknown) as ResultComposerVariants, (value, variant) => {
 				if (value) {
 					const type = `${variant}:${value}`;
 
@@ -56,42 +70,37 @@ export function createStyleHelpers<Input extends object, Output, GeneratedOutput
 	/**
 	 * Hook within a component to provide a style sheet.
 	 */
-	function useStyles<T = unknown>(
-		sheet: ComponentSheet<T, Input, Output>,
-	): ResultComposer<keyof T, Output, GeneratedOutput> {
+	function useStyles<T extends ComponentSheet<string, Input, Output>[]>(
+		...sheets: T
+	): ResultComposer<InferKeysFromSheets<T>, Output, GeneratedOutput> {
 		const theme = useTheme();
 		const direction = useDirection();
 		const classCache = useRef<Record<string, GeneratedOutput>>({});
-		const initialMount = useRef(true);
+		const [sheet, setSheet] = useState(() => aesthetic.mergeStyleSheets(...sheets));
 		const [result, setResult] = useState<SheetRenderResult<Output>>(() =>
-			aesthetic.renderComponentStyles(sheet, {
+			aesthetic.renderStyleSheet(sheet, {
 				direction,
 				theme: theme.name,
 			}),
 		);
 
-		useEffect(() => {
-			// Avoid double rendering on first mount
-			if (initialMount.current) {
-				initialMount.current = false;
+		useDeferredEffect(() => {
+			// Re-merge style sheets when they change
+			setSheet(aesthetic.mergeStyleSheets(...sheets));
+		}, sheets);
 
-				return;
-			}
-
+		useDeferredEffect(() => {
 			// Reset cache since styles are changing
 			classCache.current = {};
 
 			// Re-render styles when the theme or direction change
 			setResult(
-				aesthetic.renderComponentStyles(sheet, {
+				aesthetic.renderStyleSheet(sheet, {
 					direction,
 					theme: theme.name,
 				}),
 			);
-
-			// It wants to include `sheet` but that triggers an infinite render loop
-			// eslint-disable-next-line react-hooks/exhaustive-deps
-		}, [direction, theme.name]);
+		}, [sheet, direction, theme.name]);
 
 		const composer = useCallback(
 			(...args: ResultComposerArgs<string, Output>) =>
@@ -99,10 +108,10 @@ export function createStyleHelpers<Input extends object, Output, GeneratedOutput
 			[result],
 		);
 
-		const cx = composer as unknown as ResultComposer<keyof T, Output, GeneratedOutput>;
+		const cx = composer as ResultComposer<InferKeysFromSheets<T>, Output, GeneratedOutput>;
 
 		// Make the result available if need be, but behind a hidden API
-		cx.result = result!;
+		cx.result = result;
 
 		return cx;
 	}
@@ -110,13 +119,14 @@ export function createStyleHelpers<Input extends object, Output, GeneratedOutput
 	/**
 	 * Wrap a React component with an HOC that injects the style to class name transfer function.
 	 */
-	function withStyles<T = unknown>(sheet: ComponentSheet<T, Input, Output>) /* infer */ {
+	function withStyles<
+		T extends ComponentSheet<string, Input, Output>[],
+		K = InferKeysFromSheets<T>
+	>(...sheets: T) /* infer */ {
 		return function withStylesComposer<Props extends object = {}>(
-			WrappedComponent: React.ComponentType<
-				InternalWithStylesWrappedProps<keyof T, Output> & Props
-			>,
+			WrappedComponent: React.ComponentType<InternalWithStylesWrappedProps<K, Output> & Props>,
 		): React.FunctionComponent<
-			Omit<Props, keyof InternalWithStylesWrappedProps<keyof T, Output>> & WrapperProps
+			Omit<Props, keyof InternalWithStylesWrappedProps<K, Output>> & WrapperProps
 		> &
 			WrapperComponent {
 			return createHOC(
@@ -124,7 +134,7 @@ export function createStyleHelpers<Input extends object, Output, GeneratedOutput
 				WrappedComponent,
 				// eslint-disable-next-line prefer-arrow-callback
 				function WithStyles({ wrappedRef, ...props }) {
-					const compose = useStyles(sheet);
+					const compose = useStyles(...sheets);
 
 					// eslint-disable-next-line @typescript-eslint/no-explicit-any
 					return <WrappedComponent {...(props as any)} ref={wrappedRef} compose={compose} />;

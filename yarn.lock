@@ -2,19 +2,19 @@
 # yarn lockfile v1
 
 
-"@aesthetic/core@^0.10.8":
-  version "0.10.8"
-  resolved "https://registry.yarnpkg.com/@aesthetic/core/-/core-0.10.8.tgz#3fedcc15cfba97e04d110f6f250097ed80673626"
-  integrity sha512-WeEsPlOKk+QqJ4L2AZZPGUDIsRIpsiVzeu22+JzQjBpD8qXlpYxo9LQaDO0vSrxOCRsXWUYbLAXpYwggEs7Gog==
+"@aesthetic/core@^0.11.1":
+  version "0.11.1"
+  resolved "https://registry.yarnpkg.com/@aesthetic/core/-/core-0.11.1.tgz#aa1ceb91bb369a669b3de26912be6d10f72887b9"
+  integrity sha512-ZDyGlnWRDZqJdDOuJLCgltklvCU4V5vUoFaT7Je8fWLXIvrMQsrbUZ66EAml6oRgwqZnrcYo0ru8l7pyvTli+g==
   dependencies:
-    "@aesthetic/system" "^0.9.8"
+    "@aesthetic/system" "^0.9.10"
     "@aesthetic/types" "^0.6.7"
     "@aesthetic/utils" "^0.8.4"
 
-"@aesthetic/design-systems@^0.1.5":
-  version "0.1.5"
-  resolved "https://registry.yarnpkg.com/@aesthetic/design-systems/-/design-systems-0.1.5.tgz#6b1d5908481379af52ee277acf175684a0c3ef0b"
-  integrity sha512-/KYRRdrBxeMDmwGla7Sxtjig0gkk72zDM7Apghw3Gkn7Jf8X3pQyfH5YdIqPzHXdQfp6TlCynMb5rw7GuSxtFw==
+"@aesthetic/design-systems@^0.1.6":
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/@aesthetic/design-systems/-/design-systems-0.1.6.tgz#668ef06d698b897a1228eeb4d3a0d98656151632"
+  integrity sha512-D64WZldrnwDA60WIXaa/DGuvp8N1Kliwd/vwKN7W242awIOiHpmnBcS2gMZllm71VO2PUuVrGzSy/yIZNKTfLg==
 
 "@aesthetic/style@^0.9.8":
   version "0.9.8"
@@ -25,10 +25,10 @@
     "@aesthetic/utils" "^0.8.4"
     sort-css-media-queries "^2.0.3"
 
-"@aesthetic/system@^0.9.8":
-  version "0.9.8"
-  resolved "https://registry.yarnpkg.com/@aesthetic/system/-/system-0.9.8.tgz#2bb6ee6c74e21c66e080b1fa420ae2521ab0ab1e"
-  integrity sha512-bn7XLaQVPP5z5u73YMPpVtiikw1T6BVBaLpDAgOYlt+RZmVwX3hOCDKHco8jybJBbp1BatMSaMQVIroiNcx2KQ==
+"@aesthetic/system@^0.9.10":
+  version "0.9.10"
+  resolved "https://registry.yarnpkg.com/@aesthetic/system/-/system-0.9.10.tgz#8484627a213f38ee5a0cc52da66ede8d996193f4"
+  integrity sha512-iNIgvwm4P0Dcbb1wwqGjr8Jq49edLxC7Q5UBrFZ3LrQ4Yh1LLQL65Mh3fn4HlR39LA/9Q6e/PDwnl23/h8S8Pw==
   dependencies:
     "@aesthetic/types" "^0.6.7"
     "@aesthetic/utils" "^0.8.4"

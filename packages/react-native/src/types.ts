@@ -16,7 +16,7 @@ export type NativeEngine = Engine<NativeRule, NativeStyles>;
 
 export interface StyledComponent<P extends object = {}>
 	extends React.ForwardRefExoticComponent<P & StyledInheritedProps> {
-	styleSheet: ComponentSheet<unknown, NativeRule, NativeStyles>;
+	styleSheet: ComponentSheet<string, NativeRule, NativeStyles>;
 }
 
 export interface StyledInheritedProps {

@@ -64,7 +64,7 @@ describe('createStyled()', () => {
 		expect(getRenderedStyles('standard')).toMatchSnapshot();
 	});
 
-	it('only renders styles twice (create and mount), even when component rerenders', () => {
+	it('only renders styles once, even when component rerenders', () => {
 		const spy = jest.fn(() => ({
 			textDecoration: 'none',
 		}));
@@ -79,7 +79,7 @@ describe('createStyled()', () => {
 		update();
 		update();
 
-		expect(spy).toHaveBeenCalledTimes(2);
+		expect(spy).toHaveBeenCalledTimes(1);
 		expect(debug({ log: false })).toMatchSnapshot();
 		expect(getRenderedStyles('standard')).toMatchSnapshot();
 	});

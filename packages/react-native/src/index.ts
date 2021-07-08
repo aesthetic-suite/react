@@ -17,20 +17,20 @@ export const {
 	changeDirection,
 	changeTheme,
 	configure,
-	createComponentStyles,
-	createElementStyles,
+	createStyleSheet,
+	createScopedStyleSheet,
 	getActiveDirection,
 	getActiveTheme,
 	getEngine,
 	getTheme,
 	registerDefaultTheme,
 	registerTheme,
-	renderComponentStyles,
+	renderStyleSheet,
 	subscribe,
 	unsubscribe,
 } = aesthetic;
 
 // Export aliases
-export const style = createElementStyles;
-export const styles = createComponentStyles;
+export const style = createScopedStyleSheet;
+export const styles = createStyleSheet;
 export const styled = createStyled;
