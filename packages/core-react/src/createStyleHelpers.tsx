@@ -47,7 +47,7 @@ export function createStyleHelpers<Input extends object, Output, GeneratedOutput
 
 		// Variant objects may only be passed as the first argument
 		if (isObject(args[0])) {
-			objectLoop((args.shift() as unknown) as ResultComposerVariants, (value, variant) => {
+			objectLoop(args.shift() as unknown as ResultComposerVariants, (value, variant) => {
 				if (value) {
 					const type = `${variant}:${value}`;
 
@@ -121,7 +121,7 @@ export function createStyleHelpers<Input extends object, Output, GeneratedOutput
 	 */
 	function withStyles<
 		T extends ComponentSheet<string, Input, Output>[],
-		K = InferKeysFromSheets<T>
+		K = InferKeysFromSheets<T>,
 	>(...sheets: T) /* infer */ {
 		return function withStylesComposer<Props extends object = {}>(
 			WrappedComponent: React.ComponentType<InternalWithStylesWrappedProps<K, Output> & Props>,

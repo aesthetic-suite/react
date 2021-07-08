@@ -40,7 +40,7 @@
   },
   "devDependencies": {
     "@testing-library/react-native": "^7.0.2",
-    "@types/react-native": "^0.64.10",
+    "@types/react-native": "^0.64.11",
     "react": "^17.0.1",
     "react-native": "^0.64.2"
   },

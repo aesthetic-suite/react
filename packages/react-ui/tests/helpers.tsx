@@ -29,7 +29,9 @@ export function Wrapper({ children }: WrapperProps) {
 	);
 }
 
-export function withAccessibility(unit: (axeCore: typeof axe) => Promise<void>): jest.ProvidesCallback {
+export function withAccessibility(
+	unit: (axeCore: typeof axe) => Promise<void>,
+): jest.ProvidesCallback {
 	return async () => {
 		await unit(axe);
 	};
