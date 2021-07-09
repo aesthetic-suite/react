@@ -125,6 +125,14 @@ export const styleSheet = styles(() => ({
 		order: 'var(--box-order)',
 	},
 
+	items: {
+		'@selectors': {
+			'> *': {
+				flexGrow: 1,
+			},
+		},
+	},
+
 	inlineGap: {
 		'@selectors': {
 			'> *:not(:last-child)': {

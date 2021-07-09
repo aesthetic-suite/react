@@ -1,5 +1,6 @@
 import { BORDER_SIZES, PaletteType, PALETTE_TYPES, TEXT_SIZES } from '@aesthetic/react';
-import { Button, ButtonFill, ButtonProps, ButtonShape } from '../../src/buttons/Button';
+import { Button, ButtonFill, ButtonProps } from '../../src/buttons/Button';
+import { Shape } from '../../src/types/shape';
 
 export default {
 	title: 'Buttons/Button',
@@ -123,29 +124,17 @@ export function Variants() {
 		PALETTE_TYPES.forEach((palette) => {
 			TEXT_SIZES.forEach((size) => {
 				(['solid', 'hollow', 'empty'] as ButtonFill[]).forEach((fill) => {
-					(['sharp', 'round', 'pill'] as ButtonShape[]).forEach((shape) => {
+					(['sharp', 'round', 'pill'] as Shape[]).forEach((shape) => {
 						if (!examples[palette]) {
 							examples[palette] = [];
 						}
 
 						examples[palette]?.push(
-							<span style={styles}>
+							<span key={`${border}-${palette}-${size}-${fill}-${shape}`} style={styles}>
 								<Button border={border} fill={fill} palette={palette} shape={shape} size={size}>
 									Button
 								</Button>
 							</span>,
-							// <span style={styles}>
-							// 	<Button
-							// 		border={border}
-							// 		fill={fill}
-							// 		palette={palette}
-							// 		shape={shape}
-							// 		size={size}
-							// 		disabled
-							// 	>
-							// 		Button
-							// 	</Button>
-							// </span>,
 						);
 					});
 				});

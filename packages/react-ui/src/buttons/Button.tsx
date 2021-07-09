@@ -3,9 +3,12 @@ import { ButtonOptions } from 'reakit';
 import { BorderSize, CommonSize, PaletteType, useStyles } from '@aesthetic/react';
 import { createComponent } from '../helpers/createComponent';
 import { HtmlAnchorProps, HtmlButtonProps, Pressable } from '../internal/Pressable';
+import { shapedBorderStyleSheet } from '../sheets/borders';
+import { sizingStyleSheet } from '../sheets/sizing';
 import { CommonProps } from '../types';
+import { Shape } from '../types/shape';
 import { styleSheet } from './styles';
-import { ButtonFill, ButtonShape } from './types';
+import { ButtonFill } from './types';
 
 export * from './types';
 
@@ -33,7 +36,7 @@ export interface ButtonCommonProps extends ButtonOptions, CommonProps {
 	 * Customize the shape of the button (primarily border corner radius).
 	 * @default round
 	 */
-	shape?: ButtonShape;
+	shape?: Shape;
 	/**
 	 * Increase or decrease the font size and spacing.
 	 * @default df
@@ -69,9 +72,12 @@ export const Button = createComponent<ButtonProps>(function Button(
 	},
 	ref,
 ) {
-	const cx = useStyles(styleSheet);
+	const cx = useStyles(styleSheet, shapedBorderStyleSheet, sizingStyleSheet);
 	const className = useMemo(
-		() => cx({ border, fill, palette, shape, size }, 'element', [inheritedClassName]),
+		() =>
+			cx({ border, fill, palette, shape, size }, 'element', 'borders', 'sizing', [
+				inheritedClassName,
+			]),
 		[cx, border, fill, palette, shape, size, inheritedClassName],
 	);
 

@@ -13,7 +13,7 @@ describe('Stack', () => {
 		render(<Stack testID="box">Child</Stack>, { wrapper: Wrapper });
 
 		expect(getElement().className).toBe(
-			'box variant:alignContent:normal variant:alignItems:stretch variant:alignSelf:auto variant:direction:column variant:justifyContent:flex-start variant:wrap:false spacing',
+			'box variant:alignContent:normal variant:alignItems:stretch variant:alignSelf:auto variant:direction:column variant:justifyContent:flex-start variant:wrap:false items spacing',
 		);
 	});
 
