@@ -12,6 +12,7 @@ export const styleSheet = style((css) => ({
 	outline: 'none',
 	margin: 0,
 	padding: 0,
+	zIndex: 0,
 
 	':disabled': {
 		cursor: 'default',

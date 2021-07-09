@@ -8,13 +8,17 @@ import { OmitUnwantedHtmlProps } from '../types';
 import { styleSheet } from './styles';
 import { InputCommonProps } from './types';
 
-export interface InputProps
+export interface SelectProps
 	extends InputCommonProps,
-		OmitUnwantedHtmlProps<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {}
+		OmitUnwantedHtmlProps<React.SelectHTMLAttributes<HTMLSelectElement>, 'size'> {
+	/** List of `option` and `optgroup` elements. */
+	children: NonNullable<React.ReactNode>;
+}
 
-export const Input = createComponent<InputProps, HTMLInputElement>(function Input(
+export const Select = createComponent<SelectProps, HTMLSelectElement>(function Select(
 	{
 		border = 'df',
+		children,
 		palette,
 		shape = 'round',
 		size = 'df',
@@ -33,6 +37,8 @@ export const Input = createComponent<InputProps, HTMLInputElement>(function Inpu
 	);
 
 	return (
-		<ReakitInput ref={ref} data-testid={testID} type="text" {...props} className={className} />
+		<ReakitInput ref={ref} as="select" data-testid={testID} {...props} className={className}>
+			{children}
+		</ReakitInput>
 	);
 });
