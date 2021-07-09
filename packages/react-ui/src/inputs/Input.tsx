@@ -4,12 +4,13 @@ import { BorderSize, CommonSize, PaletteType, useStyles } from '@aesthetic/react
 import { createComponent } from '../helpers/createComponent';
 import { shapedBorderStyleSheet } from '../sheets/borders';
 import { sizingStyleSheet } from '../sheets/sizing';
-import { OmitUnwantedHtmlProps } from '../types';
+import { CommonProps, OmitUnwantedHtmlProps } from '../types';
 import { Shape } from '../types/shape';
 import { styleSheet } from './styles';
 
 export interface InputProps
 	extends InputOptions,
+		CommonProps,
 		OmitUnwantedHtmlProps<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
 	/**
 	 * Increase or decrease the border width.
@@ -39,6 +40,7 @@ export const Input = createComponent<InputProps, HTMLInputElement>(function Inpu
 		palette,
 		shape = 'round',
 		size = 'df',
+		testID,
 		// Inherited
 		className: inheritedClassName,
 		...props
@@ -53,7 +55,7 @@ export const Input = createComponent<InputProps, HTMLInputElement>(function Inpu
 	);
 
 	return (
-		<ReakitInput ref={ref} type="text" {...props} className={className}>
+		<ReakitInput ref={ref} data-testid={testID} type="text" {...props} className={className}>
 			{children}
 		</ReakitInput>
 	);
