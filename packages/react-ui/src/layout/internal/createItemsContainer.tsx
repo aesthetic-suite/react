@@ -51,7 +51,10 @@ export function createItemsContainer<T extends ItemsContainerProps>(
 		const cx = useStyles(styleSheet);
 		const gapUnit = useSpacingUnit(gap);
 		const className = useMemo(
-			() => cx(!!gap && (component === 'Inline' ? 'inlineGap' : 'stackGap'), [inheritedClassName]),
+			() =>
+				cx('items', !!gap && (component === 'Inline' ? 'inlineGap' : 'stackGap'), [
+					inheritedClassName,
+				]),
 			[cx, gap, inheritedClassName],
 		);
 		const style = useMemo(
