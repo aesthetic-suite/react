@@ -12,7 +12,7 @@ describe('Button', () => {
 		render(<Button>Button</Button>, { wrapper: Wrapper });
 
 		expect(getElement().className).toBe(
-			'element variant:border:df variant:shape:round variant:border:df variant:size:df variant:palette:primary variant:fill:solid',
+			'element variant:palette:primary variant:fill:solid borders variant:border:df variant:shape:round variant:border:df sizing variant:size:df',
 		);
 	});
 

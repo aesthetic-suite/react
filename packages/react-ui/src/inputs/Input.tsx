@@ -2,8 +2,8 @@ import React, { useMemo } from 'react';
 import { Input as ReakitInput, InputOptions } from 'reakit';
 import { BorderSize, CommonSize, PaletteType, useStyles } from '@aesthetic/react';
 import { createComponent } from '../helpers/createComponent';
-import { useInteractableSize } from '../hooks/styles/useInteractableSize';
-import { useShapedBorder } from '../hooks/styles/useShapedBorder';
+import { shapedBorderStyleSheet } from '../sheets/borders';
+import { sizingStyleSheet } from '../sheets/sizing';
 import { OmitUnwantedHtmlProps } from '../types';
 import { Shape } from '../types/shape';
 import { styleSheet } from './styles';
@@ -45,12 +45,11 @@ export const Input = createComponent<InputProps, HTMLInputElement>(function Inpu
 	},
 	ref,
 ) {
-	const cx = useStyles(styleSheet);
-	const borderClassName = useShapedBorder(border, shape);
-	const sizeClassName = useInteractableSize(size);
+	const cx = useStyles(styleSheet, shapedBorderStyleSheet, sizingStyleSheet);
 	const className = useMemo(
-		() => cx({ border, palette }, 'element', [borderClassName, sizeClassName, inheritedClassName]),
-		[cx, border, palette, borderClassName, sizeClassName, inheritedClassName],
+		() =>
+			cx({ border, palette, shape, size }, 'element', 'borders', 'sizing', [inheritedClassName]),
+		[cx, border, palette, shape, size, inheritedClassName],
 	);
 
 	return (

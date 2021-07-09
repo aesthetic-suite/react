@@ -2,9 +2,9 @@ import React, { useMemo } from 'react';
 import { ButtonOptions } from 'reakit';
 import { BorderSize, CommonSize, PaletteType, useStyles } from '@aesthetic/react';
 import { createComponent } from '../helpers/createComponent';
-import { useInteractableSize } from '../hooks/styles/useInteractableSize';
-import { useShapedBorder } from '../hooks/styles/useShapedBorder';
 import { HtmlAnchorProps, HtmlButtonProps, Pressable } from '../internal/Pressable';
+import { shapedBorderStyleSheet } from '../sheets/borders';
+import { sizingStyleSheet } from '../sheets/sizing';
 import { CommonProps } from '../types';
 import { Shape } from '../types/shape';
 import { styleSheet } from './styles';
@@ -72,17 +72,13 @@ export const Button = createComponent<ButtonProps>(function Button(
 	},
 	ref,
 ) {
-	const cx = useStyles(styleSheet);
-	const borderClassName = useShapedBorder(border, shape);
-	const sizeClassName = useInteractableSize(size);
+	const cx = useStyles(styleSheet, shapedBorderStyleSheet, sizingStyleSheet);
 	const className = useMemo(
 		() =>
-			cx({ border, fill, palette, shape }, 'element', [
-				borderClassName,
-				sizeClassName,
+			cx({ border, fill, palette, shape, size }, 'element', 'borders', 'sizing', [
 				inheritedClassName,
 			]),
-		[cx, border, fill, palette, shape, borderClassName, sizeClassName, inheritedClassName],
+		[cx, border, fill, palette, shape, size, inheritedClassName],
 	);
 
 	return (
