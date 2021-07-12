@@ -14,6 +14,8 @@ export function Default(args: ButtonProps) {
 	return (
 		<>
 			<Button {...args} /> <Button {...args} to="#" />
+			<br />
+			<Button {...args}>Fluid</Button>
 		</>
 	);
 }

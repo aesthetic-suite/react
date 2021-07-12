@@ -1,6 +1,6 @@
-import { ColorShade, PALETTE_TYPES, Rule, RuleMap, StateType, style } from '@aesthetic/react';
+import { ColorShade, PALETTE_TYPES, Rule, RuleMap, StateType, styles } from '@aesthetic/react';
 
-export const styleSheet = style((css) => {
+export const styleSheet = styles((css) => {
 	const paletteVariants: RuleMap = {};
 	const emptyBackgroundHues: Record<Exclude<StateType, 'disabled'>, ColorShade> = {
 		focused: '00',
@@ -58,34 +58,41 @@ export const styleSheet = style((css) => {
 	});
 
 	return {
-		display: 'inline-flex',
-		flexWrap: 'nowrap',
-		alignItems: 'center',
-		justifyContent: 'center',
-		position: 'relative',
-		verticalAlign: 'middle',
-		textAlign: 'center',
-		textDecoration: 'none',
-		fontWeight: 'bold',
-		fontFamily: css.var('typography-font-text'),
-		cursor: 'pointer',
-		borderColor: 'transparent',
-		borderStyle: 'solid',
-		borderWidth: 0,
-		margin: 0,
-		padding: 0,
+		button: {
+			display: 'inline-flex',
+			flexWrap: 'nowrap',
+			alignItems: 'center',
+			justifyContent: 'center',
+			position: 'relative',
+			verticalAlign: 'middle',
+			textAlign: 'center',
+			textDecoration: 'none',
+			fontWeight: 'bold',
+			fontFamily: css.var('typography-font-text'),
+			cursor: 'pointer',
+			borderColor: 'transparent',
+			borderStyle: 'solid',
+			borderWidth: 0,
+			margin: 0,
+			padding: 0,
 
-		'@selectors': {
-			// Removes weird bonus padding from button in Firefox
-			'::-moz-focus-inner': {
-				border: 0,
-				padding: 0,
-				margin: 0,
+			'@selectors': {
+				// Removes weird bonus padding from button in Firefox
+				'::-moz-focus-inner': {
+					border: 0,
+					padding: 0,
+					margin: 0,
+				},
+			},
+
+			'@variants': {
+				...paletteVariants,
 			},
 		},
 
-		'@variants': {
-			...paletteVariants,
+		buttonFluid: {
+			width: '100%',
+			maxWidth: '100%',
 		},
 	};
 });

@@ -12,7 +12,7 @@ describe('Button', () => {
 		render(<Button>Button</Button>, { wrapper: Wrapper });
 
 		expect(getElement().className).toBe(
-			'element variant:palette:primary variant:fill:solid borders variant:border:df variant:shape:round variant:border:df sizing variant:size:df',
+			'button variant:palette:primary variant:fill:solid borders variant:border:df variant:shape:round variant:border:df sizing variant:size:df',
 		);
 	});
 
@@ -97,6 +97,12 @@ describe('Button', () => {
 
 				expect(getElement().className).toEqual(expect.stringContaining(`variant:${prop}:${value}`));
 			});
+		});
+
+		it(`sets "fluid" class name`, () => {
+			render(<Button fluid>Button</Button>, { wrapper: Wrapper });
+
+			expect(getElement().className).toEqual(expect.stringContaining('buttonFluid'));
 		});
 	});
 });

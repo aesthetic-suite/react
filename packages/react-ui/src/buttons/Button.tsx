@@ -28,6 +28,11 @@ export interface ButtonCommonProps extends ButtonOptions, CommonProps {
 	 */
 	fill?: ButtonFill;
 	/**
+	 * Update the button to fill the full-width of its parent container.
+	 * @default false
+	 */
+	fluid?: boolean;
+	/**
 	 * Customize the text, background, and border colors.
 	 * @default primary
 	 */
@@ -63,6 +68,7 @@ export const Button = createComponent<ButtonProps>(function Button(
 		border = 'df',
 		children,
 		fill = 'solid',
+		fluid,
 		palette = 'primary',
 		shape = 'round',
 		size = 'df',
@@ -75,10 +81,15 @@ export const Button = createComponent<ButtonProps>(function Button(
 	const cx = useStyles(styleSheet, shapedBorderStyleSheet, sizingStyleSheet);
 	const className = useMemo(
 		() =>
-			cx({ border, fill, palette, shape, size }, 'element', 'borders', 'sizing', [
-				inheritedClassName,
-			]),
-		[cx, border, fill, palette, shape, size, inheritedClassName],
+			cx(
+				{ border, fill, palette, shape, size },
+				'button',
+				fluid && 'buttonFluid',
+				'borders',
+				'sizing',
+				[inheritedClassName],
+			),
+		[cx, border, fill, fluid, palette, shape, size, inheritedClassName],
 	);
 
 	return (

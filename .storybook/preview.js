@@ -1,5 +1,6 @@
 import React from 'react';
-import defaultTheme from '@aesthetic/design-systems/material';
+import materialTheme from '@aesthetic/design-systems/material';
+// import aestheticTheme from '@aesthetic/design-systems/aesthetic';
 import { ThemeProvider, createThemeSheet, registerDefaultTheme } from '@aesthetic/react';
 import './global.css';
 
@@ -7,7 +8,7 @@ const themeSheet = createThemeSheet((css) => ({
 	'@root': css.mixin('root'),
 }));
 
-registerDefaultTheme('default', defaultTheme, themeSheet);
+registerDefaultTheme('default', materialTheme, themeSheet);
 
 export const decorators = [
 	(Story) => (
